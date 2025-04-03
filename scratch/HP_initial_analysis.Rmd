@@ -1,0 +1,63 @@
+---
+title: "Household Project Initial Analysis"
+output: html_document
+date: "2025-04-03"
+author: "Ana Espeleta"
+---
+
+
+
+# Load in packages
+
+```{r, warning=FALSE}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(readr)
+```
+
+
+# Load in the Household Project dataset
+
+```{r}
+household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e0026-e0029-e0030.txt", header = TRUE)
+
+# Divide dataset into separate tables by experiment. Filter out unnecessary columns
+
+e0026 <- filter(household_data, str_detect(household_data$sample, "e0026")) %>% 
+select(sample, biosample1, experiment, OTU, count, replicate, relAbundance)
+
+
+e0029 <- filter(household_data, str_detect(household_data$sample, "e0029")) %>% 
+select(sample, biosample1, biosample2, experiment, OTU, count, replicate, relAbundance)
+
+
+```
+
+
+## Experiment 0026 Summary Statistics
+
+
+### Number of Reads for each Community
+
+
+```{r, warning=FALSE}
+community_reads <- e0026 %>% 
+  group_by(biosample1) %>% 
+  summarise(total_reads = sum(as.numeric(count))) %>% 
+  arrange(desc(total_reads))
+
+community_reads <- data.frame(community_reads)
+
+ggplot(community_reads, aes(x = biosample1, y = total_reads))+
+  geom_bar(stat="identity")
+
+```
+
+
+### Species Richness
+
+```{r}
+
+```
+
