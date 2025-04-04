@@ -38,10 +38,16 @@ select(sample, biosample1, biosample2, experiment, OTU, count, replicate, relAbu
 ## Experiment 0026 Summary Statistics
 
 
-### Number of Reads for each Community
+### Number of Reads per Community
 
+In the household dataset, each row contains information for a different OTU (strain). In the grouped dataset below), each row represents a sample (community) with all their OTUs and counts grouped together. 
+
+Q: Do we want to instead count how many OTUs each community has by counting the rows instead not summing it all up?
 
 ```{r, warning=FALSE}
+
+# Plot total distribution of reads
+
 community_reads <- e0026 %>% 
   group_by(biosample1) %>% 
   summarise(total_reads = sum(as.numeric(count))) %>% 
@@ -49,15 +55,79 @@ community_reads <- e0026 %>%
 
 community_reads <- data.frame(community_reads)
 
-ggplot(community_reads, aes(x = biosample1, y = total_reads))+
-  geom_bar(stat="identity")
+ggplot(community_reads, aes(x = reorder(biosample1, -total_reads), y = total_reads))+
+  geom_histogram(stat="identity")+
+  labs(title = "Total read distrbution by community", x= "Community", y = "Total Reads")+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank())
+
+
+# Find summary statistics to identify outliers 
+
+summary(community_reads)
+  
+reads_first_q <- 108050
+reads_third_q <- 131946
+
+reads_first_q.data <- filter(community_reads, total_reads < 108050)
 
 ```
+
+### Number of strains per community
+
+
+```{r}
+
+# Instead of adding up the counts, count the rows for that sample
+
+community_strains <- e0026 %>% 
+  group_by(biosample1) %>% 
+  summarise(num_strains=n())
+
+# Plot the strain number distribution across communities
+
+ggplot(community_strains, aes(x = reorder(biosample1, -num_strains), y = num_strains))+
+  geom_histogram(stat="identity")+
+  labs(title = "Strain number distrbution by community", x= "Community", y = "Num Strains")+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank())
+
+summary(community_strains)
+
+strains_first_q <- 169.0  
+strains_third_q <- 307.0
+
+strains_first_q.data <- filter(community_strains, num_strains < 169)
+strains_third_q.data <- filter(community_strains, num_strains > 307)
+
+print(strains_first_q.data$biosample1)
+print(strains_third_q.data$biosample1)
+
+# Check to make sure everything was computed right and there is no overlap between the two groups
+
+length(intersect(strains_first_q.data, strains_third_q.data)) > 0
+```
+### Looking at the community with the least amount of strains (XSA-036). Plotting the counts per strain
+
+```{r}
+
+XSA036_household_data <- household_data%>% 
+  filter(biosample1 == "XSA-036")
+
+ggplot(XSA036_household_data, aes(x = reorder(biosample1, -total_reads), y = total_reads))+
+  geom_histogram(stat="identity")+
+  labs(title = "Total read distrbution by community", x= "Community", y = "Total Reads")+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank())
+```
+
 
 
 ### Species Richness
 
 ```{r}
+
+
 
 ```
 
