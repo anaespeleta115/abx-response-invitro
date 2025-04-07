@@ -25,11 +25,11 @@ household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e002
 # Divide dataset into separate tables by experiment. Filter out unnecessary columns
 
 e0026 <- filter(household_data, str_detect(household_data$sample, "e0026")) %>% 
-select(sample, biosample1, experiment, OTU, count, replicate, relAbundance)
+select(sample, biosample1, experiment, OTU, count, replicate, relAbundance, Family, Phylum)
 
 
 e0029 <- filter(household_data, str_detect(household_data$sample, "e0029")) %>% 
-select(sample, biosample1, biosample2, experiment, OTU, count, replicate, relAbundance)
+select(sample, biosample1, biosample2, experiment, OTU, count, replicate, relAbundance, Family, Phylum)
 
 
 ```
@@ -107,27 +107,59 @@ print(strains_third_q.data$biosample1)
 
 length(intersect(strains_first_q.data, strains_third_q.data)) > 0
 ```
-### Looking at the community with the least amount of strains (XSA-036). Plotting the counts per strain
+### XSA-036: community with the least number of strains. Plot family count distribution.
 
 ```{r}
 
-XSA036_household_data <- household_data%>% 
-  filter(biosample1 == "XSA-036")
+XSA036_household_data <- e0026%>% 
+  filter(biosample1 == "XSA-036") %>% 
+  group_by(Family) %>% 
+  summarise(total_reads = sum(count))
 
-ggplot(XSA036_household_data, aes(x = reorder(biosample1, -total_reads), y = total_reads))+
+
+
+overlay <- e0026 %>% 
+  select(Family, Phylum)
+
+XSA036_household_data$Phylum <- overlay$Phylum[match(XSA036_household_data$Family, overlay$Family)]
+
+
+ggplot(XSA036_household_data, aes(x = reorder(Family, -total_reads), y = log(total_reads), fill=Phylum))+
   geom_histogram(stat="identity")+
-  labs(title = "Total read distrbution by community", x= "Community", y = "Total Reads")+
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank())
+  labs(title = "Family read distribution in Sample XSA-036", x= "Strain Identity", y = "Read Count")+
+  theme_light()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+### XSA-029: community with the largest number of strains. Plot family count distribution.
+
+```{r}
+	
+XTA029_household_data <- e0026%>% 
+  filter(biosample1 == "XTA-029") %>% 
+  group_by(Family) %>% 
+  summarise(total_reads = sum(count))
+
+XTA029_household_data$Phylum <- overlay$Phylum[match(XTA029_household_data$Family, overlay$Family)]
+
+
+ggplot(XTA029_household_data, aes(x = reorder(Family, -total_reads), y = log(total_reads), fill=Phylum))+
+  geom_histogram(stat="identity")+
+  labs(title = "Family read distribution in Sample XTA-029", x= "Strain Identity", y = "Read Count")+
+  theme_light()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
 ```
 
 
 
-### Species Richness
+### Species Richness: calculate number of OTU's with a relative abundance > 0.1%
 
 ```{r}
 
+# apply condition to see which rows are > 0.1, count the true conditions
 
+sum(e0026$relAbundance > 0.1)
 
 ```
 
