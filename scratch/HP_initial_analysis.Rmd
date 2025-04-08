@@ -25,7 +25,8 @@ household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e002
 # Divide dataset into separate tables by experiment. Filter out unnecessary columns
 
 e0026 <- filter(household_data, str_detect(household_data$sample, "e0026")) %>% 
-select(sample, biosample1, experiment, OTU, count, replicate, relAbundance, Family, Phylum)
+  filter(passage == 8) %>% 
+select(sample, biosample1, experiment, passage, OTU, count, replicate, relAbundance, Family, Phylum)
 
 
 e0029 <- filter(household_data, str_detect(household_data$sample, "e0029")) %>% 
