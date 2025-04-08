@@ -32,6 +32,11 @@ e0029 <- filter(household_data, str_detect(household_data$sample, "e0029")) %>%
 select(sample, biosample1, biosample2, experiment, OTU, count, replicate, relAbundance, Family, Phylum)
 
 
+day2_data <- filter(household_data, str_detect(household_data$biosample1, "002"))
+day29_data <- filter(household_data, str_detect(household_data$biosample1, "029"))
+day36_data <- filter(household_data, str_detect(household_data$biosample1, "036"))
+day64_data <- filter(household_data, str_detect(household_data$biosample1, "064"))
+
 ```
 
 
@@ -42,7 +47,6 @@ select(sample, biosample1, biosample2, experiment, OTU, count, replicate, relAbu
 
 In the household dataset, each row contains information for a different OTU (strain). In the grouped dataset below), each row represents a sample (community) with all their OTUs and counts grouped together. 
 
-Q: Do we want to instead count how many OTUs each community has by counting the rows instead not summing it all up?
 
 ```{r, warning=FALSE}
 
@@ -103,11 +107,10 @@ strains_third_q.data <- filter(community_strains, num_strains > 307)
 print(strains_first_q.data$biosample1)
 print(strains_third_q.data$biosample1)
 
-# Check to make sure everything was computed right and there is no overlap between the two groups
-
-length(intersect(strains_first_q.data, strains_third_q.data)) > 0
 ```
-### XSA-036: community with the least number of strains. Plot family count distribution.
+### XSA-036: community with the least number of strains
+
+#### Plot number of reads per family
 
 ```{r}
 
@@ -126,12 +129,14 @@ XSA036_household_data$Phylum <- overlay$Phylum[match(XSA036_household_data$Famil
 
 ggplot(XSA036_household_data, aes(x = reorder(Family, -total_reads), y = log(total_reads), fill=Phylum))+
   geom_histogram(stat="identity")+
-  labs(title = "Family read distribution in Sample XSA-036", x= "Strain Identity", y = "Read Count")+
+  labs(title = "Family read distribution in Sample XSA-036", x= "Family Identity", y = "Read Count")+
   theme_light()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
 
-### XSA-029: community with the largest number of strains. Plot family count distribution.
+### XSA-029: community with the largest number of strains
+
+#### Plot number of reads per family
 
 ```{r}
 	
@@ -145,7 +150,7 @@ XTA029_household_data$Phylum <- overlay$Phylum[match(XTA029_household_data$Famil
 
 ggplot(XTA029_household_data, aes(x = reorder(Family, -total_reads), y = log(total_reads), fill=Phylum))+
   geom_histogram(stat="identity")+
-  labs(title = "Family read distribution in Sample XTA-029", x= "Strain Identity", y = "Read Count")+
+  labs(title = "Family read distribution in Sample XTA-029", x= "Family Identity", y = "Read Count")+
   theme_light()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
@@ -157,9 +162,15 @@ ggplot(XTA029_household_data, aes(x = reorder(Family, -total_reads), y = log(tot
 
 ```{r}
 
-# apply condition to see which rows are > 0.1, count the true conditions
+# apply condition to see which rows are > 0.1, count the true conditions. For each community plot how much it changes over time after antibiotics
 
-sum(e0026$relAbundance > 0.1)
+# group by antibiotic group
+# from there, 
+e0026 %>% 
+  group_by(biosample1) %>% 
+  summarise(richness = sum(e0026$relAbundance > 0.1))
+
+
 
 ```
 
