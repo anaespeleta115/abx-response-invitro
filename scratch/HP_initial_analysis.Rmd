@@ -87,7 +87,7 @@ reads_first_q.data <- filter(community_reads, total_reads < 108050)
 
 community_strains <- e0026 %>% 
   group_by(biosample1) %>% 
-  summarise(num_strains=n())
+  summarise(num_strains=n_distinct(OTU))
 
 # Plot the strain number distribution across communities
 
@@ -99,11 +99,11 @@ ggplot(community_strains, aes(x = reorder(biosample1, -num_strains), y = num_str
 
 summary(community_strains)
 
-strains_first_q <- 169.0  
-strains_third_q <- 307.0
+strains_first_q <- 52.0  
+strains_third_q <- 105.25
 
-strains_first_q.data <- filter(community_strains, num_strains < 169)
-strains_third_q.data <- filter(community_strains, num_strains > 307)
+strains_first_q.data <- filter(community_strains, num_strains < 52)
+strains_third_q.data <- filter(community_strains, num_strains > 105.25)
 
 print(strains_first_q.data$biosample1)
 print(strains_third_q.data$biosample1)
@@ -115,24 +115,17 @@ print(strains_third_q.data$biosample1)
 
 ```{r}
 
-XSA036_household_data <- e0026%>% 
-  filter(biosample1 == "XSA-036") %>% 
-  group_by(Family) %>% 
-  summarise(total_reads = sum(count))
-
-
-
-overlay <- e0026 %>% 
-  select(Family, Phylum)
-
-XSA036_household_data$Phylum <- overlay$Phylum[match(XSA036_household_data$Family, overlay$Family)]
-
-
-ggplot(XSA036_household_data, aes(x = reorder(Family, -total_reads), y = log(total_reads), fill=Phylum))+
-  geom_histogram(stat="identity")+
-  labs(title = "Family read distribution in Sample XSA-036", x= "Family Identity", y = "Read Count")+
+XBB064_household_data <- e0026%>% 
+  filter(biosample1 == "XBB-064") %>% 
+  group_by(Phylum, Family) %>% 
+  summarise(total_reads = sum(as.numeric(count))) %>% 
+  ggplot(aes(x = reorder(Family, -total_reads), y = log(total_reads), fill=Phylum))+
+  geom_bar(stat="identity")+
+  labs(title = "Family read distribution in Sample XBB-064", x= "Family Identity", y = "Log Read Count")+
   theme_light()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+XBB064_household_data
 ```
 
 ### XSA-029: community with the largest number of strains
@@ -141,19 +134,19 @@ ggplot(XSA036_household_data, aes(x = reorder(Family, -total_reads), y = log(tot
 
 ```{r}
 	
-XTA029_household_data <- e0026%>% 
-  filter(biosample1 == "XTA-029") %>% 
-  group_by(Family) %>% 
-  summarise(total_reads = sum(count))
-
-XTA029_household_data$Phylum <- overlay$Phylum[match(XTA029_household_data$Family, overlay$Family)]
-
-
-ggplot(XTA029_household_data, aes(x = reorder(Family, -total_reads), y = log(total_reads), fill=Phylum))+
-  geom_histogram(stat="identity")+
-  labs(title = "Family read distribution in Sample XTA-029", x= "Family Identity", y = "Read Count")+
+	
+XIB064_household_data <- e0026%>% 
+  filter(biosample1 == "XIB-064") %>% 
+  group_by(Phylum, Family) %>% 
+  summarise(total_reads = sum(as.numeric(count))) %>% 
+  ggplot(aes(x = reorder(Family, -total_reads), y = log(total_reads), fill=Phylum))+
+  geom_bar(stat="identity")+
+  labs(title = "Family read distribution in Sample 	
+XIB-064", x= "Family Identity", y = "Log Read Count")+
   theme_light()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+	
+XIB064_household_data
 
 ```
 
@@ -163,15 +156,54 @@ ggplot(XTA029_household_data, aes(x = reorder(Family, -total_reads), y = log(tot
 
 ```{r}
 
-# apply condition to see which rows are > 0.1, count the true conditions. For each community plot how much it changes over time after antibiotics
+# apply condition to see which rows are > 0.1%, count the true conditions. For each community plot how much it changes over time after antibiotics
 
-# group by antibiotic group
-# from there, 
-e0026 %>% 
+#Plot the distribution of species richness at each time point for samples with and without antibiotic (facet by subject)
+ 
+e0026_richness <- e0026 %>% 
   group_by(biosample1) %>% 
-  summarise(richness = sum(e0026$relAbundance > 0.1))
+  summarise(richness = sum(relAbundance > 0.001))	
 
 
 
 ```
+
+
+
+### Compositional changes across passages
+
+```{r}
+# Extract only communities that have all 0-8 passages sequenced
+
+all_passages <- household_data %>%
+  filter(str_detect(household_data$sample, "e0026")) %>% 
+  group_by(biosample1)  %>% 
+  mutate(num_passages = n_distinct(passage)) %>% 
+  filter(num_passages == 9) %>% 
+  ungroup() 
+
+
+my_colors <- readRDS("C:/Spring-Rotation-2025/scratch/familyColorPalette.rds") 
+
+# Plot the total relative abundances (which are calculated per community) totaled up for each
+
+ggplot(all_passages, aes(x = factor(passage), y = relAbundance, fill = Family)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = my_colors) +
+  labs(title = "Community composition across passages" , x = "Passage Number", y = "Total Relative Abundance", fill = "Family") +
+  theme_minimal()+
+  theme(
+  legend.position = "none"
+) +
+  facet_wrap(~ biosample1)
+
+ggplot(all_passages, aes(x = factor(passage), y = relAbundance, fill = Family)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = my_colors)
+
+# I think the reason that the bars are 12 units high is because there are 12 communities being represented, which each of their relative abundances adding up to 1
+
+
+```
+
 
