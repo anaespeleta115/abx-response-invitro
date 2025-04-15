@@ -14,6 +14,7 @@ library(tidyverse)
 library(dplyr)
 library(ggplot2)
 library(readr)
+library(ggrepel)
 ```
 
 
@@ -26,11 +27,11 @@ household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e002
 
 e0026 <- filter(household_data, str_detect(household_data$sample, "e0026")) %>% 
   filter(passage == 8) %>% 
-select(sample, biosample1, experiment, passage, OTU, count, replicate, relAbundance, Family, Phylum)
+select(sample, biosample1, experiment, passage, OTU, count, replicate, relAbundance, Phylum, Family, Genus)
 
 
 e0029 <- filter(household_data, str_detect(household_data$sample, "e0029")) %>% 
-select(sample, biosample1, biosample2, experiment, OTU, count, replicate, relAbundance, Family, Phylum)
+select(sample, biosample1, biosample2, experiment, OTU, count, replicate, relAbundance, Family, Genus)
 
 
 day2_data <- filter(household_data, str_detect(household_data$biosample1, "002"))
@@ -152,24 +153,6 @@ XIB064_household_data
 
 
 
-### Species Richness: calculate number of OTU's with a relative abundance > 0.1%
-
-```{r}
-
-# apply condition to see which rows are > 0.1%, count the true conditions. For each community plot how much it changes over time after antibiotics
-
-#Plot the distribution of species richness at each time point for samples with and without antibiotic (facet by subject)
- 
-e0026_richness <- e0026 %>% 
-  group_by(biosample1) %>% 
-  summarise(richness = sum(relAbundance > 0.001))	
-
-
-
-```
-
-
-
 ### Compositional changes across passages
 
 ```{r}
@@ -190,18 +173,246 @@ my_colors <- readRDS("C:/Spring-Rotation-2025/scratch/familyColorPalette.rds")
 ggplot(all_passages, aes(x = factor(passage), y = relAbundance, fill = Family)) +
   geom_bar(stat = "identity") +
   scale_fill_manual(values = my_colors) +
-  labs(title = "Community composition across passages" , x = "Passage Number", y = "Total Relative Abundance", fill = "Family") +
+  labs(title = "Community Composition Across Passages" , x = "Passage Number", y = "Total Relative Abundance", fill = "Family") +
   theme_minimal()+
   theme(
   legend.position = "none"
 ) +
   facet_wrap(~ biosample1)
 
+ggsave("composition_across_passages.png", width = 14, height = 12, dpi = 300, bg = "white")
+
 ggplot(all_passages, aes(x = factor(passage), y = relAbundance, fill = Family)) +
   geom_bar(stat = "identity") +
   scale_fill_manual(values = my_colors)
 
-# I think the reason that the bars are 12 units high is because there are 12 communities being represented, which each of their relative abundances adding up to 1
+```
+
+Observations: 
+
+Which families are most impacted by being in the lab? Which families tend to do much better in vitro than in vivo, and which families tend to do much worse?
+
+
+
+***Plot the fold-change (in abundance) of each family in passage 0 versus passage 8 (relative abundance p8 / relative abundance p0 (may need a pseudocounts)) for each subject and day 29 community.
+Hint: you may need pivot_wider to calculate the fold-change.
+
+
+```{r}
+
+# get passage 0 and passage 8 communities for day 29
+
+p0_p8 <- day29_data %>% 
+  filter(str_detect(sample, "e0026") & passage %in% c(0, 8)) %>% 
+  select(biosample1, OTU, count, passage, relAbundance, Family) %>% 
+  group_by(passage, biosample1, Family) %>% 
+  summarise(
+    total_abundance = sum(relAbundance, na.rm = TRUE),
+    .groups = "drop"
+  ) %>% 
+  pivot_wider(
+    names_from = passage,
+    values_from = total_abundance,
+    names_prefix = "relAbundance_passage_"
+  )%>%
+  replace_na(list(relAbundance_passage_0 = 0, relAbundance_passage_8 = 0)) %>% 
+  mutate(
+    relAbundance_passage_0 = if_else(relAbundance_passage_0 == 0, 1e-4, relAbundance_passage_0),
+    relAbundance_passage_8 = if_else(relAbundance_passage_8 == 0, 1e-4, relAbundance_passage_8)
+  )
+
+p0_p8_foldchange <- p0_p8 %>% 
+  mutate(fold_change = relAbundance_passage_8/relAbundance_passage_0)
+
+
+
+
+
+
+```
+
+
+What are the main taxa that are present in our communities?
+Plot a summary of the most prevalent and abundant taxa across subjects at day 29.
+
+Prevalence is the number (percentage) of samples that contain that family
+Total abundance is the cumulative abundance of the different strains in a family. The mean abundance is the average between the same families across different subjects.
+
+```{r}
+
+e0026_day29 <- e0026 %>%   filter(str_detect(biosample1, "029"))
+
+
+# I want the total relative abundance of OTUs at the family-level first
+
+summary_total_abundance <- e0026_day29 %>% 
+  group_by(biosample1, Family) %>% 
+  summarise(
+    total_abundance = sum(relAbundance, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Then, I get the mean of those total family abundances across all subjects
+
+summary_mean_abundance <- summary_total_abundance %>% 
+  group_by(Family) %>% 
+  summarise(
+    prevalence = n_distinct(biosample1[total_abundance > 0.001]),
+    mean_abundance = mean(total_abundance, na.rm = TRUE),
+    .groups = "drop"
+  ) 
+
+# Adjust prevalence to be the percent of total samples
+
+n_samples <- e0026_day29 %>% 
+  pull(biosample1) %>% n_distinct()
+
+summary <- summary_mean_abundance %>%
+  mutate(prevalence_pct = 100 * prevalence / n_samples)
+
+  
+ggplot(summary, aes(x = prevalence, y = mean_abundance, label = Family, color = Family)) +
+  geom_point(aes(size = mean_abundance), alpha = 0.7) +
+  geom_text_repel(size = 3, max.overlaps = Inf) +
+  scale_color_manual(values = my_colors) +
+  scale_x_continuous(name = "Prevalence (% of Samples)") +
+  scale_y_continuous(name = "Mean Relative Abundance", trans = "log10") + 
+  labs(title = "Most Prevalent and Abundant Taxa at Day 29") +
+  theme_minimal()+
+  theme(
+  legend.position = "none"
+)
+
+ggsave("abundance_prevalence.png", width = 14, height = 12, dpi = 300, bg = "white")
+```
+Interpretation:
+
+Top right = common and abundant taxa (core microbiome)
+
+Bottom right = common but low-abundance taxa
+
+Top left = rare but abundant in a few subjects
+
+Bottom left = rare and low-abundance
+
+Questions:
+
+Is this the best way to answer this question or to represent the data?
+
+
+How consistent is the community composition, in the absence of antibiotics?
+Plot a comparison of community composition at days 1 and 29 (pre-abx).
+
+```{r}
+
+# Get subject and day information as separate variables 
+
+e0026_clean <- e0026 %>%
+  mutate(
+    subject = str_sub(biosample1, 1, -5),    # remove last 4 characters
+    day = str_sub(biosample1, -3)            # extract the last 3 characters as day
+  )
+
+# Get only subject with data from both days
+
+subjects_with_both_days <- e0026_clean %>%
+  filter(day %in% c("001", "029")) %>%
+  distinct(subject, day) %>%
+  count(subject) %>%
+  filter(n == 2) %>%
+  pull(subject)
+
+compare_001 <- e0026_clean %>% 
+  filter(day == "001", subject %in% subjects_with_both_days) %>% 
+  group_by(subject, Family) %>% 
+  summarize(total_abundance = sum(relAbundance), .groups = "drop") %>%
+  mutate(day = "001")
+
+compare_029 <- e0026_clean %>% 
+  filter(day == "029", subject %in% subjects_with_both_days) %>% 
+  group_by(subject, Family) %>% 
+  summarize(total_abundance = sum(relAbundance), .groups = "drop") %>%
+  mutate(day = "029")
+
+# Combine data and create two variables for each day's relative abundance
+
+combined_data <- bind_rows(compare_001, compare_029)
+wide_data <- combined_data %>%
+  pivot_wider(
+    names_from = day,
+    values_from = total_abundance,
+    names_prefix = "day_"
+  ) %>%
+  replace_na(list(day_001 = 0, day_029 = 0)) %>% 
+  mutate(
+    day_001 = if_else(day_001 == 0, 1e-4, day_001),
+    day_029 = if_else(day_029 == 0, 1e-4, day_029)
+  )
+plot_data <- wide_data %>%
+  mutate(
+    log_day1 = log10(day_001),
+    log_day29 = log10(day_029)
+  )
+
+
+day1_29_composition <- ggplot(plot_data, aes(x = log_day29, y = log_day1, color = Family)) +
+  geom_point(size = 1.5, alpha = 0.9) +
+  scale_color_manual(values = my_colors) +
+  facet_wrap(~ subject) +
+  scale_x_continuous(name = expression(log[10]*"(rel. ab.) day 29")) +
+  scale_y_continuous(name = expression(log[10]*"(rel. ab.) day 1")) +
+  labs(title = "Comparison of Community Composition (Relative Abundances) from Day 1 and Day 29") +
+  theme_minimal() +
+  theme(
+    strip.text = element_text(face = "bold"),
+    legend.position = "none"
+  )
+
+
+day1_29_composition
+
+# save plot
+
+ggsave("day1_29_composition.png", width = 14, height = 12, dpi = 300, bg = "white")
+
+
+```
+
+
+
+### Species Richness: calculate number of OTU's with a relative abundance > 0.1%
+
+```{r}
+
+# apply condition to see which rows are > 0.1%. For each community plot how much it changes over time after antibiotics
+
+#Plot the distribution of species richness at each time point for samples with and without antibiotic (facet by subject)
+
+# Number of species per sample (rel abundance > 0.001)
+e0026_richness <- e0026 %>% 
+  filter(relAbundance > 0.001) %>%
+  group_by(biosample1) %>%
+  summarise(species_richness = n_distinct(OTU))
+
+
+```
+
+
+
+
+
+How do communities change after antibiotics?
+
+1.) Plot the distribution of species richness at each timepoint, for abx- and non-abx subjects.
+
+2.) Plot stacked bar plots with a facet for each subject, showing compositional changes over time across timepoints, at passage 8.
+(stretch goal) Which families are the most strongly impacted by antibiotics?
+***Plot the fold-change after abx for each ASV in each subject, and plot average fold-change sorted by bacterial family.
+
+```{r}
+
+# Plot distribution of species richness at each timepoint (boxplot)
+
 
 
 ```
