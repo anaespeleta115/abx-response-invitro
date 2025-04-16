@@ -264,14 +264,14 @@ summary_mean_abundance <- summary_total_abundance %>%
 
 # Adjust prevalence to be the percent of total samples
 
-n_samples <- e0026_day29 %>% 
+n_samples <- e0026_day29 %>%
   pull(biosample1) %>% n_distinct()
 
 summary <- summary_mean_abundance %>%
-  mutate(prevalence_pct = 100 * prevalence / n_samples)
+  mutate(prevalence_pct = 100 * (prevalence / n_samples))
 
   
-ggplot(summary, aes(x = prevalence, y = mean_abundance, label = Family, color = Family)) +
+ggplot(summary, aes(x = prevalence_pct, y = mean_abundance, label = Family, color = Family)) +
   geom_point(aes(size = mean_abundance), alpha = 0.7) +
   geom_text_repel(size = 3, max.overlaps = Inf) +
   scale_color_manual(values = my_colors) +
