@@ -26,18 +26,33 @@ household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e002
 # Divide dataset into separate tables by experiment. Filter out unnecessary columns
 
 e0026 <- filter(household_data, str_detect(household_data$sample, "e0026")) %>% 
-  filter(passage == 8) %>% 
 select(sample, biosample1, experiment, passage, OTU, count, replicate, relAbundance, Phylum, Family, Genus)
 
+e0026_clean <- e0026 %>%
+  mutate(
+    subject = str_sub(biosample1, 1, -5),    # remove last 4 characters
+    day = str_sub(biosample1, -3),
+    household = str_sub(biosample1, 1, -6),
+    antibiotic = if_else(str_sub(biosample1, 3, 3) == "A", 1, 0)
+  )
 
-e0029 <- filter(household_data, str_detect(household_data$sample, "e0029")) %>% 
-select(sample, biosample1, biosample2, experiment, OTU, count, replicate, relAbundance, Family, Genus)
+e0026_passage8 <- e0026_clean %>% 
+  filter(passage == 8)
+
+e0026_day1 <- e0026_clean %>%  filter(str_detect(biosample1, "001") | str_detect(biosample1, "002") | str_detect(biosample1, "003") | str_detect(biosample1, "022")) %>% 
+mutate(day = "001")
+
+e0026_day29 <- e0026_clean %>%   filter(str_detect(biosample1, "029") | str_detect(biosample1, "028") | str_detect(biosample1, "027")) %>% 
+mutate(day = "029")
+
+e0026_day36 <- e0026_clean %>%  filter(str_detect(biosample1, "036")) %>% 
+mutate(day = "036")
+
+e0026_day64 <- e0026_clean %>%  filter(str_detect(biosample1, "064")) %>% 
+mutate(day = "064")
 
 
-day2_data <- filter(household_data, str_detect(household_data$biosample1, "002"))
-day29_data <- filter(household_data, str_detect(household_data$biosample1, "029"))
-day36_data <- filter(household_data, str_detect(household_data$biosample1, "036"))
-day64_data <- filter(household_data, str_detect(household_data$biosample1, "064"))
+
 
 ```
 
@@ -202,8 +217,8 @@ Hint: you may need pivot_wider to calculate the fold-change.
 
 # get passage 0 and passage 8 communities for day 29
 
-p0_p8 <- day29_data %>% 
-  filter(str_detect(sample, "e0026") & passage %in% c(0, 8)) %>% 
+p0_p8 <- e0026_day29 %>% 
+  filter(passage %in% c(0, 8)) %>% 
   select(biosample1, OTU, count, passage, relAbundance, Family) %>% 
   group_by(passage, biosample1, Family) %>% 
   summarise(
@@ -224,12 +239,44 @@ p0_p8 <- day29_data %>%
 p0_p8_foldchange <- p0_p8 %>% 
   mutate(fold_change = relAbundance_passage_8/relAbundance_passage_0)
 
+```
 
 
 
+
+```{r}
+
+p0_p8_foldchange %>%
+  mutate(log2_fc = log2(fold_change)) %>%
+  ggplot(aes(x = Family, y = log2_fc, fill = Family)) +
+  geom_boxplot(width = 0.9, outlier.shape = NA) +
+  scale_fill_manual(values = my_colors)+
+  # geom_jitter(
+  #   shape = 21,           # circle with border
+  #   color = "black",      # fill color (or use log2_fc mapped to fill if you want color gradient)
+  #   stroke = 0.4,         # outline thickness
+  #   size = 1,
+  #   width = 0.25
+  #   ) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "darkred") +
+  scale_x_discrete(expand = expansion(mult = c(0.1, 0.1))) + 
+  labs(
+    title = "Distribution of Log2 Fold Change per Subject (P8 vs P0)",
+    x = "Subject (biosample1)",
+    y = "Log2 Fold Change"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 4), legend.position = "none")
+
+ggsave("fold_change_p0p8.png", width = 14, height = 12, dpi = 300, bg = "white")
+
+# maybe try arranging the boxplots
+# or try filtering the families to the top 20
+# or extract the 5-letter family code
 
 
 ```
+
 
 
 What are the main taxa that are present in our communities?
@@ -240,7 +287,7 @@ Total abundance is the cumulative abundance of the different strains in a family
 
 ```{r}
 
-e0026_day29 <- e0026 %>%   filter(str_detect(biosample1, "029"))
+e0026_day29 <- e0026 %>%   filter(str_detect(biosample1, "029") | str_detect(biosample1, "028") | str_detect(biosample1, "027") | str_detect(biosample1, "022"))
 
 
 # I want the total relative abundance of OTUs at the family-level first
@@ -305,31 +352,25 @@ Plot a comparison of community composition at days 1 and 29 (pre-abx).
 
 ```{r}
 
-# Get subject and day information as separate variables 
 
-e0026_clean <- e0026 %>%
-  mutate(
-    subject = str_sub(biosample1, 1, -5),    # remove last 4 characters
-    day = str_sub(biosample1, -3)            # extract the last 3 characters as day
-  )
 
-# Get only subject with data from both days
+# Get only subject with data from both days. CHECK THIS!!!
 
 subjects_with_both_days <- e0026_clean %>%
-  filter(day %in% c("001", "029")) %>%
+  filter(day %in% c("001", "002","003", "022", "027", "028", "029")) %>%
   distinct(subject, day) %>%
   count(subject) %>%
   filter(n == 2) %>%
   pull(subject)
 
 compare_001 <- e0026_clean %>% 
-  filter(day == "001", subject %in% subjects_with_both_days) %>% 
+  filter(day == "001" | day == "002" | day == "003", subject %in% subjects_with_both_days) %>% 
   group_by(subject, Family) %>% 
   summarize(total_abundance = sum(relAbundance), .groups = "drop") %>%
   mutate(day = "001")
 
 compare_029 <- e0026_clean %>% 
-  filter(day == "029", subject %in% subjects_with_both_days) %>% 
+  filter(day == "029" | day == "028" | day == "027" | day == "022", subject %in% subjects_with_both_days) %>% 
   group_by(subject, Family) %>% 
   summarize(total_abundance = sum(relAbundance), .groups = "drop") %>%
   mutate(day = "029")
@@ -382,18 +423,69 @@ ggsave("day1_29_composition.png", width = 14, height = 12, dpi = 300, bg = "whit
 
 ### Species Richness: calculate number of OTU's with a relative abundance > 0.1%
 
+1.) Plot the distribution of species richness at each timepoint, for abx- and non-abx subjects.
+
 ```{r}
 
-# apply condition to see which rows are > 0.1%. For each community plot how much it changes over time after antibiotics
+#Plot the distribution of species richness at each time point for samples with and without antibiotic (facet by subject). x: abx vs. non-abx, y:species richnes, faceted by
 
-#Plot the distribution of species richness at each time point for samples with and without antibiotic (facet by subject)
+# Combine all the day datasets
+
+combined_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
 
 # Number of species per sample (rel abundance > 0.001)
-e0026_richness <- e0026 %>% 
-  filter(relAbundance > 0.001) %>%
-  group_by(biosample1) %>%
-  summarise(species_richness = n_distinct(OTU))
 
+e0026_richness <- combined_data %>%
+  filter(relAbundance > 0.001) %>%
+  select(biosample1, OTU) %>%
+  distinct() %>%
+  dplyr::count(biosample1, name = "species_richness") %>%
+  left_join(
+    combined_data %>% distinct(biosample1, day, subject, antibiotic),
+    by = "biosample1"
+  )
+
+
+e0026_richness <- e0026_richness %>%
+  mutate(
+    day = factor(day, levels = sort(unique(day))),
+    antibiotic = factor(antibiotic, levels = c(0, 1), labels = c("No", "Yes"))
+  )
+
+
+species_richness_time <- ggplot(
+  e0026_richness,
+  aes(x = day, y = species_richness, fill = antibiotic)
+) +
+  geom_boxplot(
+    position = position_dodge(width = 0.75),
+    width = 0.6,
+    alpha = 0.9,
+    size = 1
+  )  +
+  geom_jitter(
+    color = "black",
+    position = position_jitterdodge(jitter.width = 0.2, dodge.width = 0.75),
+    shape = 21,
+    stroke = 0.3,
+    size = 1.5,
+    alpha = 0.8
+  ) +
+  labs(
+    title = "Change in Species Richness Pre- and Post Abx",
+    x = "Day",
+    y = "Species Richness",
+    fill = "Antibiotic"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    legend.position = "right",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+species_richness_time
+
+# try running the wilcoxon rank test with
 
 ```
 
@@ -403,11 +495,8 @@ e0026_richness <- e0026 %>%
 
 How do communities change after antibiotics?
 
-1.) Plot the distribution of species richness at each timepoint, for abx- and non-abx subjects.
-
 2.) Plot stacked bar plots with a facet for each subject, showing compositional changes over time across timepoints, at passage 8.
-(stretch goal) Which families are the most strongly impacted by antibiotics?
-***Plot the fold-change after abx for each ASV in each subject, and plot average fold-change sorted by bacterial family.
+
 
 ```{r}
 
@@ -415,6 +504,11 @@ How do communities change after antibiotics?
 
 
 
+
+
 ```
 
 
+
+(stretch goal) Which families are the most strongly impacted by antibiotics?
+***Plot the fold-change after abx for each ASV in each subject, and plot average fold-change sorted by bacterial family. (this might be like the p8/p0 graph above)

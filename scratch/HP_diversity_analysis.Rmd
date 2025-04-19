@@ -1,0 +1,209 @@
+---
+title: "HP_diversity_analysis"
+output: html_document
+date: "2025-04-18"
+---
+
+
+# Load in packages
+
+```{r, warning=FALSE}
+library(tidyverse)
+library("plyr")
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(ggrepel)
+
+library("phyloseq")
+```
+
+
+
+
+# Load in the Household Project dataset
+
+```{r}
+household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e0026-e0029-e0030.txt", header = TRUE)
+
+# Divide dataset into separate tables by experiment. Filter out unnecessary columns
+
+e0026 <- filter(household_data, str_detect(household_data$sample, "e0026")) %>% 
+select(sample, biosample1, experiment, passage, OTU, count, replicate, relAbundance, Phylum, Family, Genus)
+
+e0026_clean <- e0026 %>%
+  mutate(
+    subject = str_sub(biosample1, 1, -5),    # remove last 4 characters
+    day = str_sub(biosample1, -3),
+    household = str_sub(biosample1, 1, -6),
+    antibiotic = if_else(str_sub(biosample1, 3, 3) == "A", 1, 0)
+  )
+
+e0026_passage8 <- e0026_clean %>% 
+  filter(passage == 8)
+
+e0026_day1 <- e0026_clean %>%  filter(str_detect(biosample1, "001") | str_detect(biosample1, "002") | str_detect(biosample1, "003") | str_detect(biosample1, "022")) %>% 
+mutate(day = "001")
+
+e0026_day29 <- e0026_clean %>%   filter(str_detect(biosample1, "029") | str_detect(biosample1, "028") | str_detect(biosample1, "027")) %>% 
+mutate(day = "029")
+
+e0026_day36 <- e0026_clean %>%  filter(str_detect(biosample1, "036")) %>% 
+mutate(day = "036")
+
+e0026_day64 <- e0026_clean %>%  filter(str_detect(biosample1, "064")) %>% 
+mutate(day = "064")
+
+
+```
+
+
+### Using Phyloseq to calculate diversity statistics
+
+
+```{r}
+data <- readRDS("../data/ps_all.rds")
+
+hp_data_clean <- prune_taxa(taxa_sums(data) > 0, data)
+
+e0026_obj <- subset_samples(hp_data_clean, experiment == "e0026")
+
+OUTDIR <- "./"
+
+```
+
+
+
+### Get alpha diversity metrics
+
+```{r}
+# Calculate alpha diversity.
+calculateAlphaDiversity <- function(data) {
+
+  # Use the estimate_richness function to calculate
+  # an array of alpha-diversity statistics.
+  alphaRaw <- estimate_richness(data, split=TRUE)
+  # Add the sample names.
+  alphaRaw$sample <- rownames(alphaRaw)
+  # Calculate the Shannon effective number of species.
+  alphaRaw <- alphaRaw %>%
+	mutate(ShannonEffectiveSpecies=exp(Shannon))
+  # Tidy the dataframe.
+  alpha <- alphaRaw %>%
+	mutate(sample=gsub("\\.","-",sample)) %>%
+	pivot_longer(-sample, names_to="alphaStat", values_to="value")
+}
+
+alpha_diversity <- calculateAlphaDiversity(e0026_obj)
+write_delim(alpha_diversity, paste0(OUTDIR, "alpha_diversity.txt"))
+
+```
+
+
+# Get beta diversity metrics
+
+```{r}
+# List the distance-calculation methods to be used.
+distMethods <- c("jsd","bray","jaccard")
+
+# Write a function to calculate a distance matrix using the specified method
+# and convert the data into tidy format.
+calculateBeta <- function(data, distMethod) {
+  # Calculate the distance matrix using the specified method.
+  betaRaw <- distance(data, method=distMethod)
+ 
+  # Convert distance matrix to a dataframe.
+  beta <- as.matrix(betaRaw)
+  beta <- as.data.frame(beta)
+  beta$sample1 <- rownames(beta)
+  # Tidy the dataframe.
+  beta <- beta %>%
+	pivot_longer(-sample1, names_to="sample2", values_to="value")
+  beta <- beta %>%
+	filter(sample1 != sample2) %>%
+	mutate(method=distMethod)
+}
+
+# Calculate the distance matrix for all of the specified methods on the species abundances.
+# Combine the distance matrices for all methods.
+betaSpecies <- do.call(rbind, lapply(distMethods, function(distMethod) {
+  print(distMethod)
+  calculateBeta(e0026_obj, distMethod)
+}))
+# Export the distance matrix generated for all of the sample pairs
+# using all of the specified methods.
+write_delim(betaSpecies, paste0(OUTDIR, "speciesBeta.txt.gz"))
+
+```
+
+
+
+```{r}
+combined_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
+
+# Number of species per sample (rel abundance > 0.001)
+
+# I think the ordering here isn't right because we want the mean species richness across samples 
+# look at the species richness of a specific sample, let's see if it matches
+# combined_data %>% 
+#   filter(relAbundance > 0.001, subject == "XDB", day == "029") %>% 
+#   summarise(species_richness = n_distinct(OTU))
+
+alpha_diversity <- read_delim("./alpha_diversity.txt")
+data(alpha_diversity)
+  
+e0026_alpha <- alpha_diversity %>% 
+  filter(alphaStat == "Shannon", alphaStat == "Chao1")
+
+e0026_richness <- combined_data %>%
+  filter(relAbundance > 0.001) %>%
+  select(biosample1, OTU) %>%
+  distinct() %>%
+  dplyr::count(biosample1, name = "species_richness") %>%
+  left_join(
+    combined_data %>% distinct(biosample1, day, subject, antibiotic),
+    by = "biosample1"
+  )
+
+
+e0026_richness <- e0026_richness %>%
+  mutate(
+    day = factor(day, levels = sort(unique(day))),
+    antibiotic = factor(antibiotic, levels = c(0, 1), labels = c("No", "Yes"))
+  )
+
+
+species_richness_time <- ggplot(
+  e0026_richness,
+  aes(x = day, y = species_richness, fill = antibiotic)
+) +
+  geom_boxplot(
+    position = position_dodge(width = 0.75),
+    width = 0.6,
+    alpha = 0.9,
+    size = 1
+  )  +
+  geom_jitter(
+    color = "black",
+    position = position_jitterdodge(jitter.width = 0.2, dodge.width = 0.75),
+    shape = 21,
+    stroke = 0.3,
+    size = 1.5,
+    alpha = 0.8
+  ) +
+  labs(
+    title = "Change in Species Richness Pre- and Post Abx",
+    x = "Day",
+    y = "Species Richness",
+    fill = "Antibiotic"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    legend.position = "right",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+species_richness_time
+
+```
+
