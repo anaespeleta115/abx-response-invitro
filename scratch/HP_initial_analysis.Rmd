@@ -287,7 +287,7 @@ Total abundance is the cumulative abundance of the different strains in a family
 
 ```{r}
 
-e0026_day29 <- e0026 %>%   filter(str_detect(biosample1, "029") | str_detect(biosample1, "028") | str_detect(biosample1, "027") | str_detect(biosample1, "022"))
+# e0026_day29 <- e0026 %>%   filter(str_detect(biosample1, "029") | str_detect(biosample1, "028") | str_detect(biosample1, "027") | str_detect(biosample1, "022"))
 
 
 # I want the total relative abundance of OTUs at the family-level first
@@ -380,8 +380,8 @@ compare_029 <- e0026_clean %>%
 
 # Combine data and create two variables for each day's relative abundance
 
-combined_data <- bind_rows(compare_001, compare_029)
-wide_data <- combined_data %>%
+combined_data_0129 <- bind_rows(compare_001, compare_029)
+wide_data <- combined_data_0129 %>%
   pivot_wider(
     names_from = day,
     values_from = total_abundance,
@@ -434,17 +434,17 @@ ggsave("day1_29_composition.png", width = 14, height = 12, dpi = 300, bg = "whit
 
 # Combine all the day datasets
 
-combined_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
+combined_data_richness <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
 
 # Number of species per sample (rel abundance > 0.001)
 
-e0026_richness <- combined_data %>%
+e0026_richness <- combined_data_richness %>%
   filter(relAbundance > 0.001) %>%
   select(biosample1, OTU) %>%
   distinct() %>%
   dplyr::count(biosample1, name = "species_richness") %>%
   left_join(
-    combined_data %>% distinct(biosample1, day, subject, antibiotic),
+    combined_data_richness %>% distinct(biosample1, day, subject, antibiotic),
     by = "biosample1"
   )
 
@@ -488,6 +488,7 @@ species_richness_time <- ggplot(
 
 species_richness_time
 
+ggsave("species_richness_time.png", width = 14, height = 12, dpi = 300, bg = "white")
 # try running the wilcoxon rank test with
 
 ```
@@ -503,21 +504,11 @@ How do communities change after antibiotics?
 
 ```{r}
 
-combined_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
+combined_data_composition <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
 
-p8_data <- combined_data %>% 
+p8_data <- combined_data_composition %>% 
   filter(passage == 8)
 
-# Optional: Group rare Families into "Other"
-# top_families <- p8_data %>%
-#   group_by(Family) %>%
-#   summarise(total_abundance = sum(relAbundance, na.rm = TRUE)) %>%
-#   arrange(desc(total_abundance)) %>%
-#   slice_head(n = 10) %>%
-#   pull(Family)
-
-# p8_data <- p8_data %>%
-#   mutate(Family_cleaned = ifelse(Family %in% top_families, Family, "Other"))
 
 # Summarize relative abundance per biosample1 by Family
 composition_summary <- p8_data %>%
@@ -530,7 +521,6 @@ composition_summary <- p8_data %>%
   mutate(
     day = factor(day, levels = sort(unique(day)))
   )
-
 
 
 ```
@@ -610,6 +600,7 @@ pre_post_abx_summary <- pre_post_abx_summary %>%
 ggplot(pre_post_abx_summary, aes(x = fct_reorder(Family, -log2_fc), y = log2_fc, fill = Family)) +
   geom_boxplot(outlier.shape = NA, width = 0.8) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "darkred") +
+  scale_fill_manual(values = my_colors)+
   labs(
     title = "Impact of Antibiotics on Family Relative Abundance",
     x = "Family",

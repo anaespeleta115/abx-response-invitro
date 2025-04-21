@@ -234,7 +234,7 @@ combined_data_beta <- combined_data %>%
 ```
 
 
-I was thinking that we would want to compare the average distance (i.e. JSD) between two in vivo communities (passage 0), compared to two in vitro communities (passage 8).
+Compare the average distance (i.e. JSD) between two in vivo communities (passage 0), compared to two in vitro communities (passage 8).
 
 
 ```{r}
@@ -251,6 +251,46 @@ beta_diversity_wide <- beta_diversity_wide%>%
     passage2 = extract_passage(sample2)
   )%>%
   # remove rows where either passage is NA or mismatched
-  filter(!is.na(passage1), !is.na(passage2))
+  filter(!is.na(passage1), !is.na(passage2), passage1 == passage2)
+
+
+```
+
+
+
+```{r}
+
+# avg_jsd_summary <- beta_diversity_wide %>%
+#   group_by(passage1) %>%
+#   summarise(
+#     mean_JSD = mean(jsd, na.rm = TRUE),
+#     sd_JSD = sd(jsd, na.rm = TRUE),
+#     n = n(),
+#     .groups = "drop"
+#   )
+
+
+ggplot(beta_diversity_wide, aes(x = factor(passage1), y = jsd, fill = factor(passage1))) +
+  geom_boxplot(width = 0.6, alpha = 0.85) +
+  labs(
+    title = "In Vivo vs In Vitro Community JSD (Within Passage)",
+    x = "Passage",
+    y = "Jensen-Shannon Divergence",
+    fill = "Passage"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+
+```
+
+One plot I could make is a box plot of the JSD between communities from the same subject at day 1 and 29, versus the JSD between communities from the same subject at days 29 and 36.
+The question that this is answering: how much of an impact does the antibiotic have on community composition, compared to the normal level of variation that we see in the absence of antibiotics
+
+
+```{r}
+
+
+
+
 ```
 
