@@ -36,22 +36,25 @@ e0026_clean <- e0026 %>%
     antibiotic = if_else(str_sub(biosample1, 3, 3) == "A", 1, 0)
   )
 
-e0026_passage8 <- e0026_clean %>% 
-  filter(passage == 8)
 
-e0026_day1 <- e0026_clean %>%  filter(str_detect(biosample1, "001") | str_detect(biosample1, "002") | str_detect(biosample1, "003") | str_detect(biosample1, "022")) %>% 
+e0026_day1 <- e0026_clean %>%  filter(str_detect(biosample1, "001") | str_detect(biosample1, "002") | str_detect(biosample1, "003") | str_detect(biosample1, "022")| str_detect(biosample1, "008")) %>% 
 mutate(day = "001")
 
 e0026_day29 <- e0026_clean %>%   filter(str_detect(biosample1, "029") | str_detect(biosample1, "028") | str_detect(biosample1, "027")) %>% 
 mutate(day = "029")
 
-e0026_day36 <- e0026_clean %>%  filter(str_detect(biosample1, "036")) %>% 
+e0026_day36 <- e0026_clean %>%  filter(str_detect(biosample1, "036") | str_detect(biosample1, "037")) %>% 
 mutate(day = "036")
 
-e0026_day64 <- e0026_clean %>%  filter(str_detect(biosample1, "064")) %>% 
+e0026_day64 <- e0026_clean %>%  filter(str_detect(biosample1, "064")| str_detect(biosample1, "063") | str_detect(biosample1, "072") | str_detect(biosample1, "059")| str_detect(biosample1, "065")) %>% 
 mutate(day = "064")
 
-
+top_families <- e0026_day29 %>%
+  group_by(Family) %>%
+  summarise(total_abundance = sum(relAbundance, na.rm = TRUE)) %>%
+  arrange(desc(total_abundance)) %>%
+  slice_head(n = 25) %>%
+  pull(Family)
 
 
 ```
@@ -246,18 +249,15 @@ p0_p8_foldchange <- p0_p8 %>%
 
 ```{r}
 
-p0_p8_foldchange %>%
+# Filter the full dataset to just top 20 families
+filtered_data <- p0_p8_foldchange %>%
+  filter(Family %in% top_families)
+
+filtered_data %>%
   mutate(log2_fc = log2(fold_change)) %>%
-  ggplot(aes(x = Family, y = log2_fc, fill = Family)) +
+  ggplot(aes(x = fct_reorder(Family, -log2_fc), y = log2_fc, fill = Family)) +
   geom_boxplot(width = 0.9, outlier.shape = NA) +
   scale_fill_manual(values = my_colors)+
-  # geom_jitter(
-  #   shape = 21,           # circle with border
-  #   color = "black",      # fill color (or use log2_fc mapped to fill if you want color gradient)
-  #   stroke = 0.4,         # outline thickness
-  #   size = 1,
-  #   width = 0.25
-  #   ) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "darkred") +
   scale_x_discrete(expand = expansion(mult = c(0.1, 0.1))) + 
   labs(
@@ -316,6 +316,9 @@ n_samples <- e0026_day29 %>%
 
 summary <- summary_mean_abundance %>%
   mutate(prevalence_pct = 100 * prevalence / n_samples)
+
+summary <- summary %>%
+  filter(Family %in% top_families)
 
   
 ggplot(summary, aes(x = prevalence, y = mean_abundance, label = Family, color = Family)) +
@@ -500,9 +503,33 @@ How do communities change after antibiotics?
 
 ```{r}
 
-# Plot distribution of species richness at each timepoint (boxplot)
+combined_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
 
+p8_data <- combined_data %>% 
+  filter(passage == 8)
 
+# Optional: Group rare Families into "Other"
+# top_families <- p8_data %>%
+#   group_by(Family) %>%
+#   summarise(total_abundance = sum(relAbundance, na.rm = TRUE)) %>%
+#   arrange(desc(total_abundance)) %>%
+#   slice_head(n = 10) %>%
+#   pull(Family)
+
+# p8_data <- p8_data %>%
+#   mutate(Family_cleaned = ifelse(Family %in% top_families, Family, "Other"))
+
+# Summarize relative abundance per biosample1 by Family
+composition_summary <- p8_data %>%
+  group_by(biosample1, Family) %>%
+  summarise(relAbundance = sum(relAbundance, na.rm = TRUE), .groups = "drop") %>%
+  left_join(
+    p8_data %>% distinct(biosample1, day, subject, antibiotic),
+    by = "biosample1"
+  ) %>%
+  mutate(
+    day = factor(day, levels = sort(unique(day)))
+  )
 
 
 
@@ -510,5 +537,89 @@ How do communities change after antibiotics?
 
 
 
+```{r}
+
+relative_abundance_plot <- ggplot(
+  composition_summary,
+  aes(x = factor(day), y = relAbundance, fill = Family)
+) +
+  geom_bar(
+    stat = "identity",
+    position = "stack",
+    color = "black",
+    size = 0.2
+  ) +
+  scale_fill_manual(values = my_colors) +
+  facet_wrap(~subject) +
+  labs(
+    title = "Relative Abundance of Microbial Families at Passage 8",
+    x = "Sample",
+    y = "Relative Abundance",
+    fill = "Family"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "none"
+  )
+
+relative_abundance_plot
+
+
+ggsave("p8_relative_abundance_plot.png", width = 14, height = 12, dpi = 300, bg = "white")
+
+```
+
+
 (stretch goal) Which families are the most strongly impacted by antibiotics?
 ***Plot the fold-change after abx for each ASV in each subject, and plot average fold-change sorted by bacterial family. (this might be like the p8/p0 graph above)
+
+
+```{r}
+
+# Filter for day 29 & 36 and only antibiotic-treated subjects
+pre_post_abx <- e0026_clean %>%
+  filter(day %in% c("029", "036"), antibiotic == 1) %>%
+  select(biosample1, subject, day, OTU, relAbundance, Family)
+
+# Summarize relAbundance per OTU per subject per day
+pre_post_abx_summary <- pre_post_abx %>%
+  group_by(subject, day, OTU, Family) %>%
+  summarise(total_abundance = sum(relAbundance, na.rm = TRUE), .groups = "drop") %>%
+  pivot_wider(
+    names_from = day,
+    values_from = total_abundance,
+    names_prefix = "relAbundance_day_"
+  ) %>%
+  replace_na(list(relAbundance_day_029 = 0, relAbundance_day_036 = 0)) %>%
+  mutate(
+    relAbundance_day_029 = if_else(relAbundance_day_029 == 0, 1e-4, relAbundance_day_029),
+    relAbundance_day_036 = if_else(relAbundance_day_036 == 0, 1e-4, relAbundance_day_036),
+    fold_change = relAbundance_day_036 / relAbundance_day_029,
+    log2_fc = log2(fold_change)
+  )
+
+```
+
+
+
+```{r}
+pre_post_abx_summary <- pre_post_abx_summary %>%
+  filter(Family %in% top_families)
+
+ggplot(pre_post_abx_summary, aes(x = fct_reorder(Family, -log2_fc), y = log2_fc, fill = Family)) +
+  geom_boxplot(outlier.shape = NA, width = 0.8) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "darkred") +
+  labs(
+    title = "Impact of Antibiotics on Family Relative Abundance",
+    x = "Family",
+    y = "Log2 Fold Change (Day 36 / Day 29)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 7),
+    legend.position = "none"
+  )
+```
+
+

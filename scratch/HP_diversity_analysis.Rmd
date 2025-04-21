@@ -143,13 +143,13 @@ write_delim(betaSpecies, paste0(OUTDIR, "speciesBeta.txt.gz"))
 ```{r}
 
 
-combined_data_alpha <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
+combined_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
 
 
 alpha_diversity <- read_delim("./alpha_diversity.txt")
 data(alpha_diversity)
 
-valid_samples <- combined_data_alpha %>%
+valid_samples <- combined_data %>%
   distinct(sample) %>%
   pull(sample)
 
@@ -158,12 +158,12 @@ alpha_diversity_wide <- alpha_diversity %>%
   select(sample, alphaStat, value) %>%
   pivot_wider(names_from = alphaStat, values_from = value)
 
-combined_sample_info <- combined_data %>%
+combined_data_alpha <- combined_data %>%
   distinct(sample, biosample1, day, subject, antibiotic)%>%
   mutate(xsample = paste0("X", sample))
 
 
-e0026_alpha <- combined_sample_info %>%
+e0026_alpha <- combined_data_alpha %>%
   left_join(alpha_diversity_wide, by = c("xsample" = "sample"))
 
 
@@ -210,5 +210,47 @@ alpha_time <- ggplot(
   )
 
 alpha_time
+```
+
+### Change in Beta Diversity through Time
+
+```{r}
+
+combined_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
+
+
+beta_diversity <- read_delim("./speciesBeta.txt.gz")
+data(beta_diversity)
+
+
+beta_diversity_wide <- beta_diversity %>%
+  select(sample1, sample2, method, value) %>%
+  pivot_wider(names_from = method, values_from = value)
+
+combined_data_beta <- combined_data %>%
+  distinct(sample, day, subject, antibiotic)
+
+
+```
+
+
+I was thinking that we would want to compare the average distance (i.e. JSD) between two in vivo communities (passage 0), compared to two in vitro communities (passage 8).
+
+
+```{r}
+
+# Extract passage number (0 or 8) using more flexible regex
+extract_passage <- function(x) {
+  str_extract(x, "-[A-Z]-[08]-[A-Z0-9]+") %>%
+    str_extract("[08]")  # extract just the 0 or 8
+}
+
+beta_diversity_wide <- beta_diversity_wide%>%
+  mutate(
+    passage1 = extract_passage(sample1),
+    passage2 = extract_passage(sample2)
+  )%>%
+  # remove rows where either passage is NA or mismatched
+  filter(!is.na(passage1), !is.na(passage2))
 ```
 
