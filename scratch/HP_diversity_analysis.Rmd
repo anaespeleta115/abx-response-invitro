@@ -5,7 +5,7 @@ date: "2025-04-18"
 ---
 
 
-# Load in packages
+### Load in packages
 
 ```{r, warning=FALSE}
 library(tidyverse)
@@ -21,7 +21,7 @@ library("phyloseq")
 
 
 
-# Load in the Household Project dataset
+### Load in the Household Project dataset
 
 ```{r}
 household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e0026-e0029-e0030.txt", header = TRUE)
@@ -74,7 +74,7 @@ OUTDIR <- "./"
 
 
 
-### Get alpha diversity metrics
+### Get alpha diversity metrics (ONLY RUN ONCE)
 
 ```{r}
 # Calculate alpha diversity.
@@ -100,7 +100,7 @@ write_delim(alpha_diversity, paste0(OUTDIR, "alpha_diversity.txt"))
 ```
 
 
-# Get beta diversity metrics
+# Get beta diversity metrics (ONLY RUN ONCE)
 
 ```{r}
 # List the distance-calculation methods to be used.
@@ -138,44 +138,50 @@ write_delim(betaSpecies, paste0(OUTDIR, "speciesBeta.txt.gz"))
 
 
 
+### Change in Alpha Diversity through Time
+
 ```{r}
-combined_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
 
-# Number of species per sample (rel abundance > 0.001)
 
-# I think the ordering here isn't right because we want the mean species richness across samples 
-# look at the species richness of a specific sample, let's see if it matches
-# combined_data %>% 
-#   filter(relAbundance > 0.001, subject == "XDB", day == "029") %>% 
-#   summarise(species_richness = n_distinct(OTU))
+combined_data_alpha <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
+
 
 alpha_diversity <- read_delim("./alpha_diversity.txt")
 data(alpha_diversity)
-  
-e0026_alpha <- alpha_diversity %>% 
-  filter(alphaStat == "Shannon", alphaStat == "Chao1")
 
-e0026_richness <- combined_data %>%
-  filter(relAbundance > 0.001) %>%
-  select(biosample1, OTU) %>%
-  distinct() %>%
-  dplyr::count(biosample1, name = "species_richness") %>%
-  left_join(
-    combined_data %>% distinct(biosample1, day, subject, antibiotic),
-    by = "biosample1"
-  )
+valid_samples <- combined_data_alpha %>%
+  distinct(sample) %>%
+  pull(sample)
+
+alpha_diversity_wide <- alpha_diversity %>%
+  filter(alphaStat %in% c("Shannon", "Chao1")) %>%
+  select(sample, alphaStat, value) %>%
+  pivot_wider(names_from = alphaStat, values_from = value)
+
+combined_sample_info <- combined_data %>%
+  distinct(sample, biosample1, day, subject, antibiotic)%>%
+  mutate(xsample = paste0("X", sample))
 
 
-e0026_richness <- e0026_richness %>%
+e0026_alpha <- combined_sample_info %>%
+  left_join(alpha_diversity_wide, by = c("xsample" = "sample"))
+
+
+e0026_alpha <- e0026_alpha %>%
   mutate(
     day = factor(day, levels = sort(unique(day))),
     antibiotic = factor(antibiotic, levels = c(0, 1), labels = c("No", "Yes"))
   )
 
 
-species_richness_time <- ggplot(
-  e0026_richness,
-  aes(x = day, y = species_richness, fill = antibiotic)
+```
+
+
+
+```{r}
+alpha_time <- ggplot(
+  e0026_alpha,
+  aes(x = day, y = Shannon, fill = antibiotic)
 ) +
   geom_boxplot(
     position = position_dodge(width = 0.75),
@@ -192,9 +198,9 @@ species_richness_time <- ggplot(
     alpha = 0.8
   ) +
   labs(
-    title = "Change in Species Richness Pre- and Post Abx",
+    title = "Change in Alpha Diversity Pre- and Post Abx",
     x = "Day",
-    y = "Species Richness",
+    y = "Alpha Diversity",
     fill = "Antibiotic"
   ) +
   theme_minimal(base_size = 13) +
@@ -203,7 +209,6 @@ species_richness_time <- ggplot(
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 
-species_richness_time
-
+alpha_time
 ```
 
