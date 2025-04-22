@@ -138,39 +138,58 @@ write_delim(betaSpecies, paste0(OUTDIR, "speciesBeta.txt.gz"))
 
 
 
+```{r}
+
+# Define a function to extract passage information from raw sample ID
+
+extract_passage <- function(x) {
+  ifelse(
+    str_detect(x, "-mix-"),
+    NA_character_,
+    str_extract(x, "-[A-Z]-[08]-[A-Z0-9]+") %>%
+      str_extract("[08]")
+  )
+}
+```
+
+
 ### Change in Alpha Diversity through Time
 
 ```{r}
 
+combined_data <- e0026_day29
 
-combined_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
-
-
+# Read in alpha diversity file
 alpha_diversity <- read_delim("./alpha_diversity.txt")
 data(alpha_diversity)
 
+
+# Only consider samples contained within combined data
 valid_samples <- combined_data %>%
   distinct(sample) %>%
   pull(sample)
 
+# Pivot to have each statistic as its own column
 alpha_diversity_wide <- alpha_diversity %>%
   filter(alphaStat %in% c("Shannon", "Chao1")) %>%
   select(sample, alphaStat, value) %>%
   pivot_wider(names_from = alphaStat, values_from = value)
 
+# Add a column with altered sample ID
 combined_data_alpha <- combined_data %>%
   distinct(sample, biosample1, day, subject, antibiotic)%>%
   mutate(xsample = paste0("X", sample))
 
-
+# Left join be that sample ID
 e0026_alpha <- combined_data_alpha %>%
   left_join(alpha_diversity_wide, by = c("xsample" = "sample"))
 
-
+# Add day, antibiotic, and passage information
 e0026_alpha <- e0026_alpha %>%
   mutate(
     day = factor(day, levels = sort(unique(day))),
-    antibiotic = factor(antibiotic, levels = c(0, 1), labels = c("No", "Yes"))
+    antibiotic = factor(antibiotic, levels = c(0, 1), labels = c("No", "Yes")),
+    passage = extract_passage(xsample)
   )
 
 
@@ -227,11 +246,130 @@ beta_diversity_wide <- beta_diversity %>%
   select(sample1, sample2, method, value) %>%
   pivot_wider(names_from = method, values_from = value)
 
-combined_data_beta <- combined_data %>%
-  distinct(sample, day, subject, antibiotic)
+# # Left join by sample1 ID, rename to sample1's variable
+# e0026_beta_1 <- beta_diversity_wide %>%
+#   left_join(combined_data, by = c("sample1" = "sample")) %>%
+#   dplyr::rename(
+#     day1 = day,
+#     subject1 = subject,
+#     antibiotic1 = antibiotic
+#   )
+# 
+# e0026_beta_1 %>%
+#   select(sample1, day, subject, antibiotic) %>%
+#   head()
+
+
+# # Left join again by sample2 ID and rename to sample2's variables
+# e0026_beta_2 <- e0026_beta_1 %>% 
+#   left_join(combined_data, by = c("sample2" = "sample")) %>% 
+#   dplyr::rename("day" = "day2", "subject" = "subject2", "antibiotic" = "antibiotic2") %>% 
+#   mutate(passage1 = extract_passage(sample1),
+#          passage2 = extract_passage(sample2))
+
+```
+
+
+
+
+```{r}
+
+
+# ensure uniqueness in combined_data
+combined_data_clean <- combined_data %>%
+  distinct(sample, .keep_all = TRUE)
+
+# join sample1 metadata and check
+e0026_beta_1 <- beta_diversity_wide %>%
+  left_join(combined_data_clean, by = c("sample1" = "sample"))
+
+
+
+# if the columns exist, rename them
+if (all(c("day", "subject", "antibiotic") %in% names(e0026_beta_1))) {
+  e0026_beta_1 <- e0026_beta_1 %>%
+    dplyr::rename(
+      day1 = day,
+      subject1 = subject,
+      antibiotic1 = antibiotic
+    )
+} else {
+  stop("Expected columns not found after join on sample1.")
+}
+
+# Join sample2 metadata
+e0026_beta <- e0026_beta_1 %>%
+  left_join(combined_data_clean, by = c("sample2" = "sample"))
+
+
+
+# Rename second set
+if (all(c("day", "subject", "antibiotic") %in% names(e0026_beta))) {
+  e0026_beta <- e0026_beta %>%
+    dplyr::rename(
+      day2 = day,
+      subject2 = subject,
+      antibiotic2 = antibiotic
+    )
+} else {
+  stop("Expected columns not found after join on sample2.")
+}
+
+# Add passage extraction
+e0026_beta <- e0026_beta %>%
+  mutate(
+    passage1 = extract_passage(sample1),
+    passage2 = extract_passage(sample2)
+  )
 
 
 ```
+
+
+One plot I could make is a box plot of the JSD between communities from the same subject at day 1 and 29, versus the JSD between communities from the same subject at days 29 and 36.
+The question that this is answering: how much of an impact does the antibiotic have on community composition, compared to the normal level of variation that we see in the absence of antibiotics
+
+```{r}
+
+# Filter for only day combinations of interest. Maybe make a new column that has the combinations and from there decide which ones to keep.
+
+e0026_beta_clean <- e0026_beta %>%
+  mutate(day_pair = paste(day1, day2, sep = "_")) %>% 
+  filter(subject1 == subject2 & day1 != day2 & passage1 == 8 & passage2 == 8 & day_pair %in% c("001_029", "029_036"))
+
+
+ggplot(
+  e0026_beta_clean,
+  aes(x = day_pair, y = jsd)
+) +
+  geom_boxplot(
+    position = position_dodge(width = 0.75),
+    width = 0.6,
+    alpha = 0.9,
+    size = 1
+  )  +
+  geom_jitter(
+  color = "black",
+  position = position_jitter(width = 0.2),
+  shape = 21,
+  stroke = 0.3,
+  size = 1.5,
+  alpha = 0.8
+)+
+  labs(
+    title = "Divergence Across Samples Pre and Post Abx",
+    x = "Day Pair",
+    y = "Jensen-Shannon Divergence"
+  )  +
+  theme_minimal(base_size = 13) +
+  theme(
+    legend.position = "right",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+```
+
+
 
 
 Compare the average distance (i.e. JSD) between two in vivo communities (passage 0), compared to two in vitro communities (passage 8).
@@ -239,39 +377,27 @@ Compare the average distance (i.e. JSD) between two in vivo communities (passage
 
 ```{r}
 
-# Extract passage number (0 or 8) using more flexible regex
-extract_passage <- function(x) {
-  str_extract(x, "-[A-Z]-[08]-[A-Z0-9]+") %>%
-    str_extract("[08]")  # extract just the 0 or 8
-}
+# Extract passage number (0 or 8)
 
-beta_diversity_wide <- beta_diversity_wide%>%
-  mutate(
-    passage1 = extract_passage(sample1),
-    passage2 = extract_passage(sample2)
-  )%>%
-  # remove rows where either passage is NA or mismatched
-  filter(!is.na(passage1), !is.na(passage2), passage1 == passage2)
+jsd_p0p8 <- e0026_beta %>%
+  # mutate(
+  #   passage1 = extract_passage(sample1),
+  #   passage2 = extract_passage(sample2)
+  # )%>%
+  # # remove rows where either passage is NA or mismatched
+  filter(!is.na(passage1), !is.na(passage2), passage1 == passage2, day1 == "029", day2 == "029")
+  
 
 
 ```
 
 
 
+
 ```{r}
 
-# avg_jsd_summary <- beta_diversity_wide %>%
-#   group_by(passage1) %>%
-#   summarise(
-#     mean_JSD = mean(jsd, na.rm = TRUE),
-#     sd_JSD = sd(jsd, na.rm = TRUE),
-#     n = n(),
-#     .groups = "drop"
-#   )
-
-
-ggplot(beta_diversity_wide, aes(x = factor(passage1), y = jsd, fill = factor(passage1))) +
-  geom_boxplot(width = 0.6, alpha = 0.85) +
+ggplot(jsd_p0p8, aes(x = factor(passage1), y = jsd, fill = factor(passage1))) +
+  geom_violin(width = 0.6, alpha = 0.85) +
   labs(
     title = "In Vivo vs In Vitro Community JSD (Within Passage)",
     x = "Passage",
@@ -283,14 +409,6 @@ ggplot(beta_diversity_wide, aes(x = factor(passage1), y = jsd, fill = factor(pas
 
 ```
 
-One plot I could make is a box plot of the JSD between communities from the same subject at day 1 and 29, versus the JSD between communities from the same subject at days 29 and 36.
-The question that this is answering: how much of an impact does the antibiotic have on community composition, compared to the normal level of variation that we see in the absence of antibiotics
 
 
-```{r}
-
-
-
-
-```
 

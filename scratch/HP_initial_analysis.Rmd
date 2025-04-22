@@ -493,6 +493,19 @@ ggsave("species_richness_time.png", width = 14, height = 12, dpi = 300, bg = "wh
 
 ```
 
+Install rstatix and broom
+Use wilcox_test on a dataframe
+wilcox_test(dependentVariable ~ independentVariable)
+wilcox_effsize(dependentVariable ~ independentVariable)
+
+Perform a Wilcoxon rank-sum test (Mann-Whitney U test) to assess whether species richness significantly differs between samples with and without antibiotics, using the e0026_richness dataset.
+
+```{r}
+
+
+
+```
+
 
 
 
