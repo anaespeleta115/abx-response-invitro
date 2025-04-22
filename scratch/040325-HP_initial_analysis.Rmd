@@ -333,6 +333,7 @@ ggplot(summary, aes(x = prevalence, y = mean_abundance, label = Family, color = 
   legend.position = "none"
 )
 
+
 ggsave("abundance_prevalence.png", width = 14, height = 12, dpi = 300, bg = "white")
 ```
 Interpretation:
@@ -502,11 +503,17 @@ Perform a Wilcoxon rank-sum test (Mann-Whitney U test) to assess whether species
 
 ```{r}
 
+wilcox_results_by_day <- e0026_richness %>%
+  group_by(day) %>%
+  summarise(
+    p_value = wilcox.test(species_richness ~ antibiotic)$p.value
+  )
 
+wilcox_results_by_day
 
 ```
 
-
+Antibiotics caused a measurable disruption in microbial diversity around Day 36.
 
 
 
@@ -610,7 +617,7 @@ pre_post_abx_summary <- pre_post_abx %>%
 pre_post_abx_summary <- pre_post_abx_summary %>%
   filter(Family %in% top_families)
 
-ggplot(pre_post_abx_summary, aes(x = fct_reorder(Family, -log2_fc), y = log2_fc, fill = Family)) +
+pre_post_abx_family <- ggplot(pre_post_abx_summary, aes(x = fct_reorder(Family, -log2_fc), y = log2_fc, fill = Family)) +
   geom_boxplot(outlier.shape = NA, width = 0.8) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "darkred") +
   scale_fill_manual(values = my_colors)+
@@ -624,6 +631,10 @@ ggplot(pre_post_abx_summary, aes(x = fct_reorder(Family, -log2_fc), y = log2_fc,
     axis.text.x = element_text(angle = 45, hjust = 1, size = 7),
     legend.position = "none"
   )
+
+pre_post_abx_family
+
+ggsave("pre_post_abx_family.png", width = 14, height = 12, dpi = 300, bg = "white")
 ```
 
 

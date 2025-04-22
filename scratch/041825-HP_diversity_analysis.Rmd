@@ -77,25 +77,25 @@ OUTDIR <- "./"
 ### Get alpha diversity metrics (ONLY RUN ONCE)
 
 ```{r}
-# Calculate alpha diversity.
-calculateAlphaDiversity <- function(data) {
-
-  # Use the estimate_richness function to calculate
-  # an array of alpha-diversity statistics.
-  alphaRaw <- estimate_richness(data, split=TRUE)
-  # Add the sample names.
-  alphaRaw$sample <- rownames(alphaRaw)
-  # Calculate the Shannon effective number of species.
-  alphaRaw <- alphaRaw %>%
-	mutate(ShannonEffectiveSpecies=exp(Shannon))
-  # Tidy the dataframe.
-  alpha <- alphaRaw %>%
-	mutate(sample=gsub("\\.","-",sample)) %>%
-	pivot_longer(-sample, names_to="alphaStat", values_to="value")
-}
-
-alpha_diversity <- calculateAlphaDiversity(e0026_obj)
-write_delim(alpha_diversity, paste0(OUTDIR, "alpha_diversity.txt"))
+#  # Calculate alpha diversity.
+# calculateAlphaDiversity <- function(data) {
+# 
+#   # Use the estimate_richness function to calculate
+#   # an array of alpha-diversity statistics.
+#   alphaRaw <- estimate_richness(data, split=TRUE)
+#   # Add the sample names.
+#   alphaRaw$sample <- rownames(alphaRaw)
+#   # Calculate the Shannon effective number of species.
+#   alphaRaw <- alphaRaw %>%
+# 	mutate(ShannonEffectiveSpecies=exp(Shannon))
+#   # Tidy the dataframe.
+#   alpha <- alphaRaw %>%
+# 	mutate(sample=gsub("\\.","-",sample)) %>%
+# 	pivot_longer(-sample, names_to="alphaStat", values_to="value")
+# }
+# 
+# alpha_diversity <- calculateAlphaDiversity(e0026_obj)
+# write_delim(alpha_diversity, paste0(OUTDIR, "alpha_diversity.txt"))
 
 ```
 
@@ -103,36 +103,36 @@ write_delim(alpha_diversity, paste0(OUTDIR, "alpha_diversity.txt"))
 # Get beta diversity metrics (ONLY RUN ONCE)
 
 ```{r}
-# List the distance-calculation methods to be used.
-distMethods <- c("jsd","bray","jaccard")
-
-# Write a function to calculate a distance matrix using the specified method
-# and convert the data into tidy format.
-calculateBeta <- function(data, distMethod) {
-  # Calculate the distance matrix using the specified method.
-  betaRaw <- distance(data, method=distMethod)
- 
-  # Convert distance matrix to a dataframe.
-  beta <- as.matrix(betaRaw)
-  beta <- as.data.frame(beta)
-  beta$sample1 <- rownames(beta)
-  # Tidy the dataframe.
-  beta <- beta %>%
-	pivot_longer(-sample1, names_to="sample2", values_to="value")
-  beta <- beta %>%
-	filter(sample1 != sample2) %>%
-	mutate(method=distMethod)
-}
-
-# Calculate the distance matrix for all of the specified methods on the species abundances.
-# Combine the distance matrices for all methods.
-betaSpecies <- do.call(rbind, lapply(distMethods, function(distMethod) {
-  print(distMethod)
-  calculateBeta(e0026_obj, distMethod)
-}))
-# Export the distance matrix generated for all of the sample pairs
-# using all of the specified methods.
-write_delim(betaSpecies, paste0(OUTDIR, "speciesBeta.txt.gz"))
+# # List the distance-calculation methods to be used.
+# distMethods <- c("jsd","bray","jaccard")
+# 
+# # Write a function to calculate a distance matrix using the specified method
+# # and convert the data into tidy format.
+# calculateBeta <- function(data, distMethod) {
+#   # Calculate the distance matrix using the specified method.
+#   betaRaw <- distance(data, method=distMethod)
+#  
+#   # Convert distance matrix to a dataframe.
+#   beta <- as.matrix(betaRaw)
+#   beta <- as.data.frame(beta)
+#   beta$sample1 <- rownames(beta)
+#   # Tidy the dataframe.
+#   beta <- beta %>%
+# 	pivot_longer(-sample1, names_to="sample2", values_to="value")
+#   beta <- beta %>%
+# 	filter(sample1 != sample2) %>%
+# 	mutate(method=distMethod)
+# }
+# 
+# # Calculate the distance matrix for all of the specified methods on the species abundances.
+# # Combine the distance matrices for all methods.
+# betaSpecies <- do.call(rbind, lapply(distMethods, function(distMethod) {
+#   print(distMethod)
+#   calculateBeta(e0026_obj, distMethod)
+# }))
+# # Export the distance matrix generated for all of the sample pairs
+# # using all of the specified methods.
+# write_delim(betaSpecies, paste0(OUTDIR, "speciesBeta.txt.gz"))
 
 ```
 
@@ -157,7 +157,7 @@ extract_passage <- function(x) {
 
 ```{r}
 
-combined_data <- e0026_day29
+combined_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
 
 # Read in alpha diversity file
 alpha_diversity <- read_delim("./alpha_diversity.txt")
@@ -191,6 +191,9 @@ e0026_alpha <- e0026_alpha %>%
     antibiotic = factor(antibiotic, levels = c(0, 1), labels = c("No", "Yes")),
     passage = extract_passage(xsample)
   )
+
+e0026_alpha <- e0026_alpha %>% 
+  filter(passage == 8)
 
 
 ```
@@ -229,7 +232,39 @@ alpha_time <- ggplot(
   )
 
 alpha_time
+
+ggsave("alpha_time.png", width = 14, height = 12, dpi = 300, bg = "white")
 ```
+
+### Test Significance
+
+```{r}
+
+# Significance of antibiotic on the entire data
+
+wilcox.test(Shannon ~ antibiotic, data = e0026_alpha)
+
+
+# Significant of antibiotic on diversity by day
+
+wilcox_results_by_day <- e0026_alpha %>%
+  group_split(day) %>%
+  map_df(~{
+    data <- .
+    result <- wilcox.test(Shannon ~ antibiotic, data = data)
+    tibble(
+      day = unique(data$day),
+      p_value = result$p.value
+    )
+  })
+
+wilcox_results_by_day
+
+
+```
+
+
+
 
 ### Change in Beta Diversity through Time
 
@@ -323,6 +358,7 @@ e0026_beta <- e0026_beta %>%
   )
 
 
+
 ```
 
 
@@ -338,7 +374,7 @@ e0026_beta_clean <- e0026_beta %>%
   filter(subject1 == subject2 & day1 != day2 & passage1 == 8 & passage2 == 8 & day_pair %in% c("001_029", "029_036"))
 
 
-ggplot(
+beta_time <- ggplot(
   e0026_beta_clean,
   aes(x = day_pair, y = jsd)
 ) +
@@ -350,7 +386,7 @@ ggplot(
   )  +
   geom_jitter(
   color = "black",
-  position = position_jitter(width = 0.2),
+  position = position_jitter(width = 0.1),
   shape = 21,
   stroke = 0.3,
   size = 1.5,
@@ -367,6 +403,10 @@ ggplot(
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 
+beta_time
+
+ggsave("beta_time.png", width = 14, height = 12, dpi = 300, bg = "white")
+
 ```
 
 
@@ -380,15 +420,8 @@ Compare the average distance (i.e. JSD) between two in vivo communities (passage
 # Extract passage number (0 or 8)
 
 jsd_p0p8 <- e0026_beta %>%
-  # mutate(
-  #   passage1 = extract_passage(sample1),
-  #   passage2 = extract_passage(sample2)
-  # )%>%
-  # # remove rows where either passage is NA or mismatched
   filter(!is.na(passage1), !is.na(passage2), passage1 == passage2, day1 == "029", day2 == "029")
   
-
-
 ```
 
 
@@ -396,16 +429,21 @@ jsd_p0p8 <- e0026_beta %>%
 
 ```{r}
 
-ggplot(jsd_p0p8, aes(x = factor(passage1), y = jsd, fill = factor(passage1))) +
-  geom_violin(width = 0.6, alpha = 0.85) +
+jsd_p0p8_plot <- ggplot(jsd_p0p8, aes(x = factor(passage1), y = jsd, fill = factor(passage1))) +
+  geom_boxplot(width = 0.6, alpha = 0.85) +
   labs(
     title = "In Vivo vs In Vitro Community JSD (Within Passage)",
-    x = "Passage",
+    x = "Passage Pair",
     y = "Jensen-Shannon Divergence",
     fill = "Passage"
   ) +
   theme_minimal(base_size = 13) +
   theme(legend.position = "none")
+
+
+jsd_p0p8_plot
+
+ggsave("jsd_p0p8_plot.png", width = 14, height = 12, dpi = 300, bg = "white")
 
 ```
 
