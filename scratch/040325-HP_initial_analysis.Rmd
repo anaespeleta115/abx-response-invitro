@@ -18,25 +18,30 @@ library(ggrepel)
 ```
 
 
+## Question #1: How similar are in vivo and in vitro communities?
+
+
 # Load in the Household Project dataset
 
 ```{r}
+
 household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e0026-e0029-e0030.txt", header = TRUE)
 
 # Divide dataset into separate tables by experiment. Filter out unnecessary columns
-
 e0026 <- filter(household_data, str_detect(household_data$sample, "e0026")) %>% 
 select(sample, biosample1, experiment, passage, OTU, count, replicate, relAbundance, Phylum, Family, Genus)
 
+
+# Extract subject, day, household, and antibiotic information
 e0026_clean <- e0026 %>%
   mutate(
-    subject = str_sub(biosample1, 1, -5),    # remove last 4 characters
+    subject = str_sub(biosample1, 1, -5),
     day = str_sub(biosample1, -3),
     household = str_sub(biosample1, 1, -6),
     antibiotic = if_else(str_sub(biosample1, 3, 3) == "A", 1, 0)
   )
 
-
+# Divide up e0026 dataset into separate day datasets
 e0026_day1 <- e0026_clean %>%  filter(str_detect(biosample1, "001") | str_detect(biosample1, "002") | str_detect(biosample1, "003") | str_detect(biosample1, "022")| str_detect(biosample1, "008")) %>% 
 mutate(day = "001")
 
@@ -49,6 +54,7 @@ mutate(day = "036")
 e0026_day64 <- e0026_clean %>%  filter(str_detect(biosample1, "064")| str_detect(biosample1, "063") | str_detect(biosample1, "072") | str_detect(biosample1, "059")| str_detect(biosample1, "065")) %>% 
 mutate(day = "064")
 
+# Extract the top 25 families by relative abundance to make plots better
 top_families <- e0026_day29 %>%
   group_by(Family) %>%
   summarise(total_abundance = sum(relAbundance, na.rm = TRUE)) %>%
@@ -57,115 +63,9 @@ top_families <- e0026_day29 %>%
   pull(Family)
 
 
-```
+# Specify output directory
 
-
-## Experiment 0026 Summary Statistics
-
-
-### Number of Reads per Community
-
-In the household dataset, each row contains information for a different OTU (strain). In the grouped dataset below), each row represents a sample (community) with all their OTUs and counts grouped together. 
-
-
-```{r, warning=FALSE}
-
-# Plot total distribution of reads
-
-community_reads <- e0026 %>% 
-  group_by(biosample1) %>% 
-  summarise(total_reads = sum(as.numeric(count))) %>% 
-  arrange(desc(total_reads))
-
-community_reads <- data.frame(community_reads)
-
-ggplot(community_reads, aes(x = reorder(biosample1, -total_reads), y = total_reads))+
-  geom_histogram(stat="identity")+
-  labs(title = "Total read distrbution by community", x= "Community", y = "Total Reads")+
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank())
-
-
-# Find summary statistics to identify outliers 
-
-summary(community_reads)
-  
-reads_first_q <- 108050
-reads_third_q <- 131946
-
-reads_first_q.data <- filter(community_reads, total_reads < 108050)
-
-```
-
-### Number of strains per community
-
-
-```{r}
-
-# Instead of adding up the counts, count the rows for that sample
-
-community_strains <- e0026 %>% 
-  group_by(biosample1) %>% 
-  summarise(num_strains=n_distinct(OTU))
-
-# Plot the strain number distribution across communities
-
-ggplot(community_strains, aes(x = reorder(biosample1, -num_strains), y = num_strains))+
-  geom_histogram(stat="identity")+
-  labs(title = "Strain number distrbution by community", x= "Community", y = "Num Strains")+
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank())
-
-summary(community_strains)
-
-strains_first_q <- 52.0  
-strains_third_q <- 105.25
-
-strains_first_q.data <- filter(community_strains, num_strains < 52)
-strains_third_q.data <- filter(community_strains, num_strains > 105.25)
-
-print(strains_first_q.data$biosample1)
-print(strains_third_q.data$biosample1)
-
-```
-### XSA-036: community with the least number of strains
-
-#### Plot number of reads per family
-
-```{r}
-
-XBB064_household_data <- e0026%>% 
-  filter(biosample1 == "XBB-064") %>% 
-  group_by(Phylum, Family) %>% 
-  summarise(total_reads = sum(as.numeric(count))) %>% 
-  ggplot(aes(x = reorder(Family, -total_reads), y = log(total_reads), fill=Phylum))+
-  geom_bar(stat="identity")+
-  labs(title = "Family read distribution in Sample XBB-064", x= "Family Identity", y = "Log Read Count")+
-  theme_light()+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
-XBB064_household_data
-```
-
-### XSA-029: community with the largest number of strains
-
-#### Plot number of reads per family
-
-```{r}
-	
-	
-XIB064_household_data <- e0026%>% 
-  filter(biosample1 == "XIB-064") %>% 
-  group_by(Phylum, Family) %>% 
-  summarise(total_reads = sum(as.numeric(count))) %>% 
-  ggplot(aes(x = reorder(Family, -total_reads), y = log(total_reads), fill=Phylum))+
-  geom_bar(stat="identity")+
-  labs(title = "Family read distribution in Sample 	
-XIB-064", x= "Family Identity", y = "Log Read Count")+
-  theme_light()+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-	
-XIB064_household_data
+OUTPUTDIR <- "./outputs"
 
 ```
 
@@ -188,7 +88,7 @@ my_colors <- readRDS("C:/Spring-Rotation-2025/scratch/familyColorPalette.rds")
 
 # Plot the total relative abundances (which are calculated per community) totaled up for each
 
-ggplot(all_passages, aes(x = factor(passage), y = relAbundance, fill = Family)) +
+composition_across_passages <- ggplot(all_passages, aes(x = factor(passage), y = relAbundance, fill = Family)) +
   geom_bar(stat = "identity") +
   scale_fill_manual(values = my_colors) +
   labs(title = "Community Composition Across Passages" , x = "Passage Number", y = "Total Relative Abundance", fill = "Family") +
@@ -198,27 +98,26 @@ ggplot(all_passages, aes(x = factor(passage), y = relAbundance, fill = Family)) 
 ) +
   facet_wrap(~ biosample1)
 
-ggsave("composition_across_passages.png", width = 14, height = 12, dpi = 300, bg = "white")
+
+# Save the plot
+windows(width = 14, height = 12)
+savePlot(file.path(OUTPUTDIR, "composition_across_passages.png"), type = "png", device = dev.cur())
+
 
 ggplot(all_passages, aes(x = factor(passage), y = relAbundance, fill = Family)) +
   geom_bar(stat = "identity") +
   scale_fill_manual(values = my_colors)
 
+
 ```
 
-Observations: 
-
-Which families are most impacted by being in the lab? Which families tend to do much better in vitro than in vivo, and which families tend to do much worse?
 
 
-
-***Plot the fold-change (in abundance) of each family in passage 0 versus passage 8 (relative abundance p8 / relative abundance p0 (may need a pseudocounts)) for each subject and day 29 community.
-Hint: you may need pivot_wider to calculate the fold-change.
-
+### Fold-change of each family in passage 0 versus passage 8 (p0/p8 for each subject in day 29)
 
 ```{r}
 
-# get passage 0 and passage 8 communities for day 29
+# Get passage 0 and passage 8 communities for day 29
 
 p0_p8 <- e0026_day29 %>% 
   filter(passage %in% c(0, 8)) %>% 
@@ -253,7 +152,7 @@ p0_p8_foldchange <- p0_p8 %>%
 filtered_data <- p0_p8_foldchange %>%
   filter(Family %in% top_families)
 
-filtered_data %>%
+fold_change_p0p8 <- filtered_data %>%
   mutate(log2_fc = log2(fold_change)) %>%
   ggplot(aes(x = fct_reorder(Family, -log2_fc), y = log2_fc, fill = Family)) +
   geom_boxplot(width = 0.9, outlier.shape = NA) +
@@ -268,22 +167,20 @@ filtered_data %>%
   theme_minimal(base_size = 12) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 4), legend.position = "none")
 
-ggsave("fold_change_p0p8.png", width = 14, height = 12, dpi = 300, bg = "white")
+# ggsave("fold_change_p0p8.png", width = 14, height = 12, dpi = 300, bg = "white")
 
-# maybe try arranging the boxplots
-# or try filtering the families to the top 20
-# or extract the 5-letter family code
-
+# Save the plot
+windows(width = 14, height = 12)
+print(fold_change_p0p8)
+savePlot(file.path(OUTPUTDIR, "fold_change_p0p8.png"), type = "png", device = dev.cur())
 
 ```
 
 
 
-What are the main taxa that are present in our communities?
-Plot a summary of the most prevalent and abundant taxa across subjects at day 29.
+### Summary of the most prevalent and abundant taxa across subjects at day 29.
 
-Prevalence is the number (percentage) of samples that contain that family
-Total abundance is the cumulative abundance of the different strains in a family. The mean abundance is the average between the same families across different subjects.
+Prevalence is the number (percentage) of samples that contain that family. Total abundance is the cumulative abundance of the different strains in a family. The mean abundance is the average between the same families across different subjects.
 
 ```{r}
 
@@ -293,6 +190,7 @@ Total abundance is the cumulative abundance of the different strains in a family
 # I want the total relative abundance of OTUs at the family-level first
 
 summary_total_abundance <- e0026_day29 %>% 
+  filter(passage == 8) %>% 
   group_by(biosample1, Family) %>% 
   summarise(
     total_abundance = sum(relAbundance, na.rm = TRUE),
@@ -321,44 +219,37 @@ summary <- summary %>%
   filter(Family %in% top_families)
 
   
-ggplot(summary, aes(x = prevalence, y = mean_abundance, label = Family, color = Family)) +
+abundance_prevalence8 <- ggplot(summary, aes(x = prevalence, y = mean_abundance, label = Family, color = Family)) +
   geom_point(aes(size = mean_abundance), alpha = 0.7) +
-  geom_text_repel(size = 3, max.overlaps = Inf) +
+  geom_text_repel(size = 6, max.overlaps = Inf) +
   scale_color_manual(values = my_colors) +
   scale_x_continuous(name = "Prevalence (% of Samples)") +
   scale_y_continuous(name = "Mean Relative Abundance", trans = "log10") + 
-  labs(title = "Most Prevalent and Abundant Taxa at Day 29") +
+  labs(title = "Most Prevalent and Abundant Taxa at Day 29 (Passage 8)") +
   theme_minimal()+
   theme(
   legend.position = "none"
 )
 
 
-ggsave("abundance_prevalence.png", width = 14, height = 12, dpi = 300, bg = "white")
+# ggsave("abundance_prevalence8.png", width = 14, height = 12, dpi = 300, bg = "white")
+
+windows(width = 14, height = 12)
+print(abundance_prevalence8)
+savePlot(file.path(OUTPUTDIR, "abundance_prevalence8.png"), type = "png", device = dev.cur())
 ```
-Interpretation:
 
-Top right = common and abundant taxa (core microbiome)
 
-Bottom right = common but low-abundance taxa
 
-Top left = rare but abundant in a few subjects
-
-Bottom left = rare and low-abundance
-
-Questions:
-
-Is this the best way to answer this question or to represent the data?
-
+### Comparison of community composition at days 1 and 29 (pre-abx).
 
 How consistent is the community composition, in the absence of antibiotics?
-Plot a comparison of community composition at days 1 and 29 (pre-abx).
 
 ```{r}
 
 
 
-# Get only subject with data from both days. CHECK THIS!!!
+# Get only subject with data from both days
 
 subjects_with_both_days <- e0026_clean %>%
   filter(day %in% c("001", "002","003", "022", "027", "028", "029")) %>%
@@ -414,11 +305,13 @@ day1_29_composition <- ggplot(plot_data, aes(x = log_day29, y = log_day1, color 
   )
 
 
-day1_29_composition
+# day1_29_composition
+# 
+# ggsave("day1_29_composition.png", width = 14, height = 12, dpi = 300, bg = "white")
 
-# save plot
-
-ggsave("day1_29_composition.png", width = 14, height = 12, dpi = 300, bg = "white")
+windows(width = 14, height = 12)
+print(day1_29_composition)
+savePlot(file.path(OUTPUTDIR, "day1_29_composition.png"), type = "png", device = dev.cur())
 
 
 ```
@@ -427,11 +320,9 @@ ggsave("day1_29_composition.png", width = 14, height = 12, dpi = 300, bg = "whit
 
 ### Species Richness: calculate number of OTU's with a relative abundance > 0.1%
 
-1.) Plot the distribution of species richness at each timepoint, for abx- and non-abx subjects.
+Plot the distribution of species richness at each timepoint, for abx- and non-abx subjects.
 
 ```{r}
-
-#Plot the distribution of species richness at each time point for samples with and without antibiotic (facet by subject). x: abx vs. non-abx, y:species richnes, faceted by
 
 # Combine all the day datasets
 
@@ -487,19 +378,20 @@ species_richness_time <- ggplot(
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 
-species_richness_time
+# species_richness_time
+# 
+# ggsave("species_richness_time.png", width = 14, height = 12, dpi = 300, bg = "white")
 
-ggsave("species_richness_time.png", width = 14, height = 12, dpi = 300, bg = "white")
-# try running the wilcoxon rank test with
+windows(width = 14, height = 12)
+print(species_richness_time)
+savePlot(file.path(OUTPUTDIR, "species_richness_time.png"), type = "png", device = dev.cur())
 
 ```
 
-Install rstatix and broom
-Use wilcox_test on a dataframe
-wilcox_test(dependentVariable ~ independentVariable)
-wilcox_effsize(dependentVariable ~ independentVariable)
 
-Perform a Wilcoxon rank-sum test (Mann-Whitney U test) to assess whether species richness significantly differs between samples with and without antibiotics, using the e0026_richness dataset.
+### Perform Wilcoxon rank-sum test 
+
+Perform a Wilcoxon rank-sum test (Mann-Whitney U test) to assess whether species richness significantly differs between samples with and without antibiotics
 
 ```{r}
 
@@ -513,17 +405,16 @@ wilcox_results_by_day
 
 ```
 
-Antibiotics caused a measurable disruption in microbial diversity around Day 36.
 
+## Question #2: How do communities change after antibiotics?
 
+Plot stacked bar plots with a facet for each subject, showing compositional changes over time across timepoints, at passage 8.
 
-How do communities change after antibiotics?
-
-2.) Plot stacked bar plots with a facet for each subject, showing compositional changes over time across timepoints, at passage 8.
-
+### Compositional changes pre and post-abx
 
 ```{r}
 
+# Combine day datasets again
 combined_data_composition <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
 
 p8_data <- combined_data_composition %>% 
@@ -573,17 +464,21 @@ relative_abundance_plot <- ggplot(
     legend.position = "none"
   )
 
-relative_abundance_plot
+# relative_abundance_plot
 
 
-ggsave("p8_relative_abundance_plot.png", width = 14, height = 12, dpi = 300, bg = "white")
+# ggsave("p8_relative_abundance_plot.png", width = 14, height = 12, dpi = 300, bg = "white")
+
+windows(width = 14, height = 12)
+print(relative_abundance_plot)
+savePlot(file.path(OUTPUTDIR, "relative_abundance_plot.png"), type = "png", device = dev.cur())
 
 ```
 
 
-(stretch goal) Which families are the most strongly impacted by antibiotics?
-***Plot the fold-change after abx for each ASV in each subject, and plot average fold-change sorted by bacterial family. (this might be like the p8/p0 graph above)
+### Fold-change after abx (day36/day29) by family
 
+Which families are the most strongly impacted by antibiotics?
 
 ```{r}
 
@@ -632,9 +527,15 @@ pre_post_abx_family <- ggplot(pre_post_abx_summary, aes(x = fct_reorder(Family, 
     legend.position = "none"
   )
 
-pre_post_abx_family
+# pre_post_abx_family
 
-ggsave("pre_post_abx_family.png", width = 14, height = 12, dpi = 300, bg = "white")
+# ggsave("pre_post_abx_family.png", width = 14, height = 12, dpi = 300, bg = "white")
+
+
+windows(width = 14, height = 12)
+print(pre_post_abx_family)
+savePlot(file.path(OUTPUTDIR, "pre_post_abx_family.png"), type = "png", device = dev.cur())
+
 ```
 
 
