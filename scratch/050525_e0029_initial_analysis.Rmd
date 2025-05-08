@@ -1,0 +1,278 @@
+---
+title: "e0029_initial_analysis"
+output: html_document
+date: "2025-05-06"
+---
+
+
+# Load in packages
+
+```{r, warning=FALSE}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(ggrepel)
+```
+
+
+
+
+# Load in the Household Project dataset
+
+```{r}
+
+household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e0026-e0029-e0030.txt", header = TRUE)
+
+# Divide dataset into separate tables by experiment
+e0029 <- filter(household_data, str_detect(household_data$sample, "e0029"))
+
+e0026 <- filter(household_data, str_detect(household_data$sample, "e0026"))
+
+# Extract subject, day, household information
+e0029_clean <- e0029 %>%
+  mutate(
+    subject = str_sub(biosample1, 1, -5),
+    day = str_sub(biosample1, -3),
+    household = str_sub(biosample1, 1, -6)
+  )
+
+# Specify output directory
+
+OUTPUTDIR <- "./outputs"
+
+# Define color palette
+
+my_colors <- readRDS("C:/Spring-Rotation-2025/scratch/familyColorPalette.rds") 
+
+```
+
+
+### First plot composition across mixtures by biosample2 (donor community)
+
+
+```{r}
+
+# First get only the biosamples corresponding to actual mixtures
+composition_across_mixes <- e0029 %>%
+  # filter(!is.na(relAbundance)) %>%
+  group_by(biosample2, replicate) %>%
+  mutate(
+    biosample1 = factor(biosample1, levels = unique(biosample1))  # sets the order of levels to match the order they appear within the current group
+  ) %>%
+  ungroup() # Remove the group structure to avoid it affecting during plotting
+
+
+
+composition_across_mixes_plot <- ggplot(composition_across_mixes, aes(x = biosample1, y = relAbundance, fill = Family)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Community Composition Across Mixtures",
+    x = "Biosample1",
+    y = "Total Relative Abundance"
+  ) +
+  theme_gray() + 
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 10),
+    strip.text.x = element_text(angle = 90, hjust = 0, size = 15)
+  ) +
+  facet_grid(replicate ~ biosample2, scales = "free_x", space = "free_x")
+
+
+
+ggsave(
+  filename = file.path(OUTPUTDIR, "composition_across_mixes.png"),
+  plot = composition_across_mixes_plot,
+  width = 25,
+  height = 10,
+  dpi = 300
+)
+
+```
+
+
+
+### Try looking at the opposite: composition across mixtures by biosample1 (donor community)
+
+
+```{r}
+
+# First get only the biosamples corresponding to actual mixtures
+composition_across_mixes <- e0029 %>%
+  # filter(!is.na(relAbundance)) %>%
+  group_by(biosample1, replicate) %>%  # flip group structure
+  mutate(
+    biosample2 = factor(biosample2, levels = unique(biosample2))  # set local order within group
+  ) %>%
+  ungroup()
+
+# Why do the blank mixtures have an so many more observations?
+composition_across_mixes %>%
+  distinct(biosample1, biosample2, replicate) %>%  # ensure unique pairs
+  group_by(biosample1) %>%
+  summarise(n_biosample2 = n_distinct(biosample2)) %>%
+  arrange(desc(n_biosample2))
+
+
+composition_across_mixes_plot <- ggplot(composition_across_mixes, aes(x = biosample2, y = relAbundance, fill = Family)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Community Composition Across Mixtures",
+    x = "Biosample2",
+    y = "Total Relative Abundance"
+  ) +
+  theme_gray() + 
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 10),
+    strip.text.x = element_text(angle = 90, hjust = 0, size = 15)
+  ) +
+  facet_grid(replicate ~ biosample1, scales = "free_x", space = "free_x")
+
+ggsave(
+  filename = file.path(OUTPUTDIR, "composition_across_mixes_flipped.png"),
+  plot = composition_across_mixes_plot,
+  width = 25,
+  height = 10,
+  dpi = 300
+)
+
+
+```
+
+
+
+
+### Question #1: Was colonization resistance affected by antibiotic treatment and did it recover by day 64?
+
+Pseudocode:
+
+Group by mixture
+
+- For each of these unique communities, extract all OTU identities
+
+- For the recipient communities we can do the same by looking at biosample1+blank mixtures?
+
+- For the donor communities we have to go back to the e0026 dataset and extract the OTUs from there
+
+**Only use ASVs with relAbundance > 0.0001**
+
+```{r}
+
+# Only extract OT
+e0029_colonization <- e0029 %>% 
+  filter(relAbundance > 0.0001)
+
+e0026_colonization <- e0026 %>% 
+  filter(relAbundance > 0.0001)
+
+```
+
+
+**Get mixture ASVs**
+
+```{r}
+
+
+  
+# Replicate 1
+mixture_ASVs_rep1 <- e0029_colonization %>%
+  filter(replicate == 1) %>% 
+  select(mixture, OTU) %>%
+  distinct() %>%                        
+  group_by(mixture) %>%
+  summarise(asvs = list(unique(OTU)), .groups = "drop") %>%
+  deframe()
+
+# mixture_ASVs_rep1[["XBB-029+XBA-029"]]
+
+#Replicate 2
+mixture_ASVs_rep2 <- e0029_colonization %>%
+  filter(replicate == 2) %>% 
+  select(mixture, OTU) %>%
+  distinct() %>%                        
+  group_by(mixture) %>%
+  summarise(asvs = list(unique(OTU)), .groups = "drop") %>%
+  deframe()
+
+```
+
+
+**Get recipient ASVs**
+
+```{r}
+
+
+
+# Replicate 1
+recipient_ASVs_rep1 <- e0029_colonization %>% 
+  filter(replicate == 1, biosample2 == "blank", biosample1 != "blank") %>% 
+  select(biosample1, OTU) %>%
+  distinct() %>%                        
+  group_by(biosample1) %>%
+  summarise(asvs = list(unique(OTU)), .groups = "drop") %>%
+  deframe()
+
+# Replicate 2
+recipient_ASVs_rep2 <- e0029_colonization %>% 
+  filter(replicate == 2, biosample2 == "blank", biosample1 != "blank") %>% 
+  select(biosample1, OTU) %>%
+  distinct() %>%                        
+  group_by(biosample1) %>%
+  summarise(asvs = list(unique(OTU)), .groups = "drop") %>%
+  deframe()
+
+# recipient_ASVs_rep1[["XBA-029"]]
+
+```
+
+
+**Get donor ASVs**
+
+```{r}
+
+# Extract only the donor communities
+donor_communities <- e0029_colonization %>%
+  filter(!is.na(biosample2), biosample2 != "blank") %>%
+  pull(biosample2) %>%
+  unique()
+
+# Replicate 1
+donor_ASVs_rep1 <- e0026_colonization %>% 
+  filter(biosample1 %in% donor_communities) %>% 
+  select(biosample1, OTU) %>%
+  distinct() %>%
+  group_by(biosample1) %>%
+  summarise(asvs = list(unique(OTU)), .groups = "drop") %>%
+  deframe()
+
+
+```
+
+
+
+### Define a function to categorize colonization
+
+this is how you get an overall intersection: global_intersection <- intersect(
+  unlist(list1),
+  unlist(list2)
+)
+
+
+```{r}
+
+for (mix in names(mixture_ASVs_rep1)) {
+  otus <- mixture_ASVs_rep1[[mix]]
+  cat("Mixture:", mix, "\n")
+  print(otus)
+}
+
+
+
+```
+
+
+

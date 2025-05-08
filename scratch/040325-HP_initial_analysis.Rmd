@@ -67,6 +67,11 @@ top_families <- e0026_day29 %>%
 
 OUTPUTDIR <- "./outputs"
 
+
+# Define color palette
+
+my_colors <- readRDS("C:/Spring-Rotation-2025/scratch/familyColorPalette.rds") 
+
 ```
 
 
@@ -84,7 +89,7 @@ all_passages <- household_data %>%
   ungroup() 
 
 
-my_colors <- readRDS("C:/Spring-Rotation-2025/scratch/familyColorPalette.rds") 
+
 
 # Plot the total relative abundances (which are calculated per community) totaled up for each
 
@@ -101,6 +106,7 @@ composition_across_passages <- ggplot(all_passages, aes(x = factor(passage), y =
 
 # Save the plot
 windows(width = 14, height = 12)
+print(composition_across_passages)
 savePlot(file.path(OUTPUTDIR, "composition_across_passages.png"), type = "png", device = dev.cur())
 
 
