@@ -101,12 +101,19 @@ ggsave(
 
 # First get only the biosamples corresponding to actual mixtures. For blanks, only get the first well of the duplicates
 composition_across_mixes <- e0029 %>%
-  filter(!(biosample2 == "blank") | (biosample2 == "blank" & well %in% c("A11", "C11", "E11", "G11")) | (biosample1 == "blank" & well %in% "G12")) %>%
+  filter(
+    !(biosample2 == "blank") |
+    (biosample2 == "blank" & !well %in% c("G11", "H11"))) %>%
+  filter(
+    biosample1 != "blank" | 
+    (plate == "e0029.B.5" & well %in% c("G12", "H12"))
+  )
   group_by(biosample1, replicate) %>%
   mutate(
     biosample2 = factor(biosample2, levels = unique(biosample2))
   ) %>%
   ungroup()
+
 
 
 # Why do the blank mixtures have an so many more observations?
@@ -117,7 +124,12 @@ composition_across_mixes %>%
   arrange(desc(n_biosample2))
 
 
-composition_across_mixes_plot <- ggplot(composition_across_mixes, aes(x = biosample2, y = relAbundance, fill = Family)) +
+library(forcats)
+
+ggplot(
+  composition_across_mixes,
+  aes(x = forcats::fct_relevel(factor(biosample2), "blank"), y = relAbundance, fill = Family)
+) +
   geom_bar(stat = "identity") +
   scale_fill_manual(values = my_colors) +
   labs(
@@ -133,6 +145,8 @@ composition_across_mixes_plot <- ggplot(composition_across_mixes, aes(x = biosam
   ) +
   facet_grid(replicate ~ biosample1, scales = "free_x", space = "free_x")
 
+
+
 ggsave(
   filename = file.path(OUTPUTDIR, "composition_across_mixes_flipped.png"),
   plot = composition_across_mixes_plot,
@@ -140,7 +154,6 @@ ggsave(
   height = 10,
   dpi = 300
 )
-
 
 ```
 
@@ -186,7 +199,7 @@ mixture_ASVs_rep1 <- e0029_colonization %>%
   summarise(asvs = list(unique(OTU)), .groups = "drop") %>%
   deframe()
 
-# mixture_ASVs_rep1[["XBB-029+XBA-029"]]
+mixture_ASVs_rep1[["XBB-029+XBA-029"]]
 
 #Replicate 2
 mixture_ASVs_rep2 <- e0029_colonization %>%
@@ -235,7 +248,7 @@ recipient_ASVs_rep2 <- e0029_colonization %>%
 
 # Extract only the donor communities
 donor_communities <- e0029_colonization %>%
-  filter(!is.na(biosample2), biosample2 != "blank") %>%
+  # filter(!is.na(biosample2), biosample2 != "blank") %>%
   pull(biosample2) %>%
   unique()
 
@@ -294,50 +307,37 @@ for (donor in names(extended_donor_ASVs)){
   extended_donor_ASVs[["b-mix"]] <- combined_asvs_list
 }
 
+extended_donor_ASVs[["blank"]] <- mixture_ASVs_rep1[["blank+blank"]]
+
 
 ```
 
 
 
-### Define a function to categorize colonization
+### Define a function to categorize colonization (one-by-one test)
 
 
-```{r, }
+```{r}
 
-# This is what I have intuitively, but there 
-
-compute_colonization <- function(mixture_list, donor_list, recipient_list) {
-  colonization_results <- list()
+get_colonization <- function(mix_asvs, donor_asvs, recipient_asvs) {
+  # Find OTUs shared by donor and mixture
+  shared_asvs <- intersect(donor_asvs, mix_asvs)
+  # print(donor_asvs)
   
-  for (mix in names(mixture_list)) {
-    mix_asvs <- mixture_list[[mix]]
-    
-    for (donor in names(donor_list)) {
-      donor_asvs <- donor_list[[donor]]
-      
-      # Shared OTUs between mixture and donor
-      shared_otus <- intersect(mix_asvs, donor_asvs)
-      
-      for (recipient in names(recipient_list)) {
-        recipient_asvs <- recipient_list[[recipient]]
-        
-        # Flag colonization: 1 if OTU not in recipient, 0 if present
-        colonization_flag <- ifelse(!(shared_otus %in% recipient_asvs), 1, 0)
-        names(colonization_flag) <- shared_otus
-        
-        # Store in nested list
-        colonization_results[[mix]][[donor]][[recipient]] <- colonization_flag
-      }
-    }
-  }
+  # Colonized if at least one shared ASV is not in recipient
+  colonized <- any(!(shared_asvs %in% recipient_asvs))
   
-  return(colonization_results)
+  return(as.integer(colonized))  # 1 if colonized, 0 if not
 }
 
-colonization_results <- invisible(compute_colonization(mixture_ASVs_rep1, donor_ASVs, recipient_ASVs_rep1))
 
+get_colonization(
+  mix_asvs = mixture_ASVs_rep1[["blank+XEA-029"]],
+  donor_asvs = extended_donor_ASVs[["blank"]],
+  recipient_asvs = recipient_ASVs_rep1[["XEA-029"]]
+)
+# returns 1 or 0
 
 ```
-
 
 
