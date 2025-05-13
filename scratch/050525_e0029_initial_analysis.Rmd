@@ -13,6 +13,7 @@ library(dplyr)
 library(ggplot2)
 library(readr)
 library(ggrepel)
+library(purrr)
 ```
 
 
@@ -107,7 +108,7 @@ composition_across_mixes <- e0029 %>%
   filter(
     biosample1 != "blank" | 
     (plate == "e0029.B.5" & well %in% c("G12", "H12"))
-  )
+  ) %>% 
   group_by(biosample1, replicate) %>%
   mutate(
     biosample2 = factor(biosample2, levels = unique(biosample2))
@@ -172,18 +173,170 @@ Group by mixture
 
 - For the donor communities we have to go back to the e0026 dataset and extract the OTUs from there
 
-**Only use ASVs with relAbundance > 0.0001**
+- Recalculate relative abundances for datasets (since there are replicates) and b-mixes and filter for those asvs >0.0001
+
+**Only use ASVs with relAbundance > 0.001**
 
 ```{r}
 
-# Only extract OT
-e0029_colonization <- e0029 %>% 
-  filter(relAbundance > 0.0001)
+# Have filter for relative abundance in actual calculations to avoid losing information
+# Only extract OTU
 
-e0026_colonization <- e0026 %>% 
-  filter(relAbundance > 0.0001)
+limit_of_detection <- 0.001
 
 ```
+
+
+**Create a mixture ASVs, recipient ASVs, and donor ASVs dataset**
+
+```{r}
+
+# Get mixture communities
+mixture_ASVs1 <- e0029 %>% 
+  filter(relAbundance > limit_of_detection) %>% 
+  filter(replicate == 1)
+
+
+mixture_ASVs2 <- e0029 %>% 
+  filter(relAbundance > limit_of_detection) %>% 
+  filter(replicate == 2)
+
+# Get recipient communities
+recipient_ASVs1 <- e0029 %>% 
+  filter(relAbundance > limit_of_detection) %>%  
+  filter(biosample2 == "blank", replicate == 1)
+
+recipient_ASVs2 <- e0029 %>% 
+  filter(relAbundance > limit_of_detection) %>%  
+  filter(biosample2 == "blank", replicate == 2)
+
+
+# Extract donor community IDs from e0029
+donor_communities <- e0029 %>%
+  pull(biosample2) %>%
+  unique()
+
+# Extract single donor OTUs from e0026
+single_donor_ASVs <- e0026 %>%
+  filter(biosample1 %in% donor_communities, passage == "8") %>% 
+  
+# We'll deal with the b-mix and two-donor communities later
+donor_combinations <- list(
+  c("XBB-029", "XKB-029"),
+  c("XCB-029", "XBB-029"),
+  c("XDB-029", "XCB-029"),
+  c("XEB-029", "XDB-029"),
+  c("XFB-029", "XEB-029"),
+  c("XGB-029", "XFB-029"),
+  c("XHB-029", "XGB-029"),
+  c("XIB-029", "XHB-029"),
+  c("XJB-029", "XIB-029")
+)
+
+# donor_combinations[[1]] 
+#   
+# two_donor_ASVs <- single_donor_ASVs %>% 
+#   filter(biosample1 %in% donor_combinations[[1]])
+# 
+# combined_otus <- two_donor_ASVs %>% 
+#   group_by(OTU) %>% 
+#   summarize(total_abundance = sum(relAbundance))
+# 
+# combined_otus <- combined_otus %>% 
+#   mutate(avg_abundance = total_abundance/2)
+# 
+# 
+# combined_otus <- combined_otus %>% 
+#   mutate(relAbundance_final = avg_abundance/sum(avg_abundance)) %>% 
+#   select(OTU, relAbundance_final) %>% 
+#   filter(relAbundance_final > limit_of_detection)
+
+
+
+
+```
+
+
+
+
+```{r}
+# Loop and collect into one dataframe. map_dfr binds all the donor pair dataframes together at the end. Iterates over each element in the list donor_combinations (i.e., each donor pair). Applies the anonymous function(donor_pair) { ... } to each element. Combines all returned dataframes by row (dfr = data frame row-binding)
+
+two_donor_ASVs <- map_dfr(donor_combinations, function(donor_pair) {
+  pair_name <- paste(donor_pair, collapse = "+")
+  
+  two_donor_ASVs <- single_donor_ASVs %>%
+    filter(biosample1 %in% donor_pair)
+  
+  combined_otus <- two_donor_ASVs %>%
+    group_by(OTU) %>%
+    summarize(total_abundance = sum(relAbundance), .groups = "drop") %>%
+    mutate(
+      avg_abundance = total_abundance / 2,
+      relAbundance_final = avg_abundance / sum(avg_abundance)
+    ) %>%
+    select(OTU, relAbundance_final) %>%
+    filter(relAbundance_final > limit_of_detection) %>%
+    mutate(donors = pair_name)  # Add mixture ID
+  
+  return(combined_otus) # donor pair data frame
+})
+
+
+
+```
+
+
+
+
+
+```{r}
+# Calculate colonization
+get_colonization <- function(mix_asvs, donor_asvs, recipient_asvs) {
+  # Find OTUs shared by donor and mixture
+  shared_asvs <- intersect(single_donor_ASVs, mixture_ASVs1)
+  
+  # print(paste("donor asvs", donor_asvs))
+  
+  # Colonized if at least one shared ASV is not in recipient
+  colonized <- any(!(shared_asvs %in% recipient_asvs))
+  
+  return(as.integer(colonized))  # 1 if colonized, 0 if not
+}
+
+
+# Recalculate relative abundance
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 **Get mixture ASVs**
@@ -263,6 +416,10 @@ donor_ASVs <- e0026_colonization %>%
   deframe()
 
 
+# Add b-mix info by computing the total asvs in the donor samples
+b_mix_asvs <- Reduce(union, donor_ASVs)
+donor_ASVs[["b-mix"]] <- b_mix_asvs
+
 
 # Infer mixture donor OTUs by adding together each pair:
 donor_combinations <- list(
@@ -292,23 +449,12 @@ for (combo_name in names(donor_combinations)) {
 
 }
 
-
-# Add b-mix info by computing the total asvs in the donor samples
-
-combined_asvs_list <- list()
-
-for (donor in names(extended_donor_ASVs)){
-  
-  donor_asvs <- extended_donor_ASVs[[donor]]
-
-  combined_asvs_list <- append(combined_asvs_list, donor_asvs) # get all OTUs present in the 10 donors??
-  combined_asvs_list <- Reduce(union, combined_asvs_list)
-  
-  extended_donor_ASVs[["b-mix"]] <- combined_asvs_list
-}
-
+# Add "blank" as a donor
 extended_donor_ASVs[["blank"]] <- mixture_ASVs_rep1[["blank+blank"]]
 
+
+all_donor_asvs <- unique(unlist(donor_ASVs))
+length(all_donor_asvs)
 
 ```
 
@@ -322,7 +468,8 @@ extended_donor_ASVs[["blank"]] <- mixture_ASVs_rep1[["blank+blank"]]
 get_colonization <- function(mix_asvs, donor_asvs, recipient_asvs) {
   # Find OTUs shared by donor and mixture
   shared_asvs <- intersect(donor_asvs, mix_asvs)
-  # print(donor_asvs)
+  
+  # print(paste("donor asvs", donor_asvs))
   
   # Colonized if at least one shared ASV is not in recipient
   colonized <- any(!(shared_asvs %in% recipient_asvs))
@@ -332,11 +479,73 @@ get_colonization <- function(mix_asvs, donor_asvs, recipient_asvs) {
 
 
 get_colonization(
-  mix_asvs = mixture_ASVs_rep1[["blank+XEA-029"]],
-  donor_asvs = extended_donor_ASVs[["blank"]],
-  recipient_asvs = recipient_ASVs_rep1[["XEA-029"]]
+  mix_asvs = mixture_ASVs_rep1[["b-mix+XEA-036"]],
+  donor_asvs = extended_donor_ASVs[["b-mix"]],
+  recipient_asvs = recipient_ASVs_rep1[["XEA-036"]]
 )
 # returns 1 or 0
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+### Full function looping through mixture ids
+
+```{r}
+# Initialize results list
+colonization_results <- list()
+
+# Loop through each mixture
+for (mix_id in names(mixture_ASVs_rep1)) {
+  # Split into donor and recipient
+  ids <- unlist(strsplit(mix_id, "\\+"))
+  
+  donor_id <- ids[1]
+  recipient_id <- ids[2]
+  
+  print(paste("mix id", mix_id))
+  print(paste("donor id", donor_id))
+  print(paste("recipient", recipient_id))
+  
+  # Extract ASV lists
+  mix_asvs <- mixture_ASVs_rep1[[mix_id]]
+  donor_asvs <- extended_donor_ASVs[[donor_id]]
+  recipient_asvs <- recipient_ASVs_rep1[[recipient_id]]
+  
+  # print(paste("mix asvs", mix_asvs))
+  # print(paste("donor asvs", donor_asvs))
+  # print(paste("recipient asvs", recipient_asvs))
+  
+  # Apply the function
+  colonized_flag <- get_colonization(
+    mix_asvs = mix_asvs,
+    donor_asvs = donor_asvs,
+    recipient_asvs = recipient_asvs
+  )
+
+  # Store result
+  colonization_results[[mix_id]] <- data.frame(
+    mixture = mix_id,
+    donor = donor_id,
+    recipient = recipient_id,
+    colonized = colonized_flag,
+    stringsAsFactors = FALSE
+  )
+}
+
+# Combine into final data frame
+colonization_df <- do.call(rbind, colonization_results)
+
+
 
 ```
 
