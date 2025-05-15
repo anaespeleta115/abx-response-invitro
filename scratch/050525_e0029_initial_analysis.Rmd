@@ -14,6 +14,10 @@ library(ggplot2)
 library(readr)
 library(ggrepel)
 library(purrr)
+
+library(foreach)
+library(forcats)
+library(cowplot)
 ```
 
 
@@ -125,9 +129,8 @@ composition_across_mixes %>%
   arrange(desc(n_biosample2))
 
 
-library(forcats)
 
-ggplot(
+composition_across_mixes_plot <- ggplot(
   composition_across_mixes,
   aes(x = forcats::fct_relevel(factor(biosample2), "blank"), y = relAbundance, fill = Family)
 ) +
@@ -141,8 +144,8 @@ ggplot(
   theme_gray() + 
   theme(
     legend.position = "none",
-    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 10),
-    strip.text.x = element_text(angle = 90, hjust = 0, size = 15)
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 10, face = "bold"),
+    strip.text.x = element_text(angle = 90, hjust = 0, size = 10)
   ) +
   facet_grid(replicate ~ biosample1, scales = "free_x", space = "free_x")
 
@@ -153,7 +156,7 @@ ggsave(
   plot = composition_across_mixes_plot,
   width = 25,
   height = 10,
-  dpi = 300
+  dpi =600
 )
 
 ```
@@ -192,23 +195,21 @@ limit_of_detection <- 0.001
 ```{r}
 
 # Get mixture communities
-mixture_ASVs1 <- e0029 %>% 
-  filter(relAbundance > limit_of_detection) %>% 
-  filter(replicate == 1)
+mixture_ASVs <- e0029 %>% 
+  filter(relAbundance > limit_of_detection)
 
-
-mixture_ASVs2 <- e0029 %>% 
-  filter(relAbundance > limit_of_detection) %>% 
-  filter(replicate == 2)
 
 # Get recipient communities
-recipient_ASVs1 <- e0029 %>% 
-  filter(relAbundance > limit_of_detection) %>%  
-  filter(biosample2 == "blank", replicate == 1)
-
-recipient_ASVs2 <- e0029 %>% 
-  filter(relAbundance > limit_of_detection) %>%  
-  filter(biosample2 == "blank", replicate == 2)
+recipient_ASVs <- e0029 %>% 
+  filter(relAbundance > limit_of_detection) %>%   
+  filter(biosample2 == "blank") %>% 
+  filter(
+    !(biosample2 == "blank") |
+    (biosample2 == "blank" & !well %in% c("G11", "H11"))) %>%
+  filter(
+    biosample1 != "blank" | 
+    (plate == "e0029.B.5" & well %in% c("G12", "H12"))
+  )
 
 
 # Extract donor community IDs from e0029
@@ -216,9 +217,11 @@ donor_communities <- e0029 %>%
   pull(biosample2) %>%
   unique()
 
+donor_communities
+
 # Extract single donor OTUs from e0026
 single_donor_ASVs <- e0026 %>%
-  filter(biosample1 %in% donor_communities, passage == "8") %>% 
+  filter(biosample1 %in% donor_communities, passage == "8")
   
 # We'll deal with the b-mix and two-donor communities later
 donor_combinations <- list(
@@ -230,37 +233,18 @@ donor_combinations <- list(
   c("XGB-029", "XFB-029"),
   c("XHB-029", "XGB-029"),
   c("XIB-029", "XHB-029"),
-  c("XJB-029", "XIB-029")
+  c("XJB-029", "XIB-029"),
+  c("XKB-029", "XJB-029") 
 )
-
-# donor_combinations[[1]] 
-#   
-# two_donor_ASVs <- single_donor_ASVs %>% 
-#   filter(biosample1 %in% donor_combinations[[1]])
-# 
-# combined_otus <- two_donor_ASVs %>% 
-#   group_by(OTU) %>% 
-#   summarize(total_abundance = sum(relAbundance))
-# 
-# combined_otus <- combined_otus %>% 
-#   mutate(avg_abundance = total_abundance/2)
-# 
-# 
-# combined_otus <- combined_otus %>% 
-#   mutate(relAbundance_final = avg_abundance/sum(avg_abundance)) %>% 
-#   select(OTU, relAbundance_final) %>% 
-#   filter(relAbundance_final > limit_of_detection)
-
-
 
 
 ```
 
 
-
+**Get two-donor communities**
 
 ```{r}
-# Loop and collect into one dataframe. map_dfr binds all the donor pair dataframes together at the end. Iterates over each element in the list donor_combinations (i.e., each donor pair). Applies the anonymous function(donor_pair) { ... } to each element. Combines all returned dataframes by row (dfr = data frame row-binding)
+# Loop and collect into one dataframe. map_dfr binds all the donor pair dataframes together at the end. Iterates over each element in the list donor_combinations (i.e., each donor pair). Applies the anonymous "function(donor_pair)" to each element. Combines all returned dataframes by row (dfr = data frame row-binding)
 
 two_donor_ASVs <- map_dfr(donor_combinations, function(donor_pair) {
   pair_name <- paste(donor_pair, collapse = "+")
@@ -277,276 +261,389 @@ two_donor_ASVs <- map_dfr(donor_combinations, function(donor_pair) {
     ) %>%
     select(OTU, relAbundance_final) %>%
     filter(relAbundance_final > limit_of_detection) %>%
-    mutate(donors = pair_name)  # Add mixture ID
+    mutate(mixture = pair_name)  # Add mixture ID
   
   return(combined_otus) # donor pair data frame
 })
 
+# within each mixture community, the relative abundances should this sum to one
+two_donor_ASVs %>% 
+  group_by(mixture) %>% 
+  summarise(total = sum(relAbundance_final))
+
+
+
+```
+
+
+**Get b-mix communities**
+
+
+```{r}
+
+```
+
+
+**Join together all donor community dataframes**
+
+```{r}
 
 
 ```
 
 
 
+Write a function to take in a specific mixture and output whether there was colonization or not for each OTU in the mixture (THIS ONE WORKS!)
 
-
+**Testing on a specific case**
 ```{r}
-# Calculate colonization
-get_colonization <- function(mix_asvs, donor_asvs, recipient_asvs) {
-  # Find OTUs shared by donor and mixture
-  shared_asvs <- intersect(single_donor_ASVs, mixture_ASVs1)
+
+# function takes the id and replicate number, filters the community datasets for those ids and finds intersection between the otu vectors to see if they are shared across communities 
+
+get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {
   
-  # print(paste("donor asvs", donor_asvs))
+  # Subset mixture and recipient ASVs for the given replicate
+  mix_asvs_subset <- mixture_ASVs %>% 
+    filter(mixture == mix_id, replicate == replicate)
   
-  # Colonized if at least one shared ASV is not in recipient
-  colonized <- any(!(shared_asvs %in% recipient_asvs))
+  recipient_asvs_subset <- recipient_ASVs %>% 
+    filter(biosample1 == recipient_id, replicate == replicate)
   
-  return(as.integer(colonized))  # 1 if colonized, 0 if not
+  donor_asvs_subset <- single_donor_ASVs %>%  # change this when you have donor_asvs with mixed donors
+    filter(biosample1 == donor_id)
+  
+  # Get shared OTUs between donor and mixture.  Add colonization column: 1 if OTU is shared with donor, 0 otherwise
+  mix_asvs_colonization <- mix_asvs_subset %>% 
+    mutate(colonization = ifelse(OTU %in% donor_asvs_subset$OTU & !(OTU %in% recipient_asvs_subset$OTU), 1, 0))
+
+  return(mix_asvs_colonization)
 }
 
 
-# Recalculate relative abundance
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-**Get mixture ASVs**
-
-```{r}
-  
-# Replicate 1
-mixture_ASVs_rep1 <- e0029_colonization %>%
-  filter(replicate == 1) %>% 
-  select(mixture, OTU) %>%
-  distinct() %>%                        
-  group_by(mixture) %>%
-  summarise(asvs = list(unique(OTU)), .groups = "drop") %>%
-  deframe()
-
-mixture_ASVs_rep1[["XBB-029+XBA-029"]]
-
-#Replicate 2
-mixture_ASVs_rep2 <- e0029_colonization %>%
-  filter(replicate == 2) %>% 
-  select(mixture, OTU) %>%
-  distinct() %>%                        
-  group_by(mixture) %>%
-  summarise(asvs = list(unique(OTU)), .groups = "drop") %>%
-  deframe()
-
-```
-
-
-**Get recipient ASVs**
-
-```{r}
-
-
-
-# Replicate 1
-recipient_ASVs_rep1 <- e0029_colonization %>% 
-  filter(replicate == 1, biosample2 == "blank", biosample1 != "blank") %>% 
-  select(biosample1, OTU) %>%
-  distinct() %>%                        
-  group_by(biosample1) %>%
-  summarise(asvs = list(unique(OTU)), .groups = "drop") %>%
-  deframe()
-
-# Replicate 2
-recipient_ASVs_rep2 <- e0029_colonization %>% 
-  filter(replicate == 2, biosample2 == "blank", biosample1 != "blank") %>% 
-  select(biosample1, OTU) %>%
-  distinct() %>%                        
-  group_by(biosample1) %>%
-  summarise(asvs = list(unique(OTU)), .groups = "drop") %>%
-  deframe()
-
-# recipient_ASVs_rep1[["XBA-029"]]
-
-```
-
-
-**Get donor ASVs**
-
-```{r}
-
-# Extract only the donor communities
-donor_communities <- e0029_colonization %>%
-  # filter(!is.na(biosample2), biosample2 != "blank") %>%
-  pull(biosample2) %>%
-  unique()
-
-
-# Extract single donor OTUs from e0026
-donor_ASVs <- e0026_colonization %>% 
-  filter(biosample1 %in% donor_communities, passage == "8") %>% 
-  select(biosample1, OTU) %>%
-  distinct() %>%
-  group_by(biosample1) %>%
-  summarise(asvs = list(unique(OTU)), .groups = "drop") %>%
-  deframe()
-
-
-# Add b-mix info by computing the total asvs in the donor samples
-b_mix_asvs <- Reduce(union, donor_ASVs)
-donor_ASVs[["b-mix"]] <- b_mix_asvs
-
-
-# Infer mixture donor OTUs by adding together each pair:
-donor_combinations <- list(
-  "XBB-029+XKB-029" = c("XBB-029", "XKB-029"),
-  "XCB-029+XBB-029" = c("XCB-029", "XBB-029"),
-  "XDB-029+XCB-029" = c("XDB-029", "XCB-029"),
-  "XEB-029+XDB-029" = c("XEB-029", "XDB-029"),
-  "XFB-029+XEB-029" = c("XFB-029", "XEB-029"),
-  "XGB-029+XFB-029" = c("XGB-029", "XFB-029"),
-  "XHB-029+XGB-029" = c("XHB-029", "XGB-029"),
-  "XIB-029+XHB-029" = c("XIB-029", "XHB-029"),
-  "XJB-029+XIB-029" = c("XJB-029", "XIB-029")
+XBB_XEA_colonization <- get_colonization(
+  mix_id = "XBB-029+XEA-029",
+  donor_id = "XBB-029",
+  recipient_id = "XEA-029",
+  replicate = 1
 )
 
-
-
-extended_donor_ASVs <- donor_ASVs
-
-for (combo_name in names(donor_combinations)) {
-  component_donors <- donor_combinations[[combo_name]]
-  
-  # Combine OTUs using union() across selected donors
-  combined_otus <- Reduce(union, donor_ASVs[component_donors])
-  
-  # Add to the extended list
-  extended_donor_ASVs[[combo_name]] <- combined_otus
-
-}
-
-# Add "blank" as a donor
-extended_donor_ASVs[["blank"]] <- mixture_ASVs_rep1[["blank+blank"]]
-
-
-all_donor_asvs <- unique(unlist(donor_ASVs))
-length(all_donor_asvs)
-
-```
-
-
-
-### Define a function to categorize colonization (one-by-one test)
-
-
-```{r}
-
-get_colonization <- function(mix_asvs, donor_asvs, recipient_asvs) {
-  # Find OTUs shared by donor and mixture
-  shared_asvs <- intersect(donor_asvs, mix_asvs)
-  
-  # print(paste("donor asvs", donor_asvs))
-  
-  # Colonized if at least one shared ASV is not in recipient
-  colonized <- any(!(shared_asvs %in% recipient_asvs))
-  
-  return(as.integer(colonized))  # 1 if colonized, 0 if not
-}
-
-
-get_colonization(
-  mix_asvs = mixture_ASVs_rep1[["b-mix+XEA-036"]],
-  donor_asvs = extended_donor_ASVs[["b-mix"]],
-  recipient_asvs = recipient_ASVs_rep1[["XEA-036"]]
-)
-# returns 1 or 0
-
 ```
 
 
 
 
-
-
-
-
-
-
-
-
-### Full function looping through mixture ids
+**Loop through all mixtures to get final e0029 colonization dataset**
 
 ```{r}
-# Initialize results list
-colonization_results <- list()
 
-# Loop through each mixture
-for (mix_id in names(mixture_ASVs_rep1)) {
-  # Split into donor and recipient
+# use foreach() and rbind() to combine the subset mix_asvs_colonization datasets
+
+# Filter just the mixtures you want to process
+mixture_ids <- unique(mixture_ASVs %>%
+  filter(biosample2 %in% single_donor_ASVs$biosample1) %>%
+  pull(mixture))
+
+# Apply get_colonization() across all mixture IDs
+colonization_results <- foreach(mix_id = mixture_ids, .combine = bind_rows) %do% {
   ids <- unlist(strsplit(mix_id, "\\+"))
+  
+  # if (length(ids) != 2) {
+  #   warning(paste("Invalid mixture ID:", mix_id))
+  #   return(NULL)
+  # }
   
   donor_id <- ids[1]
   recipient_id <- ids[2]
   
-  print(paste("mix id", mix_id))
-  print(paste("donor id", donor_id))
-  print(paste("recipient", recipient_id))
-  
-  # Extract ASV lists
-  mix_asvs <- mixture_ASVs_rep1[[mix_id]]
-  donor_asvs <- extended_donor_ASVs[[donor_id]]
-  recipient_asvs <- recipient_ASVs_rep1[[recipient_id]]
-  
-  # print(paste("mix asvs", mix_asvs))
-  # print(paste("donor asvs", donor_asvs))
-  # print(paste("recipient asvs", recipient_asvs))
-  
-  # Apply the function
-  colonized_flag <- get_colonization(
-    mix_asvs = mix_asvs,
-    donor_asvs = donor_asvs,
-    recipient_asvs = recipient_asvs
+  # Run your function (assumes replicate 1 here)
+  result <- get_colonization(
+    mix_id = mix_id,
+    donor_id = donor_id,
+    recipient_id = recipient_id,
+    replicate = 1
   )
-
-  # Store result
-  colonization_results[[mix_id]] <- data.frame(
-    mixture = mix_id,
-    donor = donor_id,
-    recipient = recipient_id,
-    colonized = colonized_flag,
-    stringsAsFactors = FALSE
-  )
+  
+  # Add metadata to the result
+  result <- result %>%
+    mutate(mixture = mix_id)
+  
+  return(result)
 }
 
-# Combine into final data frame
-colonization_df <- do.call(rbind, colonization_results)
 
+colonization_results %>% 
+  group_by(mixture) %>% 
+  summarize(total_colonizers = sum(colonizer))
 
 
 ```
 
 
+### Plots!!!
+
+
+**Looking at specific cases and verifying colonization algo**
+
+**Day 029**
+
+```{r}
+theme_set(theme_cowplot())
+
+mixture_ASVs_XBBXBA <- colonization_results %>% 
+  filter(mixture == "XBB-029+XBA-029", replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Mixture",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+mixture_ASVs_XBBXBA_colonized <- colonization_results %>% 
+  filter(mixture == "XBB-029+XBA-029", replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonizer))) +
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
+  labs(
+    title = "Colonized",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+recipient_ASVs_XBBXBA <- recipient_ASVs %>% 
+  filter(biosample1 == "XBA-029", replicate == 1)%>% 
+  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Recipient",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+donor_ASVs_XBBXBA <- single_donor_ASVs %>% 
+  filter(biosample1 == "XBB-029")%>%
+  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Donor",
+    x = "",
+    y = "Total Relative Abundance"
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+row_of_plots <- plot_grid(
+  donor_ASVs_XBBXBA,
+  recipient_ASVs_XBBXBA,
+  mixture_ASVs_XBBXBA,
+  mixture_ASVs_XBBXBA_colonized,
+  ncol = 4
+)
+
+# Add a centered title above the row
+preantibiotic_plot <- plot_grid(
+  ggdraw() + draw_label("Pre-abx (Rep 1)", fontface = "bold", size = 12, hjust = 0.5),
+  row_of_plots,
+  ncol = 1,
+  rel_heights = c(0.1, 1)  # Reserve top space for title
+)
+
+# Display the result
+preantibiotic_plot
+
+
+
+
+```
+
+**Day 036**
+
+```{r}
+
+theme_set(theme_cowplot())
+mixture_ASVs_XBBXBA36 <- colonization_results %>% 
+  filter(mixture == "XBB-029+XBA-036", replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Mixture",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+
+
+mixture_ASVs_XBBXBA36_colonized <- colonization_results %>% 
+  filter(mixture == "XBB-029+XBA-036", replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonizer))) +
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
+  labs(
+    title = "Colonized",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+recipient_ASVs_XBBXBA36 <- recipient_ASVs %>% 
+  filter(biosample1 == "XBA-036", replicate == 1)%>% 
+  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Recipient",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank())
+
+donor_ASVs_XBBXBA <- single_donor_ASVs %>% 
+  filter(biosample1 == "XBB-029")%>%
+  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Donor",
+    x = "",
+    y = "Total Relative Abundance"
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+row_of_post_plots <- plot_grid(
+  donor_ASVs_XBBXBA,
+  recipient_ASVs_XBBXBA36,
+  mixture_ASVs_XBBXBA36,
+  mixture_ASVs_XBBXBA36_colonized,
+  ncol = 4
+)
+
+# Add a centered title above the row
+postantibiotic_plot <- plot_grid(
+  ggdraw() + draw_label("Post-abx (Rep 1)", fontface = "bold", size = 12, hjust = 0.5),
+  row_of_post_plots,
+  ncol = 1,
+  rel_heights = c(0.1, 1)
+)
+
+# Display
+postantibiotic_plot
+
+# MAKE THIS LIGHT!
+ggsave(
+  filename = file.path(OUTPUTDIR, "postantibiotic_compositionsXBBXBA.png"),
+  plot = postantibiotic_plot,
+  width = 20,
+  height = 10,
+  dpi =600,
+)
+
+
+
+```
+
+**Day 064**
+
+```{r}
+
+theme_set(theme_cowplot())
+mixture_ASVs_XBBXBA64 <- colonization_results %>% 
+  filter(mixture == "XBB-029+XBA-064", replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Mixture",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+mixture_ASVs_XBBXBA64_colonized <- colonization_results %>% 
+  filter(mixture == "XBB-029+XBA-064", replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonizer))) +
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
+  labs(
+    title = "Colonized",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+recipient_ASVs_XBBXBA64 <- recipient_ASVs %>% 
+  filter(biosample1 == "XBA-064", replicate == 1)%>% 
+  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Recipient",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+row_of_post64_plots <- plot_grid(
+  donor_ASVs_XBBXBA,
+  recipient_ASVs_XBBXBA64,
+  mixture_ASVs_XBBXBA64,
+  mixture_ASVs_XBBXBA64_colonized,
+  ncol = 4
+)
+
+# Add a centered title above the row
+postantibiotic64_plot <- plot_grid(
+  ggdraw() + draw_label("Post-abx day 64 (Rep 1)", fontface = "bold", size = 12, hjust = 0.5),
+  row_of_post_plots,
+  ncol = 1,
+  rel_heights = c(0.1, 1)
+)
+
+# Display
+postantibiotic64_plot
+
+
+```
+
+
+
+**NOTE! CHECK OUT PATCHWORK PACKAGE**
