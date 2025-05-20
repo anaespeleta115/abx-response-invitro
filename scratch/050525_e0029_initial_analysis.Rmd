@@ -97,7 +97,7 @@ ggsave(
   plot = composition_across_mixes_plot,
   width = 25,
   height = 10,
-  dpi = 300
+  dpi = 600
 )
 
 ```
@@ -286,6 +286,9 @@ two_donor_ASVs %>%
 
 ```{r}
 
+two_donor_ASVs
+
+single_donor_ASVs
 ```
 
 
@@ -773,16 +776,16 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
 
 ```{r}
 
-subject_composition_plot_day29 <- subject_composition("XCB-029+XBA-029", "XCB-029", "XBA-029", 1) + theme_cowplot()
-subject_composition_plot_day36 <- subject_composition("XCB-029+XBA-036", "XCB-029", "XBA-036", 1) + theme_cowplot()
-subject_composition_plot_day64 <- subject_composition("XCB-029+XBA-064", "XCB-029", "XBA-064", 1) + theme_cowplot()
+subject_composition_plot_day29 <- subject_composition("XDB-029+XDA-029", "XDB-029", "XDA-029", 1) + theme_cowplot()
+subject_composition_plot_day36 <- subject_composition("XDB-029+XDA-036", "XDB-029", "XDA-036", 1) + theme_cowplot()
+subject_composition_plot_day64 <- subject_composition("XDB-029+XDA-064", "XDB-029", "XDA-064", 1) + theme_cowplot()
 
 combined_plot <- subject_composition_plot_day29 /
                  subject_composition_plot_day36 /
                  subject_composition_plot_day64
 
 ggsave(
-  filename = file.path(OUTPUTDIR, "compositions_XBAXCB.png"),
+  filename = file.path(OUTPUTDIR, "compositions_XDBXDA.png"),
   plot = combined_plot,
   width = 10,
   height = 10,
@@ -935,13 +938,5 @@ ggsave(
 
 ```
 
-
-
-
-```{r}
-
-
-
-```
 
 
