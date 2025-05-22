@@ -1,0 +1,947 @@
+---
+title: "e0029_initial_analysis"
+output: html_document
+date: "2025-05-06"
+---
+
+
+# Load in packages
+
+```{r, warning=FALSE}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(ggrepel)
+library(purrr)
+library(patchwork)
+library(foreach)
+library(forcats)
+library(cowplot)
+```
+
+
+
+
+# Load in the Household Project dataset
+
+```{r}
+
+household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e0026-e0029-e0030.txt", header = TRUE)
+
+# Divide dataset into separate tables by experiment
+e0029 <- filter(household_data, str_detect(household_data$sample, "e0029"))
+
+e0026 <- filter(household_data, str_detect(household_data$sample, "e0026"))
+
+# Extract subject, day, household information
+e0029_clean <- e0029 %>%
+  mutate(
+    subject = str_sub(biosample1, 1, -5),
+    day = str_sub(biosample1, -3),
+    household = str_sub(biosample1, 1, -6)
+  )
+
+# Specify output directory
+
+OUTPUTDIR <- "./e0029_outputs"
+
+# Define color palette
+
+my_colors <- readRDS("C:/Spring-Rotation-2025/scratch/familyColorPalette.rds") 
+
+```
+
+
+### First plot composition across mixtures by biosample2 (donor community)
+
+
+```{r}
+
+# First get only the biosamples corresponding to actual mixtures
+composition_across_mixes <- e0029 %>%
+  filter(
+    !(biosample2 == "blank") |
+    (biosample2 == "blank" & !well %in% c("G11", "H11"))) %>%
+  filter(
+    biosample1 != "blank" | 
+    (plate == "e0029.B.5" & well %in% c("G12", "H12"))
+  ) %>% 
+  group_by(biosample2, replicate) %>%
+  mutate(
+    biosample1 = factor(biosample1, levels = unique(biosample1))
+  ) %>%
+  ungroup()
+
+
+composition_across_mixes_plot <- ggplot(composition_across_mixes, aes(x = biosample1, y = relAbundance, fill = Family)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Community Composition Across Mixtures",
+    x = "Biosample1",
+    y = "Total Relative Abundance"
+  ) +
+  theme_gray() + 
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 10),
+    strip.text.x = element_text(angle = 90, hjust = 0, size = 15)
+  ) +
+  facet_grid(replicate ~ biosample2, scales = "free_x", space = "free_x")
+
+
+
+ggsave(
+  filename = file.path(OUTPUTDIR, "composition_across_mixes.png"),
+  plot = composition_across_mixes_plot,
+  width = 25,
+  height = 10,
+  dpi = 600
+)
+
+```
+
+
+
+### Try looking at the opposite: composition across mixtures by biosample1 (donor community)
+
+
+```{r}
+
+# First get only the biosamples corresponding to actual mixtures. For blanks, only get the first well of the duplicates
+composition_across_mixes <- e0029 %>%
+  filter(
+    !(biosample2 == "blank") |
+    (biosample2 == "blank" & !well %in% c("G11", "H11"))) %>%
+  filter(
+    biosample1 != "blank" | 
+    (plate == "e0029.B.5" & well %in% c("G12", "H12"))
+  ) %>% 
+  group_by(biosample1, replicate) %>%
+  mutate(
+    biosample2 = factor(biosample2, levels = unique(biosample2))
+  ) %>%
+  ungroup()
+
+
+
+# Why do the blank mixtures have an so many more observations?
+composition_across_mixes %>%
+  distinct(biosample1, biosample2, replicate) %>%  # ensure unique pairs
+  group_by(biosample1) %>%
+  summarise(n_biosample2 = n_distinct(biosample2)) %>%
+  arrange(desc(n_biosample2))
+
+
+
+composition_across_mixes_plot <- ggplot(
+  composition_across_mixes,
+  aes(x = forcats::fct_relevel(factor(biosample2), "blank"), y = relAbundance, fill = Family)
+) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Community Composition Across Mixtures",
+    x = "Biosample2",
+    y = "Total Relative Abundance"
+  ) +
+  theme_gray() + 
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 10, face = "bold"),
+    strip.text.x = element_text(angle = 90, hjust = 0, size = 10)
+  ) +
+  facet_grid(replicate ~ biosample1, scales = "free_x", space = "free_x")
+
+
+
+ggsave(
+  filename = file.path(OUTPUTDIR, "composition_across_mixes_flipped.png"),
+  plot = composition_across_mixes_plot,
+  width = 25,
+  height = 10,
+  dpi =600
+)
+
+```
+
+
+
+
+### Question #1: Was colonization resistance affected by antibiotic treatment and did it recover by day 64?
+
+Pseudocode:
+
+Group by mixture
+
+- For each of these unique communities, extract all OTU identities
+
+- For the recipient communities we can do the same by looking at biosample1+blank mixtures?
+
+- For the donor communities we have to go back to the e0026 dataset and extract the OTUs from there
+
+- Recalculate relative abundances for datasets (since there are replicates) and b-mixes and filter for those asvs >0.0001
+
+**Only use ASVs with relAbundance > 0.001**
+
+```{r}
+
+# Have filter for relative abundance in actual calculations to avoid losing information
+# Only extract OTU
+
+limit_of_detection <- 0.001
+
+```
+
+
+**Create a mixture ASVs, recipient ASVs, and donor ASVs dataset**
+
+```{r}
+
+# Get mixture communities
+mixture_ASVs <- e0029 %>% 
+  filter(relAbundance > limit_of_detection)
+
+
+# Get recipient communities
+recipient_ASVs <- e0029 %>% 
+  filter(relAbundance > limit_of_detection) %>%   
+  filter(biosample2 == "blank") %>% 
+  filter(
+    !(biosample2 == "blank") |
+    (biosample2 == "blank" & !well %in% c("G11", "H11"))) %>%
+  filter(
+    biosample1 != "blank" | 
+    (plate == "e0029.B.5" & well %in% c("G12", "H12"))
+  )
+
+
+# Extract donor community IDs from e0029
+donor_communities <- e0029 %>%
+  pull(biosample2) %>%
+  unique()
+
+donor_communities
+
+# Extract single donor OTUs from e0026
+single_donor_ASVs <- e0026 %>%
+  filter(biosample1 %in% donor_communities, passage == "8")
+  
+# We'll deal with the b-mix and two-donor communities later
+donor_combinations <- list(
+  c("XBB-029", "XKB-029"),
+  c("XCB-029", "XBB-029"),
+  c("XDB-029", "XCB-029"),
+  c("XEB-029", "XDB-029"),
+  c("XFB-029", "XEB-029"),
+  c("XGB-029", "XFB-029"),
+  c("XHB-029", "XGB-029"),
+  c("XIB-029", "XHB-029"),
+  c("XJB-029", "XIB-029"),
+  c("XKB-029", "XJB-029") 
+)
+
+
+```
+
+
+**Get two-donor communities**
+
+```{r}
+# Loop and collect into one dataframe. map_dfr binds all the donor pair dataframes together at the end. Iterates over each element in the list donor_combinations (i.e., each donor pair). Applies the anonymous "function(donor_pair)" to each element. Combines all returned dataframes by row (dfr = data frame row-binding)
+
+two_donor_ASVs <- map_dfr(donor_combinations, function(donor_pair) {
+  pair_name <- paste(donor_pair, collapse = "+")
+  
+  two_donor_ASVs <- single_donor_ASVs %>%
+    filter(biosample1 %in% donor_pair)
+  
+  combined_otus <- two_donor_ASVs %>%
+    group_by(OTU) %>%
+    summarize(total_abundance = sum(relAbundance), .groups = "drop") %>%
+    mutate(
+      avg_abundance = total_abundance / 2, # avg_abundance ends up being the abundance of each OTU
+      relAbundance_final = avg_abundance / sum(avg_abundance) # final abundance gets the OTU abundance relative to all other OTUs in the mixture
+    ) %>%
+    select(OTU, relAbundance_final) %>%
+    filter(relAbundance_final > limit_of_detection) %>%
+    mutate(mixture = pair_name)  # Add mixture ID
+  
+  return(combined_otus) # donor pair data frame
+})
+
+# within each mixture community, the relative abundances should this sum to one
+two_donor_ASVs %>% 
+  group_by(mixture) %>% 
+  summarise(total = sum(relAbundance_final))
+
+
+
+```
+
+
+**Get b-mix communities**
+
+
+```{r}
+
+two_donor_ASVs
+
+single_donor_ASVs
+```
+
+
+**Join together all donor community dataframes**
+
+```{r}
+
+
+```
+
+
+
+Write a function to take in a specific mixture and output whether there was colonization or not for each OTU in the mixture (THIS ONE WORKS!)
+
+**Testing on a specific case**
+```{r}
+
+# function takes the id and replicate number, filters the community datasets for those ids and finds intersection between the otu vectors to see if they are shared across communities 
+
+get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {
+  
+  # Subset mixture and recipient ASVs for the given replicate
+  mix_asvs_subset <- mixture_ASVs %>% 
+    filter(mixture == mix_id, replicate == replicate)
+  
+  recipient_asvs_subset <- recipient_ASVs %>% 
+    filter(biosample1 == recipient_id, replicate == replicate)
+  
+  donor_asvs_subset <- single_donor_ASVs %>%  # change this when you have donor_asvs with mixed donors
+    filter(biosample1 == donor_id)
+  
+  # Get shared OTUs between donor and mixture.  Add colonization column: 1 if OTU is shared with donor, 0 otherwise
+  mix_asvs_colonization <- mix_asvs_subset %>% 
+    mutate(colonization = ifelse(OTU %in% donor_asvs_subset$OTU & !(OTU %in% recipient_asvs_subset$OTU), 1, 0))
+
+  return(mix_asvs_colonization)
+}
+
+
+XBB_XEA_colonization <- get_colonization(
+  mix_id = "XBB-029+XEA-029",
+  donor_id = "XBB-029",
+  recipient_id = "XEA-029",
+  replicate = 1
+)
+
+```
+
+
+
+
+**Loop through all mixtures to get final e0029 colonization dataset**
+
+```{r}
+
+# use foreach() and rbind() to combine the subset mix_asvs_colonization datasets
+
+# Filter just the mixtures you want to process
+mixture_ids <- unique(mixture_ASVs %>%
+  filter(biosample2 %in% single_donor_ASVs$biosample1) %>%
+  pull(mixture))
+
+# Apply get_colonization() across all mixture IDs
+colonization_results <- foreach(mix_id = mixture_ids, .combine = bind_rows) %do% {
+  ids <- unlist(strsplit(mix_id, "\\+"))
+  
+  donor_id <- ids[1]
+  recipient_id <- ids[2]
+  
+  # Run your function (assumes replicate 1 here)
+  result <- get_colonization(
+    mix_id = mix_id,
+    donor_id = donor_id,
+    recipient_id = recipient_id,
+    replicate = 1
+  )
+  
+  # Add metadata to the result
+  result <- result %>%
+    mutate(mixture = mix_id)
+  
+  return(result)
+}
+
+
+colonization_results %>% 
+  group_by(mixture) %>% 
+  summarize(total_colonizers = sum(colonization))
+
+
+```
+
+
+### Plots!!! (FOR NOT ONLY ON REPLICATE 1)
+
+
+**Looking at specific cases and verifying colonization algo**
+
+**Day 029**
+
+```{r}
+theme_set(theme_cowplot())
+
+mixture_ASVs_XBBXBA <- colonization_results %>% 
+  filter(mixture == "XBB-029+XBA-029", replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Mixture",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+mixture_ASVs_XBBXBA_colonized <- colonization_results %>% 
+  filter(mixture == "XBB-029+XBA-029", replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonization))) +
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
+  labs(
+    title = "Colonized",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+recipient_ASVs_XBBXBA <- recipient_ASVs %>% 
+  filter(biosample1 == "XBA-029", replicate == 1)%>% 
+  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Recipient",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+donor_ASVs_XBBXBA <- single_donor_ASVs %>% 
+  filter(biosample1 == "XBB-029")%>%
+  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Donor",
+    x = "",
+    y = "Total Relative Abundance"
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+row_of_plots <- plot_grid(
+  donor_ASVs_XBBXBA,
+  recipient_ASVs_XBBXBA,
+  mixture_ASVs_XBBXBA,
+  mixture_ASVs_XBBXBA_colonized,
+  ncol = 4
+)
+
+# Add a centered title above the row
+preantibiotic_plot <- plot_grid(
+  ggdraw() + draw_label("", fontface = "bold", size = 12, hjust = 0.5),
+  row_of_plots,
+  ncol = 1,
+  rel_heights = c(0.1, 1)  # Reserve top space for title
+)
+
+# Display the result
+preantibiotic_plot
+
+
+
+
+```
+
+**Day 036**
+
+```{r}
+
+theme_set(theme_cowplot())
+mixture_ASVs_XBBXBA36 <- colonization_results %>% 
+  filter(mixture == "XBB-029+XBA-036", replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Mixture",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+
+
+mixture_ASVs_XBBXBA36_colonized <- colonization_results %>% 
+  filter(mixture == "XBB-029+XBA-036", replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonization))) +
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
+  labs(
+    title = "Colonized",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+recipient_ASVs_XBBXBA36 <- recipient_ASVs %>% 
+  filter(biosample1 == "XBA-036", replicate == 1)%>% 
+  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Recipient",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank())
+
+donor_ASVs_XBBXBA <- single_donor_ASVs %>% 
+  filter(biosample1 == "XBB-029")%>%
+  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Donor",
+    x = "",
+    y = "Total Relative Abundance"
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+row_of_post_plots <- plot_grid(
+  donor_ASVs_XBBXBA,
+  recipient_ASVs_XBBXBA36,
+  mixture_ASVs_XBBXBA36,
+  mixture_ASVs_XBBXBA36_colonized,
+  ncol = 4
+)
+
+# Add a centered title above the row
+postantibiotic_plot <- plot_grid(
+  ggdraw() + draw_label("", fontface = "bold", size = 12, hjust = 0.5),
+  row_of_post_plots,
+  ncol = 1,
+  rel_heights = c(0.1, 1)
+)
+
+# Display
+postantibiotic_plot
+
+# MAKE THIS LIGHT!
+ggsave(
+  filename = file.path(OUTPUTDIR, "postantibiotic_compositionsXBBXBA.png"),
+  plot = postantibiotic_plot,
+  width = 20,
+  height = 10,
+  dpi =600,
+)
+
+
+
+```
+
+**Day 064**
+
+```{r}
+
+theme_set(theme_cowplot())
+mixture_ASVs_XBBXBA64 <- colonization_results %>% 
+  filter(mixture == "XBB-029+XBA-064", replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Mixture",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+mixture_ASVs_XBBXBA64_colonized <- colonization_results %>% 
+  filter(mixture == "XBB-029+XBA-064", replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonization))) +
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
+  labs(
+    title = "Colonized",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+recipient_ASVs_XBBXBA64 <- recipient_ASVs %>% 
+  filter(biosample1 == "XBA-064", replicate == 1)%>% 
+  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Recipient",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+row_of_post64_plots <- plot_grid(
+  donor_ASVs_XBBXBA,
+  recipient_ASVs_XBBXBA64,
+  mixture_ASVs_XBBXBA64,
+  mixture_ASVs_XBBXBA64_colonized,
+  ncol = 4
+)
+
+# Add a centered title above the row
+postantibiotic64_plot <- plot_grid(
+  ggdraw() + draw_label("", fontface = "bold", size = 12, hjust = 0.5),
+  row_of_post64_plots,
+  ncol = 1,
+  rel_heights = c(0.1, 1)
+)
+
+# Display
+postantibiotic64_plot
+
+```
+**Join plots with patchwork**
+
+```{r}
+
+library(patchwork)
+
+preantibiotic_plot <- preantibiotic_plot + theme_cowplot()
+postantibiotic_plot <- postantibiotic_plot + theme_cowplot()
+postantibiotic64_plot <- postantibiotic64_plot + theme_cowplot()
+
+
+combined_plot <- preantibiotic_plot /
+                 postantibiotic_plot /
+                 postantibiotic64_plot
+
+ggsave(
+  filename = file.path(OUTPUTDIR, "compositions_XBBXBA.png"),
+  plot = combined_plot,
+  width = 10,
+  height = 10,
+  dpi = 600,
+  bg = "white"
+)
+
+```
+
+
+
+**Create function extract specific mixture and display its composition**
+
+```{r}
+
+theme_set(theme_cowplot())
+
+subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
+  
+  # Subset mixture and recipient ASVs for the given replicate
+  mix_asvs_subset <- mixture_ASVs %>% 
+    filter(mixture == mix_id, replicate == replicate)
+  
+  recipient_asvs_subset <- recipient_ASVs %>% 
+    filter(biosample1 == recipient_id, replicate == replicate)
+  
+  mixture_ASVs_mix <- colonization_results %>% 
+  filter(mixture == mix_id, replicate == 1) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Mixture",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+  mixture_ASVs_colonized <- colonization_results %>% 
+    filter(mixture == mix_id, replicate == 1) %>% 
+    ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonization))) +
+    geom_bar(stat = "identity", color = "black") +
+    scale_fill_manual(values = my_colors) +
+    scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
+    labs(
+      title = "Colonized",
+      x = "",
+      y = ""
+    ) +
+    theme(legend.position = "none",
+          axis.line=element_blank(), 
+          axis.text.x = element_text(size = 10))
+
+  
+  recipient_ASVs <- recipient_ASVs %>% 
+    filter(biosample1 == recipient_id, replicate == 1)%>% 
+    ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+    geom_bar(stat = "identity", color = "black") +
+    scale_fill_manual(values = my_colors) +
+    labs(
+      title = "Recipient",
+      x = "",
+      y = ""
+    ) +
+    theme(legend.position = "none",
+          axis.line=element_blank(), 
+          axis.text.x = element_text(size = 10))
+
+  donor_ASVs <- single_donor_ASVs %>% 
+    filter(biosample1 == donor_id)%>%
+    ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+    geom_bar(stat = "identity", color = "black") +
+    scale_fill_manual(values = my_colors) +
+    labs(
+      title = "Donor",
+      x = "",
+      y = "Total Relative Abundance"
+    ) +
+    theme(legend.position = "none",
+          axis.line=element_blank(), 
+          axis.text.x = element_text(size = 10))
+
+
+  row_of_plots <- plot_grid(
+    donor_ASVs,
+    recipient_ASVs,
+    mixture_ASVs_mix,
+    mixture_ASVs_colonized,
+    ncol = 4
+  )
+  
+  # Add a centered title above the row
+  final_plot <- plot_grid(
+    ggdraw() + draw_label("", fontface = "bold", size = 12, hjust = 0.5),
+    row_of_plots,
+    ncol = 1,
+    rel_heights = c(0.1, 1)  # Reserve top space for title
+  )
+
+  return(final_plot)
+}
+
+
+```
+
+
+
+**Function call**
+
+```{r}
+
+subject_composition_plot_day29 <- subject_composition("XKB-029+XEA-029", "XKB-029", "XEA-029", 1) + theme_cowplot()
+subject_composition_plot_day36 <- subject_composition("XKB-029+XEA-036", "XKB-029", "XEA-036", 1) + theme_cowplot()
+subject_composition_plot_day64 <- subject_composition("XKB-029+XEA-064", "XKB-029", "XEA-064", 1) + theme_cowplot()
+
+combined_plot <- subject_composition_plot_day29 /
+                 subject_composition_plot_day36 /
+                 subject_composition_plot_day64
+
+ggsave(
+  filename = file.path(OUTPUTDIR, "compositions_XKBXEA.png"),
+  plot = combined_plot,
+  width = 10,
+  height = 10,
+  dpi = 600,
+  bg = "white"
+)
+
+
+```
+
+
+**Get species richness for each community**
+
+```{r}
+
+theme_set(theme_cowplot())
+
+# Create recipient richness dataset
+recipient_richness <- recipient_ASVs %>%
+  filter(biosample1 != "blank") %>% 
+  select(biosample1, OTU) %>%
+  distinct() %>%
+  dplyr::count(biosample1, name = "species_richness")  %>% # count the distinct OTUs
+  mutate(community = "recipient", 
+         day = as.integer(str_extract(biosample1, "\\d{2}$"))) %>%
+  rename(sample = biosample1)
+
+
+
+# Create mixture richness dataset
+mixture_richness <- mixture_ASVs %>%
+  filter(biosample2 %in% single_donor_ASVs$biosample1) %>%
+  select(mixture, OTU) %>%
+  distinct() %>%
+  dplyr::count(mixture, name = "species_richness") %>% #count the distinct OTUs
+  mutate(community = "mixture", 
+         day = as.integer(str_extract(mixture, "\\d{2}$"))) %>%
+  rename(sample = mixture)
+
+
+# Join richness datasets together to plot
+combined_richness <- bind_rows(recipient_richness, mixture_richness)
+
+
+# Plot
+richness_day_plot <- 
+  ggplot(combined_richness, aes(x = factor(day), y = species_richness, fill = community)) +
+  geom_boxplot(outlier.shape = NA, alpha = 0.8, color = "black", width = 0.6) +
+  geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
+  labs(
+    title = "Change in Species Richness Pre- and Post-Abx",
+    x = "Day",
+    y = "Species Richness",
+    fill = "Community Type"
+  )
+
+
+richness_day_plot
+
+ggsave(
+  filename = file.path(OUTPUTDIR, "richness_by_day.png"),
+  plot = richness_day_plot,
+  width = 10,
+  height = 5.5,
+  dpi = 600,
+  bg = "white"
+)
+
+```
+
+
+### How does the recipient's species richness compare to the number of colonizers in the mixture?
+
+
+```{r}
+
+
+# we need the colonization_results and the recipient_richness datasets. From there, we have to join them by biosample1 
+
+total_colonization <- colonization_results %>% 
+  group_by(mixture) %>% 
+  summarize(total_colonizers = sum(colonization)) %>% 
+  mutate(recipient = str_sub(mixture, -7, -1))
+
+combined_richness <- left_join(total_colonization, recipient_richness,
+  by = c("recipient" = "sample") # match recipient to sample
+) %>% 
+  select(-community)  %>% 
+  mutate(recipient = str_sub(recipient, -7, -5))
+  
+
+
+colonization_richness_plot <- combined_richness %>% 
+  ggplot(aes(x = species_richness, y = total_colonizers, color = factor(day))) + 
+  geom_point() +
+  geom_text_repel(aes(label = recipient), size = 2)+
+  labs(
+    x = "Species Richness of Recipient",
+    y = "Number of Colonizers in Mixture"
+  )
+
+
+ggsave(
+  filename = file.path(OUTPUTDIR, "colonization_vs_richness.png"),
+  plot = colonization_richness_plot,
+  width = 9,
+  height = 6,
+  dpi = 600,
+  bg = "white"
+)
+
+
+# Could I instead use color for the subject and shape of dot for day?
+
+```
+
+
+**Boxplots of total colonizers by mixture and day**
+
+
+```{r}
+
+total_colonization <- colonization_results %>% 
+  group_by(mixture, biosample1) %>% 
+  summarize(total_colonizers = sum(colonization)) %>% 
+  mutate(day = str_sub(mixture, -2), recipient = str_sub(biosample1, 0, 3))
+
+
+# Plot
+colonization_day_plot2 <- 
+  ggplot(total_colonization, aes(x = factor(day), y = total_colonizers, fill = factor(day))) +
+  geom_boxplot() +
+  geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
+  labs(
+    title = "Number of Colonizers per Mixture by Day",
+    x = "Day",
+    y = "Number of colonizers",
+    fill = ""
+  )+
+  facet_wrap(~recipient)
+
+colonization_day_plot2
+
+ggsave(
+  filename = file.path(OUTPUTDIR, "colonization_by_day.png"),
+  plot = colonization_day_plot2,
+  width = 9,
+  height = 6,
+  dpi = 600,
+  bg = "white"
+)
+
+
+```
+
+
+
+
+
