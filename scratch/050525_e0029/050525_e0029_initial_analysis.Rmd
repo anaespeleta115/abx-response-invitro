@@ -44,7 +44,7 @@ e0029_clean <- e0029 %>%
 
 # Specify output directory
 
-OUTPUTDIR <- "./e0029_outputs"
+OUTPUTDIR <- "./outputs"
 
 # Define color palette
 
@@ -382,7 +382,7 @@ colonization_results %>%
 ```
 
 
-### Plots!!! (FOR NOT ONLY ON REPLICATE 1)
+### Plots!!! (FOR NOW ONLY ON REPLICATE 1)
 
 
 **Looking at specific cases and verifying colonization algo**
@@ -645,6 +645,8 @@ postantibiotic64_plot <- plot_grid(
 postantibiotic64_plot
 
 ```
+
+
 **Join plots with patchwork**
 
 ```{r}
