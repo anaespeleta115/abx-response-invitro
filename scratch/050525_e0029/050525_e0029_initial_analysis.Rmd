@@ -44,7 +44,7 @@ e0029_clean <- e0029 %>%
 
 # Specify output directory
 
-OUTPUTDIR <- "./outputs"
+OUTPUTDIR <- "../mixed_outputs"
 
 # Define color palette
 
@@ -390,286 +390,286 @@ colonization_results %>%
 **Day 029**
 
 ```{r}
-theme_set(theme_cowplot())
-
-mixture_ASVs_XBBXBA <- colonization_results %>% 
-  filter(mixture == "XBB-029+XBA-029", replicate == 1) %>% 
-  ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
-  geom_bar(stat = "identity", color = "black") +
-  scale_fill_manual(values = my_colors) +
-  labs(
-    title = "Mixture",
-    x = "",
-    y = ""
-  ) +
-  theme(legend.position = "none",
-        axis.line=element_blank(), 
-        axis.text.x = element_text(size = 10))
-
-
-mixture_ASVs_XBBXBA_colonized <- colonization_results %>% 
-  filter(mixture == "XBB-029+XBA-029", replicate == 1) %>% 
-  ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonization))) +
-  geom_bar(stat = "identity", color = "black") +
-  scale_fill_manual(values = my_colors) +
-  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
-  labs(
-    title = "Colonized",
-    x = "",
-    y = ""
-  ) +
-  theme(legend.position = "none",
-        axis.line=element_blank(), 
-        axis.text.x = element_text(size = 10))
-
-
-recipient_ASVs_XBBXBA <- recipient_ASVs %>% 
-  filter(biosample1 == "XBA-029", replicate == 1)%>% 
-  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
-  geom_bar(stat = "identity", color = "black") +
-  scale_fill_manual(values = my_colors) +
-  labs(
-    title = "Recipient",
-    x = "",
-    y = ""
-  ) +
-  theme(legend.position = "none",
-        axis.line=element_blank(), 
-        axis.text.x = element_text(size = 10))
-
-donor_ASVs_XBBXBA <- single_donor_ASVs %>% 
-  filter(biosample1 == "XBB-029")%>%
-  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
-  geom_bar(stat = "identity", color = "black") +
-  scale_fill_manual(values = my_colors) +
-  labs(
-    title = "Donor",
-    x = "",
-    y = "Total Relative Abundance"
-  ) +
-  theme(legend.position = "none",
-        axis.line=element_blank(), 
-        axis.text.x = element_text(size = 10))
-
-
-row_of_plots <- plot_grid(
-  donor_ASVs_XBBXBA,
-  recipient_ASVs_XBBXBA,
-  mixture_ASVs_XBBXBA,
-  mixture_ASVs_XBBXBA_colonized,
-  ncol = 4
-)
-
-# Add a centered title above the row
-preantibiotic_plot <- plot_grid(
-  ggdraw() + draw_label("", fontface = "bold", size = 12, hjust = 0.5),
-  row_of_plots,
-  ncol = 1,
-  rel_heights = c(0.1, 1)  # Reserve top space for title
-)
-
-# Display the result
-preantibiotic_plot
-
-
-
-
-```
-
-**Day 036**
-
-```{r}
-
-theme_set(theme_cowplot())
-mixture_ASVs_XBBXBA36 <- colonization_results %>% 
-  filter(mixture == "XBB-029+XBA-036", replicate == 1) %>% 
-  ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
-  geom_bar(stat = "identity", color = "black") +
-  scale_fill_manual(values = my_colors) +
-  labs(
-    title = "Mixture",
-    x = "",
-    y = ""
-  ) +
-  theme(legend.position = "none",
-        axis.line=element_blank(), 
-        axis.text.x = element_text(size = 10))
-
-
-
-
-mixture_ASVs_XBBXBA36_colonized <- colonization_results %>% 
-  filter(mixture == "XBB-029+XBA-036", replicate == 1) %>% 
-  ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonization))) +
-  geom_bar(stat = "identity", color = "black") +
-  scale_fill_manual(values = my_colors) +
-  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
-  labs(
-    title = "Colonized",
-    x = "",
-    y = ""
-  ) +
-  theme(legend.position = "none",
-        axis.line=element_blank(), 
-        axis.text.x = element_text(size = 10))
-
-
-recipient_ASVs_XBBXBA36 <- recipient_ASVs %>% 
-  filter(biosample1 == "XBA-036", replicate == 1)%>% 
-  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
-  geom_bar(stat = "identity", color = "black") +
-  scale_fill_manual(values = my_colors) +
-  labs(
-    title = "Recipient",
-    x = "",
-    y = ""
-  ) +
-  theme(legend.position = "none",
-        axis.line=element_blank())
-
-donor_ASVs_XBBXBA <- single_donor_ASVs %>% 
-  filter(biosample1 == "XBB-029")%>%
-  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
-  geom_bar(stat = "identity", color = "black") +
-  scale_fill_manual(values = my_colors) +
-  labs(
-    title = "Donor",
-    x = "",
-    y = "Total Relative Abundance"
-  ) +
-  theme(legend.position = "none",
-        axis.line=element_blank(), 
-        axis.text.x = element_text(size = 10))
-
-
-row_of_post_plots <- plot_grid(
-  donor_ASVs_XBBXBA,
-  recipient_ASVs_XBBXBA36,
-  mixture_ASVs_XBBXBA36,
-  mixture_ASVs_XBBXBA36_colonized,
-  ncol = 4
-)
-
-# Add a centered title above the row
-postantibiotic_plot <- plot_grid(
-  ggdraw() + draw_label("", fontface = "bold", size = 12, hjust = 0.5),
-  row_of_post_plots,
-  ncol = 1,
-  rel_heights = c(0.1, 1)
-)
-
-# Display
-postantibiotic_plot
-
-# MAKE THIS LIGHT!
-ggsave(
-  filename = file.path(OUTPUTDIR, "postantibiotic_compositionsXBBXBA.png"),
-  plot = postantibiotic_plot,
-  width = 20,
-  height = 10,
-  dpi =600,
-)
-
-
-
-```
-
-**Day 064**
-
-```{r}
-
-theme_set(theme_cowplot())
-mixture_ASVs_XBBXBA64 <- colonization_results %>% 
-  filter(mixture == "XBB-029+XBA-064", replicate == 1) %>% 
-  ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
-  geom_bar(stat = "identity", color = "black") +
-  scale_fill_manual(values = my_colors) +
-  labs(
-    title = "Mixture",
-    x = "",
-    y = ""
-  ) +
-  theme(legend.position = "none",
-        axis.line=element_blank(), 
-        axis.text.x = element_text(size = 10))
-
-
-mixture_ASVs_XBBXBA64_colonized <- colonization_results %>% 
-  filter(mixture == "XBB-029+XBA-064", replicate == 1) %>% 
-  ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonization))) +
-  geom_bar(stat = "identity", color = "black") +
-  scale_fill_manual(values = my_colors) +
-  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
-  labs(
-    title = "Colonized",
-    x = "",
-    y = ""
-  ) +
-  theme(legend.position = "none",
-        axis.line=element_blank(), 
-        axis.text.x = element_text(size = 10))
-
-
-recipient_ASVs_XBBXBA64 <- recipient_ASVs %>% 
-  filter(biosample1 == "XBA-064", replicate == 1)%>% 
-  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
-  geom_bar(stat = "identity", color = "black") +
-  scale_fill_manual(values = my_colors) +
-  labs(
-    title = "Recipient",
-    x = "",
-    y = ""
-  ) +
-  theme(legend.position = "none",
-        axis.line=element_blank(), 
-        axis.text.x = element_text(size = 10))
-
-
-row_of_post64_plots <- plot_grid(
-  donor_ASVs_XBBXBA,
-  recipient_ASVs_XBBXBA64,
-  mixture_ASVs_XBBXBA64,
-  mixture_ASVs_XBBXBA64_colonized,
-  ncol = 4
-)
-
-# Add a centered title above the row
-postantibiotic64_plot <- plot_grid(
-  ggdraw() + draw_label("", fontface = "bold", size = 12, hjust = 0.5),
-  row_of_post64_plots,
-  ncol = 1,
-  rel_heights = c(0.1, 1)
-)
-
-# Display
-postantibiotic64_plot
-
-```
-
-
-**Join plots with patchwork**
-
-```{r}
-
-library(patchwork)
-
-preantibiotic_plot <- preantibiotic_plot + theme_cowplot()
-postantibiotic_plot <- postantibiotic_plot + theme_cowplot()
-postantibiotic64_plot <- postantibiotic64_plot + theme_cowplot()
-
-
-combined_plot <- preantibiotic_plot /
-                 postantibiotic_plot /
-                 postantibiotic64_plot
-
-ggsave(
-  filename = file.path(OUTPUTDIR, "compositions_XBBXBA.png"),
-  plot = combined_plot,
-  width = 10,
-  height = 10,
-  dpi = 600,
-  bg = "white"
-)
+# theme_set(theme_cowplot())
+# 
+# mixture_ASVs_XBBXBA <- colonization_results %>% 
+#   filter(mixture == "XBB-029+XBA-029", replicate == 1) %>% 
+#   ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   labs(
+#     title = "Mixture",
+#     x = "",
+#     y = ""
+#   ) +
+#   theme(legend.position = "none",
+#         axis.line=element_blank(), 
+#         axis.text.x = element_text(size = 10))
+# 
+# 
+# mixture_ASVs_XBBXBA_colonized <- colonization_results %>% 
+#   filter(mixture == "XBB-029+XBA-029", replicate == 1) %>% 
+#   ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonization))) +
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
+#   labs(
+#     title = "Colonized",
+#     x = "",
+#     y = ""
+#   ) +
+#   theme(legend.position = "none",
+#         axis.line=element_blank(), 
+#         axis.text.x = element_text(size = 10))
+# 
+# 
+# recipient_ASVs_XBBXBA <- recipient_ASVs %>% 
+#   filter(biosample1 == "XBA-029", replicate == 1)%>% 
+#   ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   labs(
+#     title = "Recipient",
+#     x = "",
+#     y = ""
+#   ) +
+#   theme(legend.position = "none",
+#         axis.line=element_blank(), 
+#         axis.text.x = element_text(size = 10))
+# 
+# donor_ASVs_XBBXBA <- single_donor_ASVs %>% 
+#   filter(biosample1 == "XBB-029")%>%
+#   ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   labs(
+#     title = "Donor",
+#     x = "",
+#     y = "Total Relative Abundance"
+#   ) +
+#   theme(legend.position = "none",
+#         axis.line=element_blank(), 
+#         axis.text.x = element_text(size = 10))
+# 
+# 
+# row_of_plots <- plot_grid(
+#   donor_ASVs_XBBXBA,
+#   recipient_ASVs_XBBXBA,
+#   mixture_ASVs_XBBXBA,
+#   mixture_ASVs_XBBXBA_colonized,
+#   ncol = 4
+# )
+# 
+# # Add a centered title above the row
+# preantibiotic_plot <- plot_grid(
+#   ggdraw() + draw_label("", fontface = "bold", size = 12, hjust = 0.5),
+#   row_of_plots,
+#   ncol = 1,
+#   rel_heights = c(0.1, 1)  # Reserve top space for title
+# )
+# 
+# # Display the result
+# preantibiotic_plot
+# 
+# 
+# 
+# 
+# ```
+# 
+# **Day 036**
+# 
+# ```{r}
+# 
+# theme_set(theme_cowplot())
+# mixture_ASVs_XBBXBA36 <- colonization_results %>% 
+#   filter(mixture == "XBB-029+XBA-036", replicate == 1) %>% 
+#   ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   labs(
+#     title = "Mixture",
+#     x = "",
+#     y = ""
+#   ) +
+#   theme(legend.position = "none",
+#         axis.line=element_blank(), 
+#         axis.text.x = element_text(size = 10))
+# 
+# 
+# 
+# 
+# mixture_ASVs_XBBXBA36_colonized <- colonization_results %>% 
+#   filter(mixture == "XBB-029+XBA-036", replicate == 1) %>% 
+#   ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonization))) +
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
+#   labs(
+#     title = "Colonized",
+#     x = "",
+#     y = ""
+#   ) +
+#   theme(legend.position = "none",
+#         axis.line=element_blank(), 
+#         axis.text.x = element_text(size = 10))
+# 
+# 
+# recipient_ASVs_XBBXBA36 <- recipient_ASVs %>% 
+#   filter(biosample1 == "XBA-036", replicate == 1)%>% 
+#   ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   labs(
+#     title = "Recipient",
+#     x = "",
+#     y = ""
+#   ) +
+#   theme(legend.position = "none",
+#         axis.line=element_blank())
+# 
+# donor_ASVs_XBBXBA <- single_donor_ASVs %>% 
+#   filter(biosample1 == "XBB-029")%>%
+#   ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   labs(
+#     title = "Donor",
+#     x = "",
+#     y = "Total Relative Abundance"
+#   ) +
+#   theme(legend.position = "none",
+#         axis.line=element_blank(), 
+#         axis.text.x = element_text(size = 10))
+# 
+# 
+# row_of_post_plots <- plot_grid(
+#   donor_ASVs_XBBXBA,
+#   recipient_ASVs_XBBXBA36,
+#   mixture_ASVs_XBBXBA36,
+#   mixture_ASVs_XBBXBA36_colonized,
+#   ncol = 4
+# )
+# 
+# # Add a centered title above the row
+# postantibiotic_plot <- plot_grid(
+#   ggdraw() + draw_label("", fontface = "bold", size = 12, hjust = 0.5),
+#   row_of_post_plots,
+#   ncol = 1,
+#   rel_heights = c(0.1, 1)
+# )
+# 
+# # Display
+# postantibiotic_plot
+# 
+# # MAKE THIS LIGHT!
+# ggsave(
+#   filename = file.path(OUTPUTDIR, "postantibiotic_compositionsXBBXBA.png"),
+#   plot = postantibiotic_plot,
+#   width = 20,
+#   height = 10,
+#   dpi =600,
+# )
+# 
+# 
+# 
+# ```
+# 
+# **Day 064**
+# 
+# ```{r}
+# 
+# theme_set(theme_cowplot())
+# mixture_ASVs_XBBXBA64 <- colonization_results %>% 
+#   filter(mixture == "XBB-029+XBA-064", replicate == 1) %>% 
+#   ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   labs(
+#     title = "Mixture",
+#     x = "",
+#     y = ""
+#   ) +
+#   theme(legend.position = "none",
+#         axis.line=element_blank(), 
+#         axis.text.x = element_text(size = 10))
+# 
+# 
+# mixture_ASVs_XBBXBA64_colonized <- colonization_results %>% 
+#   filter(mixture == "XBB-029+XBA-064", replicate == 1) %>% 
+#   ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(colonization))) +
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
+#   labs(
+#     title = "Colonized",
+#     x = "",
+#     y = ""
+#   ) +
+#   theme(legend.position = "none",
+#         axis.line=element_blank(), 
+#         axis.text.x = element_text(size = 10))
+# 
+# 
+# recipient_ASVs_XBBXBA64 <- recipient_ASVs %>% 
+#   filter(biosample1 == "XBA-064", replicate == 1)%>% 
+#   ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   labs(
+#     title = "Recipient",
+#     x = "",
+#     y = ""
+#   ) +
+#   theme(legend.position = "none",
+#         axis.line=element_blank(), 
+#         axis.text.x = element_text(size = 10))
+# 
+# 
+# row_of_post64_plots <- plot_grid(
+#   donor_ASVs_XBBXBA,
+#   recipient_ASVs_XBBXBA64,
+#   mixture_ASVs_XBBXBA64,
+#   mixture_ASVs_XBBXBA64_colonized,
+#   ncol = 4
+# )
+# 
+# # Add a centered title above the row
+# postantibiotic64_plot <- plot_grid(
+#   ggdraw() + draw_label("", fontface = "bold", size = 12, hjust = 0.5),
+#   row_of_post64_plots,
+#   ncol = 1,
+#   rel_heights = c(0.1, 1)
+# )
+# 
+# # Display
+# postantibiotic64_plot
+# 
+# ```
+# 
+# 
+# **Join plots with patchwork**
+# 
+# ```{r}
+# 
+# library(patchwork)
+# 
+# preantibiotic_plot <- preantibiotic_plot + theme_cowplot()
+# postantibiotic_plot <- postantibiotic_plot + theme_cowplot()
+# postantibiotic64_plot <- postantibiotic64_plot + theme_cowplot()
+# 
+# 
+# combined_plot <- preantibiotic_plot /
+#                  postantibiotic_plot /
+#                  postantibiotic64_plot
+# 
+# ggsave(
+#   filename = file.path(OUTPUTDIR, "compositions_XBBXBA.png"),
+#   plot = combined_plot,
+#   width = 10,
+#   height = 10,
+#   dpi = 600,
+#   bg = "white"
+# )
 
 ```
 

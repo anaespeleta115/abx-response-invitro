@@ -52,226 +52,6 @@ my_colors <- readRDS("C:/Spring-Rotation-2025/scratch/familyColorPalette.rds")
 
 
 
-### Get beta diversity
-
-
-**Create phyloseq object**
-
-
-```{r}
-
-data <- readRDS("../../data/ps_all.rds")
-
-hp_data_clean <- prune_taxa(taxa_sums(data) > 0, data)
-
-e0026_e0029_obj <- subset_samples(
-  hp_data_clean,
-  experiment == "e0029" | 
-    experiment == "e0026"
-)
-
-# e0026_e0029_obj <- subset_samples(e0026_e0029_obj,
-#     biosample1 != "blank" &
-#     biosample1 != "B-mix" &
-#     !grepl("\\+", biosample2))
-
-```
-
-
-```{r}
-# # List the distance-calculation methods to be used.
-# distMethods <- c("jsd","bray","jaccard")
-# 
-# # Write a function to calculate a distance matrix using the specified method
-# # and convert the data into tidy format.
-# calculateBeta <- function(data, distMethod) {
-#   # Calculate the distance matrix using the specified method.
-#   betaRaw <- distance(data, method=distMethod)
-# 
-#   # Convert distance matrix to a dataframe.
-#   beta <- as.matrix(betaRaw)
-#   beta <- as.data.frame(beta)
-#   beta$sample1 <- rownames(beta)
-#   # Tidy the dataframe.
-#   beta <- beta %>%
-# 	pivot_longer(-sample1, names_to="sample2", values_to="value")
-#   beta <- beta %>%
-# 	filter(sample1 != sample2) %>%
-# 	mutate(method=distMethod)
-# }
-# 
-# # Calculate the distance matrix for all of the specified methods on the species abundances.
-# # Combine the distance matrices for all methods.
-# betaSpecies <- do.call(rbind, lapply(distMethods, function(distMethod) {
-#   print(distMethod)
-#   calculateBeta(e0026_e0029_obj, distMethod)
-# }))
-# # Export the distance matrix generated for all of the sample pairs
-# # using all of the specified methods.
-# write_delim(betaSpecies, paste0("e0026_e0029_speciesBeta.txt.gz"))
-
-
-```
-
-
-
-### JSD between all possible combinations
-
-
-
-```{r, warning=FALSE}
-
-beta_diversity <- read_delim("./e0026_e0029_speciesBeta.txt.gz")
-data(beta_diversity)
-
-
-beta_diversity_wide <- beta_diversity %>%
-  select(sample1, sample2, method, value) %>%
-  pivot_wider(names_from = method, values_from = value)
-
-beta_diversity_wide <- beta_diversity_wide %>%
-  filter(!grepl("e0029", sample1), !grepl("e0029", sample2))
-
-```
-
-
-
-
-```{r}
-
-recipients <- c("XBA-029", "XBA-036", "XBA-064", "XDA-029", "XDA-036", "XDA-064", "XEA-029", "XEA-036", "XEA-064", "XKA-029", "XKA-036", "XKA-064")
-
-e0026_filtered <- e0026 %>% 
-  select(sample, biosample1) %>% 
-  unique()
-
-donor_communities <- e0029 %>%
-  filter(biosample2 != "blank", 
-         biosample2 != "B-mix",
-         !grepl("\\+", biosample2)) %>%
-  pull(biosample2) %>%
-  unique()
-
-# join sample1 metadata and check
-e0026_e0029_beta_1 <- beta_diversity_wide %>%
-  left_join(e0026_filtered, by = c("sample1" = "sample")) %>% 
-  filter(biosample1 %in% recipients)
-
-# if the columns exist, rename them
-e0026_e0029_beta_1 <- e0026_e0029_beta_1 %>%
-    dplyr::rename(
-      component1 = biosample1
-    )
-
-# Join sample2 metadata
-e0026_e0029_beta_final <- e0026_e0029_beta_1 %>%
-  left_join(e0026_filtered, by = c("sample2" = "sample")) %>% 
-  filter(biosample1 %in% donor_communities)
-
-
-# Rename columns to have biosample1 and biosample
-e0026_e0029_beta_final <- e0026_e0029_beta_final %>%
-    dplyr::rename(
-      biosample1 = component1,
-      biosample2 = biosample1
-    )
-
-
-```
-
-
-**Define a function to extract passage information from raw sample ID**
-
-```{r}
-
-extract_passage <- function(x) {
-  ifelse(
-    str_detect(x, "-mix-"),
-    NA_character_,
-    str_extract(x, "-[A-Z]-[08]-[A-Z0-9]+") %>%
-      str_extract("[08]")
-  )
-}
-
-# Add passage extraction
-e0026_e0029_beta_final <- e0026_e0029_beta_final %>%
-  mutate(
-    passage1 = extract_passage(sample1),
-    passage2 = extract_passage(sample2)
-  ) %>% 
-  filter(passage1 == 8, passage1 == passage2)
-
-e0026_e0029_beta_final <- e0026_e0029_beta_final %>% 
-  select(-passage1, -passage2, -bray, -jaccard) %>% 
-  mutate(mixture = paste(biosample2, biosample1, sep = "+"))
-  
-```
-
-
-**Plot distances in a heatmap**
-
-```{r}
-
-theme_set(theme_cowplot())
-
-beta_diversity_mixture_plot <- ggplot(e0026_e0029_beta_final, aes(x = biosample2, y = biosample1, fill = jsd)) +
-  geom_tile() +
-  scale_fill_viridis_c(option = "A") +
-  labs(x = "Donor", y = "Recipient", fill = "JSD",
-       title = "JSD Heatmap Across Donor–Recipient Pairs")
-
-ggsave(
-  filename = file.path(OUTPUTDIR, "diversity_heatmap_plot.png"),
-  plot = beta_diversity_mixture_plot,
-  width = 10,
-  height = 10,
-  dpi = 600,
-  bg = "white"
-)
-
-beta_diversity_mixture_plot
-
-
-```
-
-
-**Boxplot of JSDs faceted by day**
-
-```{r}
-
-theme_set(theme_cowplot())
-
-e0026_e0029_beta_final <- e0026_e0029_beta_final %>% 
-  mutate(day = str_sub(biosample1, -3), subject = str_sub(biosample1, 1, -5))
-
-diversity_boxplot <- e0026_e0029_beta_final %>% 
-  ggplot(aes(x = subject, y = jsd, fill = subject)) + 
-  geom_boxplot()+
-  geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
-  labs(
-    title = "Divergence between donor-recipient pair distributions by day",
-    x = "",
-    y = "JSD",
-    fill = ""
-  )+
-  theme(
-    axis.text.x = element_text(angle = 45, vjust = 0.5, hjust = 1, size = 8)
-  )+
-  facet_wrap(~day)
-
-
-ggsave(
-  filename = file.path(OUTPUTDIR, "diversity_boxplot_mixtures.png"),
-  plot = diversity_boxplot,
-  width = 10,
-  height = 10,
-  dpi = 600,
-  bg = "white"
-)
-
-
-
-```
 
 
 
@@ -281,10 +61,10 @@ ggsave(
 
 get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {
   mix_asvs_subset <- mixture_ASVs %>% 
-    filter(mixture == mix_id, replicate == replicate)
+    filter(mixture == mix_id, replicate == 1)
   
   recipient_asvs_subset <- recipient_ASVs %>% 
-    filter(biosample1 == recipient_id, replicate == replicate)
+    filter(biosample1 == recipient_id, replicate == 1)
   
   donor_asvs_subset <- single_donor_ASVs %>%  
     filter(biosample1 == donor_id)
@@ -303,23 +83,76 @@ get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {
   ))
 }
 
-
 ```
 
 
 
 
-**Loop through all mixtures to get final e0029 colonization dataset**
+**Create a mixture ASVs, recipient ASVs, and donor ASVs dataset**
+
+```{r}
+
+limit_of_detection <- 0.001
+
+# Get mixture communities
+mixture_ASVs <- e0029 %>% 
+  filter(relAbundance > limit_of_detection)
+
+
+# Get recipient communities
+recipient_ASVs <- e0029 %>% 
+  filter(relAbundance > limit_of_detection) %>%   
+  filter(biosample2 == "blank") %>% 
+  filter(
+    !(biosample2 == "blank") |
+    (biosample2 == "blank" & !well %in% c("G11", "H11"))) %>%
+  filter(
+    biosample1 != "blank" | 
+    (plate == "e0029.B.5" & well %in% c("G12", "H12"))
+  )
+
+
+# Extract donor community IDs from e0029
+donor_communities <- e0029 %>%
+  pull(biosample2) %>%
+  unique()
+
+donor_communities
+
+# Extract single donor OTUs from e0026
+single_donor_ASVs <- e0026 %>%
+  filter(biosample1 %in% donor_communities, passage == "8")
+  
+# We'll deal with the b-mix and two-donor communities later
+donor_combinations <- list(
+  c("XBB-029", "XKB-029"),
+  c("XCB-029", "XBB-029"),
+  c("XDB-029", "XCB-029"),
+  c("XEB-029", "XDB-029"),
+  c("XFB-029", "XEB-029"),
+  c("XGB-029", "XFB-029"),
+  c("XHB-029", "XGB-029"),
+  c("XIB-029", "XHB-029"),
+  c("XJB-029", "XIB-029"),
+  c("XKB-029", "XJB-029") 
+)
+
+
+```
+
+
+**Get a final dataset with actual colonizers**
 
 ```{r}
 
 # initialize results table
-colonization_prop_results <- tibble()
+actual_colonizers_results <- tibble()
 
-# get list of mixture IDs
+# Filter just the mixtures you want to process
 mixture_ids <- unique(mixture_ASVs %>%
   filter(biosample2 %in% single_donor_ASVs$biosample1) %>%
   pull(mixture))
+
 
 # loop over mixtures
 for (mix_id in mixture_ids) {
@@ -329,98 +162,44 @@ for (mix_id in mixture_ids) {
   
   result <- get_colonization(mix_id, donor_id, recipient_id, replicate = 1)
   
-  # count actual and potential colonizers
-  n_potential_colonizers <- length(result$potential_colonizers)
-  n_actual_colonizers <- result$colonization_df %>%
-  filter(actual_colonizer == 1) %>%
-  distinct(OTU) %>%
-  nrow()
-  
-  # store all values in a one-row tibble
-  prop_row <- tibble(
-    mixture = mix_id,
-    biosample2 = donor_id,
-    biosample1 = recipient_id,
-    n_potential_colonizers = n_potential_colonizers,
-    n_actual_colonizers = n_actual_colonizers,
-    prop_colonizers = n_actual_colonizers / n_potential_colonizers
-  )
+
+  actual_colonizers <- result$colonization_df 
   
   # bind all the mixture rows together
-  colonization_prop_results <- bind_rows(colonization_prop_results, prop_row)
+  actual_colonizers_results <- bind_rows(actual_colonizers_results, actual_colonizers)
 }
 
 
 ```
 
 
-**Visualize colonization**
-
-```{r}
-theme_set(theme_cowplot())
-
-prop_colonization_plot <- ggplot(colonization_prop_results, aes(x = donor_id, y = recipient_id, fill = prop_colonizers)) +
-  geom_tile() +
-  scale_fill_viridis_c(option = "A") +
-  labs(x = "Donor", y = "Recipient", fill = "Colonization Efficacy",
-       title = "Colonization Efficacy Across Mixtures")
-
-ggsave(
-  filename = file.path(OUTPUTDIR, "prop_colonization_plot.png"),
-  plot = prop_colonization_plot,
-  width = 12,
-  height = 10,
-  dpi = 600,
-  bg = "white"
-)
-
-```
-
-
-
-**Plot Colonization against JSD**
-
-```{r}
-
-# join in the two datasets
-
-jsd_data <- e0026_e0029_beta_final %>% 
-  select(mixture, jsd, day)
-
-jsd_colonization <- colonization_prop_results %>%
-  left_join(jsd_data, by = c("mixture" = "mixture"))
-
-jsd_colonization_plot <- jsd_colonization %>% 
-  ggplot(aes(x = jsd, y = prop_colonizers, color = factor(day)))+
-  geom_point()+
-  labs(
-    x = "Donor-Recipient JSD",
-    y = "Colonization Efficacy",
-    title = "Colonization Efficacy vs. Donor-Recipient Divergence"
-  )
-
-ggsave(
-  filename = file.path(OUTPUTDIR, "jsd_colonization_plot.png"),
-  plot = jsd_colonization_plot,
-  width = 10,
-  height = 8,
-  dpi = 600,
-  bg = "white"
-)
-  
-  
-
-```
-
-
-
-### Differential Colonization
 
 
 **Find differential colonizers**
 
+
 ```{r}
 
+actual_colonizers_results <- actual_colonizers_results %>% 
+  mutate(day = str_sub(biosample1, -3), 
+         mixture_pair = str_replace_all(mixture, "-\\d{3}", ""))
+
+# We need to group OTUs by their mixture pair, independent of day
+diff_colonizers <- actual_colonizers_results %>%
+  filter(day %in% c("029", "036")) %>%
+  group_by(mixture_pair, OTU) %>%
+  summarize(
+    colonized_day29 = as.integer(any(day == "029" & actual_colonizer == 1)),
+    colonized_day36 = as.integer(any(day == "036" & actual_colonizer == 1)),
+    .groups = "drop"
+  ) %>%
+  mutate(diff_colonizer = as.integer(colonized_day36 & !colonized_day29))
+
+
+actual_colonizers_results <- actual_colonizers_results %>%
+  left_join(diff_colonizers %>% select(mixture_pair, OTU, diff_colonizer),
+            by = c("mixture_pair", "OTU")) %>% 
+  mutate(diff_colonizer = ifelse(day == "064", 0, diff_colonizer))
 
 
 ```
@@ -432,76 +211,120 @@ ggsave(
 
 
 
+**Find the strains lost between day 29 and day 36 in the recipient**
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-**Composition Plots**
 
 ```{r}
+
+recipient_ASVs <- recipient_ASVs %>%
+  mutate(day = str_extract(biosample1, "\\d{3}"))
+
+recipients_day29 <- recipient_ASVs %>%
+  filter(day == "029", replicate == 1) %>%
+  select(biosample1, OTU) %>%
+  distinct()
+
+recipients_day36 <- recipient_ASVs %>%
+  filter(day == "036", replicate == 1) %>%
+  select(biosample1, OTU) %>%
+  distinct()
+
+lost_strains <- recipients_day29 %>% 
+  filter(!(OTU %in% recipients_day36$OTU)) %>% # extract day 29 taxa not in day 36 taxa
+  mutate(lost_strain = 1)
+  
+recipient_ASVs <- recipient_ASVs %>%
+  left_join(lost_strains, by = c("biosample1", "OTU")) %>%
+  mutate(lost_strain = ifelse(is.na(lost_strain), 0, lost_strain))
+
+```
+
+
+
+**Are the differential colonizers in the same family as the lost colonizers?**
+
+
+**Create function extract specific mixture and display its composition**
+
+
+
+```{r}
+
 theme_set(theme_cowplot())
 
 subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
   
-  # Run colonization analysis for this donor-recipient pair
-  result <- get_colonization(mix_id, donor_id, recipient_id, replicate)
-  colonization_df <- result$colonization_df
+  # Subset mixture and recipient ASVs for the given replicate
+  mix_asvs_subset <- mixture_ASVs %>% 
+    filter(mixture == mix_id, replicate == replicate)
   
-  # Mixture composition
-  mixture_ASVs_mix <- colonization_df %>%
-    ggplot(aes(x = mixture, y = relAbundance, fill = Family)) +
+  recipient_asvs_subset <- recipient_ASVs %>% 
+    filter(biosample1 == recipient_id, replicate == replicate)
+  
+  mixture_ASVs_mix <- actual_colonizers_results %>% 
+  filter(mixture == mix_id) %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_manual(values = my_colors) +
+  labs(
+    title = "Mixture",
+    x = "",
+    y = ""
+  ) +
+  theme(legend.position = "none",
+        axis.line=element_blank(), 
+        axis.text.x = element_text(size = 10))
+
+
+  mixture_ASVs_colonized <- actual_colonizers_results %>% 
+    filter(mixture == mix_id) %>% 
+    ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(actual_colonizer))) +
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
+    scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
     labs(
-      title = "Mixture",
+      title = "Actual Colonizers",
       x = "",
       y = ""
     ) +
-    theme(
-      legend.position = "none",
-      axis.line = element_blank(),
-      axis.text.x = element_text(size = 10)
-    )
+    theme(legend.position = "none",
+          axis.line=element_blank(), 
+          axis.text.x = element_text(size = 10))
+  
+    mixture_ASVs_differential <- actual_colonizers_results %>%
+    filter(mixture == mix_id, day == "036") %>%
+    ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(diff_colonizer))) +
+    geom_bar(stat = "identity", color = "black") +
+    scale_fill_manual(values = my_colors) +
+    scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
+    labs(
+      title = "Differential",
+      x = "",
+      y = ""
+    ) +
+    theme(legend.position = "none",
+          axis.line=element_blank(),
+          axis.text.x = element_text(size = 10))
 
-  # Colonized subset (highlighted)
-  mixture_ASVs_colonized <- colonization_df %>%
-    mutate(colonization = factor(actual_colonizer)) %>%
-    ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = colonization)) +
+  
+  lost_ASVs <- recipient_ASVs %>% 
+    filter(biosample1 == recipient_id, replicate == 1, day == "029")%>% 
+    ggplot(aes(x = biosample1, y = relAbundance, fill = Family, alpha = factor(lost_strain)))+
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
     scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
     labs(
-      title = "Colonized",
+      title = "Lost Strains",
       x = "",
       y = ""
     ) +
-    theme(
-      legend.position = "none",
-      axis.line = element_blank(),
-      axis.text.x = element_text(size = 10)
-    )
-
-  # Recipient composition
-  recipient_plot <- recipient_ASVs %>%
-    filter(biosample1 == recipient_id, replicate == replicate) %>%
-    ggplot(aes(x = biosample1, y = relAbundance, fill = Family)) +
+    theme(legend.position = "none",
+          axis.line=element_blank(), 
+          axis.text.x = element_text(size = 10))
+  
+    recipient_ASVs <- recipient_ASVs %>% 
+    filter(biosample1 == recipient_id, replicate == 1)%>% 
+    ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
     labs(
@@ -509,16 +332,13 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
       x = "",
       y = ""
     ) +
-    theme(
-      legend.position = "none",
-      axis.line = element_blank(),
-      axis.text.x = element_text(size = 10)
-    )
+    theme(legend.position = "none",
+          axis.line=element_blank(), 
+          axis.text.x = element_text(size = 10))
 
-  # Donor composition
-  donor_plot <- single_donor_ASVs %>%
-    filter(biosample1 == donor_id) %>%
-    ggplot(aes(x = biosample1, y = relAbundance, fill = Family)) +
+  donor_ASVs <- single_donor_ASVs %>% 
+    filter(biosample1 == donor_id)%>%
+    ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
     labs(
@@ -526,30 +346,32 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
       x = "",
       y = "Total Relative Abundance"
     ) +
-    theme(
-      legend.position = "none",
-      axis.line = element_blank(),
-      axis.text.x = element_text(size = 10)
-    )
+    theme(legend.position = "none",
+          axis.line=element_blank(), 
+          axis.text.x = element_text(size = 10))
 
-  # Assemble panel
+
   row_of_plots <- plot_grid(
-    donor_plot,
-    recipient_plot,
+    donor_ASVs,
+    recipient_ASVs,
     mixture_ASVs_mix,
     mixture_ASVs_colonized,
-    ncol = 4
+    lost_ASVs,
+    mixture_ASVs_differential,
+    ncol = 6
   )
-
+  
+  # Add a centered title above the row
   final_plot <- plot_grid(
     ggdraw() + draw_label("", fontface = "bold", size = 12, hjust = 0.5),
     row_of_plots,
     ncol = 1,
-    rel_heights = c(0.1, 1)
+    rel_heights = c(0.1, 1)  # Reserve top space for title
   )
 
   return(final_plot)
 }
+
 
 ```
 
@@ -559,18 +381,21 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
 
 ```{r}
 
-subject_composition_plot_day29 <- subject_composition("XJB-029+XEA-029", "XJB-029", "XEA-029", 1) + theme_cowplot()
-subject_composition_plot_day36 <- subject_composition("XJB-029+XEA-036", "XJB-029", "XEA-036", 1) + theme_cowplot()
-subject_composition_plot_day64 <- subject_composition("XJB-029+XEA-064", "XJB-029", "XEA-064", 1) + theme_cowplot()
+subject_composition_plot_day29 <- subject_composition("XCB-029+XBA-029", "XCB-029", "XBA-029", 1) + theme_cowplot()
+subject_composition_plot_day36 <- subject_composition("XCB-029+XBA-036", "XCB-029", "XBA-036", 1) + theme_cowplot()
+# subject_composition_plot_day64 <- subject_composition("XJB-029+XDA-064", "XJB-029", "XDA-064", 1) + theme_cowplot()
+
 
 combined_plot <- subject_composition_plot_day29 /
-                 subject_composition_plot_day36 /
-                 subject_composition_plot_day64
+                 subject_composition_plot_day36
+                 # subject_composition_plot_day64
+
+combined_plot
 
 ggsave(
-  filename = file.path(OUTPUTDIR, "compositions_XKBXEA.png"),
+  filename = file.path(OUTPUTDIR, "compositionsXCBXBA_lost.png"),
   plot = combined_plot,
-  width = 10,
+  width = 20,
   height = 10,
   dpi = 600,
   bg = "white"
@@ -578,5 +403,4 @@ ggsave(
 
 
 ```
-
 

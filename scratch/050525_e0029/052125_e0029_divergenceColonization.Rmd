@@ -306,19 +306,107 @@ get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {
 ```
 
 
+
+
+**Create a mixture ASVs, recipient ASVs, and donor ASVs dataset**
+
 ```{r}
-otu_level_data <- bind_rows(colonization_list, .id = "mixture")
+
+limit_of_detection <- 0.001
+
+# Get mixture communities
+mixture_ASVs <- e0029 %>% 
+  filter(relAbundance > limit_of_detection)
+
+
+# Get recipient communities
+recipient_ASVs <- e0029 %>% 
+  filter(relAbundance > limit_of_detection) %>%   
+  filter(biosample2 == "blank") %>% 
+  filter(
+    !(biosample2 == "blank") |
+    (biosample2 == "blank" & !well %in% c("G11", "H11"))) %>%
+  filter(
+    biosample1 != "blank" | 
+    (plate == "e0029.B.5" & well %in% c("G12", "H12"))
+  )
+
+
+# Extract donor community IDs from e0029
+donor_communities <- e0029 %>%
+  pull(biosample2) %>%
+  unique()
+
+donor_communities
+
+# Extract single donor OTUs from e0026
+single_donor_ASVs <- e0026 %>%
+  filter(biosample1 %in% donor_communities, passage == "8")
+  
+# We'll deal with the b-mix and two-donor communities later
+donor_combinations <- list(
+  c("XBB-029", "XKB-029"),
+  c("XCB-029", "XBB-029"),
+  c("XDB-029", "XCB-029"),
+  c("XEB-029", "XDB-029"),
+  c("XFB-029", "XEB-029"),
+  c("XGB-029", "XFB-029"),
+  c("XHB-029", "XGB-029"),
+  c("XIB-029", "XHB-029"),
+  c("XJB-029", "XIB-029"),
+  c("XKB-029", "XJB-029") 
+)
+
+
+```
+
+
+**Get a final dataset with actual colonizers**
+
+```{r}
+
+# initialize results table
+actual_colonizers_results <- tibble()
+
+# Filter just the mixtures you want to process
+mixture_ids <- unique(mixture_ASVs %>%
+  filter(biosample2 %in% single_donor_ASVs$biosample1) %>%
+  pull(mixture))
+
+
+# loop over mixtures
+for (mix_id in mixture_ids) {
+  ids <- unlist(strsplit(mix_id, "\\+"))
+  donor_id <- ids[1]
+  recipient_id <- ids[2]
+  
+  result <- get_colonization(mix_id, donor_id, recipient_id, replicate = 1)
+  
+
+  actual_colonizers <- result$colonization_df 
+  
+  # bind all the mixture rows together
+  actual_colonizers_results <- bind_rows(actual_colonizers_results, actual_colonizers)
+}
+
+
+
 
 ```
 
 
 
-**Loop through all mixtures to get colonization results**
+**Do the same to create proportion dataset**
 
 ```{r}
 
 # initialize results table
 colonization_prop_results <- tibble()
+
+# Filter just the mixtures you want to process
+mixture_ids <- unique(mixture_ASVs %>%
+  filter(biosample2 %in% single_donor_ASVs$biosample1) %>%
+  pull(mixture))
 
 
 # loop over mixtures
@@ -378,35 +466,34 @@ ggsave(
 
 
 
-**Boxplots of total colonizers by mixture and day**
+**Boxplots of colonizers by mixture and day**
 
 
 ```{r}
 
-total_colonization <- colonization_results %>% 
-  group_by(mixture, biosample1) %>% 
-  summarize(total_colonizers = sum(colonization)) %>% 
+total_colonization <- colonization_prop_results %>%
   mutate(day = str_sub(mixture, -2), recipient = str_sub(biosample1, 0, 3))
 
 
 # Plot
-colonization_day_plot2 <- 
-  ggplot(total_colonization, aes(x = factor(day), y = prop_colonizer, fill = factor(day))) +
+colonization_prop_day_plot2 <- 
+  ggplot(total_colonization, aes(x = factor(day), y = prop_colonizers, fill = factor(day))) +
   geom_boxplot() +
   geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
   labs(
-    title = "Number of Colonizers per Mixture by Day",
+    title = "Colonization Efficacy per Mixture by Day",
     x = "Day",
     y = "Number of colonizers",
     fill = ""
   )+
   facet_wrap(~recipient)
 
-colonization_day_plot2
+colonization_prop_day_plot2
 
 ggsave(
-  filename = file.path(OUTPUTDIR, "colonization_by_day.png"),
-  plot = colonization_day_plot2,
+  filename = file.path(OUTPUTDIR, "colonization_prop_by_day.png"),
+  plot = 
+colonization_prop_day_plot2,
   width = 9,
   height = 6,
   dpi = 600,
