@@ -71,6 +71,9 @@ get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {
   
   # potential colonizers are those present in the donor but not in the recipient
   potential_colonizers <- donor_asvs_subset$OTU[!(donor_asvs_subset$OTU %in% recipient_asvs_subset$OTU)]
+  
+  donor_asvs_potential <- donor_asvs_subset %>% 
+    filter(OTU %in% potential_colonizers)
 
   # actual colonizers are the subset of potentials that did make it into the mix
   mix_asvs_colonization <- mix_asvs_subset %>% 
@@ -79,7 +82,7 @@ get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {
   # return both the dataframe and potential colonizer list
   return(list(
     colonization_df = mix_asvs_colonization,
-    potential_colonizers = potential_colonizers
+    donor_asvs_potential = donor_asvs_potential
   ))
 }
 
@@ -147,6 +150,7 @@ donor_combinations <- list(
 
 # initialize results table
 actual_colonizers_results <- tibble()
+potential_colonizers_results <- tibble()
 
 # Filter just the mixtures you want to process
 mixture_ids <- unique(mixture_ASVs %>%
@@ -164,10 +168,15 @@ for (mix_id in mixture_ids) {
   
 
   actual_colonizers <- result$colonization_df 
+  potential_colonizers <- result$donor_asvs_potential
+  
   
   # bind all the mixture rows together
   actual_colonizers_results <- bind_rows(actual_colonizers_results, actual_colonizers)
+  potential_colonizers_results <- bind_rows(potential_colonizers_results, potential_colonizers)
 }
+
+# loop through donor ids and get potential colonizers. Maybe rewrite a function to extract potential colonizers from the donor ids.
 
 
 ```
@@ -237,15 +246,19 @@ recipient_ASVs <- recipient_ASVs %>%
   left_join(lost_strains, by = c("biosample1", "OTU")) %>%
   mutate(lost_strain = ifelse(is.na(lost_strain), 0, lost_strain))
 
+recipient_lost <- recipient_ASVs %>% 
+  filter(lost_strain == 1)
+
 ```
 
 
 
-**Are the differential colonizers in the same family as the lost colonizers?**
 
 
-**Create function extract specific mixture and display its composition**
+## Are the differential colonizers in the same family as the lost colonizers?
 
+
+### Create function extract specific mixture and display its composition
 
 
 ```{r}
@@ -262,7 +275,7 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
     filter(biosample1 == recipient_id, replicate == replicate)
   
   mixture_ASVs_mix <- actual_colonizers_results %>% 
-  filter(mixture == mix_id) %>% 
+  filter(mixture == mix_id, replicate == 1) %>% 
   ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
   geom_bar(stat = "identity", color = "black") +
   scale_fill_manual(values = my_colors) +
@@ -277,7 +290,7 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
 
 
   mixture_ASVs_colonized <- actual_colonizers_results %>% 
-    filter(mixture == mix_id) %>% 
+    filter(mixture == mix_id, day == "036", replicate == 1) %>% 
     ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(actual_colonizer))) +
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
@@ -292,7 +305,7 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
           axis.text.x = element_text(size = 10))
   
     mixture_ASVs_differential <- actual_colonizers_results %>%
-    filter(mixture == mix_id, day == "036") %>%
+    filter(mixture == mix_id, replicate == 1) %>%
     ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(diff_colonizer))) +
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
@@ -381,8 +394,8 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
 
 ```{r}
 
-subject_composition_plot_day29 <- subject_composition("XCB-029+XBA-029", "XCB-029", "XBA-029", 1) + theme_cowplot()
-subject_composition_plot_day36 <- subject_composition("XCB-029+XBA-036", "XCB-029", "XBA-036", 1) + theme_cowplot()
+subject_composition_plot_day29 <- subject_composition("XJB-029+XBA-029", "XJB-029", "XBA-029", 1) + theme_cowplot()
+subject_composition_plot_day36 <- subject_composition("XJB-029+XBA-036", "XJB-029", "XBA-036", 1) + theme_cowplot()
 # subject_composition_plot_day64 <- subject_composition("XJB-029+XDA-064", "XJB-029", "XDA-064", 1) + theme_cowplot()
 
 
@@ -390,10 +403,10 @@ combined_plot <- subject_composition_plot_day29 /
                  subject_composition_plot_day36
                  # subject_composition_plot_day64
 
-combined_plot
+# combined_plot
 
 ggsave(
-  filename = file.path(OUTPUTDIR, "compositionsXCBXBA_lost.png"),
+  filename = file.path(OUTPUTDIR, "compositionsXJBXBA_lost.png"),
   plot = combined_plot,
   width = 20,
   height = 10,
@@ -403,4 +416,141 @@ ggsave(
 
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+### Bootstrapping
+
+
+
+**Extract single-mixture information for potential colonizers**
+
+```{r}
+
+mix_id <- "XBB-029+XBA-029"
+donor_id <- "XBB-029"
+recipient_id <- "XBA-029"
+
+single_result <- get_colonization(mix_id, donor_id, recipient_id, replicate = 1)
+
+single_sample_actual_colonizers <- single_result$colonization_df %>% 
+  filter(actual_colonizer == 1)
+
+recipient_lost <- recipient_lost %>% 
+  filter(biosample1 == "XBA-029")
+
+single_donor_ASVs <- single_donor_ASVs %>% 
+  filter(biosample1 == "XBB-029")
+
+
+single_sample_actual_colonizers <- actual_colonizers_results %>% 
+  filter(mixture_pair == "XBB+XBA", actual_colonizer == 1, day != "064") %>% 
+  distinct(Family, OTU)
+
+```
+
+
+**Set parameters**
+```{r}
+n_trials <- 1000
+n_sample <- nrow(single_sample_actual_colonizers)  # Number of colonizers observed
+```
+
+
+
+**Simulate Boostrap Trials**
+
+```{r}
+
+set.seed(123)
+trial = 1
+
+bootstrap_results <- map_dfr(1:n_trials, function(trial) {
+  boot_sample <- single_sample_actual_colonizers %>%
+    slice_sample(n = n_sample, replace = TRUE)
+  
+  otu_shared <- length(intersect(boot_sample$OTU, recipient_lost$OTU)) # get shared taxa between the bootstrap population and the recipient population
+  fam_shared <- length(intersect(boot_sample$Family, recipient_lost$Family))
+  
+  tibble(trial = trial, shared_otus = otu_shared, shared_families = fam_shared)
+})
+
+
+length(unique(single_sample_actual_colonizers$OTU))
+
+bootstrap_results
+
+```
+
+
+
+**Get observed values**
+
+```{r}
+
+single_sample_diff_colonizers <- actual_colonizers_results %>% 
+  filter(mixture_pair == "XBB+XBA", diff_colonizer == 1, day != "064") %>% 
+  distinct(Family, OTU)
+
+
+observed_otus <- length(intersect(single_sample_diff_colonizers$OTU, recipient_lost$OTU))
+observed_families <- length(intersect(single_sample_diff_colonizers$Family, recipient_lost$Family))
+
+observed_otus
+observed_families
+
+intersect(single_sample_diff_colonizers$OTU, recipient_lost$OTU)
+
+bootstrap_results <- bootstrap_results %>%
+  mutate(trial = as.character(trial)) %>%
+  bind_rows(tibble(
+    trial = "Observed",
+    shared_otus = observed_otus,
+    shared_families = observed_families
+  ))
+
+
+
+```
+```{r}
+
+
+intersect(single_sample_diff_colonizers$Family, recipient_lost$Family)
+```
+
+
+
+**Get p-values**
+```{r}
+p_otu <- mean(bootstrap_results$shared_otus >= observed_otus)
+p_fam <- mean(bootstrap_results$shared_families >= observed_families)
+
+p_otu
+p_fam
+
+```
+
+
+
+
+```{r}
+ggplot(bootstrap_results, aes(x = shared_otus)) +
+  geom_histogram(binwidth = 1, fill = "gray") +
+  geom_vline(xintercept = observed_otus, color = "red", linetype = "dashed") +
+  labs(title = "Bootstrap OTU Overlap with Lost Taxa",
+       subtitle = paste("Observed =", observed_otus, ", p =", signif(p_otu, 3)))
+```
+
+
+
+
 
