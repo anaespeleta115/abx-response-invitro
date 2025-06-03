@@ -290,7 +290,7 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
 
 
   mixture_ASVs_colonized <- actual_colonizers_results %>% 
-    filter(mixture == mix_id, day == "036", replicate == 1) %>% 
+    filter(mixture == mix_id, replicate == 1) %>% 
     ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(actual_colonizer))) +
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
@@ -305,7 +305,7 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
           axis.text.x = element_text(size = 10))
   
     mixture_ASVs_differential <- actual_colonizers_results %>%
-    filter(mixture == mix_id, replicate == 1) %>%
+    filter(mixture == mix_id, replicate == 1, day == "036") %>%
     ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(diff_colonizer))) +
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
@@ -394,8 +394,8 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
 
 ```{r}
 
-subject_composition_plot_day29 <- subject_composition("XJB-029+XBA-029", "XJB-029", "XBA-029", 1) + theme_cowplot()
-subject_composition_plot_day36 <- subject_composition("XJB-029+XBA-036", "XJB-029", "XBA-036", 1) + theme_cowplot()
+subject_composition_plot_day29 <- subject_composition("XGB-029+XBA-029", "XGB-029", "XBA-029", 1) + theme_cowplot()
+subject_composition_plot_day36 <- subject_composition("XGB-029+XBA-036", "XGB-029", "XBA-036", 1) + theme_cowplot()
 # subject_composition_plot_day64 <- subject_composition("XJB-029+XDA-064", "XJB-029", "XDA-064", 1) + theme_cowplot()
 
 
@@ -403,10 +403,10 @@ combined_plot <- subject_composition_plot_day29 /
                  subject_composition_plot_day36
                  # subject_composition_plot_day64
 
-# combined_plot
+combined_plot
 
 ggsave(
-  filename = file.path(OUTPUTDIR, "compositionsXJBXBA_lost.png"),
+  filename = file.path(OUTPUTDIR, "compositionsXGBXBA_lost.png"),
   plot = combined_plot,
   width = 20,
   height = 10,
@@ -436,8 +436,9 @@ ggsave(
 
 ```{r}
 
-mix_id <- "XBB-029+XBA-029"
-donor_id <- "XBB-029"
+mix_id <- "XGB-029+XBA-029"
+mix_pair <- "XGB+XBA"
+donor_id <- "XGB-029"
 recipient_id <- "XBA-029"
 
 single_result <- get_colonization(mix_id, donor_id, recipient_id, replicate = 1)
@@ -445,17 +446,18 @@ single_result <- get_colonization(mix_id, donor_id, recipient_id, replicate = 1)
 single_sample_actual_colonizers <- single_result$colonization_df %>% 
   filter(actual_colonizer == 1)
 
-recipient_lost <- recipient_lost %>% 
-  filter(biosample1 == "XBA-029")
+single_recipient_lost <- recipient_lost %>% 
+  filter(biosample1 == recipient_id)
 
-single_donor_ASVs <- single_donor_ASVs %>% 
-  filter(biosample1 == "XBB-029")
+# single_sample_donor_ASVs <- single_donor_ASVs %>% 
+#   filter(biosample1 == donor_id)
 
 
 single_sample_actual_colonizers <- actual_colonizers_results %>% 
-  filter(mixture_pair == "XBB+XBA", actual_colonizer == 1, day != "064") %>% 
+  filter(mixture_pair == mix_pair, actual_colonizer == 1, day != "064") %>% 
   distinct(Family, OTU)
 
+donor_communities
 ```
 
 
@@ -478,8 +480,8 @@ bootstrap_results <- map_dfr(1:n_trials, function(trial) {
   boot_sample <- single_sample_actual_colonizers %>%
     slice_sample(n = n_sample, replace = TRUE)
   
-  otu_shared <- length(intersect(boot_sample$OTU, recipient_lost$OTU)) # get shared taxa between the bootstrap population and the recipient population
-  fam_shared <- length(intersect(boot_sample$Family, recipient_lost$Family))
+  otu_shared <- length(intersect(boot_sample$OTU, single_recipient_lost$OTU)) # get shared taxa between the bootstrap population and the recipient population
+  fam_shared <- length(intersect(boot_sample$Family, single_recipient_lost$Family))
   
   tibble(trial = trial, shared_otus = otu_shared, shared_families = fam_shared)
 })
@@ -498,11 +500,11 @@ bootstrap_results
 ```{r}
 
 single_sample_diff_colonizers <- actual_colonizers_results %>% 
-  filter(mixture_pair == "XBB+XBA", diff_colonizer == 1, day != "064") %>% 
+  filter(mixture_pair == mix_pair, diff_colonizer == 1, day != "064") %>% 
   distinct(Family, OTU)
 
 
-observed_otus <- length(intersect(single_sample_diff_colonizers$OTU, recipient_lost$OTU))
+observed_otus <- length(intersect(single_sample_diff_colonizers$OTU, single_recipient_lost$OTU))
 observed_families <- length(intersect(single_sample_diff_colonizers$Family, recipient_lost$Family))
 
 observed_otus
@@ -521,12 +523,6 @@ bootstrap_results <- bootstrap_results %>%
 
 
 ```
-```{r}
-
-
-intersect(single_sample_diff_colonizers$Family, recipient_lost$Family)
-```
-
 
 
 **Get p-values**
@@ -548,8 +544,20 @@ ggplot(bootstrap_results, aes(x = shared_otus)) +
   geom_vline(xintercept = observed_otus, color = "red", linetype = "dashed") +
   labs(title = "Bootstrap OTU Overlap with Lost Taxa",
        subtitle = paste("Observed =", observed_otus, ", p =", signif(p_otu, 3)))
+
+
+ggplot(bootstrap_results, aes(x = shared_families)) +
+  geom_histogram(binwidth = 1, fill = "gray") +
+  geom_vline(xintercept = observed_families, color = "red", linetype = "dashed") +
+  labs(title = "Bootstrap Families Overlap with Lost Taxa",
+       subtitle = paste("Observed =", observed_families, ", p =", signif(p_fam, 3)))
 ```
 
+```{r}
+recipient_lost %>% 
+  group_by(biosample1) %>% 
+  summarize(total_lost = sum(lost_strain))
+```
 
 
 
