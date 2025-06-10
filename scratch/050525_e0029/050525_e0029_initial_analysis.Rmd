@@ -870,13 +870,15 @@ ggsave(
 total_colonization <- colonization_results %>% 
   group_by(mixture) %>% 
   summarize(total_colonizers = sum(colonization)) %>% 
-  mutate(recipient = str_sub(mixture, -7, -1))
+  mutate(recipient = str_sub(mixture, -7, -1),
+         donor = str_sub(mixture, 1, -9))
 
 combined_richness <- left_join(total_colonization, recipient_richness,
   by = c("recipient" = "sample") # match recipient to sample
 ) %>% 
   select(-community)  %>% 
-  mutate(recipient = str_sub(recipient, -7, -5))
+  mutate(recipient = str_sub(recipient, -7, -5),
+         donor = str_sub(mixture, 1, -9))
   
 
 
@@ -887,7 +889,10 @@ colonization_richness_plot <- combined_richness %>%
   labs(
     x = "Species Richness of Recipient",
     y = "Number of Colonizers in Mixture"
-  )
+  )+
+  facet_wrap(~donor)
+
+colonization_richness_plot
 
 
 ggsave(

@@ -91,6 +91,7 @@ get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {
 
 
 
+
 **Create a mixture ASVs, recipient ASVs, and donor ASVs dataset**
 
 ```{r}
@@ -181,6 +182,64 @@ for (mix_id in mixture_ids) {
 
 ```
 
+
+**How does the recipient's species richness compare to the number of colonizers in the mixture?**
+
+```{r}
+# we need the colonization_results and the recipient_richness datasets. From there, we have to join them by biosample1 
+
+total_colonization <- actual_colonizers_results %>% 
+  group_by(mixture) %>% 
+  summarize(total_colonizers = sum(actual_colonizer)) %>% 
+  mutate(recipient = str_sub(mixture, -7, -1),
+         donor = str_sub(mixture, 1, -9))
+
+
+# Create recipient richness dataset
+recipient_richness <- recipient_ASVs %>%
+  filter(biosample1 != "blank") %>% 
+  select(biosample1, OTU) %>%
+  distinct() %>%
+  dplyr::count(biosample1, name = "species_richness")  %>% # count the distinct OTUs
+  mutate(community = "recipient", 
+         day = as.integer(str_extract(biosample1, "\\d{2}$"))) %>%
+  rename(sample = biosample1)
+
+
+combined_richness <- left_join(total_colonization, recipient_richness,
+  by = c("recipient" = "sample") # match recipient to sample
+) %>% 
+  select(-community)  %>% 
+  mutate(recipient = str_sub(recipient, -7, -5),
+         donor = str_sub(mixture, 1, -9))
+
+
+colonization_richness_plot <- combined_richness %>% 
+  ggplot(aes(x = species_richness, y = total_colonizers, color = factor(day))) + 
+  geom_point()+
+  geom_text_repel(aes(label = recipient), size = 2.5, max.overlaps = 20)+
+  labs(
+    x = "Species Richness of Recipient",
+    y = "Number of Colonizers in Mixture",
+    color = "Study Day"
+  )+
+  facet_wrap(~donor)
+
+colonization_richness_plot
+
+
+ggsave(
+  filename = file.path(OUTPUTDIR, "colonization_vs_richness.png"),
+  plot = colonization_richness_plot,
+  width = 9,
+  height = 6,
+  dpi = 600,
+  bg = "white"
+)
+
+
+# Could I instead use color for the subject and shape of dot for day?
+```
 
 
 
@@ -394,8 +453,8 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
 
 ```{r}
 
-subject_composition_plot_day29 <- subject_composition("XGB-029+XBA-029", "XGB-029", "XBA-029", 1) + theme_cowplot()
-subject_composition_plot_day36 <- subject_composition("XGB-029+XBA-036", "XGB-029", "XBA-036", 1) + theme_cowplot()
+subject_composition_plot_day29 <- subject_composition("XDB-029+XDA-029", "XDB-029", "XDA-029", 1) + theme_cowplot()
+subject_composition_plot_day36 <- subject_composition("XDB-029+XDA-036", "XDB-029", "XDA-036", 1) + theme_cowplot()
 # subject_composition_plot_day64 <- subject_composition("XJB-029+XDA-064", "XJB-029", "XDA-064", 1) + theme_cowplot()
 
 
@@ -406,7 +465,7 @@ combined_plot <- subject_composition_plot_day29 /
 combined_plot
 
 ggsave(
-  filename = file.path(OUTPUTDIR, "compositionsXGBXBA_lost.png"),
+  filename = file.path(OUTPUTDIR, "compositionsXDBXDA_lost.png"),
   plot = combined_plot,
   width = 20,
   height = 10,
@@ -436,10 +495,10 @@ ggsave(
 
 ```{r}
 
-mix_id <- "XGB-029+XBA-029"
-mix_pair <- "XGB+XBA"
-donor_id <- "XGB-029"
-recipient_id <- "XBA-029"
+mix_id <- "XHB-029+XDA-029"
+mix_pair <- "XHB+XDA"
+donor_id <- "XHB-029"
+recipient_id <- "XDA-029"
 
 single_result <- get_colonization(mix_id, donor_id, recipient_id, replicate = 1)
 
@@ -560,5 +619,129 @@ recipient_lost %>%
 ```
 
 
+## Bootstrap Algorithm (All mixtures version)
+
+```{r}
+
+set.seed(123)
+
+actual_colonizers_results_filtered <- actual_colonizers_results %>%
+  mutate(subject = str_sub(biosample1, 1, -5)) %>% 
+  filter(day %in% c("029", "036")) %>%
+  mutate(day = str_sub(biosample1, -3)) 
+
+# Step 1: Get all relevant mixture IDs
+mixture_ids <- actual_colonizers_results_filtered %>%
+  distinct(mixture) %>%
+  pull(mixture)
+
+# Step 2: Initialize results list
+bootstrap_results_list <- list()
+
+# Step 3: Loop over each mixture
+for (mix in mixture_ids) {
+  
+  ids <- unlist(strsplit(mix, "\\+"))
+  donor_id <- ids[1]
+  donor_id <- str_sub(donor_id, 1, -5)
+  recipient_id <- ids[2] 
+  recipient_id <- str_sub(recipient_id, 1, -5)
+  mix_pair <- paste(donor_id, recipient_id, sep = "+")
+
+  
+  # Subset data
+  single_sample_actual_colonizers <- actual_colonizers_results %>%
+    filter(mixture == mix, day %in% c("036"), actual_colonizer == 1) %>%
+    distinct(OTU, Family)
+  
+  single_sample_diff_colonizers <- actual_colonizers_results %>%
+    filter(mixture_pair == mix_pair, diff_colonizer == 1, day != "064") %>%
+    distinct(OTU, Family)
+  
+  single_recipient_lost <- recipient_lost %>%
+    mutate(subject = str_sub(biosample1, 1, -5)) %>% 
+    filter(subject == recipient_id) %>%
+    distinct(OTU, Family)
+  
+  # If not enough data, skip
+  if (nrow(single_sample_actual_colonizers) == 0 || nrow(single_recipient_lost) == 0) {
+    next
+  }
+  
+  # Bootstrap setup
+  n_trials <- 1000
+  n_sample <- nrow(single_sample_actual_colonizers)
+
+  bootstrap_results <- map_dfr(1:n_trials, function(trial) {
+    boot_sample <- single_sample_actual_colonizers %>%
+      slice_sample(n = n_sample, replace = TRUE)
+    
+    otu_shared <- length(intersect(boot_sample$OTU, single_recipient_lost$OTU))
+    fam_shared <- length(intersect(boot_sample$Family, single_recipient_lost$Family))
+    
+    tibble(trial = trial, shared_otus = otu_shared, shared_families = fam_shared)
+  })
+
+  # Observed values
+  observed_otus <- length(intersect(single_sample_diff_colonizers$OTU, single_recipient_lost$OTU))
+  observed_families <- length(intersect(single_sample_diff_colonizers$Family, recipient_lost$Family))
+  
+  # Add observed as final row
+  bootstrap_results <- bootstrap_results %>%
+    mutate(trial = as.character(trial)) %>%
+    bind_rows(tibble(
+      trial = "Observed",
+      shared_otus = observed_otus,
+      shared_families = observed_families
+    ))
+
+  # Store for this mixture
+  bootstrap_results_list[[mix]] <- bootstrap_results
+}
+
+combined_bootstrap_results <- bind_rows(bootstrap_results_list, .id = "mixture")
+
+observed_families
+observed_otus
+
+```
+
+
+
+
+```{r}
+
+
+# Compute enrichment stats per mixture
+enrichment_summary <- combined_bootstrap_results %>%
+  mutate(shared_families = as.numeric(shared_families)) %>%
+  group_by(mixture) %>%
+  summarise(
+    observed_families = shared_families[trial == "Observed"],
+    observed_otus = shared_otus[trial == "Observed"],
+    p_value_fam = mean(shared_families[trial != "Observed"] >= shared_families[trial == "Observed"]),
+    p_value_otu = mean(shared_otus[trial != "Observed"] >= shared_otus[trial == "Observed"]),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    enriched_fam = p_value_fam < 0.05,
+    enriched_otu = p_value_otu < 0.05
+  )
+
+```
+
+
+```{r}
+
+enrichment_summary <- enrichment_summary %>% 
+  mutate(biosample1 = str_sub(mixture, -7, -1),
+      biosample2 = str_sub(mixture, 1, -9))
+
+enrichment_summary_totals <- enrichment_summary %>% 
+  group_by(biosample1) %>% 
+  summarize(total_enriched_fam = sum(enriched_fam),
+            total_enriched_otu = sum(enriched_otu))
+
+```
 
 

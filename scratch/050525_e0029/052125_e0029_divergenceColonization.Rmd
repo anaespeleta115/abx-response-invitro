@@ -180,6 +180,7 @@ e0026_e0029_beta_final <- e0026_e0029_beta_final %>%
 ```
 
 
+
 **Define a function to extract passage information from raw sample ID**
 
 ```{r}
@@ -517,19 +518,25 @@ jsd_data <- e0026_e0029_beta_final %>%
   select(mixture, jsd, day)
 
 jsd_colonization <- colonization_prop_results %>%
-  left_join(jsd_data, by = c("mixture" = "mixture"))
+  left_join(jsd_data, by = c("mixture" = "mixture")) %>% 
+  mutate(donor = str_sub(mixture, 1, -13),
+         recipient = str_sub(mixture, -7, -5))
 
 jsd_colonization_plot <- jsd_colonization %>% 
   ggplot(aes(x = jsd, y = prop_colonizers, color = factor(day)))+
-  geom_point()+
+  geom_point() +
+  geom_text_repel(aes(label = recipient), size = 2.5, max.overlaps = 20)+
   labs(
     x = "Donor-Recipient JSD",
     y = "Colonization Efficacy",
     title = "Colonization Efficacy vs. Donor-Recipient Divergence"
-  )
+  )+
+  facet_wrap(~donor)
+
+jsd_colonization_plot
 
 ggsave(
-  filename = file.path(OUTPUTDIR, "jsd_colonization_plot.png"),
+  filename = file.path(OUTPUTDIR, "jsd_colonization_plot_donor.png"),
   plot = jsd_colonization_plot,
   width = 10,
   height = 8,
@@ -565,6 +572,7 @@ ggsave(
 )
 
 ```
+
 
 
 
