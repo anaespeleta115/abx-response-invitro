@@ -733,14 +733,32 @@ enrichment_summary <- combined_bootstrap_results %>%
 
 ```{r}
 
+library(viridis)
+
 enrichment_summary <- enrichment_summary %>% 
   mutate(biosample1 = str_sub(mixture, -7, -1),
       biosample2 = str_sub(mixture, 1, -9))
 
+# Step 2: Summarize
 enrichment_summary_totals <- enrichment_summary %>% 
   group_by(biosample1) %>% 
-  summarize(total_enriched_fam = sum(enriched_fam),
-            total_enriched_otu = sum(enriched_otu))
+  summarize(
+    total_enriched_fam = sum(enriched_fam),
+    total_enriched_otu = sum(enriched_otu),
+    .groups = "drop"
+  )
+
+
+# Step 3: Plot using geom_col (bar plot of summarized values)
+ggplot(enrichment_summary_totals, aes(x = biosample1, y = total_enriched_fam, fill = biosample1)) +
+  geom_col() +
+  scale_fill_viridis(discrete = TRUE, option = "A") +
+  labs(
+    x = "Sample",
+    y = "Number of mixtures enriched with lost taxa",
+    title = ""
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
 

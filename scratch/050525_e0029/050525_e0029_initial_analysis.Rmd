@@ -812,6 +812,17 @@ recipient_richness <- recipient_ASVs %>%
   distinct() %>%
   dplyr::count(biosample1, name = "species_richness")  %>% # count the distinct OTUs
   mutate(community = "recipient", 
+         day = as.integer(str_extract(biosample1, "\\d{2}$")),
+         subject = str_sub(biosample1, -7, -5)) %>%
+  rename(sample = biosample1)
+
+
+
+donor_richness <- single_donor_ASVs %>%
+  select(biosample1, OTU) %>%
+  distinct() %>%
+  dplyr::count(biosample1, name = "species_richness")  %>% # count the distinct OTUs
+  mutate(community = "donor", 
          day = as.integer(str_extract(biosample1, "\\d{2}$"))) %>%
   rename(sample = biosample1)
 
@@ -834,15 +845,17 @@ combined_richness <- bind_rows(recipient_richness, mixture_richness)
 
 # Plot
 richness_day_plot <- 
-  ggplot(combined_richness, aes(x = factor(day), y = species_richness, fill = community)) +
-  geom_boxplot(outlier.shape = NA, alpha = 0.8, color = "black", width = 0.6) +
-  geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
+  ggplot(recipient_richness, aes(x = factor(day), y = species_richness)) +
+  geom_line(aes(group = subject, color = subject)) +
+  geom_point(aes(color = subject), size = 1.5) +
+  # geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
   labs(
     title = "Change in Species Richness Pre- and Post-Abx",
     x = "Day",
     y = "Species Richness",
     fill = "Community Type"
-  )
+  )+
+  facet_wrap(~subject)
 
 
 richness_day_plot
@@ -878,28 +891,30 @@ combined_richness <- left_join(total_colonization, recipient_richness,
 ) %>% 
   select(-community)  %>% 
   mutate(recipient = str_sub(recipient, -7, -5),
-         donor = str_sub(mixture, 1, -9))
+         donor = str_sub(mixture, 1, -13),
+         day = as.numeric(str_sub(mixture, -2, -1)))
   
 
 
 colonization_richness_plot <- combined_richness %>% 
   ggplot(aes(x = species_richness, y = total_colonizers, color = factor(day))) + 
   geom_point() +
-  geom_text_repel(aes(label = recipient), size = 2)+
+  geom_text_repel(aes(label = donor), size = 2.5)+
   labs(
     x = "Species Richness of Recipient",
     y = "Number of Colonizers in Mixture"
   )+
-  facet_wrap(~donor)
+  facet_wrap(~recipient)
 
 colonization_richness_plot
+
 
 
 ggsave(
   filename = file.path(OUTPUTDIR, "colonization_vs_richness.png"),
   plot = colonization_richness_plot,
   width = 9,
-  height = 6,
+  height = 8,
   dpi = 600,
   bg = "white"
 )
@@ -925,13 +940,13 @@ total_colonization <- colonization_results %>%
 colonization_day_plot2 <- 
   ggplot(total_colonization, aes(x = factor(day), y = total_colonizers, fill = factor(day))) +
   geom_boxplot() +
-  geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
+  # geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
   labs(
     title = "Number of Colonizers per Mixture by Day",
     x = "Day",
     y = "Number of colonizers",
     fill = ""
-  )+
+  ) + 
   facet_wrap(~recipient)
 
 colonization_day_plot2
