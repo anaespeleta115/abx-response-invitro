@@ -54,6 +54,17 @@ e0026_all_passages <- e0026 %>%
   filter(num_passages == 9) %>% 
   ungroup() 
 
+# Compute species richness
+e0026_richness <- combined_day_data %>%
+  filter(relAbundance > 0.001) %>%
+  select(biosample1, OTU) %>%
+  distinct() %>%
+  dplyr::count(biosample1, name = "species_richness") %>%
+  left_join(
+    combined_day_data %>% distinct(biosample1, day, subject, household, antibiotic),
+    by = "biosample1"
+  )
+
 # Extract the top 25 families by relative abundance to make plots better
 top_families <- e0026_day29 %>%
   group_by(Family) %>%
