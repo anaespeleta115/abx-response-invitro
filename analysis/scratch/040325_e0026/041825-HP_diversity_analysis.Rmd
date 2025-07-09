@@ -79,6 +79,14 @@ e0026_obj <- subset_samples(hp_data_clean, experiment == "e0026")
 ```
 
 
+```{r}
+source("C:/abx-response-invitro/analysis/scratch/041825-computeAlphaDiversity/041825-computeAlphaDiversity.R")
+source("C:/abx-response-invitro/analysis/scratch/040325-comparePrePostAbx/040325-comparePrePostAbx.R")
+source("C:/abx-response-invitro/analysis/scratch/041825-computeAlphaDiversity/041825-computeAlphaDiversity.R")
+source("C:/abx-response-invitro/analysis/scratch/041825-computeBetaPrePostAbx/041825-computeBetaPrePostAbx.R")
+```
+
+
 
 ### Get alpha diversity metrics (ONLY RUN ONCE)
 

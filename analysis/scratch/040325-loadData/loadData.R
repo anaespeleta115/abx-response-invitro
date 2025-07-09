@@ -3,7 +3,8 @@ library(dplyr)
 library(ggplot2)
 library(readr)
 library(ggrepel)
-
+library("phyloseq")
+library(rstatix)
 
 
 household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e0026-e0029-e0030.txt", header = TRUE)
