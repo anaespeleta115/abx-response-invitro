@@ -13,6 +13,12 @@ OUTDIR <- "C:/abx-response-invitro/analysis/scratch/041825-computeBetaPrePostAbx
 e0026_beta2 <- e0026_beta2 %>%
   mutate(day_pair = paste(day1, day2, sep = "_")) %>% 
   filter(subject1 == subject2 & day1 != day2 & passage1 == 8 & passage2 == 8, antibiotic1 == 1)
+  
+e0026_beta2 <- e0026_beta2 %>%  
+  mutate(
+    day_pair = map_chr(str_split(day_pair, "_"), ~ paste(sort(.x), collapse = "_"))
+  )
+
 
 # # Only consider day subject A samples as day 2
 # e0026_beta_clean <- 
