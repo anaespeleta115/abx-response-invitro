@@ -4,9 +4,10 @@ source("C:/abx-response-invitro/analysis/scratch/040325-loadData/loadData.R")
 source("C:/abx-response-invitro/analysis/plotDefaults.R")
 
 # Set output directory
-OUTDIR <- "C:/abx-response-invitro/analysis/scratch/041825-comparePrePostAbx/out/"
+OUTDIR <- "C:/abx-response-invitro/analysis/scratch/041825-computeAlphaPrePostAbx/out/"
 
-
+# Set palette
+pal <- pnw_palette("Sunset2", 2, type = "discrete")
 
 ### Define a function to extract passage information from raw sample ID
 
@@ -26,7 +27,8 @@ extract_passage <- function(x) {
 
 
 # Read in alpha diversity file
-alpha_diversity <- read_delim("./alpha_diversity.txt")
+alpha_diversity <- read_delim("C:/abx-response-invitro/analysis/scratch/041825-computeAlphaDiversity/out/alpha_diversity.txt")
+
 
 # Only consider samples contained within combined data
 valid_samples <- combined_day_data%>%
@@ -46,7 +48,7 @@ combined_data_alpha <- combined_day_data %>%
 
 # Left join be that sample ID
 e0026_alpha <- combined_data_alpha %>%
-  left_join(alpha_diversity_wide, by = c("xsample" = "sample"))
+  left_join(alpha_diversity, by = c("xsample" = "sample"))
 
 # Add day, antibiotic, and passage information
 e0026_alpha <- e0026_alpha %>%
@@ -86,6 +88,7 @@ p_alpha_time <- ggplot(
   theme(
     legend.position = "right",
     axis.text.x = element_text(angle = 45, hjust = 1)
-  )
+  )+
+  scale_fill_manual(values=pal)
 
 savePNGPDF(paste0(OUTDIR, "alphaPrePostAbx"), p_alpha_time, 6, 12)

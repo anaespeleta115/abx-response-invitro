@@ -5,7 +5,7 @@ library(readr)
 library(ggrepel)
 library("phyloseq")
 library(rstatix)
-
+library(PNWColors)
 
 household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e0026-e0029-e0030.txt", header = TRUE)
 
@@ -21,6 +21,8 @@ e0026 <- filter(household_data, str_detect(household_data$sample, "e0026")) %>%
 subjectsAbx <- c("XAA","XBA","XCA","XDA","XEA","XFA","XGA","XHB","XIA","XJA",
                  "XKA","XLA","XMA","XNA","XOA","XPA","XQA","XRA","XSA","XTA",
                  "XUA","XVA")
+
+lastingResponses <- c("XBA", "XDA", "XEA", "XKA")
 
 # Extract subject, day, household, and antibiotic information
 e0026 <- e0026 %>%
@@ -58,18 +60,19 @@ e0026_all_passages <- e0026 %>%
 # Compute species richness
 e0026_richness <- combined_day_data %>%
   filter(relAbundance > 0.001) %>%
-  select(biosample1, OTU) %>%
-  distinct() %>%
-  dplyr::count(biosample1, name = "species_richness") %>%
+  select(biosample1, OTU, passage) %>%
+  group_by(biosample1, passage) %>%
+  dplyr::summarize(species_richness = n_distinct(OTU)) %>%
   left_join(
     combined_day_data %>% distinct(biosample1, day, subject, household, antibiotic),
     by = "biosample1"
   )
 
+
 # Extract the top 25 families by relative abundance to make plots better
 top_families <- e0026_day29 %>%
   group_by(Family) %>%
-  summarise(total_abundance = sum(relAbundance, na.rm = TRUE)) %>%
+  dplyr::summarise(total_abundance = sum(relAbundance, na.rm = TRUE)) %>%
   arrange(desc(total_abundance)) %>%
   slice_head(n = 25) %>%
   pull(Family)

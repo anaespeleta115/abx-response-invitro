@@ -8,6 +8,9 @@ source("C:/abx-response-invitro/analysis/scratch/041825-computeBetaPassages/0418
 # Set output directory
 OUTDIR <- "C:/abx-response-invitro/analysis/scratch/041825-computeBetaPrePostAbx/out/"
 
+# Set palette
+pal <- pnw_palette("Sunset", 6, type = "continuous")
+
 # Filter for day combinations of interest. Maybe make a new column that has the combinations and from there decide which ones to keep.
 
 e0026_beta2 <- e0026_beta2 %>%
@@ -52,7 +55,8 @@ p_betaPrePostAbx <- ggplot(
   theme(
     legend.position = "right",
     axis.text.x = element_text(angle = 45, hjust = 1)
-  )
+  )+
+  scale_fill_manual(values=pal)
 
 
 

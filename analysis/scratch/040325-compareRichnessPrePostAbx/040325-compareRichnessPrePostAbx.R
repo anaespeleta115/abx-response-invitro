@@ -9,13 +9,21 @@ source("C:/abx-response-invitro/analysis/plotDefaults.R")
 # Set output directory
 OUTDIR <- "C:/abx-response-invitro/analysis/scratch/040325-comparePrePostAbx/out/"
 
+# Set palette
+pal <- pnw_palette("Sunset2", 2, type = "discrete")
+
+ABX <- c("No", "Yes")
+PALETTE.ABX <- c("gray80","coral3")
+names(PALETTE.ABX) <- ABX
+
 # Combine all the day datasets
 
 e0026_richness <- e0026_richness %>%
   mutate(
     day = factor(day, levels = sort(unique(day))),
     antibiotic = factor(antibiotic, levels = c(0, 1), labels = c("No", "Yes"))
-  )
+  ) %>%
+  filter(passage %in% c(0,8))
 
 
 p_richness_time <- ggplot(
@@ -42,10 +50,11 @@ p_richness_time <- ggplot(
     y = "Species Richness",
     fill = "Antibiotic"
   ) +
-  theme_minimal(base_size = 13) +
   theme(
     legend.position = "right",
     axis.text.x = element_text(angle = 45, hjust = 1)
-  )
+  )+
+  scale_fill_manual(values=PALETTE.ABX) +
+  facet_wrap(~passage)
 
 savePNGPDF(paste0(OUTDIR, "richnessByTime"), p_richness_time, 6, 12)

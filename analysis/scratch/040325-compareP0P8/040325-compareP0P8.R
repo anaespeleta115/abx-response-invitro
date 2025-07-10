@@ -16,7 +16,7 @@ P0P8 <- e0026_day29 %>%
   filter(passage %in% c(0, 8)) %>% 
   select(biosample1, OTU, count, passage, relAbundance, Family) %>% 
   group_by(passage, biosample1, Family) %>% 
-  summarise(
+  dplyr::summarise(
     total_abundance = sum(relAbundance, na.rm = TRUE),
     .groups = "drop"
   ) %>% 

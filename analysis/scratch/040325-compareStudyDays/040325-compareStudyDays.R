@@ -12,12 +12,13 @@ OUTDIR <- "C:/abx-response-invitro/analysis/scratch/040325-compareStudyDays/out/
 ### Compositional changes pre and post-abx
 
 P8_compositions <- combined_day_data %>% 
-  filter(passage == 8)
+  filter(passage == 8) %>% 
+  filter(subject %in% lastingResponses)
 
 # Summarize relative abundance per biosample1 by Family
 composition_pre_postAbx <- P8_compositions %>%
   group_by(biosample1, Family) %>%
-  summarise(relAbundance = sum(relAbundance, na.rm = TRUE), .groups = "drop") %>%
+  dplyr::summarise(relAbundance = sum(relAbundance, na.rm = TRUE), .groups = "drop") %>%
   left_join(
     P8_compositions %>% distinct(biosample1, day, subject, household, antibiotic),
     by = "biosample1"
@@ -68,7 +69,7 @@ fc_pre_post_abx <- e0026 %>%
 # Summarize relAbundance per OTU per subject per day
 fc_pre_post_abx <- fc_pre_post_abx %>%
   group_by(subject, day, OTU, Family) %>%
-  summarise(total_abundance = sum(relAbundance, na.rm = TRUE), .groups = "drop") %>%
+  dplyr::summarise(total_abundance = sum(relAbundance, na.rm = TRUE), .groups = "drop") %>%
   pivot_wider(
     names_from = day,
     values_from = total_abundance,
