@@ -70,7 +70,7 @@ OUTPUTDIR <- "./outputs"
 
 ```{r}
 
-data <- readRDS("../data/ps_all.rds")
+data <- readRDS("C:/abx-response-invitro/data/ps_all.rds")
 
 hp_data_clean <- prune_taxa(taxa_sums(data) > 0, data)
 
@@ -174,7 +174,7 @@ extract_passage <- function(x) {
 combined_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
 
 # Read in alpha diversity file
-alpha_diversity <- read_delim("./alpha_diversity.txt")
+alpha_diversity <- read_delim("C:/abx-response-invitro/data/alpha_diversity.txt")
 data(alpha_diversity)
 
 
@@ -268,21 +268,31 @@ savePlot(file.path(OUTPUTDIR, "alpha_time.png"), type = "png", device = dev.cur(
   
 # These are the ones I considered to be meaningful comparisons, but I'm actually really not sure
 
-  valid_comparisons_2 <- c("No_001 vs No_029", "No_001 vs No_036", "No_001 vs No_064", "No_001 vs Yes_001", "No_029 vs No_036", "No_029 vs No_064", "No_029 vs Yes_029", "No_036 vs Yes_036", "No_064 vs Yes_064", "Yes_001 vs Yes_029", "Yes_001 vs Yes_036", "Yes_001 vs Yes_064", "Yes_029 vs Yes_036", "Yes_029 vs Yes_064", "Yes_036 vs Yes_064")
+valid_comparisons <- c("No_001 vs No_029", "No_001 vs No_036", "No_001 vs No_064", "No_001 vs Yes_036", "No_001 vs Yes_064", "Yes_001 vs Yes_029", "Yes_001 vs Yes_036", "Yes_001 vs Yes_064")
 
 
-left_join(e0026_alpha %>%
-  mutate(abxDay=paste0(antibiotic,"_",day)) %>%
-  wilcox_test(Shannon~abxDay),
-  e0026_alpha %>%
-  mutate(abxDay=paste0(antibiotic,"_",day)) %>%
-  wilcox_effsize(Shannon~abxDay),
-  by=c(".y.","group1","group2","n1","n2")) %>%
-  mutate(comparison=paste0(gsub("\n"," ",group1), " vs ", gsub("\n"," ",group2)),
-     	summary=paste0("Wilcoxon rank-sum two-sided test, ", comparison, ": n=", n1+n2,
-                    	", r=", round(effsize,2), ", p=", p, ", adjusted p-value=", p.adj, ", ", p.adj.signif,
-                    	", custom adjusted p-value=", 15*p, " (number of groups: 15)")) %>% 
-  filter(comparison %in% valid_comparisons_2)
+# Step 1: Construct group labels
+e0026_alpha <- e0026_alpha %>%
+  mutate(abxDay = paste0(antibiotic, "_", day))
+
+# Step 2: Ensure grouping variable is a factor
+e0026_alpha$abxDay <- factor(e0026_alpha$abxDay)
+
+# Step 3: Generate pairwise comparisons manually
+comparisons <- combn(levels(e0026_alpha$abxDay), 2, simplify = FALSE)
+
+# Step 4: Run Wilcoxon rank-sum test with rstatix
+wilcox_results <- rstatix::wilcox_test(
+  data = e0026_alpha,
+  formula = Shannon ~ abxDay,
+  comparisons = comparisons
+)
+
+
+
+
+
+
 
 
 # # Perform Wilcoxon rank-sum tests to investigate the significance of the

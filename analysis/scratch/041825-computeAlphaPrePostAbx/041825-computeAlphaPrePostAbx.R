@@ -1,6 +1,8 @@
 # Load data
 source("C:/abx-response-invitro/analysis/scratch/040325-loadData/loadData.R")
 
+library(coin)
+
 source("C:/abx-response-invitro/analysis/plotDefaults.R")
 
 # Set output directory
@@ -60,6 +62,27 @@ e0026_alpha <- e0026_alpha %>%
 
 e0026_alpha <- e0026_alpha %>% 
   filter(passage == 8)
+
+
+# Perform statistical test
+
+valid_comparisons <- c("Yes_029 vs Yes_036", "Yes_029 vs Yes_064")
+
+
+wilcoxon_results <- left_join(e0026_alpha %>%
+            mutate(abxDay=paste0(antibiotic,"_",day)) %>%
+            rstatix::wilcox_test(Shannon~abxDay),
+          e0026_alpha %>%
+            mutate(abxDay=paste0(antibiotic,"_",day)) %>%
+            rstatix::wilcox_effsize(Shannon~abxDay),
+          by=c(".y.","group1","group2","n1","n2")) %>%
+  mutate(comparison=paste0(gsub("\n"," ",group1), " vs ", gsub("\n"," ",group2)),
+         summary=paste0("Wilcoxon rank-sum two-sided test, ", comparison, ": n=", n1+n2,
+                        ", r=", round(effsize,2), ", p=", p, ", adjusted p-value=", p.adj, ", ", p.adj.signif,
+                        ", custom adjusted p-value=", 2*p, " (number of groups: 8")) %>%
+  filter(comparison %in% valid_comparisons)
+
+
 
 p_alpha_time <- ggplot(
   e0026_alpha,

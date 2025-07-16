@@ -28,24 +28,23 @@ lastingResponses <- c("XBA", "XDA", "XEA", "XKA")
 e0026 <- e0026 %>%
   mutate(
     subject = str_sub(biosample1, 1, -5),
-    day = str_sub(biosample1, -3),
+    day = str_sub(biosample1, -2),
     household = str_sub(biosample1, 1, -6),
     antibiotic = if_else(str_sub(biosample1, 1, -5) %in% subjectsAbx, 1, 0)
   )
 
 
 # Divide up e0026 dataset into separate day datasets
-e0026_day1 <- e0026 %>%  filter(str_detect(biosample1, "001") | str_detect(biosample1, "002") | str_detect(biosample1, "003") | str_detect(biosample1, "022")| str_detect(biosample1, "008")) %>% 
-  mutate(day = "001")
+e0026_day1 <- e0026 %>%  filter(str_detect(day, "01") | str_detect(day, "02") | str_detect(day, "03") | str_detect(day, "22")| str_detect(day, "08")) %>% 
+  mutate(day = "01")
+e0026_day29 <- e0026 %>%   filter(str_detect(day, "29") | str_detect(day, "28") | str_detect(day, "27")) %>% 
+  mutate(day = "29")
 
-e0026_day29 <- e0026 %>%   filter(str_detect(biosample1, "029") | str_detect(biosample1, "028") | str_detect(biosample1, "027")) %>% 
-  mutate(day = "029")
+e0026_day36 <- e0026 %>%  filter(str_detect(day, "36") | str_detect(day, "37")) %>% 
+  mutate(day = "36")
 
-e0026_day36 <- e0026 %>%  filter(str_detect(biosample1, "036") | str_detect(biosample1, "037")) %>% 
-  mutate(day = "036")
-
-e0026_day64 <- e0026 %>%  filter(str_detect(biosample1, "064")| str_detect(biosample1, "063") | str_detect(biosample1, "072") | str_detect(biosample1, "059")| str_detect(biosample1, "065")) %>% 
-  mutate(day = "064")
+e0026_day64 <- e0026 %>%  filter(str_detect(day, "64")| str_detect(day, "63") | str_detect(day, "72") | str_detect(day, "59")| str_detect(day, "65")) %>% 
+  mutate(day = "64")
 
 # Combine all day datasets
 combined_day_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
@@ -74,7 +73,7 @@ top_families <- e0026_day29 %>%
   group_by(Family) %>%
   dplyr::summarise(total_abundance = sum(relAbundance, na.rm = TRUE)) %>%
   arrange(desc(total_abundance)) %>%
-  slice_head(n = 25) %>%
+  # slice_head(n = 25) %>%
   pull(Family)
 
 # Define color palette

@@ -20,4 +20,4 @@ p_compositionsByPassage <- ggplot(e0026_all_passages, aes(x = factor(passage), y
   facet_wrap(~ biosample1)
 
 
-savePNGPDF(paste0(OUTDIR, "compositionsByPassage"), p_compositionsByPassage, 6, 12)
+savePNGPDF(paste0(OUTDIR, "compositionsByPassage"), p_compositionsByPassage, 4, 8)

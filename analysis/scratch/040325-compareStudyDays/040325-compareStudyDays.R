@@ -53,7 +53,54 @@ p_composition_pre_postAbx <- ggplot(
     legend.position = "none"
   )
 
-savePNGPDF(paste0(OUTDIR, "compostionPrePostAbx"), p_composition_pre_postAbx, 8, 14)
+savePNGPDF(paste0(OUTDIR, "compostionPrePostAbx"), p_composition_pre_postAbx, 4, 8)
+
+
+### Compositional changes pre and post-abx
+
+P0_compositions <- combined_day_data %>% 
+  filter(passage == 0) %>% 
+  filter(subject %in% lastingResponses)
+
+# Summarize relative abundance per biosample1 by Family
+composition_pre_postAbx0 <- P0_compositions %>%
+  group_by(biosample1, Family) %>%
+  dplyr::summarise(relAbundance = sum(relAbundance, na.rm = TRUE), .groups = "drop") %>%
+  left_join(
+    P8_compositions %>% distinct(biosample1, day, subject, household, antibiotic),
+    by = "biosample1"
+  ) 
+# 
+# %>%
+#   mutate(
+#     day = factor(day, levels = sort(unique(day)))
+#   )
+
+
+p_composition_pre_postAbx0 <- ggplot(
+  composition_pre_postAbx0,
+  aes(x = factor(day), y = relAbundance, fill = Family)
+) +
+  geom_bar(
+    stat = "identity",
+    position = "stack",
+    color = "black",
+    size = 0.2
+  ) +
+  scale_fill_manual(values = my_colors) +
+  facet_wrap(~subject) +
+  labs(
+    title = "Relative Abundance of Microbial Families at Passage 0",
+    x = "Study Day",
+    y = "Rel. Abundance",
+    fill = "Family"
+  ) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "none"
+  )
+
+savePNGPDF(paste0(OUTDIR, "compostionPrePostAbx-P0"), p_composition_pre_postAbx0, 4, 8)
 
 
 ### Fold-change after abx (day36/day29) by family
@@ -64,11 +111,11 @@ savePNGPDF(paste0(OUTDIR, "compostionPrePostAbx"), p_composition_pre_postAbx, 8,
 # Filter for day 29 & 36 and only antibiotic-treated subjects
 fc_pre_post_abx <- e0026 %>%
   filter(day %in% c("029", "036"), antibiotic == 1) %>%
-  select(biosample1, subject, household, day, Family, OTU, relAbundance)
+  select(biosample1, subject, household, day, Family, OTU, relAbundance, passage)
 
 # Summarize relAbundance per OTU per subject per day
 fc_pre_post_abx <- fc_pre_post_abx %>%
-  group_by(subject, day, OTU, Family) %>%
+  group_by(biosample1, day, OTU, Family, passage) %>%
   dplyr::summarise(total_abundance = sum(relAbundance, na.rm = TRUE), .groups = "drop") %>%
   pivot_wider(
     names_from = day,
@@ -83,23 +130,50 @@ fc_pre_post_abx <- fc_pre_post_abx %>%
     log2_fc = log2(fold_change)
   )
 
+# In vitro fold change
 
-fc_pre_post_abx <- fc_pre_post_abx %>%
-  filter(Family %in% top_families)
-
-p_fc_pre_post_abx <- ggplot(fc_pre_post_abx, aes(x = fct_reorder(Family, -log2_fc), y = log2_fc, fill = Family)) +
+p_fc_pre_post_abx_vitro <- fc_pre_post_abx %>% 
+  filter(passage == 8) %>% 
+  ggplot(aes(x = fct_reorder(Family, -log2_fc), y = log2_fc, fill = Family)) +
   geom_boxplot(outlier.shape = NA, width = 0.8) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "darkred") +
   scale_fill_manual(values = my_colors)+
   labs(
-    title = "Impact of Antibiotics on Family Relative Abundance",
+    title = "Impact of Antibiotics on Family Relative Abundance in Vitro (Passage 8)",
     x = "Family",
-    y = "Log2 Fold Change (Day 36 / Day 29)"
+    y = "Log2 Fold Change
+     (Day 36 / Day 29)"
   ) +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1, size = 7),
     legend.position = "none"
   )
 
-savePNGPDF(paste0(OUTDIR, "fold-changePrePostAbx"), p_fc_pre_post_abx, 6, 12)
+savePNGPDF(paste0(OUTDIR, "fold-changePrePostAbx-inVitro"), p_fc_pre_post_abx_vitro, 4, 10)
+
+
+# In vivo fold-change 
+
+p_fc_pre_post_abx_vivo <- fc_pre_post_abx %>% 
+  filter(passage == 0) %>% 
+  ggplot(aes(x = fct_reorder(Family, -log2_fc), y = log2_fc, fill = Family)) +
+  geom_boxplot(outlier.shape = NA, width = 0.8) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "darkred") +
+  scale_fill_manual(values = my_colors)+
+  labs(
+    title = "Impact of Antibiotics on Family Relative Abundance in Vivo (Passage 0)",
+    x = "Family",
+    y = "Log2 Fold Change
+     (Day 36 / Day 29)"
+  ) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 7),
+    legend.position = "none"
+  )
+
+
+savePNGPDF(paste0(OUTDIR, "fold-changePrePostAbx-inVivo"), p_fc_pre_post_abx_vivo, 4, 10)
+
+
+
 
