@@ -12,8 +12,7 @@ OUTDIR <- "C:/abx-response-invitro/analysis/scratch/040325-compareStudyDays/out/
 ### Compositional changes pre and post-abx
 
 P8_compositions <- combined_day_data %>% 
-  filter(passage == 8) %>% 
-  filter(subject %in% lastingResponses)
+  filter(passage == 8, subject %in% lastingResponses)
 
 # Summarize relative abundance per biosample1 by Family
 composition_pre_postAbx <- P8_compositions %>%
@@ -22,7 +21,7 @@ composition_pre_postAbx <- P8_compositions %>%
   left_join(
     P8_compositions %>% distinct(biosample1, day, subject, household, antibiotic),
     by = "biosample1"
-  ) 
+  )
 # 
 # %>%
 #   mutate(
@@ -43,17 +42,18 @@ p_composition_pre_postAbx <- ggplot(
   scale_fill_manual(values = my_colors) +
   facet_wrap(~subject) +
   labs(
-    title = "Relative Abundance of Microbial Families at Passage 8",
-    x = "Study Day",
+    title = "Passage 8 Compositions",
+    x = "Study day",
     y = "Rel. Abundance",
     fill = "Family"
   ) +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.text.x = element_text(hjust = 0.5),
     legend.position = "none"
-  )
+  )+
+  DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "compostionPrePostAbx"), p_composition_pre_postAbx, 4, 8)
+savePNGPDF(paste0(OUTDIR, "compostionPrePostAbx"), p_composition_pre_postAbx, 3, 4)
 
 
 ### Compositional changes pre and post-abx
@@ -90,17 +90,18 @@ p_composition_pre_postAbx0 <- ggplot(
   scale_fill_manual(values = my_colors) +
   facet_wrap(~subject) +
   labs(
-    title = "Relative Abundance of Microbial Families at Passage 0",
-    x = "Study Day",
+    title = "Passage 0 Compositions",
+    x = "Study day",
     y = "Rel. Abundance",
     fill = "Family"
   ) +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.text.x = element_text(hjust = 0.5),
     legend.position = "none"
-  )
+  )+
+  DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "compostionPrePostAbx-P0"), p_composition_pre_postAbx0, 4, 8)
+savePNGPDF(paste0(OUTDIR, "compostionPrePostAbx-P0"), p_composition_pre_postAbx0, 3, 4)
 
 
 ### Fold-change after abx (day36/day29) by family
@@ -145,7 +146,7 @@ p_fc_pre_post_abx_vitro <- fc_pre_post_abx %>%
      (Day 36 / Day 29)"
   ) +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 7),
+    axis.text.x = element_text(hjust = 1, size = 7),
     legend.position = "none"
   )
 
@@ -167,7 +168,7 @@ p_fc_pre_post_abx_vivo <- fc_pre_post_abx %>%
      (Day 36 / Day 29)"
   ) +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 7),
+    axis.text.x = element_text(hjust = 1, size = 7),
     legend.position = "none"
   )
 

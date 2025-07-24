@@ -106,16 +106,17 @@ p_richness_time <- ggplot(
   #   alpha = 0.8
   # ) +
   labs(
-    title = "Change in Species Richness Pre- and Post Abx",
-    x = "Study Day",
+    title = "",
+    x = "Study day",
     y = "Species Richness",
     fill = "Antibiotic"
   ) +
   theme(
     legend.position = "right",
-    axis.text.x = element_text(angle = 45, hjust = 1)
+    axis.text.x = element_text(hjust = 0.5)
   )+
   scale_fill_manual(values=PALETTE.ABX) +
-  facet_wrap(~passage)
+  facet_wrap(~passage)+
+  DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "richnessByTime"), p_richness_time, 4, 8)
+savePNGPDF(paste0(OUTDIR, "richnessByTime"), p_richness_time, 2.5, 4.5)

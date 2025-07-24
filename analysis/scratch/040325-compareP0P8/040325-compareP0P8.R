@@ -32,24 +32,24 @@ P0P8 <- e0026_day29 %>%
   ) %>% 
   mutate(fold_change = relAbundance_passage_8/relAbundance_passage_0) %>% 
   filter(Family %in% top_families) %>% 
-  mutate(log2_fc = log2(fold_change))
+  mutate(log10_fc = log10(fold_change))
   
 
 p_P0P8 <- P0P8 %>%
-  ggplot(aes(x = fct_reorder(Family, -log2_fc), y = log2_fc, fill = Family)) +
+  ggplot(aes(x = fct_reorder(Family, -log10_fc), y = log10_fc, fill = Family)) +
   geom_boxplot(width = 0.9, outlier.shape = NA) +
   scale_fill_manual(values = my_colors)+
-  geom_hline(yintercept = 0, linetype = "dashed", color = "darkred") +
-  scale_x_discrete(expand = expansion(mult = c(0.1, 0.1))) + 
+  geom_hline(yintercept = 0, linetype = "dashed", color = "darkred")+ 
   labs(
-    title = "Distribution of Log2 Fold Change per Subject (P8 vs P0)",
-    x = "Subject (biosample1)",
-    y = "Log2 Fold Change"
+    title = "",
+    x = "Family",
+    y = "Log10 Fold Change in vitro/in vivo"
   ) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 7), legend.position = "none")
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 6), legend.position = "none")+
+  DEFAULTS.THEME_PRINT
 
 
-savePNGPDF(paste0(OUTDIR, "compareP0P8"), p_P0P8, 6, 12)
+savePNGPDF(paste0(OUTDIR, "compareP0P8"), p_P0P8, 4, 6)
 
 
 

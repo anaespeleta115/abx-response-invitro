@@ -28,23 +28,23 @@ lastingResponses <- c("XBA", "XDA", "XEA", "XKA")
 e0026 <- e0026 %>%
   mutate(
     subject = str_sub(biosample1, 1, -5),
-    day = str_sub(biosample1, -2),
+    day = str_sub(biosample1, -3),
     household = str_sub(biosample1, 1, -6),
     antibiotic = if_else(str_sub(biosample1, 1, -5) %in% subjectsAbx, 1, 0)
   )
 
 
 # Divide up e0026 dataset into separate day datasets
-e0026_day1 <- e0026 %>%  filter(str_detect(day, "01") | str_detect(day, "02") | str_detect(day, "03") | str_detect(day, "22")| str_detect(day, "08")) %>% 
-  mutate(day = "01")
-e0026_day29 <- e0026 %>%   filter(str_detect(day, "29") | str_detect(day, "28") | str_detect(day, "27")) %>% 
-  mutate(day = "29")
+e0026_day1 <- e0026 %>%  filter(str_detect(day, "001") | str_detect(day, "002") | str_detect(day, "003") | str_detect(day, "022")| str_detect(day, "008")) %>% 
+  mutate(day = "001")
+e0026_day29 <- e0026 %>%   filter(str_detect(day, "029") | str_detect(day, "028") | str_detect(day, "027")) %>% 
+  mutate(day = "029")
 
-e0026_day36 <- e0026 %>%  filter(str_detect(day, "36") | str_detect(day, "37")) %>% 
-  mutate(day = "36")
+e0026_day36 <- e0026 %>%  filter(str_detect(day, "036") | str_detect(day, "037")) %>% 
+  mutate(day = "036")
 
-e0026_day64 <- e0026 %>%  filter(str_detect(day, "64")| str_detect(day, "63") | str_detect(day, "72") | str_detect(day, "59")| str_detect(day, "65")) %>% 
-  mutate(day = "64")
+e0026_day64 <- e0026 %>%  filter(str_detect(day, "064")| str_detect(day, "063") | str_detect(day, "072") | str_detect(day, "059")| str_detect(day, "065")) %>% 
+  mutate(day = "064")
 
 # Combine all day datasets
 combined_day_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
