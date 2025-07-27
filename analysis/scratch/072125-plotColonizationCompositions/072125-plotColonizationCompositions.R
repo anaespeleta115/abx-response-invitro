@@ -93,9 +93,9 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
 
 
 # Function calls
-subject_composition_plot_day29 <- subject_composition("XKB-029+XEA-029", "XKB-029", "XEA-029", 1) + DEFAULTS.THEME_PRINT
-subject_composition_plot_day36 <- subject_composition("XKB-029+XEA-036", "XKB-029", "XEA-036", 1) + DEFAULTS.THEME_PRINT
-subject_composition_plot_day64 <- subject_composition("XKB-029+XEA-064", "XKB-029", "XEA-064", 1) + DEFAULTS.THEME_PRINT
+subject_composition_plot_day29 <- subject_composition("XGB-029+XBA-029", "XBB-029", "XBA-029", 1) + DEFAULTS.THEME_PRINT
+subject_composition_plot_day36 <- subject_composition("XGB-029+XBA-036", "XBB-029", "XBA-036", 1) + DEFAULTS.THEME_PRINT
+subject_composition_plot_day64 <- subject_composition("XGB-029+XBA-064", "XBB-029", "XBA-064", 1) + DEFAULTS.THEME_PRINT
 
 # Combined day plots
 combined_plot <- subject_composition_plot_day29 /

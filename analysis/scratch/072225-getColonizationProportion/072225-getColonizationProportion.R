@@ -39,6 +39,8 @@ get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {
 
 actual_colonizers_results <- tibble()
 potential_colonizers_results <- tibble()
+colonization_prop_results <- tibble()
+
 
 # Loop over mixtures
 for (mix_id in mixture_ids) {
@@ -48,13 +50,39 @@ for (mix_id in mixture_ids) {
   
   result <- get_colonization(mix_id, donor_id, recipient_id, 1)
   
-  
-  actual_colonizers <- result$colonization_df 
+  actual_colonizers <- result$colonization_df
   potential_colonizers <- result$donor_asvs_potential
   
+  n_potential_colonizers <- nrow(potential_colonizers)
+  n_actual_colonizers <- actual_colonizers %>%
+    filter(actual_colonizer == 1) %>% 
+    nrow()
   
   # bind all the mixture rows together
   actual_colonizers_results <- bind_rows(actual_colonizers_results, actual_colonizers)
   potential_colonizers_results <- bind_rows(potential_colonizers_results, potential_colonizers)
+  
+  prop_row <- tibble(
+    mixture = mix_id,
+    biosample2 = donor_id,
+    biosample1 = recipient_id,
+    n_potential_colonizers = n_potential_colonizers,
+    n_actual_colonizers = n_actual_colonizers,
+    prop_colonizers = n_actual_colonizers / n_potential_colonizers
+  )
+  
+  # bind all the mixture rows together
+  colonization_prop_results <- bind_rows(colonization_prop_results, prop_row)
+  
 }
+
+
+colonization_prop_results <- colonization_prop_results %>%
+  mutate(
+    recipient = str_sub(biosample1, 1, -5),
+    donor = str_sub(biosample2, 1, -5),
+    day = str_sub(biosample1, -3),
+    household = str_sub(biosample1, 1, -6)
+  )
+
 

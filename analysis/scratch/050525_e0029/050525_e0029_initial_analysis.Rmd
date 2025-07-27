@@ -48,7 +48,7 @@ OUTPUTDIR <- "../mixed_outputs"
 
 # Define color palette
 
-my_colors <- readRDS("C:/Spring-Rotation-2025/scratch/familyColorPalette.rds") 
+my_colors <- readRDS("C:/abx-response-invitro/data/familyColorPalette.rds") 
 
 ```
 

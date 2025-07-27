@@ -46,7 +46,7 @@ OUTPUTDIR <- "./e0029_outputs"
 
 # Define color palette
 
-my_colors <- readRDS("C:/Spring-Rotation-2025/scratch/familyColorPalette.rds") 
+my_colors <- readRDS("C:/abx-response-invitro/data/familyColorPalette.rds") 
 
 ```
 
@@ -307,6 +307,12 @@ recipient_ASVs <- recipient_ASVs %>%
 
 recipient_lost <- recipient_ASVs %>% 
   filter(lost_strain == 1)
+
+
+p_lost_strains <- recipient_lost %>% 
+  group_by(biosample1) %>% 
+  summarize(n_OTU = n_distinct(OTU))
+  
 
 ```
 

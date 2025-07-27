@@ -13,12 +13,12 @@ library(stringr)
 
 
 # Set global variables
-my_colors <- readRDS("./data/familyColorPalette.rds") 
+my_colors <- readRDS("C:/abx-response-invitro/data/familyColorPalette.rds") 
 
 limit_of_detection <- 0.001
 
 # Read in household dataset
-household_data <- read.table("./data/e0026-e0029-e0030.txt", header = TRUE)
+household_data <- read.table("C:/abx-response-invitro/data/e0026-e0029-e0030.txt", header = TRUE)
 
 # Divide dataset into separate tables by experiment
 e0029 <- filter(household_data, str_detect(household_data$sample, "e0029"))
@@ -31,30 +31,21 @@ e0029 <- e0029 %>%
     !(biosample2 == "blank") |
       (biosample2 == "blank" & !well %in% c("G11", "H11"))) %>%
   filter(
-    biosample1 != "blank" | 
+    biosample1 != "blank" |
       (plate == "e0029.B.5" & well %in% c("G12", "H12"))
   )
-
-# This part for plotting compositions
-#%>% 
-# group_by(biosample2, replicate) %>%
-#   mutate(
-#     biosample1 = factor(biosample1, levels = unique(biosample1))
-#   ) %>%
-#   ungroup()
-
 
 # Get recipient, donor, and mixture communities into separate datasets
 
 
 # Get recipient communities
 recipient_ASVs <- e0029 %>% 
-  filter(relAbundance > limit_of_detection, replicate == 1) %>%   
+  filter(relAbundance > limit_of_detection, replicate == 1) %>%    
   filter(biosample2 == "blank") %>% 
-  # filter(
-  #   !(biosample2 == "blank") |
-  #     (biosample2 == "blank" & !well %in% c("G11", "H11"))) %>%
-  filter(biosample1 != "blank")
+  filter(
+    !(biosample2 == "blank") |
+      (biosample2 == "blank" & !well %in% c("G11", "H11"))) %>%
+  filter(biosample1 != "blank" )
 
 
 # Extract donor community IDs from e0029

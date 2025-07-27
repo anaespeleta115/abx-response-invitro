@@ -50,7 +50,7 @@ Colonizers",
   
   mixture_ASVs_differential <- actual_colonizers_results %>%
     filter(mixture == mix_id, replicate == replicate, day == "064") %>%
-    ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(diff_colonizer_36))) +
+    ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(diff_colonizer_64))) +
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
     scale_alpha_manual(values = c("0" = 0, "1" = 1)) +  # colonizer == 0 → transparent
@@ -73,7 +73,7 @@ Colonizers",
     scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
     labs(
       title = "Lost 
-Strains",
+Strains day 64",
       x = "",
       y = ""
     ) +
@@ -135,8 +135,8 @@ Strains",
 
 
 # Function call
-subject_composition_plot_day29 <- subject_composition("XDB-029+XEA-029", "XDB-029", "XEA-029", 1) + DEFAULTS.THEME_PRINT
-subject_composition_plot_day64 <- subject_composition("XDB-029+XEA-064", "XDB-029", "XEA-064", 1) + DEFAULTS.THEME_PRINT
+subject_composition_plot_day29 <- subject_composition("XDB-029+XBA-029", "XDB-029", "XBA-029", 1) + DEFAULTS.THEME_PRINT
+subject_composition_plot_day64 <- subject_composition("XDB-029+XBA-064", "XDB-029", "XBA-064", 1) + DEFAULTS.THEME_PRINT
 
 
 combined_plot <- subject_composition_plot_day29 /

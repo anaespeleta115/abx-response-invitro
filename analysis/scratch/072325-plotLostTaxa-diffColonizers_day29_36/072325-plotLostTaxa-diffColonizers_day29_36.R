@@ -43,10 +43,7 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
 Colonizers",
       x = "",
       y = ""
-    ) +
-    theme(legend.position = "none",
-          axis.line=element_blank(), 
-          axis.text.x = element_text(size = 10))
+    )
   
   mixture_ASVs_differential <- actual_colonizers_results %>%
     filter(mixture == mix_id, replicate == replicate, day == "036") %>%
@@ -135,8 +132,8 @@ Colonizers",
 
 
 # Function call
-subject_composition_plot_day29 <- subject_composition("XJB-029+XKA-029", "XJB-029", "XKA-029", 1) + DEFAULTS.THEME_PRINT
-subject_composition_plot_day36 <- subject_composition("XJB-029+XKA-036", "XJB-029", "XKA-036", 1) + DEFAULTS.THEME_PRINT
+subject_composition_plot_day29 <- subject_composition("XBB-029+XBA-029", "XBB-029", "XBA-029", 1) + DEFAULTS.THEME_PRINT
+subject_composition_plot_day36 <- subject_composition("XBB-029+XBA-036", "XBB-029", "XBA-036", 1) + DEFAULTS.THEME_PRINT
 
 
 combined_plot <- subject_composition_plot_day29 /

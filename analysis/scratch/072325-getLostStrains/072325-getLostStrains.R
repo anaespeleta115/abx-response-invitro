@@ -8,12 +8,12 @@ recipient_ASVs <- recipient_ASVs %>%
   mutate(day = str_extract(biosample1, "\\d{3}"))
 
 recipients_day29 <- recipient_ASVs %>%
-  filter(day == "029", replicate == 1) %>%
+  filter(day == "029") %>% #  add replicate 1 filter
   select(biosample1, OTU) %>%
   distinct()
 
 recipients_day36 <- recipient_ASVs %>%
-  filter(day == "036", replicate == 1) %>%
+  filter(day == "036") %>% #  add replicate 1 filter
   select(biosample1, OTU) %>%
   distinct()
 
@@ -60,3 +60,4 @@ recipient_lost_29_64 <- recipient_ASVs %>%
 
 recipient_lost_36_64 <- recipient_ASVs %>%
   filter(lost_strain_36_64 == 1)
+

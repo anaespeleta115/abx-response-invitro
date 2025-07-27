@@ -127,7 +127,6 @@ enrichment_summary_64 <- left_join(observed_rows, enrichment_pvals, by = "mixtur
   )
 
 
-
 ids_64 <- enrichment_summary_64 %>%
   mutate(
     observed_otu_ids = sapply(observed_otu_ids, paste, collapse = ", "),

@@ -126,6 +126,14 @@ enrichment_summary_36 <- left_join(observed_rows, enrichment_pvals, by = "mixtur
     enriched_otu = p_value_otu < 0.05
   )
 
+
+enrichment_summary_36 <- enrichment_summary_36 %>%
+  mutate(
+    observed_otu_ids = map_chr(observed_otu_ids, ~ paste(.x, collapse = ", ")),
+    observed_family_ids = map_chr(observed_family_ids, ~ paste(.x, collapse = ", "))
+  )
+
+
 # Make dataset with only the IDs of shared values
 ids_36 <- enrichment_summary_36 %>%
   mutate(
@@ -133,5 +141,21 @@ ids_36 <- enrichment_summary_36 %>%
     observed_family_ids = sapply(observed_family_ids, paste, collapse = ", ")
   ) %>%
   select(mixture, observed_otu_ids, observed_family_ids)
+
+
+ids_36 <- ids_36 %>%
+  mutate(
+    observed_otu_ids = map_chr(observed_otu_ids, ~ paste(.x, collapse = ", ")),
+    observed_family_ids = map_chr(observed_family_ids, ~ paste(.x, collapse = ", "))
+  )
+
+
+write.csv(enrichment_summary_36, "C:/abx-response-invitro/data/enrichment_summary_day36.csv", row.names = FALSE)
+write.csv(ids_36, "C:/abx-response-invitro/data/enriched_ids_day36.csv", row.names = FALSE)
+
+
+
+## With the identities of the shared OTUs and families we can be more confident in the results of the algorithm. From the ids_36 dataset, I copied the OTUs and looked them up in both the actual_colonizers and lost taxa datasets to verify that they infact were marked as differential colonizers and lost taxa for that subject.
+## I also validated the families by looking at the compositional plots in great detail. 
 
 

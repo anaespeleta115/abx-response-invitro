@@ -17,6 +17,10 @@ PALETTE.ABX <- c("gray80","#88CCEE")
 names(PALETTE.ABX) <- ABX
 
 
+PASSAGE <- c(0, 8)
+PALETTE.PASSAGE <- c(  "gray80", "#B084CC")
+names(PALETTE.PASSAGE) <- PASSAGE
+
 
 e0026_richness <- e0026_richness %>%
   ungroup() %>%  
@@ -86,10 +90,16 @@ wilcoxon_results_p8 <- wilcoxon_results_p8 %>%
   filter(comparison %in% valid_comparisons)
 
 
+e0026_richness_filtered <- e0026_richness %>% 
+  filter(antibiotic != "0", passage %in% c(0,8)) %>% 
+  mutate(
+    passage = factor(passage, levels = c(0, 8))
+  )
 
-p_richness_time <- ggplot(
-  e0026_richness,
-  aes(x = day, y = species_richness, fill = antibiotic)
+
+p_richness_time_filtered <- ggplot(
+  e0026_richness_filtered,
+  aes(x = day, y = species_richness, fill = passage)
 ) +
   geom_boxplot(
     position = position_dodge(width = 0.75),
@@ -108,15 +118,14 @@ p_richness_time <- ggplot(
   labs(
     title = "",
     x = "Study day",
-    y = "Species Richness",
-    fill = "Antibiotic"
+    y = "Species richness",
+    fill = "Passage number"
   ) +
   theme(
     legend.position = "right",
     axis.text.x = element_text(hjust = 0.5)
   )+
-  scale_fill_manual(values=PALETTE.ABX) +
-  facet_wrap(~passage)+
+  scale_fill_manual(values=PALETTE.PASSAGE)+
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "richnessByTime"), p_richness_time, 2.5, 4.5)
+savePNGPDF(paste0(OUTDIR, "richnessByTime_filtered"), p_richness_time_filtered, 2, 3.5)
