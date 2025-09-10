@@ -29,7 +29,8 @@ p_colonization_richness <- combined_richness %>%
   # geom_text_repel(size = 2, max.overlaps = 20)+
   labs(
     x = "Recipient species richness",
-    y = "Colonization proportion",
+    y = "Donor XHB 
+    Colonization proportion",
     color = "Study day",
     shape = "Recipient"
   )+

@@ -10,12 +10,13 @@ library(foreach)
 library(forcats)
 library(cowplot)
 library(stringr)
+library(scico)
 
 
 # Set global variables
 my_colors <- readRDS("C:/abx-response-invitro/data/familyColorPalette.rds") 
 
-limit_of_detection <- 0.001
+limit_of_detection <- 1e-4
 
 # Read in household dataset
 household_data <- read.table("C:/abx-response-invitro/data/e0026-e0029-e0030.txt", header = TRUE)
@@ -37,10 +38,12 @@ e0029 <- e0029 %>%
 
 # Get recipient, donor, and mixture communities into separate datasets
 
+# Adjust replicate!!!
+replicate <- 1
 
 # Get recipient communities
 recipient_ASVs <- e0029 %>% 
-  filter(relAbundance > limit_of_detection, replicate == 1) %>%    
+  filter(relAbundance > limit_of_detection, replicate == replicate) %>%    
   filter(biosample2 == "blank") %>% 
   filter(
     !(biosample2 == "blank") |
@@ -77,7 +80,7 @@ e0029_base <- e0029 %>%
 
 # Get mixture communities
 mixture_ASVs <- e0029_base %>% 
-  filter(relAbundance > limit_of_detection, replicate == 1)
+  filter(relAbundance > limit_of_detection, replicate == replicate)
 
 
 # Get list of mixture IDs and  out b-mix and two-mix donors

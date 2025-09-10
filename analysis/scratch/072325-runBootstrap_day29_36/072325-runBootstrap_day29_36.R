@@ -3,8 +3,9 @@ source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loa
 source("C:/abx-response-invitro/analysis/plotDefaults.R")
 source("C:/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
 source("C:/abx-response-invitro/analysis/scratch/072325-getLostStrains/072325-getLostStrains.R")
+source("C:/abx-response-invitro/analysis/scratch/082225-getPotentialColonizers/082225-getPotentialColonizers.R")
 
-
+# Set seed to keep the same randomization
 set.seed(123)
 
 # Exclude day 64 data
@@ -34,18 +35,18 @@ for (mix in mixture_ids) {
   # Get all colonizers for that mixture
   single_sample_actual_colonizers <- actual_colonizers_results_filtered %>%
     filter(mixture == mix, day %in% c("036"), actual_colonizer == 1) %>%
-    distinct(OTU, Family)
-  
+    distinct(OTU, relAbundance, Family)
+
   # Get all differential colonizers for that mixture
   single_sample_diff_colonizers <- actual_colonizers_results_filtered %>%
     filter(mixture_pair == mix_pair, diff_colonizer_36 == 1) %>%
-    distinct(OTU, Family)
+    distinct(OTU, relAbundance, Family)
   
   # Get lost taxa between day 29 and day 36
   single_recipient_lost <- recipient_lost_29_36 %>%
     mutate(subject = str_sub(biosample1, 1, -5)) %>% 
     filter(subject == recipient_id) %>%
-    distinct(OTU, Family)
+    distinct(OTU, relAbundance, Family)
   
   # If not enough data, skip
   if (nrow(single_sample_actual_colonizers) == 0 || nrow(single_recipient_lost) == 0) {
@@ -58,7 +59,7 @@ for (mix in mixture_ids) {
   
   bootstrap_results <- map_dfr(1:n_trials, function(trial) {
     boot_sample <- single_sample_actual_colonizers %>%
-      slice_sample(n = n_sample, replace = TRUE)
+      slice_sample(n = n_sample, weight_by = relAbundance, replace = TRUE)
     
     otu_shared <- length(intersect(boot_sample$OTU, single_recipient_lost$OTU))
     fam_shared <- length(intersect(boot_sample$Family, single_recipient_lost$Family))

@@ -82,7 +82,7 @@ wilcoxon_results_p8 <- left_join(
     )
   )
 
-valid_comparisons <- c("Yes_029 vs Yes_036")
+valid_comparisons <- c("Yes_001 vs Yes_036", "Yes_001 vs Yes_064")
 
 wilcoxon_results_p0 <- wilcoxon_results_p0 %>%
   filter(comparison %in% valid_comparisons)
@@ -98,8 +98,8 @@ e0026_richness_filtered <- e0026_richness %>%
 
 
 p_richness_time_filtered <- ggplot(
-  e0026_richness_filtered,
-  aes(x = day, y = species_richness, fill = passage)
+  e0026_richness_filtered %>% mutate(day = as.numeric(day)-29),
+  aes(x = factor(day), y = species_richness, fill = passage)
 ) +
   geom_boxplot(
     position = position_dodge(width = 0.75),
@@ -119,13 +119,15 @@ p_richness_time_filtered <- ggplot(
     title = "",
     x = "Study day",
     y = "Species richness",
-    fill = "Passage number"
+    fill = "Passage"
   ) +
+  scale_fill_manual(values=PALETTE.PASSAGE)+
+  DEFAULTS.THEME_PRINT+
   theme(
     legend.position = "right",
-    axis.text.x = element_text(hjust = 0.5)
-  )+
-  scale_fill_manual(values=PALETTE.PASSAGE)+
-  DEFAULTS.THEME_PRINT
+    axis.text.x = element_text(hjust = 0.5, size = 8),
+    axis.text.y = element_text(hjust = 0.5, size = 8),
+    axis.title = element_text(size = 8)
+  )
 
-savePNGPDF(paste0(OUTDIR, "richnessByTime_filtered"), p_richness_time_filtered, 2, 3.5)
+savePNGPDF(paste0(OUTDIR, "richnessByTime_filtered"), p_richness_time_filtered, 2, 3)

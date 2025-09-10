@@ -2,16 +2,16 @@
 source("C:/abx-response-invitro/analysis/plotDefaults.R")
 source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
 
-
+curr_replicate <- 1
 
 # Compute colonization as an efficacy metric and return a colonization dataframe as well as the potential colonizer list
 
 get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {
   mix_asvs_subset <- mixture_ASVs %>% 
-    filter(mixture == mix_id, replicate == replicate)
+    filter(mixture == mix_id, replicate == curr_replicate)
   
   recipient_asvs_subset <- recipient_ASVs %>% 
-    filter(biosample1 == recipient_id, replicate == replicate)
+    filter(biosample1 == recipient_id, replicate == curr_replicate)
   
   donor_asvs_subset <- single_donor_ASVs %>%  
     filter(biosample1 == donor_id)
@@ -48,10 +48,10 @@ for (mix_id in mixture_ids) {
   donor_id <- ids[1]
   recipient_id <- ids[2]
   
-  result <- get_colonization(mix_id, donor_id, recipient_id, 1)
+  result <- get_colonization(mix_id, donor_id, recipient_id, 1) # get colonization for a specific mixture
   
-  actual_colonizers <- result$colonization_df
-  potential_colonizers <- result$donor_asvs_potential
+  actual_colonizers <- result$colonization_df # get colonizers
+  potential_colonizers <- result$donor_asvs_potential # get potential colonizers
   
   n_potential_colonizers <- nrow(potential_colonizers)
   n_actual_colonizers <- actual_colonizers %>%

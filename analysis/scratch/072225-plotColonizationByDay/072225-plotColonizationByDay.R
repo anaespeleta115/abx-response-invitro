@@ -7,9 +7,10 @@ source("C:/abx-response-invitro/analysis/scratch/072225-getColonizationProportio
 # Set output directory
 OUTDIR <- "C:/abx-response-invitro/analysis/scratch/072225-plotColonizationByDay/out/"
 
-DAY <- c("029", "036", "064")
-PALETTE.DAY <- c("#9ec3f1", "#DD5E98" ,"#FFA849")
-names(PALETTE.DAY) <- DAY
+
+SUBJECT <- c("XBA", "XDA", "XEA", "XKA")
+PALETTE.SUBJECT <- c(  "#345995","#AD0505", "#daa520","#619E00")
+names(PALETTE.SUBJECT) <- SUBJECT
 
 
 total_colonization <- colonization_results %>%
@@ -21,7 +22,7 @@ total_colonization <- colonization_results %>%
 # Plots
 
 colonization_day <- 
-  ggplot(total_colonization, aes(x = factor(day), y = total_colonizers, fill = factor(day))) +
+  ggplot(total_colonization %>% mutate(day = as.numeric(day)-29), aes(x = factor(day), y = total_colonizers, fill = factor(day))) +
   geom_boxplot() +
   # geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
   labs(
@@ -34,41 +35,43 @@ colonization_day <-
   facet_wrap(~recipient)+
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "mixtureColonization-day"), colonization_day, 3, 4)
+savePNGPDF(paste0(OUTDIR, "mixtureColonization-day"), colonization_day, 4, 5)
 
 
 
 
 prop_colonization_day <- 
-  ggplot(colonization_prop_results, aes(x = factor(day), y = prop_colonizers, fill = factor(day))) +
+  ggplot(colonization_prop_results %>% mutate(day = as.numeric(day)-29), aes(x = factor(day), y = prop_colonizers, fill = recipient)) +
   geom_boxplot() +
   # geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
   labs(
     title = "",
     x = "Study day",
-    y = "Colonization proportion",
+    y = "Colonization efficacy",
     fill = ""
   ) + 
-  scale_fill_manual(values = PALETTE.DAY)+
+  scale_fill_manual(values = PALETTE.SUBJECT)+
   facet_wrap(~recipient)+
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day"), prop_colonization_day, 3, 4)
+savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day"), prop_colonization_day, 4, 4)
 
 
 prop_colonization_day_XBA <- 
-  ggplot(colonization_prop_results %>% filter(recipient == "XBA"), aes(x = factor(day), y = prop_colonizers, fill = factor(day))) +
+  ggplot(colonization_prop_results %>% filter(recipient == "XEA") %>% mutate(day = as.numeric(day)-29), aes(x = factor(day), y = prop_colonizers, fill = factor(day))) +
   geom_boxplot() +
   # geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
   labs(
     title = "",
     x = "Study day",
-    y = "Colonization proportion",
-    fill = ""
+    y = "Subject XEA
+    Colonization proportion",
+    fill = "Study Day"
   ) + 
   scale_fill_manual(values = PALETTE.DAY)+
-  DEFAULTS.THEME_PRINT
+  DEFAULTS.THEME_PRINT+
+  theme(legend.position = "none")
 
-savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day_XBA"), prop_colonization_day_XBA, 1.5, 2.5)
+savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day_XEA"), prop_colonization_day_XBA, 2, 2)
 
 

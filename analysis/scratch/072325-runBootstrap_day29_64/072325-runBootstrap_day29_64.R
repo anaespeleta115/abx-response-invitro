@@ -34,18 +34,18 @@ for (mix in mixture_ids) {
   # Get all colonizers for that mixture
   single_sample_actual_colonizers <- actual_colonizers_results_filtered %>%
     filter(mixture == mix, day %in% c("064"), actual_colonizer == 1) %>%
-    distinct(OTU, Family)
+    distinct(OTU, relAbundance, Family)
   
   # Get all differential colonizers for that mixture
   single_sample_diff_colonizers <- actual_colonizers_results_filtered %>%
     filter(mixture_pair == mix_pair, diff_colonizer_64 == 1) %>%
-    distinct(OTU, Family)
+    distinct(OTU, relAbundance, Family)
   
   # Get lost taxa between day 29 and day 64
   single_recipient_lost <- recipient_lost_29_64 %>%
     mutate(subject = str_sub(biosample1, 1, -5)) %>% 
     filter(subject == recipient_id) %>%
-    distinct(OTU, Family)
+    distinct(OTU, relAbundance, Family)
   
   # If not enough data, skip
   if (nrow(single_sample_actual_colonizers) == 0 || nrow(single_recipient_lost) == 0) {
@@ -58,7 +58,7 @@ for (mix in mixture_ids) {
   
   bootstrap_results <- map_dfr(1:n_trials, function(trial) {
     boot_sample <- single_sample_actual_colonizers %>%
-      slice_sample(n = n_sample, replace = TRUE)
+      slice_sample(n = n_sample,  weight_by =  relAbundance, replace = TRUE)
     
     otu_shared <- length(intersect(boot_sample$OTU, single_recipient_lost$OTU))
     fam_shared <- length(intersect(boot_sample$Family, single_recipient_lost$Family))
@@ -126,6 +126,11 @@ enrichment_summary_64 <- left_join(observed_rows, enrichment_pvals, by = "mixtur
     enriched_otu = p_value_otu < 0.05
   )
 
+enrichment_summary_64 <- enrichment_summary_64 %>%
+  mutate(
+    observed_otu_ids = map_chr(observed_otu_ids, ~ paste(.x, collapse = ", ")),
+    observed_family_ids = map_chr(observed_family_ids, ~ paste(.x, collapse = ", "))
+  )
 
 ids_64 <- enrichment_summary_64 %>%
   mutate(
@@ -134,5 +139,14 @@ ids_64 <- enrichment_summary_64 %>%
   ) %>%
   select(mixture, observed_otu_ids, observed_family_ids)
 
+ids_64 <- ids_64 %>%
+  mutate(
+    observed_otu_ids = map_chr(observed_otu_ids, ~ paste(.x, collapse = ", ")),
+    observed_family_ids = map_chr(observed_family_ids, ~ paste(.x, collapse = ", "))
+  )
 
+
+
+write.csv(enrichment_summary_64, "C:/abx-response-invitro/data/enrichment_summary_day64.csv", row.names = FALSE)
+write.csv(ids_64, "C:/abx-response-invitro/data/enriched_ids_day64.csv", row.names = FALSE)
 

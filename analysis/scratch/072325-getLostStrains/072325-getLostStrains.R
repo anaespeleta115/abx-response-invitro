@@ -18,7 +18,7 @@ recipients_day36 <- recipient_ASVs %>%
   distinct()
 
 recipients_day64 <- recipient_ASVs %>%
-  filter(day == "064", replicate == 1) %>%
+  filter(day == "064") %>%
   select(biosample1, OTU) %>%
   distinct()
 

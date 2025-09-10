@@ -13,11 +13,11 @@ p_colonization_heatmap <- ggplot(colonization_prop_results, aes(x = biosample2, 
   scale_fill_viridis_c(option = "A") +
   labs(x = "Donor", y = "Recipient", fill = "Colonization efficacy",
        title = "")+
-  theme(legend.position = "none",
+  theme(legend.position = "right",
         axis.text.x = element_text(angle = 90, vjust = 0.5))+
   DEFAULTS.THEME_PRINT
 
 
 
-savePNGPDF(paste0(OUTDIR, "propColonizationHeatmap"), p_colonization_heatmap, 2, 2)
+savePNGPDF(paste0(OUTDIR, "propColonizationHeatmap"), p_colonization_heatmap, 2, 3)
 

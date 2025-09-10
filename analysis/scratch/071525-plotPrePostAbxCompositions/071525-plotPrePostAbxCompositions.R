@@ -124,8 +124,9 @@ composition_pre_postAbx_XBA <- XBA_compositions %>%
 #   )
 
 
-p_composition_pre_postAbx_XBA <- ggplot(
-  composition_pre_postAbx_XBA,
+
+p_composition_pre_postAbx_XBA_P0 <- ggplot(
+  composition_pre_postAbx_XBA %>% filter(passage == 0) %>% mutate(day = as.numeric(day)-29),
   aes(x = factor(day), y = relAbundance, fill = Family)
 ) +
   geom_bar(
@@ -135,7 +136,7 @@ p_composition_pre_postAbx_XBA <- ggplot(
     size = 0.2
   ) +
   scale_fill_manual(values = my_colors) +
-  facet_wrap(~passage) +
+  # facet_wrap(~passage) +
   labs(
     title = "",
     x = "Study day",
@@ -149,7 +150,37 @@ p_composition_pre_postAbx_XBA <- ggplot(
   DEFAULTS.THEME_PRINT
 
 
-savePNGPDF(paste0(OUTDIR, "compostionPrePostAbx-XBA"), p_composition_pre_postAbx_XBA, 2, 3.5)
+savePNGPDF(paste0(OUTDIR, "compostionPrePostAbx-XBA-P0"), p_composition_pre_postAbx_XBA_P0, 1.5, 1.5)
+
+
+
+
+p_composition_pre_postAbx_XBA_P8 <- ggplot(
+  composition_pre_postAbx_XBA %>% filter(passage == 8)%>% mutate(day = as.numeric(day)-29),
+  aes(x = factor(day), y = relAbundance, fill = Family)
+) +
+  geom_bar(
+    stat = "identity",
+    position = "stack",
+    color = "black",
+    size = 0.2
+  ) +
+  scale_fill_manual(values = my_colors) +
+  # facet_wrap(~passage) +
+  labs(
+    title = "",
+    x = "Study day",
+    y = "Relative abundance",
+    fill = "Family"
+  ) +
+  theme(
+    axis.text.x = element_text(hjust = 0.5),
+    legend.position = "none"
+  )+
+  DEFAULTS.THEME_PRINT
+
+
+savePNGPDF(paste0(OUTDIR, "compostionPrePostAbx-XBA-P8"), p_composition_pre_postAbx_XBA_P8, 1.5, 1.5)
 
 
 

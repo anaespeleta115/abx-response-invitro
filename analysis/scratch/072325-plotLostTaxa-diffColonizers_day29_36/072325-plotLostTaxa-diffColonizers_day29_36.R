@@ -4,20 +4,23 @@ source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loa
 source("C:/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
 source("C:/abx-response-invitro/analysis/scratch/072325-getLostStrains/072325-getLostStrains.R")
 
+# Set output directory
+OUTDIR <- "C:/abx-response-invitro/analysis/scratch/072325-plotLostTaxa-diffColonizers_day29_36/out/"
 
 
+num_replicate <- 1
 
-subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
+subject_composition <- function(mix_id, donor_id, recipient_id, num_replicate) {
   
   # Subset mixture and recipient ASVs for the given replicate
   mix_asvs_subset <- mixture_ASVs %>% 
-    filter(mixture == mix_id, replicate == replicate)
+    filter(mixture == mix_id, replicate == num_replicate)
   
   recipient_asvs_subset <- recipient_ASVs %>% 
-    filter(biosample1 == recipient_id, replicate == replicate)
+    filter(biosample1 == recipient_id, replicate == num_replicate)
   
   mixture_ASVs_mix <- actual_colonizers_results %>% 
-    filter(mixture == mix_id, replicate == 1) %>% 
+    filter(mixture == mix_id, replicate == num_replicate) %>% 
     ggplot(aes(x = mixture, y = relAbundance, fill = Family))+
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
@@ -33,7 +36,7 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
   
   
   mixture_ASVs_colonized <- actual_colonizers_results %>% 
-    filter(mixture == mix_id, replicate == 1) %>% 
+    filter(mixture == mix_id, replicate == num_replicate) %>% 
     ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(actual_colonizer))) +
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
@@ -43,10 +46,13 @@ subject_composition <- function(mix_id, donor_id, recipient_id, replicate) {
 Colonizers",
       x = "",
       y = ""
-    )
+    )+
+    theme(legend.position = "none",
+          axis.line=element_blank(), 
+          axis.text.x = element_text(size = 10))
   
   mixture_ASVs_differential <- actual_colonizers_results %>%
-    filter(mixture == mix_id, replicate == replicate, day == "036") %>%
+    filter(mixture == mix_id, replicate == num_replicate, day == "036") %>%
     ggplot(aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(diff_colonizer_36))) +
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
@@ -63,7 +69,7 @@ Colonizers",
   
   
   lost_ASVs <- recipient_ASVs %>% 
-    filter(biosample1 == recipient_id, replicate == 1, day == "029") %>% 
+    filter(biosample1 == recipient_id, replicate == num_replicate, day == "029") %>% 
     ggplot(aes(x = biosample1, y = relAbundance, fill = Family, alpha = factor(lost_strain_29_36)))+
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
@@ -79,7 +85,7 @@ Colonizers",
           axis.text.x = element_text(size = 10))
   
   recipient_ASVs <- recipient_ASVs %>% 
-    filter(biosample1 == recipient_id, replicate == 1) %>% 
+    filter(biosample1 == recipient_id, replicate == num_replicate) %>% 
     ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
     geom_bar(stat = "identity", color = "black") +
     scale_fill_manual(values = my_colors) +
@@ -132,12 +138,41 @@ Colonizers",
 
 
 # Function call
-subject_composition_plot_day29 <- subject_composition("XBB-029+XBA-029", "XBB-029", "XBA-029", 1) + DEFAULTS.THEME_PRINT
-subject_composition_plot_day36 <- subject_composition("XBB-029+XBA-036", "XBB-029", "XBA-036", 1) + DEFAULTS.THEME_PRINT
-
+subject_composition_plot_day29 <- subject_composition("XEB-029+XKA-029", "XEB-029", "XKA-029", num_replicate) + DEFAULTS.THEME_PRINT
+subject_composition_plot_day36 <- subject_composition("XEB-029+XKA-036", "XEB-029", "XKA-036", num_replicate) + DEFAULTS.THEME_PRINT
 
 combined_plot <- subject_composition_plot_day29 /
   subject_composition_plot_day36
+
+
+savePNGPDF(paste0(OUTDIR, "XEBXKA_colonization_compositions_36"), combined_plot, 10, 15)
+
+
+# 
+# donor_id <- "XGB-029"
+
+
+# p_donor_ASVs <- single_donor_ASVs %>% 
+#   filter(biosample1 == donor_id)%>%
+#   ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   labs(
+#     title = "
+#       ",
+#     x = "",
+#     y = "Relative abundance"
+#   ) +
+#   DEFAULTS.THEME_PRINT +
+#   theme(legend.position = "none",
+#         axis.line=element_blank(), 
+#         axis.text.x = element_text(size = 7),
+#         axis.text.y = element_text(size = 7),
+#         axis.title = element_text(size = 10))
+# 
+# 
+# savePNGPDF(paste0(OUTDIR, "donor_composition"), p_donor_ASVs, 2, 1.5)
+
 
 
 

@@ -128,47 +128,47 @@ fc_pre_post_abx <- fc_pre_post_abx %>%
     relAbundance_day_029 = if_else(relAbundance_day_029 == 0, 1e-4, relAbundance_day_029),
     relAbundance_day_036 = if_else(relAbundance_day_036 == 0, 1e-4, relAbundance_day_036),
     fold_change = relAbundance_day_036 / relAbundance_day_029,
-    log2_fc = log2(fold_change)
+    log10_fc = log10(fold_change)
   )
 
 # In vitro fold change
 
 p_fc_pre_post_abx_vitro <- fc_pre_post_abx %>% 
   filter(passage == 8) %>% 
-  ggplot(aes(x = fct_reorder(Family, -log2_fc), y = log2_fc, fill = Family)) +
+  ggplot(aes(x = fct_reorder(Family, -log10_fc), y = log10_fc, fill = Family)) +
   geom_boxplot(outlier.shape = NA, width = 0.8) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "darkred") +
   scale_fill_manual(values = my_colors)+
   labs(
-    title = "Impact of Antibiotics on Family Relative Abundance in Vitro (Passage 8)",
+    title = "Impact of Antibiotics on Family Relative Abundance in Vitro",
     x = "Family",
-    y = "Log2 Fold Change
+    y = "Log10 Fold Change
      (Day 36 / Day 29)"
   ) +
   theme(
-    axis.text.x = element_text(hjust = 1, size = 7),
+    axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 7, angle = 90),
     legend.position = "none"
   )
 
-savePNGPDF(paste0(OUTDIR, "fold-changePrePostAbx-inVitro"), p_fc_pre_post_abx_vitro, 4, 10)
+savePNGPDF(paste0(OUTDIR, "fold-changePrePostAbx-inVitro"), p_fc_pre_post_abx_vitro, 4, 8)
 
 
 # In vivo fold-change 
 
 p_fc_pre_post_abx_vivo <- fc_pre_post_abx %>% 
   filter(passage == 0) %>% 
-  ggplot(aes(x = fct_reorder(Family, -log2_fc), y = log2_fc, fill = Family)) +
+  ggplot(aes(x = fct_reorder(Family, -log10_fc), y = log10_fc, fill = Family)) +
   geom_boxplot(outlier.shape = NA, width = 0.8) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "darkred") +
   scale_fill_manual(values = my_colors)+
   labs(
     title = "Impact of Antibiotics on Family Relative Abundance in Vivo (Passage 0)",
     x = "Family",
-    y = "Log2 Fold Change
+    y = "Log10 Fold Change
      (Day 36 / Day 29)"
   ) +
   theme(
-    axis.text.x = element_text(hjust = 1, size = 7),
+    axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 7, angle = 90),
     legend.position = "none"
   )
 

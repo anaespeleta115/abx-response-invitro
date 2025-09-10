@@ -7,21 +7,23 @@ source("C:/abx-response-invitro/analysis/scratch/072125-getRecipient-MixtureRich
 OUTDIR <- "C:/abx-response-invitro/analysis/scratch/072225-plotRecipientRichness/out/"
 
 SUBJECT <- c("XBA", "XDA", "XEA", "XKA")
-PALETTE.SUBJECT <- c(  "#345995","#FFA849", "#DD5E98","#B084CC")
+PALETTE.SUBJECT <- c(  "#345995","#AD0505", "#daa520","#619E00")
 names(PALETTE.SUBJECT) <- SUBJECT
+
 
 # Plot
 p_richness_day <- 
-  ggplot(recipient_richness, aes(x = factor(day), y = species_richness, group = subject, color = subject)) +
-  geom_smooth(linewidth = 0.5) +
-  geom_point(size = 1) +
+  ggplot(recipient_richness %>% mutate(day = as.numeric(day)), aes(x = factor(day), y = species_richness, group = subject, color = subject)) +
+  geom_line(linewidth = 0.5) +
+  geom_point(size = 0.5) +
+  scale_y_continuous(limits = c(0, NA)) + 
   labs(
     title = "",
     x = "Study day",
-    y = "Recipient species richness",
-    color = "Subject"
+    y = "Species richness",
+    color = "Recipient"
   ) +
   scale_color_manual(values = PALETTE.SUBJECT) +
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "recipientRichness-day"), p_richness_day, 1.5, 3)
+savePNGPDF(paste0(OUTDIR, "recipientRichness-day_rep1"), p_richness_day, 1.5, 3)

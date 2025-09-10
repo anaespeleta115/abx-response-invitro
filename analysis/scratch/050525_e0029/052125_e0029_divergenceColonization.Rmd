@@ -454,6 +454,8 @@ prop_colonization_plot <- ggplot(colonization_prop_results, aes(x = donor_id, y 
   labs(x = "Donor", y = "Recipient", fill = "Colonization Efficacy",
        title = "Colonization Efficacy Across Mixtures")
 
+prop_colonization_plot
+
 ggsave(
   filename = file.path(OUTPUTDIR, "prop_colonization_plot.png"),
   plot = prop_colonization_plot,
