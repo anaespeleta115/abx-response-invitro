@@ -2,7 +2,7 @@
 source("C:/abx-response-invitro/analysis/plotDefaults.R")
 source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
 
-curr_replicate <- 1
+curr_replicate <- 2
 
 # Compute colonization as an efficacy metric and return a colonization dataframe as well as the potential colonizer list
 

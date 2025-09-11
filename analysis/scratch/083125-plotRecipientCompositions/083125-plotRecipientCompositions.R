@@ -201,10 +201,10 @@ donor <- "XJB"
 XJB_mixture_plots <- actual_colonizers_results %>%
   filter(day == "036", subject2 == donor, replicate == num_replicate) %>%
   split(.$biosample1) %>%
-  map(~ggplot(.x, aes(x = mixture, y = relAbundance, fill = Family)) +
+  map(~ggplot(.x, aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(actual_colonizer))) +
         geom_bar(stat = "identity", color = "black") +
         scale_fill_manual(values = my_colors) +
-        # scale_alpha_manual(values = c("0" = 0, "1" = 1))+
+        scale_alpha_manual(values = c("0" = 0, "1" = 1))+
         labs(x = "", y = "", title = "") +
         facet_wrap(~biosample1)+
         theme(

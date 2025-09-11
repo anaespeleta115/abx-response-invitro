@@ -13,13 +13,13 @@ curr_replicate <- 1
 
 # ----------------- Mixture Colonization Gain --------------------------------
 
-## get day 29 mixture family OTU counts
+## get day 29 mixture family colonizer OTU counts
 fam_colonizer_counts_mixture_29 <- actual_colonizers_results %>% 
   filter(day == "029", replicate == curr_replicate, actual_colonizer == 1) %>% 
   group_by(Family, subject1, subject2) %>% 
   summarise(fam_OTUs_29_mix = n_distinct(OTU))
 
-## get day 36 mixture family OTU counts
+## get day 36 mixture family colonizer OTU counts
 fam_colonizer_counts_mixture_36 <- actual_colonizers_results %>% 
   filter(day == "036", replicate == curr_replicate, actual_colonizer == 1) %>% 
   group_by(Family, subject1, subject2) %>% 

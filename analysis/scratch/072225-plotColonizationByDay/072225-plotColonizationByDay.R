@@ -38,26 +38,28 @@ colonization_day <-
 savePNGPDF(paste0(OUTDIR, "mixtureColonization-day"), colonization_day, 4, 5)
 
 
-
+# For the poster, this plot was made on replicate 2 and with a higher limit of detection (stricter cutoff)
 
 prop_colonization_day <- 
-  ggplot(colonization_prop_results %>% mutate(day = as.numeric(day)-29), aes(x = factor(day), y = prop_colonizers, fill = recipient)) +
-  geom_boxplot() +
+  ggplot(colonization_prop_results %>% mutate(day = as.numeric(day)-29), aes(x = factor(day), y = prop_colonizers)) +
+  geom_boxplot(fill = "#c7746d") +
   # geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
   labs(
     title = "",
     x = "Study day",
     y = "Colonization efficacy",
     fill = ""
-  ) + 
+  ) +
+  scale_y_continuous(limits = c(0, 1)) +
   scale_fill_manual(values = PALETTE.SUBJECT)+
-  facet_wrap(~recipient)+
-  DEFAULTS.THEME_PRINT
+  # facet_wrap(~recipient)+
+  DEFAULTS.THEME_PRINT+
+  theme(legend.position = "none")
 
-savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day"), prop_colonization_day, 4, 4)
+savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day"), prop_colonization_day, 2, 2)
 
 
-prop_colonization_day_XBA <- 
+prop_colonization_day_XEA <- 
   ggplot(colonization_prop_results %>% filter(recipient == "XEA") %>% mutate(day = as.numeric(day)-29), aes(x = factor(day), y = prop_colonizers, fill = factor(day))) +
   geom_boxplot() +
   # geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
@@ -72,6 +74,6 @@ prop_colonization_day_XBA <-
   DEFAULTS.THEME_PRINT+
   theme(legend.position = "none")
 
-savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day_XEA"), prop_colonization_day_XBA, 2, 2)
+savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day_XEA"), prop_colonization_day_XEA, 2, 2)
 
 
