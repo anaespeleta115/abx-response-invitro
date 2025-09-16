@@ -1,0 +1,4 @@
+".y.","group1","group2","n1","n2","statistic","p","p.adj","p.adj.signif","effsize","magnitude","comparison","summary"
+"prop_colonizers","029","036",40,40,36.5,2.1e-13,6.3e-13,"****",0.821424101219938,"large","029 vs 036","Wilcoxon rank-sum two-sided test, 029 vs 036: n=80, r=0.82, p=2.1e-13, adjusted p-value=6.3e-13, ****, custom adjusted p-value=2.1e-13"
+"prop_colonizers","029","064",40,40,216,1.97e-08,3.94e-08,"****",0.628309740124066,"large","029 vs 064","Wilcoxon rank-sum two-sided test, 029 vs 064: n=80, r=0.63, p=1.97e-08, adjusted p-value=3.94e-08, ****, custom adjusted p-value=1.97e-08"
+"prop_colonizers","036","064",40,40,1223.5,4.69e-05,4.69e-05,"****",0.455653513224111,"moderate","036 vs 064","Wilcoxon rank-sum two-sided test, 036 vs 064: n=80, r=0.46, p=4.69e-05, adjusted p-value=4.69e-05, ****, custom adjusted p-value=4.69e-05"

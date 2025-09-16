@@ -3,7 +3,7 @@ source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loa
 
 # Make sure only one replicate is present
 recipient_richness <- recipient_ASVs %>% 
-  filter(replicate == curr_replicate)
+  filter(replicate == num_replicate)
 
 # Create recipient richness dataset
 recipient_richness <- recipient_richness %>%
@@ -37,6 +37,13 @@ mixture_richness <- mixture_ASVs %>%
 # combined_richness <- bind_rows(recipient_richness, mixture_richness)
 
 
+
+# save into a csv file
+write.csv(
+  donor_richness,
+  "C:/abx-response-invitro/analysis/scratch/072125-getRecipient-MixtureRichness/out/donor_richness.csv",
+  row.names = FALSE
+)
 
 
 

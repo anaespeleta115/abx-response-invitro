@@ -16,7 +16,8 @@ library(scico)
 # Set global variables
 my_colors <- readRDS("C:/abx-response-invitro/data/familyColorPalette.rds") 
 
-limit_of_detection <- 1e-3
+# Set limit of detection
+limit_of_detection <- 1e-4
 
 # Read in household dataset
 household_data <- read.table("C:/abx-response-invitro/data/e0026-e0029-e0030.txt", header = TRUE)

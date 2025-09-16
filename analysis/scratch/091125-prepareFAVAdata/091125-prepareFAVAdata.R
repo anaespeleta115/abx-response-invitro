@@ -20,17 +20,26 @@ phyloseq_obj <- readRDS("C:/abx-response-invitro/data/ps_all.rds")
 # Donor-only samples (from e0026)
 ps_donors <- subset_samples(phyloseq_obj, experiment == "e0026" & passage == 8 & biosample1 %in% donor_communities)
 
+
+# Recipient samples 
+ps_recipients <- subset_samples(phyloseq_obj, experiment == "e0029" & replicate == num_replicate & biosample2 == "blank")
+
 # Mixtures (from e0029)
 ps_mixtures <- subset_samples(phyloseq_obj, experiment == "e0029" & replicate == num_replicate)
 
 
 donor_relab <- FAVA::relab_phyloseq(ps_donors)
 mixt_relab  <- FAVA::relab_phyloseq(ps_mixtures)
+recipient_relab <- FAVA::relab_phyloseq(ps_recipients)
 
 # Match donors to mixtures
 # Separate metadata and taxa
 donor_taxa <- donor_relab %>%
   mutate(type = "donor") %>%
+  select(biosample1, everything())
+
+recipient_taxa <- recipient_relab %>% 
+  mutate(type = "recipient") %>% 
   select(biosample1, everything())
 
 mixt_taxa <- mixt_relab %>%
@@ -39,6 +48,9 @@ mixt_taxa <- mixt_relab %>%
 
 # Join donors to their mixtures
 combined <- bind_rows(donor_relab, mixt_relab)
+
+# join recipients to their mixtures
+combined_recipients <- bind_rows(recipient_relab, mixt_relab)
 
 
 
