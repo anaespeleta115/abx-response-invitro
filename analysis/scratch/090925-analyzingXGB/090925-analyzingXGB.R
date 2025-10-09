@@ -1,12 +1,12 @@
 # Load data
-source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
-source("C:/abx-response-invitro/analysis/plotDefaults.R")
-source("C:/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
 
 
 
 # Set output directory
-OUTDIR <- "C:/abx-response-invitro/analysis/scratch/090925-analyzingXDB/out/"
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/analysis/scratch/090925-analyzingXGB/out/"
 
 
 num_replicate <- 1
@@ -17,26 +17,26 @@ names(PALETTE.DAY) <- DAY
 
 
 
-# -------------------------- calculate species richness for XJB mixtures -----------------------------------------------
+# -------------------------- calculate species richness for XCB mixtures -----------------------------------------------
 
 
-XJB_species_richness <- actual_colonizers_results %>% 
-  filter(subject2 == "XJB", replicate == num_replicate, day == "036") %>% 
+XCB_species_richness <- actual_colonizers_results %>% 
+  filter(subject2 == "XCB", replicate == num_replicate, day == "036") %>% 
   group_by(mixture) %>% 
   summarize(species_richness = n_distinct(OTU))
 
 
 # get colonization proportion for each mixture
 
-XJB_colonization_prop <- colonization_prop_results %>% 
-  filter(donor == "XJB", day != "064")
+XCB_colonization_prop <- colonization_prop_results %>% 
+  filter(donor == "XCB", day != "064")
 
 
 #------------------------ plot mixture colonization efficacy ------------------------------------------------------------
 
 
 
-XJB_colonization_prop_plot <- XJB_colonization_prop %>% 
+XCB_colonization_prop_plot <- XCB_colonization_prop %>% 
   ggplot(aes(x = recipient, y = prop_colonizers, group = day, color = day)) +
   geom_line(linewidth = 0.5) +
   geom_point(size = 0.5) +
@@ -54,13 +54,13 @@ XJB_colonization_prop_plot <- XJB_colonization_prop %>%
   DEFAULTS.THEME_PRINT
 
 
-savePNGPDF(paste0(OUTDIR, "XJB_colonization_prop_plot_both"), XJB_colonization_prop_plot, 2, 3)
+savePNGPDF(paste0(OUTDIR, "XCB_colonization_prop_plot_both"), XCB_colonization_prop_plot, 2, 3)
 
 
 
 #------------------------ plot number of colonizers ------------------------------------------------------------
 
-XJB_num_colonizers_plot <- XJB_colonization_prop %>% 
+XCB_num_colonizers_plot <- XCB_colonization_prop %>% 
   ggplot(aes(x = recipient, y = n_actual_colonizers, group = day, color = day)) +
   geom_line(linewidth = 0.5) +
   geom_point(size = 0.5) +
@@ -78,13 +78,13 @@ XJB_num_colonizers_plot <- XJB_colonization_prop %>%
   DEFAULTS.THEME_PRINT
 
 
-savePNGPDF(paste0(OUTDIR, "XJB_num_colonizers_plot_both"), XJB_num_colonizers_plot, 2, 3)
+savePNGPDF(paste0(OUTDIR, "XCB_num_colonizers_plot_both"), XCB_num_colonizers_plot, 2, 3)
 
 #------------------------ plot potential colonizers ------------------------------------------------------------
 
 
 
-XJB_potential_colonizers_plot <- XJB_colonization_prop %>% 
+XCB_potential_colonizers_plot <- XCB_colonization_prop %>% 
   ggplot(aes(x = recipient, y = n_potential_colonizers, group = day, color = day)) +
   geom_line(linewidth = 0.5) +
   geom_point(size = 0.5) +
@@ -102,6 +102,6 @@ XJB_potential_colonizers_plot <- XJB_colonization_prop %>%
   DEFAULTS.THEME_PRINT
 
 
-savePNGPDF(paste0(OUTDIR, "XJB_potential_colonizers_plot_both"), XJB_potential_colonizers_plot, 2, 3)
+savePNGPDF(paste0(OUTDIR, "XCB_potential_colonizers_plot_both"), XCB_potential_colonizers_plot, 2, 3)
 
 

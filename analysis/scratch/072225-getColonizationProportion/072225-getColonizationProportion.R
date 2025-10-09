@@ -1,6 +1,6 @@
 # Load data
-source("C:/abx-response-invitro/analysis/plotDefaults.R")
-source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
 
 curr_replicate <- 1
 

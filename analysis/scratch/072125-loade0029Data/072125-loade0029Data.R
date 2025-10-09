@@ -14,13 +14,15 @@ library(scico)
 
 
 # Set global variables
-my_colors <- readRDS("C:/abx-response-invitro/data/familyColorPalette.rds") 
+my_colors <- readRDS("/Users/aespelet/Documents/Github/abx-response-invitro/data/familyColorPalette.rds") 
+
+# path reference: /Users/aespelet/Documents/Github/
 
 # Set limit of detection
 limit_of_detection <- 1e-4
 
 # Read in household dataset
-household_data <- read.table("C:/abx-response-invitro/data/e0026-e0029-e0030.txt", header = TRUE)
+household_data <- read.table("/Users/aespelet/Documents/Github/abx-response-invitro/data/e0026-e0029-e0030.txt", header = TRUE)
 
 # Divide dataset into separate tables by experiment
 e0029 <- filter(household_data, str_detect(household_data$sample, "e0029"))
@@ -58,9 +60,9 @@ donor_communities <- e0029 %>%
   unique()
 
 # Extract single donor OTUs from e0026
+# ADD BACK FILTER: relAbundance > limit_of_detection
 single_donor_ASVs <- e0026 %>%
-  filter(relAbundance > limit_of_detection,
-         biosample1 %in% donor_communities, passage == "8")
+  filter(biosample1 %in% donor_communities, passage == "8")
 
 
 # Extract subject, day, household information and filter out extra donor tests
@@ -86,6 +88,10 @@ mixture_ASVs <- e0029_base %>%
 
 # Get list of mixture IDs and  out b-mix and two-mix donors
 mixture_ids <- unique(mixture_ASVs %>%
+                        pull(mixture))
+
+
+mixture_ids_36 <- unique(mixture_ASVs %>% filter(day == "036") %>% 
                         pull(mixture)) 
 
 

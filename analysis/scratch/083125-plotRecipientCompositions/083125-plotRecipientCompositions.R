@@ -1,12 +1,13 @@
 # Load data
-source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
-source("C:/abx-response-invitro/analysis/plotDefaults.R")
-source("C:/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
+
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
 
 
 
 # Set output directory
-OUTDIR <- "C:/abx-response-invitro/analysis/scratch/083125-plotRecipientCompositions/out/"
+OUTDIR <- "Documents/Github/abx-response-invitro/analysis/scratch/083125-plotRecipientCompositions/out/"
 
 
 num_replicate <- 1
@@ -193,12 +194,12 @@ savePNGPDF(paste0(OUTDIR, "XKB_plots_colonization_36"), XKB_plots, 4, 10)
 
 # ----------------------------------------PLOT ALL DONORS -----------------------------------------------------
 
-donor <- "XJB"
+donor <- "XCB"
 
 # ADD FOR COLONIZATION
 ## alpha = factor(actual_colonizer)
 
-XJB_mixture_plots <- actual_colonizers_results %>%
+XCB_mixture_plots <- actual_colonizers_results %>%
   filter(day == "036", subject2 == donor, replicate == num_replicate) %>%
   split(.$biosample1) %>%
   map(~ggplot(.x, aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(actual_colonizer))) +
@@ -215,9 +216,9 @@ XJB_mixture_plots <- actual_colonizers_results %>%
         ))
 
 # Stitch them into one row
-XJB_mixture_plots <- plot_grid(plotlist = XJB_mixture_plots, nrow = 1)
+XCB_mixture_plots <- plot_grid(plotlist = XCB_mixture_plots, nrow = 1)
 
-XJB <- single_donor_ASVs %>%
+XCB <- single_donor_ASVs %>%
   mutate(day = str_sub(biosample1, -3),
          subject1 = str_sub(biosample1, 1, -5)) %>% 
   filter(subject1 == donor, replicate == num_replicate) %>% 
@@ -234,14 +235,14 @@ XJB <- single_donor_ASVs %>%
         axis.text.x = element_text(size = 10))
 
 
-XJB_plots <- plot_grid(
-  XJB,
-  XJB_mixture_plots,
+XCB_plots <- plot_grid(
+  XCB,
+  XCB_mixture_plots,
   nrow = 1,
   rel_widths = c(1, 3)  # make Mixture twice as wide
 )
 
 
-savePNGPDF(paste0(OUTDIR, "XJB_plots_36"), XJB_plots, 4, 10)
+savePNGPDF(paste0(OUTDIR, "XCB_plots_36_colonization"), XCB_plots, 4, 10)
 
 

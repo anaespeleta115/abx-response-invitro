@@ -7,7 +7,7 @@ library("phyloseq")
 library(rstatix)
 library(PNWColors)
 
-household_data <- read.table("C:/Users/anaes/OneDrive/UCI_Spring25/rotation/e0026-e0029-e0030.txt", header = TRUE)
+household_data <- read.table("~/Documents/GitHub/abx-response-invitro/data/e0026-e0029-e0030.txt", header = TRUE)
 
 
 # Divide dataset into separate tables by experiment. Filter out unnecessary columns
@@ -77,7 +77,7 @@ top_families <- e0026_day29 %>%
   pull(Family)
 
 # Define color palette
-my_colors <- readRDS("C:/abx-response-invitro/data/familyColorPalette.rds") 
+my_colors <- readRDS("~/Documents/GitHub/abx-response-invitro/data/familyColorPalette.rds") 
 
 
 

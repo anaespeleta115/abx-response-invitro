@@ -1,7 +1,7 @@
 # Load data
-source("C:/abx-response-invitro/analysis/plotDefaults.R")
-source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
-source("C:/abx-response-invitro/analysis/scratch/072225-getColonizationProportion/072225-getColonizationProportion.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072225-getColonizationProportion/072225-getColonizationProportion.R")
 
 
 actual_colonizers_results <- actual_colonizers_results %>% 
@@ -21,5 +21,5 @@ diff_colonizers <- actual_colonizers_results %>%
 
 
 actual_colonizers_results <- actual_colonizers_results %>%
-  left_join(diff_colonizers %>% select(mixture_pair, OTU, diff_colonizer_36, diff_colonizer_64),
+  left_join(diff_colonizers,
             by = c("mixture_pair", "OTU"))

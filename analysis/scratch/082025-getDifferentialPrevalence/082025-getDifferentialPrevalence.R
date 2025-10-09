@@ -1,13 +1,15 @@
 # Load data
-source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
-source("C:/abx-response-invitro/analysis/plotDefaults.R")
-source("C:/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
-source("C:/abx-response-invitro/analysis/scratch/072325-getLostStrains/072325-getLostStrains.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072325-getLostStrains/072325-getLostStrains.R")
 
 # Set output directory
-OUTDIR <- "C:/abx-response-invitro/analysis/scratch/082025-getDifferentialPrevalence/out/"
+OUTDIR <- "/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/082025-getDifferentialPrevalence/out/"
 
 curr_replicate <- 1
+
+# ------------------------------ DONOR ANALYSIS ----------------------------------------------
 
 # Get family prevalence across donor communities
 prevalence_donors <- single_donor_ASVs %>% 
@@ -34,6 +36,27 @@ prevalence_donors <- prevalence_donors %>%
 
 # Extract list of prevalent Families
 prevalence_donor_list <- prevalence_donors$Family
+
+
+abundance_donors <- single_donor_ASVs %>% 
+  group_by(Family, biosample1) %>% 
+  summarize(total_relAbundance = sum(relAbundance))
+
+# Determine prevalence threshold
+donor_abundance_plot <- abundance_donors %>% filter(biosample1 %in% c("XKB-029", "XJB-029", "XHB-029", "XIB-029")) %>% 
+  ggplot(aes(x = fct_reorder(Family, -total_relAbundance), y = total_relAbundance, fill = Family)) +
+  geom_col(color = "black")+
+  labs(x = "Family",
+       y = "Total family abundance")+
+  facet_wrap(~biosample1)+
+  scale_fill_manual(values = my_colors)+
+  DEFAULTS.THEME_PRINT+
+  theme(    axis.text.x = element_blank(),   # removes text labels
+            axis.ticks.x = element_blank(), legend.position = "none")
+
+savePNGPDF(paste0(OUTDIR, "donor_abundance_plot_row3"), donor_abundance_plot, 3, 4)
+
+
 
 # ------------------------------ DAY 36 ----------------------------------------------
 
@@ -72,7 +95,7 @@ recipient_prevalence_plot <- prevalence_recipients %>%
   DEFAULTS.THEME_PRINT+
   theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 7, angle = 90))
 
-savePNGPDF(paste0(OUTDIR, "recipient_prevalence_plot"), recipient_prevalence_plot, 4, 6)
+savePNGPDF(paste0(OUTDIR, "recipient_prevalence_plot_29"), recipient_prevalence_plot, 4, 6)
 
 
 # Filter by that threshold (adjust later if necessary)
@@ -87,21 +110,51 @@ prevalence_recipient_list <- prevalence_recipients$Family
 lost_families_36 <- recipient_ASVs %>% 
   filter(day == "029", replicate == curr_replicate) %>% 
   group_by(Family, biosample1) %>% 
-  summarise(num_otus_lost = sum(lost_strain_29_36))
+  summarise(
+    total_OTUs = n_distinct(OTU),
+    num_otus_lost = sum(lost_strain_29_36),
+    total_relAbundance = sum(relAbundance),
+    lost_relAbundance = sum(relAbundance[lost_strain_29_36 == 1])
+  ) %>% 
+  mutate(prop_lost = num_otus_lost / total_OTUs, prop_relAbundance_lost = lost_relAbundance/total_relAbundance)
 
 # Plot number of OTUs lost per family per recipient
 lost_families_plot_36 <- lost_families_36 %>%
   filter(Family %in% prevalence_donor_list) %>% 
-  ggplot(aes(x = fct_reorder(Family, - num_otus_lost), y = num_otus_lost)) +
+  ggplot(aes(x = fct_reorder(Family, - prop_lost), y = prop_lost)) +
   geom_col(fill = "lightyellow", color = "black")+
   labs(x = "Family",
-       y = "Number of OTUs lost")+
+       y = "Fraction of OTUs lost")+
   facet_wrap(~biosample1)+
   DEFAULTS.THEME_PRINT+
   theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 6, angle = 90))
 
 savePNGPDF(paste0(OUTDIR, "lost_families_plot_36"), lost_families_plot_36, 4, 5)
 
+lost_family_relAbundance_prop_plot_36 <- lost_families_36 %>% 
+  filter(Family %in% prevalence_donor_list) %>% 
+  ggplot(aes(x = fct_reorder(Family, - total_relAbundance), y = prop_relAbundance_lost)) +
+  geom_col(fill = "lightyellow", color = "black")+
+  labs(x = "Family",
+       y = "Fraction of family relAbundance lost")+
+  facet_wrap(~biosample1)+
+  DEFAULTS.THEME_PRINT+
+  theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 6, angle = 90))
+
+savePNGPDF(paste0(OUTDIR, "lost_relAbundance_prop_plot_36"), lost_family_relAbundance_prop_plot_36 , 4, 5)
+
+
+lost_family_relAbundance_plot_36 <- lost_families_36 %>% 
+  filter(Family %in% prevalence_donor_list) %>% 
+  ggplot(aes(x = fct_reorder(Family, - lost_relAbundance), y = lost_relAbundance)) +
+  geom_col(fill = "thistle", color = "black")+
+  labs(x = "Family",
+       y = "RelAbundance of OTUs lost")+
+  facet_wrap(~biosample1)+
+  DEFAULTS.THEME_PRINT+
+  theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 6, angle = 90))
+
+savePNGPDF(paste0(OUTDIR, "lost_relAbundance_plot_36"), lost_family_relAbundance_plot_36 , 4, 5)
 
 # Get lost family prevalence
 lost_prevalence_36 <- lost_families_36 %>%

@@ -1,11 +1,11 @@
 # Load data
-source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
-source("C:/abx-response-invitro/analysis/plotDefaults.R")
-source("C:/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
-source("C:/abx-response-invitro/analysis/scratch/072325-getLostStrains/072325-getLostStrains.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072325-getLostStrains/072325-getLostStrains.R")
 
 # Set output directory
-OUTDIR <- "C:/abx-response-invitro/analysis/scratch/082725-compareDeltaRichnessColonization/out/"
+OUTDIR <- "/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/082725-compareDeltaRichnessColonization/out/"
 
 curr_replicate <- 1
 
@@ -14,24 +14,47 @@ curr_replicate <- 1
 # ----------------- Mixture Colonization Gain --------------------------------
 
 ## get day 29 mixture family colonizer OTU counts
-fam_colonizer_counts_mixture_29 <- actual_colonizers_results %>% 
-  filter(day == "029", replicate == curr_replicate, actual_colonizer == 1) %>% 
-  group_by(Family, subject1, subject2) %>% 
+fam_colonizer_counts_mixture_29 <- actual_colonizers_results %>%
+  filter(day == "029", replicate == curr_replicate, actual_colonizer == 1) %>%
+  group_by(Family, subject1, subject2) %>%
   summarise(fam_OTUs_29_mix = n_distinct(OTU))
 
 ## get day 36 mixture family colonizer OTU counts
-fam_colonizer_counts_mixture_36 <- actual_colonizers_results %>% 
-  filter(day == "036", replicate == curr_replicate, actual_colonizer == 1) %>% 
-  group_by(Family, subject1, subject2) %>% 
+fam_colonizer_counts_mixture_36 <- actual_colonizers_results %>%
+  filter(day == "036", replicate == curr_replicate, actual_colonizer == 1) %>%
+  group_by(Family, subject1, subject2) %>%
   summarise(fam_OTUs_36_mix = n_distinct(OTU))
 
-## join data from both days 
-family_colonizer_gain_mixture <- fam_colonizer_counts_mixture_36 %>% 
+## join data from both days
+family_colonizer_gain_mixture <- fam_colonizer_counts_mixture_36 %>%
   full_join(fam_colonizer_counts_mixture_29, by = c("Family", "subject1", "subject2")) %>%
   replace_na(list(fam_OTUs_29_mix = 0, fam_OTUs_36_mix = 0)) %>%
   mutate(
     delta_colonization_mixture = fam_OTUs_36_mix - fam_OTUs_29_mix
   )
+
+# ----------------- Mixture Colonization Proportion Gain (not at the family level) --------------------------------
+# 
+# ## get day 36 recipient OTU counts
+# recipient_OTU_counts_36 <- recipient_ASVs %>% 
+#   filter(day == "036", replicate == curr_replicate) %>% 
+#   group_by(Family, biosample1) %>% 
+#   summarise(recipient_OTUs_36 = n_distinct(OTU)) %>% 
+#   mutate(subject1 = str_sub(biosample1, 1, -5))
+# 
+# ## get day 36 mixture family colonizer OTU counts
+# fam_colonizer_counts_mixture_36 <- actual_colonizers_results %>% 
+#   filter(day == "036", replicate == curr_replicate, actual_colonizer == 1) %>% 
+#   group_by(Family, subject1, subject2) %>% 
+#   summarise(fam_OTUs_36_mix = n_distinct(OTU))
+# 
+# ## join data from both days 
+# family_colonizer_gain_mixture <- fam_colonizer_counts_mixture_36 %>% 
+#   full_join(recipient_OTU_counts_36, by = c("Family", "subject1")) %>%
+#   replace_na(list(fam_OTUs_29_mix = 0, fam_OTUs_36_mix = 0)) %>%
+#   mutate(
+#     delta_colonization_mixture = fam_OTUs_36_mix - recipient_OTUs_36
+#   )
 
 # ------------------ Recipient Loss -----------------------------------------
 
@@ -78,6 +101,7 @@ delta_species_colonization_plot <- deltaLossColonization %>%
   ggplot(aes(x = delta_OTU_recipient, y = delta_colonization_mixture, color = Family))+
   geom_point(size = 2)+
   scale_color_manual(values = my_colors)+
+  labs(x = "Difference in family species num (day 29 - day 36)", y ="Difference number of colonizers per fam")+
   facet_wrap(~subject1)+
   theme(legend.position = "none")
 
@@ -100,13 +124,18 @@ deltaLossColonization_avg <- deltaLossColonization %>%
 deltaLossColonization_avg_plot <- deltaLossColonization_avg %>% 
   # filter(recipient_fam_relAbundance_day_029 != 1e-04, recipient_fam_relAbundance_day_036 == 1e-04) %>% 
   ggplot(aes(x = delta_OTU_recipient, y = avg_colonization, color = Family))+
-  geom_point(size = 1)+
+  geom_point(size = 2, alpha = 0.5)+
+  # geom_smooth(method = "lm", se = FALSE, color = "black", linewidth = 0.5) +
   scale_color_manual(values = my_colors)+
-  labs(x = "")+
+  labs(x = "Difference in family num species
+  (day 29 - day 36)", y = "Difference number of colonizers 
+       per family (day 36 - day 29")+
   facet_wrap(~subject1)+
   theme(legend.position = "none")
 
 
-savePNGPDF(paste0(OUTDIR, "deltaLossColonization_avg_plot"), deltaLossColonization_avg_plot, 3.5, 4)
+savePNGPDF(paste0(OUTDIR, "deltaLossColonization_avg_plot"), deltaLossColonization_avg_plot, 3.5, 6)
+
+
 
   

@@ -1,11 +1,11 @@
 # Load data
-source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
-source("C:/abx-response-invitro/analysis/plotDefaults.R")
-source("C:/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
-source("C:/abx-response-invitro/analysis/scratch/072325-getLostStrains/072325-getLostStrains.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072325-getLostStrains/072325-getLostStrains.R")
 
 # Set output directory
-OUTDIR <- "C:/abx-response-invitro/analysis/scratch/082626-compareDeltaSpeciesRichness/out/"
+OUTDIR <- "/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/082626-compareDeltaSpeciesRichness/out/"
 
 curr_replicate <- 1
 
@@ -30,11 +30,8 @@ family_OTU_gain_mixture <- fam_OTU_counts_mixture_36 %>%
   full_join(fam_OTU_counts_mixture_29, by = c("Family", "subject1", "subject2")) %>%
   replace_na(list(fam_OTUs_29_mix = 0, fam_OTUs_36_mix = 0)) %>%
   mutate(
-    delta_OTU_mixture = fam_OTUs_36_mix - fam_OTUs_29_mix
+    delta_OTU_mixture = fam_OTUs_36_mix - fam_OTUs_29_mix   # check this!!
   )
-
-
-
 
 
 # Calculate loss
@@ -61,7 +58,7 @@ family_OTU_loss_recipient <- fam_OTU_counts_recipient_36 %>%
   full_join(fam_OTU_counts_recipient_29, by = c("Family", "subject1")) %>%
   replace_na(list(fam_OTUs_29_recipient = 0, fam_OTUs_36_recipient = 0)) %>%
   mutate(
-    delta_OTU_recipient = fam_OTUs_29_recipient - fam_OTUs_36_recipient
+    delta_OTU_recipient = fam_OTUs_29_recipient - fam_OTUs_36_recipient # check this!!
   )
 
 

@@ -2,12 +2,12 @@
 # Plot the distribution of species richness at each timepoint, for abx- and non-abx subjects.
 
 # Load data
-source("C:/abx-response-invitro/analysis/scratch/040325-loadData/loadData.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/040325-loadData/loadData.R")
 
-source("C:/abx-response-invitro/analysis/plotDefaults.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
 
 # Set output directory
-OUTDIR <- "C:/abx-response-invitro/analysis/scratch/040325-comparerichnessPrePostAbx/out/"
+OUTDIR <- "/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/040325-comparerichnessPrePostAbx/out/"
 
 # Set palette
 pal <- pnw_palette("Sunset2", 2, type = "discrete")
@@ -36,28 +36,28 @@ e0026_richness <- e0026_richness %>%
 # Statistically test 
 
 comparisons <- combn(levels(e0026_richness$abxDay), 2, simplify = FALSE)
-
-wilcoxon_results_p0 <- left_join(
-  e0026_richness %>%
-    filter(passage == 0) %>% 
-    rstatix::wilcox_test(species_richness ~ abxDay, comparisons = comparisons),
-  e0026_richness %>%
-    filter(passage == 0) %>% 
-    rstatix::wilcox_effsize(species_richness ~ abxDay, comparisons = comparisons),
-  by = c(".y.", "group1", "group2", "n1", "n2")
-) %>%
-  mutate(
-    comparison = paste0(group1, " vs ", group2),
-    summary = paste0(
-      "Wilcoxon rank-sum two-sided test, ", comparison,
-      ": n=", n1 + n2,
-      ", r=", round(effsize, 2),
-      ", p=", signif(p, 3),
-      ", adjusted p-value=", signif(p.adj, 3),
-      ", ", p.adj.signif,
-      ", custom adjusted p-value=", p
-    )
-  )
+# 
+# wilcoxon_results_p0 <- left_join(
+#   e0026_richness %>%
+#     filter(passage == 0) %>% 
+#     rstatix::wilcox_test(species_richness ~ abxDay, comparisons = comparisons),
+#   e0026_richness %>%
+#     filter(passage == 0) %>% 
+#     rstatix::wilcox_effsize(species_richness ~ abxDay, comparisons = comparisons),
+#   by = c(".y.", "group1", "group2", "n1", "n2")
+# ) %>%
+#   mutate(
+#     comparison = paste0(group1, " vs ", group2),
+#     summary = paste0(
+#       "Wilcoxon rank-sum two-sided test, ", comparison,
+#       ": n=", n1 + n2,
+#       ", r=", round(effsize, 2),
+#       ", p=", signif(p, 3),
+#       ", adjusted p-value=", signif(p.adj, 3),
+#       ", ", p.adj.signif,
+#       ", custom adjusted p-value=", p
+#     )
+#   )
 
 
 wilcoxon_results_p8 <- left_join(
@@ -82,12 +82,20 @@ wilcoxon_results_p8 <- left_join(
     )
   )
 
-valid_comparisons <- c("Yes_001 vs Yes_036", "Yes_001 vs Yes_064")
+valid_comparisons <- c("Yes_029 vs Yes_036", "Yes_029 vs Yes_064")
 
-wilcoxon_results_p0 <- wilcoxon_results_p0 %>%
-  filter(comparison %in% valid_comparisons)
+# wilcoxon_results_p0 <- wilcoxon_results_p0 %>%
+#   filter(comparison %in% valid_comparisons)
 wilcoxon_results_p8 <- wilcoxon_results_p8 %>%
   filter(comparison %in% valid_comparisons)
+
+
+write.csv(
+  wilcoxon_results_p8,
+  "/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/040325-comparerichnessPrePostAbx/out/wilcoxon_results_richness.csv",
+  row.names = FALSE
+)
+
 
 
 e0026_richness_filtered <- e0026_richness %>% 
