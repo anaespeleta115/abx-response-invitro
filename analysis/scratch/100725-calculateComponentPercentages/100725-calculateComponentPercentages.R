@@ -86,30 +86,30 @@ day36_mixture_components_percentages <- all_mix_day36_components  %>%
 component_1_percentage <- day36_mixture_components_percentages %>% 
   mutate(component_1_percentage = recipient/total * 100) 
 
-component_1_percentage_plot <- ggplot(component_1_percentage, aes(x = subject1, y = component_1_percentage)) +
-  geom_boxplot(fill = "#ffc425") +
-  # geom_boxplot(fill = "#d11141") +
+component_1_percentage_plot <- ggplot(component_1_percentage, aes(x = fct_reorder(subject2, -component_1_percentage), y = component_1_percentage)) +
+  # geom_boxplot(fill = "#ffc425") +
+  geom_boxplot(fill = "#d11141") +
   scale_y_continuous(limits = c(0, 100)) +
-  labs(x = "Recipient's mixtures", y = "Percentage of colonizers belonging to component 1") +
+  labs(x = "Donor's mixtures", y = "Percentage of colonizers belonging to component 1") +
   DEFAULTS.THEME_PRINT
 
 
-savePNGPDF(paste0(OUTDIR, "component_1_percentage_plot"), component_1_percentage_plot, 3, 3)
+savePNGPDF(paste0(OUTDIR, "component_1_percentage_plot_donor"), component_1_percentage_plot, 3, 3)
 
 # --------------------------- CALCULATE PERCENTAGE OF COLONIZERS THAT BELONG TO THE LOST TAXA FAMILIES  ----------------------------
 
 component_3_percentage <- day36_mixture_components_percentages %>% 
   mutate(component_3_percentage = component_3/non_recipient * 100) 
 
-component_3_percentage_plot <- ggplot(component_3_percentage, aes(x = subject1, y = component_3_percentage)) +
-  geom_boxplot(fill = "#ffc425") +
-  # geom_boxplot(fill = "#d11141") +
+component_3_percentage_plot <- ggplot(component_3_percentage, aes(x = fct_reorder(subject2, -component_3_percentage), y = component_3_percentage)) +
+  # geom_boxplot(fill = "#ffc425") +
+  geom_boxplot(fill = "#d11141") +
   scale_y_continuous(limits = c(0, 100)) +
-  labs(x = "Recipient's mixtures", y = "Percentage of colonizers belonging to component 3") +
+  labs(x = "Donor's mixtures", y = "Percentage of colonizers belonging to component 3") +
   DEFAULTS.THEME_PRINT
 
 
-savePNGPDF(paste0(OUTDIR, "component_3_percentage_plot"), component_3_percentage_plot, 4, 3)
+savePNGPDF(paste0(OUTDIR, "component_3_percentage_plot_donor"), component_3_percentage_plot, 4, 3)
 
 # --------------------------- CALCULATE PERCENTAGE OF COMPONENT 0  ----------------------------
 
@@ -120,20 +120,33 @@ component_0_percentage <- day36_mixture_components_percentages %>%
   # summarize(avg_per_donor = mean(component_0_percentage))
 
 
-component_0_percentage_plot <- ggplot(component_0_percentage, aes(x = subject1, y = component_0_percentage)) +
-  geom_boxplot(fill = "#ffc425") +
-  # geom_boxplot(fill = "#d11141") +
+component_0_percentage_plot <- ggplot(component_0_percentage, aes(x = fct_reorder(subject2, -component_0_percentage), y = component_0_percentage)) +
+  # geom_boxplot(fill = "#ffc425") +
+  geom_boxplot(fill = "#d11141") +
   scale_y_continuous(limits = c(80, 100)) +
-  labs(x = "Recipient's mixtures", y = "Percentage of OTUs belonging to component 0") +
+  labs(x = "Donor's mixtures", y = "Percentage of OTUs belonging to component 0") +
   DEFAULTS.THEME_PRINT
   # theme(axis.text.x  = element_blank(),
   #       axis.ticks.x = element_blank())
 
 
-savePNGPDF(paste0(OUTDIR, "component_0_percentage_plot"), component_0_percentage_plot, 3, 3)
+savePNGPDF(paste0(OUTDIR, "component_0_percentage_plot_donor"), component_0_percentage_plot, 3, 3)
 
 
+# --------------------------- CALCULATE ONLY PERCENTAGE 3  ----------------------------
 
+component_3_percentage <- day36_mixture_components_percentages %>% 
+  mutate(component_3_percentage = component_3) 
+
+component_3_percentage_plot <- ggplot(component_3_percentage, aes(x = fct_reorder(subject2, -component_3_percentage), y = component_3_percentage)) +
+  # geom_boxplot(fill = "#ffc425") +
+  geom_boxplot(fill = "#d11141") +
+  scale_y_continuous(limits = c(0, 100)) +
+  labs(x = "Donor's mixtures", y = "Percentage of OTUs belonging to component 3") +
+  DEFAULTS.THEME_PRINT
+
+
+savePNGPDF(paste0(OUTDIR, "component_3_percentage_plot_ONLY3_donor"), component_3_percentage_plot, 4, 3)
 
 
 

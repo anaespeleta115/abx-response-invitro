@@ -1,6 +1,10 @@
 # Load data
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
 source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
+
+
+# Set output directory
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/analysis/scratch/100825-getFullyLostFams/out/"
 
 curr_replicate <- 1
 
@@ -38,6 +42,18 @@ fully_lost_families <- lost_family_abundance %>%
   filter(fully_lost == 1)
 
 
+fully_lost_family_plot <- lost_family_abundance %>% 
+  select(subject1, Family, fam_abundance_29, fully_lost) %>% 
+  filter(fully_lost == 1) %>% 
+  ggplot(aes(x = fct_reorder(Family, - fam_abundance_29), y = fam_abundance_29)) +
+  geom_col(fill = "thistle", color = "black")+
+  labs(x = "Family",
+       y = "Day 29 relAbundance of lost family")+
+  facet_wrap(~subject1)+
+  DEFAULTS.THEME_PRINT+
+  theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 6, angle = 90))
 
+
+savePNGPDF(paste0(OUTDIR, "fully_lost_fams_day36"), fully_lost_family_plot , 4, 4)
 
 

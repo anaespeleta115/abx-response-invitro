@@ -1,5 +1,5 @@
 # Load data
-source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
 
 
 get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {

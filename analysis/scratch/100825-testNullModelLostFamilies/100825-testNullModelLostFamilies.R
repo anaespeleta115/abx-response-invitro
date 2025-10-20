@@ -19,10 +19,13 @@ curr_replicate <- 1
 # --------------------------- run null model  ----------------------------
 
 
-mixture_ids_36 <- unique(mixture_ASVs %>% filter(day == "036", subject1 == "XBA") %>%
+mixture_ids_36 <- unique(mixture_ASVs %>% filter(day == "036") %>%
                            pull(mixture))
 
 plot_list <- list()
+
+# Initialize final dataset
+all_mix_day36_components <- tibble()
 
 for (mix in mixture_ids_36){
   ids <- unlist(strsplit(mix, "\\+"))
@@ -53,7 +56,7 @@ for (mix in mixture_ids_36){
   # recipient_lost_29_36 <- recipient_lost_29_36 %>% 
   #   mutate(subject1 = str_sub(recipient_id_long, 1, -5))
   
-  # Get lost otus
+  # Get lost families
   recipient_lost_families <- fully_lost_families %>% 
     filter(subject1 == recipient_id)
   
@@ -86,10 +89,14 @@ for (mix in mixture_ids_36){
   
   plot_list[[mix]] <- day36_mixture_components_plot
   
+  all_mix_day36_components <- bind_rows(all_mix_day36_components, day36_mixture_components)
+  
 }
 
 
-combined_plot <- wrap_plots(plot_list, nrow = 1, ncol = 10)
+combined_plot <- wrap_plots(plot_list, nrow = 4, ncol = 10) # change this to 1 row when running a single subject
 
-savePNGPDF(paste0(OUTDIR, "day36_mix_components_fully_lost_fams"), combined_plot, 2, 9)
+savePNGPDF(paste0(OUTDIR, "day36_mix_components_fully_lost_fams"), combined_plot, 6, 9) # change this from 6 to 2
+
+
 
