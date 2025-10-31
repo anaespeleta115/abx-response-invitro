@@ -7,6 +7,7 @@ library("phyloseq")
 library(rstatix)
 library(PNWColors)
 
+source("")
 household_data <- read.table("~/Documents/GitHub/abx-response-invitro/data/e0026-e0029-e0030.txt", header = TRUE)
 
 

@@ -80,7 +80,6 @@ gain_mixture <- fam_abundance_mixture %>%
     mixture_ratio = fam_relAbundance_mixture/fam_relAbundance_recipient_36
   ) 
 
-
 # ----------------- Combine gain and loss data --------------------------------------------------------------
 
 compare_gain_loss <- gain_mixture %>% 
@@ -105,12 +104,12 @@ unexpected_colonizers <- gain_mixture %>%
   filter(log_recipient_abundance_29 == -4.0 & log_recipient_abundance_36 == -4.0)
 
 
-unexpected_colonizers_plot <- unexpected_colonizers %>% 
+unexpected_colonizers_plot <- unexpected_colonizers %>% filter(subject1 == "XBA") %>% 
   ggplot(aes(x = fct_reorder(Family, - fam_relAbundance_mixture), y = fam_relAbundance_mixture))+
   geom_col(fill = "pink", color = "black")+
   labs(x = "Family",
        y = "Day 36 mixture relAbundance of family")+
-  facet_grid(~subject1)+
+  facet_grid(subject1 ~ subject2)+
   DEFAULTS.THEME_PRINT+
   theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 6, angle = 90))
 
