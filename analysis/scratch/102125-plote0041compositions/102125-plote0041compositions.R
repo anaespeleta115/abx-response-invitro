@@ -120,7 +120,7 @@ savePNGPDF(paste0(OUTDIR, "all_compositions"), combined_plot, 10, 10)
 # --------------------------------- PLOT PRE-ABX LOST TAXA V1 ---------------------------------------
 
 
-p_pre_abx_lost_v1 <- ggplot(e0041_control_recipients %>% filter(recipient == "pre-abx"), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(lost_V1))) +
+p_pre_abx_lost_v1 <- ggplot(e0041_control_recipients_pre_abx %>% filter(recipient == "pre-abx"), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(lost_V1))) +
   geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
   scale_fill_manual(values = my_colors) +
   scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
@@ -141,7 +141,7 @@ savePNGPDF(paste0(OUTDIR, "compositions_pre-abx_lost_V1"), p_pre_abx_lost_v1, 4,
 
 
 
-p_pre_abx_lost_v2 <- ggplot(e0041_control_recipients %>% filter(recipient == "pre-abx"), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(lost_V2))) +
+p_pre_abx_lost_v2 <- ggplot(e0041_control_recipients_pre_abx %>% filter(recipient == "pre-abx"), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(lost_V2))) +
   geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
   scale_fill_manual(values = my_colors) +
   scale_alpha_manual(values = c("0" = 0, "1" = 1)) +

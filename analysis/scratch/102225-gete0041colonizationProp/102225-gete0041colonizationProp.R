@@ -110,58 +110,9 @@ other_colonizers_v1 <- mixture_colonization_full %>%
   group_by(mixture, Family) %>% 
   summarize(family_counts = n())
 
-lost_colonizers_v1 <- unique(mixture_colonization_full %>% 
-  filter(recipient == "post-abx-V1", diff_colonizer_v1 ==1, lost_V1 ==1))
 
-
-# --------------------------------------- WHO DOESN'T COLONIZE?
-
-mixture_colonization_pre_abx <- mixture_colonization_full %>% 
-  filter(recipient == "pre-abx")
-mixture_colonization_post_abx_V1 <- mixture_colonization_full %>% 
-  filter(recipient == "post-abx-V1")
-mixture_colonization_post_abx_V2 <- mixture_colonization_full %>% 
-  filter(recipient == "post-abx-V2")
-
-e0041_control_donors <- e0041_control_donors %>% 
-  mutate(colonized_pre_abx = ifelse(OTU %in% mixture_colonization_pre_abx$OTU, 1, 0), 
-         colonized_post_abx_V1 = ifelse(OTU %in% mixture_colonization_post_abx_V1$OTU, 1, 0),
-         colonized_post_abx_V2 = ifelse(OTU %in% mixture_colonization_post_abx_V2$OTU, 1, 0))
-
-# Investigate colonizers
-colonizers_V1 <- e0041_control_donors %>% 
-  filter(colonized_post_abx_V1 == 1) %>% 
-  group_by(donor, Family) %>% 
+other_colonizers_v2 <- mixture_colonization_full %>% 
+  filter(recipient == "post-abx-V1", diff_colonizer_v2 ==1, lost_V2 ==0) %>%
+  group_by(mixture, Family) %>% 
   summarize(family_counts = n())
-
-colonizers_V2 <- e0041_control_donors %>% 
-  filter(colonized_post_abx_V2 == 1) %>% 
-  group_by(donor, Family) %>% 
-  summarize(family_counts = n())
-
-# Investigate interesting features about taxa that don't colonize
-e0041_control_recipients_post_abx_v1 <- e0041_control_recipients %>% 
-  filter(recipient == "post-abx-V1")
-
-not_colonizers_V1 <- e0041_control_donors %>% 
-  filter(colonized_post_abx_V1 == 0) %>% 
-  mutate(shared_recipient = ifelse(OTU %in% e0041_control_recipients_post_abx_v1$OTU, 1, 0)) %>% 
-  filter(shared_recipient == 0) %>% 
-  group_by(donor, Family) %>% 
-  summarize(family_counts = n())
-
-e0041_control_recipients_pre_abx <- e0041_control_recipients %>% 
-  filter(recipient == "pre-abx")
-
-not_colonizers_V1 <- e0041_control_donors %>% 
-  filter(colonized_pre_abx == 0) %>% 
-  mutate(shared_recipient = ifelse(Family %in% e0041_control_recipients_pre_abx$Family, 1, 0)) %>% 
-  filter(shared_recipient == 0) %>% 
-  group_by(donor, Family) %>% 
-  summarize(family_counts = n())
-
-
-
-
-
 
