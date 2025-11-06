@@ -5,7 +5,7 @@ source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102125-loade004
 OUTDIR <- "~/Documents/GitHub/abx-response-invitro/analysis/scratch/110325-findPercentOTUs/out/"
 
 
-
+# This version is not the most updated. 
 
 # ------------------------------------------ % abundance lost out of total OTUs (VERSION 1) -----------------------------------------------
 
