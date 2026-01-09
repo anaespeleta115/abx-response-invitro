@@ -1,10 +1,10 @@
 # Load data
-source("C:/abx-response-invitro/analysis/scratch/040325-loadData/loadData.R")
+source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/040325-loadData/loadData.R")
 
-source("C:/abx-response-invitro/analysis/plotDefaults.R")
+source("~/Documents/GitHub/abx-response-invitro/analysis/plotDefaults.R")
 
 # Set output directory
-OUTDIR <- "C:/abx-response-invitro/analysis/scratch/041825-computeBetaPassages/out/"
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/analysis/scratch/041825-computeBetaPassages/out/"
 
 
 
@@ -20,19 +20,19 @@ extract_passage <- function(x) {
 }
 
 
-beta_diversity <- read_delim("C:/abx-response-invitro/analysis/scratch/041825-computeBetaDiversity/out/speciesBeta.txt.gz")
+beta_diversity <- read_delim("~/Documents/GitHub/abx-response-invitro/analysis/scratch/041825-computeBetaDiversity/out/speciesBeta.txt.gz")
 
 beta_diversity <- beta_diversity %>%
   select(sample1, sample2, method, value) %>%
   pivot_wider(names_from = method, values_from = value)
 
 # ensure uniqueness in combined_data
-combined_data_clean <- combined_day_data %>%
+e0026_clean <- e0026 %>%
   distinct(sample, .keep_all = TRUE)
 
 # join sample1 metadata and check
 e0026_beta <- beta_diversity %>%
-  left_join(combined_data_clean, by = c("sample1" = "sample"))
+  left_join(e0026_clean, by = c("sample1" = "sample"))
 
 # if the columns exist, rename them
 if (all(c("day", "subject", "antibiotic") %in% names(e0026_beta))) {
@@ -48,7 +48,7 @@ if (all(c("day", "subject", "antibiotic") %in% names(e0026_beta))) {
 
 # Join sample2 metadata
 e0026_beta2 <- e0026_beta %>%
-  left_join(combined_data_clean, by = c("sample2" = "sample"))
+  left_join(e0026_clean, by = c("sample2" = "sample"))
 
 
 # Rename second set

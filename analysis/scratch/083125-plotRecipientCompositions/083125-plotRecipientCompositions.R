@@ -3,7 +3,7 @@
 source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
 source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
 source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
-
+source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/072325-getLostStrains/072325-getLostStrains.R")
 
 
 # Set output directory
@@ -33,32 +33,32 @@ recipient_composition <- function(recipient_id) {
           axis.line=element_blank(), 
           axis.text.x = element_text(size = 10))
   
-  recipient_ASVs_36 <- recipient_ASVs %>%
-    mutate(day = str_sub(biosample1, -3),
-           subject1 = str_sub(biosample1, 1, -5)) %>% 
-    filter(day == "036", subject1 == recipient_id, replicate == num_replicate) %>% 
-    ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
-    geom_bar(stat = "identity", color = "black") +
-    scale_fill_manual(values = my_colors) +
-    labs(
-      title = "",
-      x = "",
-      y = ""
-    ) +
-    theme(legend.position = "none",
-          axis.line=element_blank(), 
-          axis.text.x = element_text(size = 10))
+  # recipient_ASVs_36 <- recipient_ASVs %>%
+  #   mutate(day = str_sub(biosample1, -3),
+  #          subject1 = str_sub(biosample1, 1, -5)) %>% 
+  #   filter(day == "036", subject1 == recipient_id, replicate == num_replicate) %>% 
+  #   ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+  #   geom_bar(stat = "identity", color = "black") +
+  #   scale_fill_manual(values = my_colors) +
+  #   labs(
+  #     title = "",
+  #     x = "",
+  #     y = ""
+  #   ) +
+  #   theme(legend.position = "none",
+  #         axis.line=element_blank(), 
+  #         axis.text.x = element_text(size = 10))
   
   
-  recipient_plot <- plot_grid(
-    recipient_ASVs_29,
-    recipient_ASVs_36,
-    ncol = 2
-  )
+  # recipient_plot <- plot_grid(
+  #   recipient_ASVs_29,
+  #   recipient_ASVs_36,
+  #   ncol = 2
+  # )
   
   # Make a list of mixture plots, one per biosample2
   mixture_plots <- actual_colonizers_results %>%
-    filter(day == "036", subject1 == recipient_id, replicate == num_replicate) %>%
+    filter(day == "036", subject1 == recipient_id, subject2 %in% c(""), replicate == num_replicate) %>%
     split(.$biosample2) %>%
     map(~ ggplot(.x, aes(x = mixture, y = relAbundance, fill = Family)) +
           geom_bar(stat = "identity", color = "black") +
@@ -91,13 +91,14 @@ recipient_mixtures_36_plot <- recipient_composition("XKA")
 savePNGPDF(paste0(OUTDIR, "XKA_recipient_mixtures_36_plot"), recipient_mixtures_36_plot, 4, 20)
 
 
-# ----------------------------------------PLOT XHB-----------------------------------------------------
+# ----------------------------------------PLOT XEA-----------------------------------------------------
+# alpha = factor(actual_colonizer)
+# alpha = factor(diff_colonizer_36)
 
-
-XHB_mixture_plots <- actual_colonizers_results %>%
-  filter(day == "036", subject2 == "XHB", replicate == num_replicate) %>%
+xea_mixture_plots <- actual_colonizers_results %>%
+  filter(day == "036", subject1 == "XEA", replicate == num_replicate) %>%
   split(.$biosample1) %>%
-  map(~ggplot(.x, aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(diff_colonizer_36))) +
+  map(~ggplot(.x, aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(actual_colonizer))) +
         geom_bar(stat = "identity", color = "black") +
         scale_fill_manual(values = my_colors)  +
         scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
@@ -107,38 +108,59 @@ XHB_mixture_plots <- actual_colonizers_results %>%
           legend.position = "none",
           axis.line = element_blank(),
           axis.text.x = element_blank(),
-          axis.ticks.x = element_blank()
+          axis.ticks.x = element_blank(),
+          strip.text = element_blank()
         ))
 
 # Stitch them into one row
-XHB_mixture_plots <- plot_grid(plotlist = XHB_mixture_plots, nrow = 1)
+xea_mixture_plots <- plot_grid(plotlist = xea_mixture_plots, nrow = 1)
 
-XHB <- single_donor_ASVs %>%
-  mutate(day = str_sub(biosample1, -3),
-         subject1 = str_sub(biosample1, 1, -5)) %>% 
-  filter(subject1 == "XHB", replicate == num_replicate) %>% 
-  ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
-  geom_bar(stat = "identity", color = "black") +
-  scale_fill_manual(values = my_colors) +
-  labs(
-    title = "",
-    x = "",
-    y = ""
-  ) +
-  theme(legend.position = "none",
-        axis.line=element_blank(), 
-        axis.text.x = element_text(size = 10))
+# XHB <- single_donor_ASVs %>%
+#   mutate(day = str_sub(biosample1, -3),
+#          subject1 = str_sub(biosample1, 1, -5)) %>% 
+#   filter(subject1 == "XHB", replicate == num_replicate) %>% 
+#   ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+#   geom_bar(stat = "identity", color = "black") +
+#   scale_fill_manual(values = my_colors) +
+#   labs(
+#     title = "",
+#     x = "",
+#     y = ""
+#   ) +
+#   theme(legend.position = "none",
+#         axis.line=element_blank(), 
+#         axis.text.x = element_text(size = 10))
+
+xea <- recipient_ASVs %>%
+    mutate(day = str_sub(biosample1, -3),
+           subject1 = str_sub(biosample1, 1, -5)) %>%
+    filter(subject1 == "XEA", replicate == num_replicate, day == "029") %>%
+    ggplot(aes(x = biosample1, y = relAbundance, fill = Family))+
+    geom_bar(stat = "identity", color = "black") +
+    scale_fill_manual(values = my_colors) +
+    scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
+    labs(
+      title = "",
+      x = "",
+      y = ""
+    ) +
+    theme(legend.position = "none",
+          axis.line=element_blank(),
+          # axis.text.x = element_text(size = 10),
+          axis.text.x = element_blank(),
+          axis.ticks.x = element_blank(),)
+  
 
 
-XHB_plots <- plot_grid(
-  XHB,
-  XHB_mixture_plots,
+xea_plots <- plot_grid(
+  xea,
+  xea_mixture_plots,
   nrow = 1,
-  rel_widths = c(1, 3)  # make Mixture twice as wide
+  rel_widths = c(1, 2)  # make Mixture twice as wide
 )
 
 
-savePNGPDF(paste0(OUTDIR, "XHB_diff_colonization_plots_36"), XHB_plots, 4, 10)
+savePNGPDF(paste0(OUTDIR, "xea_colonization_plots_36"), xea_plots, 4, 6)
 
 
 
@@ -190,7 +212,6 @@ XKB_plots <- plot_grid(
 
 
 savePNGPDF(paste0(OUTDIR, "XKB_plots_colonization_36"), XKB_plots, 4, 10)
-
 
 # ----------------------------------------PLOT ALL DONORS -----------------------------------------------------
 

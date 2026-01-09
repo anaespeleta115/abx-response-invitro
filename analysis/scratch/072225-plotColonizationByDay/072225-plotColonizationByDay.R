@@ -8,9 +8,11 @@ source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/072225-getColon
 OUTDIR <- "/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072225-plotColonizationByDay/out/"
 
 
-SUBJECT <- c("XBA", "XDA", "XEA", "XKA")
-PALETTE.SUBJECT <- c(  "#345995","#AD0505", "#daa520","#619E00")
-names(PALETTE.SUBJECT) <- SUBJECT
+
+DAY <- c("0", "7", "35")
+PALETTE.DAY <- c(paletteer_d("nationalparkcolors::Voyageurs"))
+names(PALETTE.DAY) <- DAY
+
 
 curr_replicate <- 1
 
@@ -77,9 +79,9 @@ savePNGPDF(paste0(OUTDIR, "mixtureColonization-day"), colonization_day, 4, 5)
 # For the poster, this plot was made on replicate 2 and with a higher limit of detection (stricter cutoff)
 
 prop_colonization_day <- 
-  ggplot(colonization_prop_results %>% mutate(day = (as.numeric(as.character(day)))-29), aes(x = factor(day), y = prop_colonizers, fill = recipient)) +
-  geom_boxplot() +
-  geom_hline(yintercept = 0.75, linetype = "dashed", color = "black") +
+  ggplot(colonization_prop_results %>% mutate(day = (as.numeric(as.character(day)))-29), aes(x = factor(day), y = prop_colonizers, fill = factor(day))) +
+  geom_boxplot(outlier.size = 0.5, fill = "#8FC0CEFF") +
+  # geom_hline(yintercept = 0.75, linetype = "dashed", color = "black") +
   # geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
   labs(
     title = "",
@@ -88,12 +90,11 @@ prop_colonization_day <-
     fill = ""
   ) +
   scale_y_continuous(limits = c(0, 1)) +
-  scale_fill_manual(values = PALETTE.SUBJECT)+
-  facet_wrap(~recipient)+
+  # facet_wrap(~recipient)+
   DEFAULTS.THEME_PRINT+
   theme(legend.position = "none")
 
-savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day"), prop_colonization_day, 4, 3)
+savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day"), prop_colonization_day, 2, 2)
 
 
 prop_colonization_day_XEA <- 

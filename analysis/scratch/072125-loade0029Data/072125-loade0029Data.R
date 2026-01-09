@@ -11,6 +11,7 @@ library(forcats)
 library(cowplot)
 library(stringr)
 library(scico)
+library(paletteer)
 
 
 # Set global variables
@@ -19,7 +20,7 @@ my_colors <- readRDS("/Users/aespelet/Documents/Github/abx-response-invitro/data
 # path reference: /Users/aespelet/Documents/Github/
 
 # Set limit of detection
-limit_of_detection <- 1e-4
+limit_of_detection <- 1e-3
 
 # Read in household dataset
 household_data <- read.table("/Users/aespelet/Documents/Github/abx-response-invitro/data/e0026-e0029-e0030.txt", header = TRUE)
@@ -94,9 +95,19 @@ mixture_ids <- unique(mixture_ASVs %>%
 mixture_ids_36 <- unique(mixture_ASVs %>% filter(day == "036") %>% 
                         pull(mixture)) 
 
+# Set palettes
 
+PASSAGE <- c(0, 8)
+PALETTE.PASSAGE <- c(  "gray80", paletteer_d("nationalparkcolors::Saguaro"))
+names(PALETTE.PASSAGE) <- PASSAGE
 
+SUBJECT <- c("XBA", "XDA", "XEA", "XKA")
+PALETTE.SUBJECT <- c(paletteer_d("nationalparkcolors::Badlands"))
+names(PALETTE.SUBJECT) <- SUBJECT
 
+DAY <- c("0", "7", "35")
+PALETTE.DAY <- c(paletteer_d("nationalparkcolors::Voyageurs"))
+names(PALETTE.DAY) <- DAY
 
 
 

@@ -18,7 +18,13 @@ get_colonization <- function(mixture_id, recipient_id, donor_id) {
   # Get shared OTUs between donor and mixture.  Add colonization column: 1 if OTU is shared with donor, 0 otherwise
   mixture_colonization <- mix_otus %>% 
     mutate(
-      colonizer = ifelse(OTU %in% donor_otus$OTU & !(OTU %in% recipient_otus$OTU), 1, 0))
+      from_donor = ifelse(OTU %in% donor_otus$OTU, 1, 0),
+      from_recipient = ifelse(OTU %in% recipient_otus$OTU, 1, 0),
+      colonizer = ifelse(OTU %in% donor_otus$OTU & !(OTU %in% recipient_otus$OTU), 1, 0),
+      neither = ifelse(!(OTU %in% donor_otus$OTU | OTU %in% recipient_otus$OTU), 1, 0))
+  
+  mixture_colonization <- mixture_colonization %>% 
+    filter(neither != 1)
 
   return(mixture_colonization)
 }
@@ -29,8 +35,8 @@ pre_abx_colonization <- get_colonization("pre-abx+XBB-029", "pre-abx", "XBB-029"
 # Apply get_colonization() function across all mixture IDs
 XEA_colonization <- foreach(mix_id = mixture_ids, .combine = bind_rows) %do% {
   ids <- unlist(strsplit(mix_id, "\\+"))
-  donor_id <- ids[1]
-  recipient_id <- ids[2]
+  recipient_id <- ids[1]
+  donor_id <- ids[2]
   
   result <- get_colonization(
     mix_id,

@@ -56,7 +56,7 @@ savePNGPDF(paste0(OUTDIR, "compositions_pre-abx_colonization"), p_pre_abx, 4, 4)
 # --------------------------- PLOT PRE-ABX MIXTURES (with different labels for colonization) ---------------------------------
 
 
-p_post_abx_v1 <- ggplot(mixture_colonization_full %>% filter(recipient == "post-abx-V1", donor != "XBB-029" & donor != "XEB-029" & donor != "XDB-029"), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(colonized_post_abx_v1))) +
+p_post_abx_v1 <- ggplot(mixture_colonization_full %>% filter(recipient == "post-abx-V1", donor != "XBB-029" & donor != "XEB-029" & donor != "XDB-029"), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(diff_colonizer_v1))) +
   geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
   scale_fill_manual(values = my_colors) +
   scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
@@ -68,9 +68,9 @@ p_post_abx_v1 <- ggplot(mixture_colonization_full %>% filter(recipient == "post-
   ) +
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "compositions_post-abx-V1_colonization"), p_post_abx_v1, 4, 4)
+savePNGPDF(paste0(OUTDIR, "compositions_post-abx-V1_DIFFcolonization"), p_post_abx_v1, 4, 4)
 
-p_post_abx_v2 <- ggplot(mixture_colonization_full %>% filter(recipient == "post-abx-V2", donor != "XBB-029" & donor != "XEB-029" & donor != "XDB-029"), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(colonized_post_abx_v2))) +
+p_post_abx_v2 <- ggplot(mixture_colonization_full %>% filter(recipient == "post-abx-V2", donor != "XBB-029" & donor != "XEB-029" & donor != "XDB-029"), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(diff_colonizer_v2))) +
   geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
   scale_fill_manual(values = my_colors) +
   scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
@@ -82,7 +82,7 @@ p_post_abx_v2 <- ggplot(mixture_colonization_full %>% filter(recipient == "post-
   ) +
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "compositions_post-abx-V2_colonization"), p_post_abx_v2, 4, 4)
+savePNGPDF(paste0(OUTDIR, "compositions_post-abx-V2_DIFFcolonization"), p_post_abx_v2, 4, 4)
 
 
 # --------------------------------- PLOT ALL COMPOSITIONS BY WELL ---------------------------------------
@@ -120,19 +120,17 @@ savePNGPDF(paste0(OUTDIR, "all_compositions"), combined_plot, 10, 10)
 # --------------------------------- PLOT PRE-ABX LOST TAXA V1 ---------------------------------------
 
 
-p_pre_abx_lost_v1 <- ggplot(e0041_control_recipients_pre_abx %>% filter(recipient == "pre-abx"), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(lost_V1))) +
+p_pre_abx_lost_v1 <- ggplot(e0041_control_recipients %>% filter(recipient == "pre-abx") %>% mutate(lost_V1 = ifelse(OTU %in% post_abx_lost_taxa_v1, 1, 0)), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(lost_V1))) +
   geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
   scale_fill_manual(values = my_colors) +
   scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
   labs(title = "" , x = "", y = "", fill = "Family") +
-  facet_wrap(~donor)+
-  theme_minimal()+
   theme(
     legend.position = "none"
   ) +
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "compositions_pre-abx_lost_V1"), p_pre_abx_lost_v1, 4, 4)
+savePNGPDF(paste0(OUTDIR, "compositions_pre-abx_lost_V1"), p_pre_abx_lost_v1, 2, 1)
 
 
 
@@ -141,19 +139,17 @@ savePNGPDF(paste0(OUTDIR, "compositions_pre-abx_lost_V1"), p_pre_abx_lost_v1, 4,
 
 
 
-p_pre_abx_lost_v2 <- ggplot(e0041_control_recipients_pre_abx %>% filter(recipient == "pre-abx"), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(lost_V2))) +
+p_pre_abx_lost_v2 <- ggplot(e0041_control_recipients %>% filter(recipient == "pre-abx") %>% mutate(lost_V2 = ifelse(OTU %in% post_abx_lost_taxa_v2, 1, 0)), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(lost_V2))) +
   geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
   scale_fill_manual(values = my_colors) +
   scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
   labs(title = "" , x = "", y = "", fill = "Family") +
-  facet_wrap(~donor)+
-  theme_minimal()+
   theme(
     legend.position = "none"
   ) +
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "compositions_pre-abx_lost_V2"), p_pre_abx_lost_v2, 4, 4)
+savePNGPDF(paste0(OUTDIR, "compositions_pre-abx_lost_V2"), p_pre_abx_lost_v2, 2, 1)
 
 
 # Q: ARE ALL LOST TAXA GAINED BACK IN THE MIXTURE? SUTTERELLACEAE AND ENTEROBACTERIACEAE ARE GAINED BACK IN ALL MIXTURES.

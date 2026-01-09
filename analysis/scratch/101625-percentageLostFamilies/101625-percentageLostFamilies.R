@@ -51,7 +51,7 @@ lost_family_abundance <- family_abundance %>%
 
 percent_lost_family_plot <- lost_family_abundance %>% filter(subject1 == "XBA") %>% 
   select(subject1, Family, fam_abundance_29, percentage_lost) %>% 
-  ggplot(aes(x = fct_reorder(Family, -fam_abundance_29), y = percentage_lost, fill = fam_abundance_29)) +
+  ggplot(aes(x = fct_reorder(Family, -percentage_lost), y = percentage_lost, fill = fam_abundance_29)) +
   geom_col(color = "black")+
   labs(x = "Family",
        y = "% of day 29 family abundance lost",
@@ -62,7 +62,7 @@ percent_lost_family_plot <- lost_family_abundance %>% filter(subject1 == "XBA") 
   theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 6, angle = 90))
 
 
-savePNGPDF(paste0(OUTDIR, "percentage_lost_fams_day36_XBA"), percent_lost_family_plot , 4, 4)
+savePNGPDF(paste0(OUTDIR, "percentage_lost_fams_day36_XBA"), percent_lost_family_plot , 3, 3)
 
 # ------------------------------------------ % of family gained (in abundance) -----------------------------------------------
 
@@ -128,18 +128,40 @@ family_OTU_counts <- recipients_day29_OTU_counts %>%
 
 hist_OTU_loss <- family_OTU_counts %>% filter(lost == 1) %>% 
   mutate(percentage_OTU_lost = percentage_OTU_lost * 100) %>%  # convert to %
-  ggplot(aes(x = percentage_OTU_lost)) +
-  geom_histogram(bins = 5, fill = "skyblue", color = "black", alpha = 0.7) +
+  ggplot(aes(x = percentage_OTU_lost, fill = subject1)) +
+  geom_histogram(bins = 5, color = "black", alpha = 0.7) +
   # geom_density(color = "darkblue", size = 1) +
   facet_wrap(~subject1) +
+  scale_y_continuous(limits = c(0, 13)) +
   labs(
     title = "",
     x = "% of OTUs Lost (Day 29 to Day 36)",
     y = "Number of families"
   ) +
-  DEFAULTS.THEME_PRINT
+  scale_fill_manual(values = PALETTE.SUBJECT) +
+  DEFAULTS.THEME_PRINT+
+  theme(
+    legend.position = "none"
+  )
 
-savePNGPDF(paste0(OUTDIR, "OTU-loss-percentages-histogram"), hist_OTU_loss , 4, 4)
+savePNGPDF(paste0(OUTDIR, "OTU-loss-percentages-histogram"), hist_OTU_loss , 2, 2)
+
+OTU_loss_per_fam <- family_OTU_counts %>% filter(lost == 1) %>% 
+  ggplot(aes(x = percentage_OTU_lost, fill = subject1)) +
+  geom_bar(color = "black", alpha = 0.7) +
+  # geom_density(color = "darkblue", size = 1) +
+  facet_wrap(~subject1) +
+  scale_y_continuous(limits = c(0, 13)) +
+  labs(
+    title = "",
+    x = "% of OTUs Lost (Day 29 to Day 36)",
+    y = "Number of families"
+  ) +
+  scale_fill_manual(values = PALETTE.SUBJECT) +
+  DEFAULTS.THEME_PRINT+
+  theme(
+    legend.position = "none"
+  )
 
 density_OTU_loss <- family_OTU_counts %>% filter(lost == 1) %>% 
   mutate(percentage_OTU_lost = percentage_OTU_lost * 100) %>%  # convert to %

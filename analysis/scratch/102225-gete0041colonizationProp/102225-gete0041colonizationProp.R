@@ -21,7 +21,13 @@ get_colonization <- function(mix_id, recipient_id, donor_id) {
   
   # colonizers are the subset of potentials that did make it into the mix
   mixture_colonization <- mix_otus %>% 
-    mutate(colonizer = ifelse(OTU %in% potential_colonizers, 1, 0))
+    mutate(colonizer = ifelse(OTU %in% potential_colonizers, 1, 0),
+           from_donor = ifelse(OTU %in% donor_otus$OTU, 1, 0),
+           from_recipient = ifelse(OTU %in% recipient_otus$OTU, 1, 0),
+           neither = ifelse(!(OTU %in% donor_otus$OTU | OTU %in% recipient_otus$OTU), 1, 0))
+  
+  mixture_colonization <- mixture_colonization %>% 
+    filter(neither != 1)
   
   # return both the dataframe and potential colonizer list
   return(list(
@@ -77,9 +83,10 @@ for (mix_id in mixture_ids) {
 
 # ---------------------------------------- ADD DIFFERENTIAL COLONIZER LABEL
 
+
 # We need to group OTUs by their mixture pair, independent of day
 diff_colonizers <- mixture_colonization_full %>%
-  group_by(OTU) %>% 
+  group_by(donor, OTU) %>% 
   summarize(
     colonized_pre_abx = as.integer(any(recipient == "pre-abx" & colonizer == 1)),
     colonized_post_abx_v1 = as.integer(any(recipient == "post-abx-V1" & colonizer == 1)),
@@ -91,16 +98,19 @@ diff_colonizers <- mixture_colonization_full %>%
 
 mixture_colonization_full <- mixture_colonization_full %>%
   left_join(diff_colonizers,
-            by = c("OTU"))
+            by = c("donor", "OTU"))
 
 # --------------------------------------- ADD LOST FAMILY LABEL
 # mixtures
-mixture_colonization_full <- mixture_colonization_full %>% 
-  mutate(lost_V1 = ifelse(Family %in% post_abx_lost_families_v1, 1, 0), lost_V2 = ifelse(Family %in% post_abx_lost_families_v2, 1, 0))
+mixture_colonization_full <- mixture_colonization_full %>%
+  mutate(
+    lost_V1 = ifelse(OTU %in% post_abx_lost_taxa_v1, 1, 0),
+    lost_V2 = ifelse(OTU %in% post_abx_lost_taxa_v2, 1, 0)
+  )
 
 # recipients
-e0041_control_recipients <- e0041_control_recipients %>% 
-  mutate(lost_V1 = ifelse(Family %in% post_abx_lost_families_v1, 1, 0), lost_V2 = ifelse(Family %in% post_abx_lost_families_v2, 1, 0))
+# e0041_control_recipients <- e0041_control_recipients %>% 
+#   mutate(lost_V1 = ifelse(Family %in% post_abx_lost_families_v1, 1, 0), lost_V2 = ifelse(Family %in% post_abx_lost_families_v2, 1, 0))
 
 
 # --------------------------------------- FIND WHO "OTHER" COLONIZERS ARE, MATCH AT THE ORDER LEVEL?

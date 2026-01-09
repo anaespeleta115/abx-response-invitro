@@ -36,25 +36,6 @@ family_abundance <- family_abundance_pre_abx %>%
          lost = ifelse(percentage_lost > 0, 1, 0),
          gained = ifelse(percentage_lost < 0, 1, 0))
 
-# ------------------------------------------ % of family lost (in OTU count) -----------------------------------------------
-
-lost_family_abundance <- family_abundance %>% 
-  filter(lost == 1) 
-
-percent_lost_family_plot <- lost_family_abundance %>% 
-  ggplot(aes(x = fct_reorder(Family, -fam_abundance_pre_abx), y = percentage_lost, fill = fam_abundance_pre_abx)) +
-  geom_col(color = "black")+
-  labs(x = "Family",
-       y = "% of family abundance lost",
-       fill = "Pre-abx family abundance")+
-  scale_fill_viridis_c(option = "magma")+ # limits = c(0.0001, 0.3)
-  DEFAULTS.THEME_PRINT+
-  theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 6, angle = 90))
-
-
-savePNGPDF(paste0(OUTDIR, "percentage_lost_fams_post_abx_v1"), percent_lost_family_plot , 4, 4)
-
-
 
 # ------------------------------------------ % family differential colonizers out of total family abundance (VERSION 1) -----------------------------------------------
 
@@ -85,6 +66,9 @@ family_abundance <- family_abundance_pre_abx %>%
          lost = ifelse(percentage_lost > 0, 1, 0),
          gained = ifelse(percentage_lost < 0, 1, 0))
 
+
+############################################
+
 # ------------------------------------------ % of family lost (in abundance) -----------------------------------------------
 
 lost_family_abundance <- family_abundance %>% 
@@ -103,8 +87,23 @@ percent_lost_family_plot <- lost_family_abundance %>%
 
 savePNGPDF(paste0(OUTDIR, "percentage_lost_fams_post_abx_v1"), percent_lost_family_plot , 4, 4)
 
+# ------------------------------------------ % of family lost (in OTU count) -----------------------------------------------
 
-# FOR DIFFERENTIAL COLONIZATION: for every colonizer family in the mixture community, what percent of their OTUs were differential
-# colonizers??
+lost_family_abundance <- family_abundance %>% 
+  filter(lost == 1) 
+
+percent_lost_family_plot <- lost_family_abundance %>% 
+  ggplot(aes(x = fct_reorder(Family, -fam_abundance_pre_abx), y = percentage_lost, fill = fam_abundance_pre_abx)) +
+  geom_col(color = "black")+
+  labs(x = "Family",
+       y = "% of family abundance lost",
+       fill = "Pre-abx family abundance")+
+  scale_fill_viridis_c(option = "magma")+ # limits = c(0.0001, 0.3)
+  DEFAULTS.THEME_PRINT+
+  theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 6, angle = 90))
+
+
+savePNGPDF(paste0(OUTDIR, "percentage_lost_fams_post_abx_v1"), percent_lost_family_plot , 4, 4)
+
 
 

@@ -9,9 +9,9 @@ OUTDIR <- "~/Documents/GitHub/abx-response-invitro/analysis/scratch/102525-plote
 
 
 
-SUBJECT <- c("pre-abx", "post-abx-V1", "post-abx-V2")
-PALETTE.SUBJECT <- c(  "#345995","#AD0505","#AD0505")
-names(PALETTE.SUBJECT) <- SUBJECT
+VERSION <- c("pre-abx", "post-abx-V2", "post-abx-V1")
+PALETTE.VERSION <- c(paletteer_d("nationalparkcolors::ArcticGates"))
+names(PALETTE.VERSION) <- VERSION
 
 
 mixture_colonization_data <- mixture_colonization_full %>% 
@@ -35,7 +35,7 @@ colonization_plot <-  ggplot(mixture_colonization_data, aes(x = fct_relevel(reci
   DEFAULTS.THEME_PRINT+
   theme(legend.position = "none")
 
-savePNGPDF(paste0(OUTDIR, "mixtureColonization"), colonization_plot, 3, 3)
+savePNGPDF(paste0(OUTDIR, "mixtureColonization_adjusted"), colonization_plot, 3, 3)
 
 
 prop_colonization_plot <- 
@@ -48,8 +48,8 @@ prop_colonization_plot <-
     fill = "Pre/Post-abx"
   ) +
   scale_y_continuous(limits = c(0, 1)) +
-  scale_fill_manual(values = PALETTE.SUBJECT)+
+  scale_fill_manual(values = PALETTE.VERSION)+
   DEFAULTS.THEME_PRINT+
   theme(legend.position = "none")
 
-savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp"), prop_colonization_plot, 3, 3)
+savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp_adjusted"), prop_colonization_plot, 2, 2)

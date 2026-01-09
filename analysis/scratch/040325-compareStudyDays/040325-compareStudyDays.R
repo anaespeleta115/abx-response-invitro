@@ -1,17 +1,17 @@
 # Plot stacked bar plots with a facet for each subject, showing compositional changes over time across timepoints, at passage 8.
 
 # Load data
-source("C:/abx-response-invitro/analysis/scratch/040325-loadData/loadData.R")
+source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/040325-loadData/loadData.R")
 
-source("C:/abx-response-invitro/analysis/plotDefaults.R")
+source("~/Documents/GitHub/abx-response-invitro/analysis/plotDefaults.R")
 
 # Set output directory
-OUTDIR <- "C:/abx-response-invitro/analysis/scratch/040325-compareStudyDays/out/"
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/analysis/scratch/040325-compareStudyDays/out/"
 
 
 ### Compositional changes pre and post-abx
 
-P8_compositions <- combined_day_data %>% 
+P8_compositions <- e0026 %>% 
   filter(passage == 8, subject %in% lastingResponses)
 
 # Summarize relative abundance per biosample1 by Family
@@ -58,7 +58,7 @@ savePNGPDF(paste0(OUTDIR, "compostionPrePostAbx"), p_composition_pre_postAbx, 3,
 
 ### Compositional changes pre and post-abx
 
-P0_compositions <- combined_day_data %>% 
+P0_compositions <- e0026 %>% 
   filter(passage == 0) %>% 
   filter(subject %in% lastingResponses)
 

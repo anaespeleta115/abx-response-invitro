@@ -9,20 +9,16 @@ source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefau
 # Set output directory
 OUTDIR <- "/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/040325-comparerichnessPrePostAbx/out/"
 
-# Set palette
-pal <- pnw_palette("Sunset2", 2, type = "discrete")
+
 
 ABX <- c("No", "Yes")
 PALETTE.ABX <- c("gray80","#88CCEE")
 names(PALETTE.ABX) <- ABX
 
 
-PASSAGE <- c(0, 8)
-PALETTE.PASSAGE <- c(  "gray80", "#B084CC")
-names(PALETTE.PASSAGE) <- PASSAGE
 
 
-e0026_richness <- e0026_richness %>%
+e0026_richness <- e0026_species_richness %>%
   ungroup() %>%  
   mutate(
     day = as.character(day),
@@ -99,7 +95,7 @@ write.csv(
 
 
 e0026_richness_filtered <- e0026_richness %>% 
-  filter(antibiotic != "0", passage %in% c(0,8)) %>% 
+  filter(antibiotic == "Yes", passage %in% c(0,8)) %>% 
   mutate(
     passage = factor(passage, levels = c(0, 8))
   )
@@ -115,14 +111,6 @@ p_richness_time_filtered <- ggplot(
     alpha = 0.9,
     size = 1
   )  +
-  # geom_jitter(
-  #   color = "black",
-  #   position = position_jitterdodge(jitter.width = 0.2, dodge.width = 0.75),
-  #   shape = 21,
-  #   stroke = 0.3,
-  #   size = 1.5,
-  #   alpha = 0.8
-  # ) +
   labs(
     title = "",
     x = "Study day",
@@ -139,3 +127,22 @@ p_richness_time_filtered <- ggplot(
   )
 
 savePNGPDF(paste0(OUTDIR, "richnessByTime_filtered"), p_richness_time_filtered, 2, 3)
+
+
+# Plot
+p_richness_day_p8_lasting <- 
+  ggplot(e0026_richness_filtered %>% mutate(day = as.numeric(day)-29) %>% filter(subject %in% lastingResponses, passage == 8), aes(x = factor(day), y = species_richness, group = subject, color = subject)) +
+  geom_line(linewidth = 0.5) +
+  geom_point(size = 0.5) +
+  scale_y_continuous(limits = c(0, 100)) + 
+  labs(
+    title = "",
+    x = "Study day",
+    y = "Species richness",
+    color = "Recipient"
+  ) +
+  scale_color_manual(values = PALETTE.SUBJECT) +
+  DEFAULTS.THEME_PRINT
+
+savePNGPDF(paste0(OUTDIR, "lastingResponderRichness_p8"), p_richness_day_p8_lasting, 1.5, 3)
+

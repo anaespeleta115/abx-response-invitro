@@ -6,6 +6,12 @@ library(ggplot2)
 library("phyloseq")
 library(cowplot)
 library(patchwork)
+library(paletteer)
+
+# scale_colour_paletteer_d("lisa::BridgetRiley")
+# scale_color_paletteer_d("lisa::BridgetRiley")
+# scale_fill_paletteer_d("lisa::BridgetRiley")
+# paletteer_d("lisa::BridgetRiley")
 
 # Load data
 source("~/Documents/GitHub/abx-response-invitro/analysis/plotDefaults.R")
@@ -18,7 +24,7 @@ e0040_obj <- readRDS("~/Documents/GitHub/bottom-up-community-mixtures/data/ps_al
 my_colors <- readRDS("~/Documents/GitHub/abx-response-invitro/data/familyColorPalette.rds") 
 
 # set limit of detection
-limit_of_detection <- 1e-4
+limit_of_detection <- 1e-3
 
 e0040_RCM <- e0040 %>% 
   filter(well %in% c("E2","F2","G2","H2"))

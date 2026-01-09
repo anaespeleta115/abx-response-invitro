@@ -67,7 +67,7 @@ assignSignificance <- function(x){
   ))
 }
 
-# Create day palette
-DAY <- c("029", "036", "064")
-PALETTE.DAY <- c("#9ec3f1", "#DD5E98" ,"#FFA849")
-names(PALETTE.DAY) <- DAY
+# # Create day palette
+# DAY <- c("029", "036", "064")
+# PALETTE.DAY <- c("#9ec3f1", "#DD5E98" ,"#FFA849")
+# names(PALETTE.DAY) <- DAY

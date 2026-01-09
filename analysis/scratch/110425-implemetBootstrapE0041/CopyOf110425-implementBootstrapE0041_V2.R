@@ -2,14 +2,15 @@
 source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102125-loade0041data/102125-loade0041data.R")
 source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102225-gete0041colonizationProp/102225-gete0041colonizationProp.R")
 source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102125-gete0041colonization/102125-gete0041colonization.R")
+source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102625-gete0041LostTaxa/102625gete0041LostTaxa.R")
 
 
 # Set seed to keep the same randomization
 set.seed(123)
 
-# ------------------------------------- Get post-abx V1 mixtures -------------------------------------------
-mixture_colonization_post_abx1 <- mixture_colonization_full %>%
-  filter(recipient == "pre-abx" | recipient == "post-abx-V1") 
+
+# Set output directory
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/analysis/scratch/110425-implemetBootstrapE0041/out/"
 
 
 # ------------------------------------- Get post-abx V2 mixtures -------------------------------------------
@@ -48,10 +49,13 @@ get_potential_colonizers <- function(mix, donor_id, recipient_id) {
 # Initialize results list
 bootstrap_results_list <- list()
 
-mixture_ids <- mixture_colonization_post_abx1 %>%
-  filter(donor != "super", recipient == "post-abx-V1") %>% 
+mixture_ids <- mixture_colonization_post_abx2 %>%
+  filter(mixture != "post-abx-V2+XEB-029", mixture != "post-abx-V2+XBB-029", recipient == "post-abx-V2") %>% 
   distinct(mixture) %>%
   pull(mixture)
+
+# mix <- mixture_ids[10]
+# # take out XEB
 
 # Loop over each mixture
 for (mix in mixture_ids) {
@@ -60,20 +64,24 @@ for (mix in mixture_ids) {
   donor_id <- ids[2]
   recipient_id <- ids[1]
   
+  print(mix)
+  
   # Get all colonizers for that mixture
-  sample_colonizers <- mixture_colonization_post_abx1 %>%
-    filter(mixture == mix, recipient == "post-abx-V1", colonized_post_abx_v1 == 1) %>%
+  sample_colonizers <- mixture_colonization_post_abx2 %>%
+    filter(mixture == mix, recipient == "post-abx-V2", colonized_post_abx_v2 == 1) %>%
     distinct(OTU, relAbundance, Family)
+  
+  print(nrow(sample_colonizers))
   
   # Get all differential colonizers for that mixture
-  sample_diff_colonizers <- mixture_colonization_post_abx1 %>%
-    filter(donor == donor_id, diff_colonizer_v1 == 1) %>%
+  sample_diff_colonizers <- mixture_colonization_post_abx2 %>%
+    filter(donor == donor_id, diff_colonizer_v2 == 1) %>%
     distinct(OTU, relAbundance, Family)
   
+  print(nrow(sample_diff_colonizers))
+  
   # Get lost taxa between pre-abx and post-abx-V1
-  recipient_lost <- e0041_control_recipients %>%
-    filter(recipient == "pre-abx", lost_V1 == 1) %>% 
-    distinct(OTU, relAbundance, Family)
+  recipient_lost <- e0041_recipients_lost_V2
   
   # Get all potential colonizers for that mixture
   sample_potential_colonizers <- get_potential_colonizers(mix, donor_id, recipient_id)
@@ -89,31 +97,32 @@ for (mix in mixture_ids) {
   # are enriched for lost taxa
     
     otu_shared <- length(intersect(boot_sample$OTU, recipient_lost$OTU))
-    fam_shared_weighted <- sum(boot_sample$relAbundance[boot_sample$Family %in% recipient_lost$Family])
+    fam_shared <- length(intersect(boot_sample$Family, recipient_lost$Family))
     
     otu_shared_ids <- intersect(boot_sample$OTU, recipient_lost$OTU)
-    # fam_shared_ids <- intersect(boot_sample$Family, recipient_lost$Family)
+    fam_shared_ids <- intersect(boot_sample$Family, recipient_lost$Family)
     
     # Replace empty vectors with "none"
     otu_shared_ids <- if (length(otu_shared_ids) == 0) "none" else otu_shared_ids
-    # fam_shared_ids <- if (length(fam_shared_ids) == 0) "none" else fam_shared_ids
+    fam_shared_ids <- if (length(fam_shared_ids) == 0) "none" else fam_shared_ids
     
     tibble(trial = trial, 
            shared_otus = otu_shared, 
-           shared_families = fam_shared_weighted, 
-           otu_ids = list(otu_shared_ids))
+           shared_families = fam_shared, 
+           otu_ids = list(otu_shared_ids) , 
+           fam_ids = list(fam_shared_ids))
   })
   
   # Observed values: raw count of OTUs/Families shared between real diff colonizers and real lost taxa
   observed_otus <- length(intersect(sample_diff_colonizers$OTU, recipient_lost$OTU))
-  observed_families <- sum(sample_diff_colonizers$relAbundance[sample_diff_colonizers$Family %in% recipient_lost$Family])
+  observed_families <- length(intersect(sample_diff_colonizers$Family, recipient_lost$Family))
   
   observed_otu_ids <- intersect(sample_diff_colonizers$OTU, recipient_lost$OTU)
-  # observed_families_ids <- intersect(sample_diff_colonizers$Family, recipient_lost$Family)
+  observed_families_ids <- intersect(sample_diff_colonizers$Family, recipient_lost$Family)
   
   # Replace empty vectors with "none"
   observed_otu_ids <- if (length(observed_otu_ids) == 0) "none" else observed_otu_ids
-  # observed_families_ids <- if (length(observed_families_ids) == 0) "none" else observed_families_ids
+  observed_families_ids <- if (length(observed_families_ids) == 0) "none" else observed_families_ids
   
   # Add observed values as a final row
   bootstrap_results <- bootstrap_results %>%
@@ -122,24 +131,29 @@ for (mix in mixture_ids) {
       trial = "Observed",
       shared_otus = observed_otus,
       shared_families = observed_families,
-      otu_ids = list(observed_otu_ids)
-      # fam_ids = list(observed_families_ids)
+      otu_ids = list(observed_otu_ids),
+      fam_ids = list(observed_families_ids)
     ))
   
   # Store for this mixture
   bootstrap_results_list[[mix]] <- bootstrap_results
 }
 
-combined_bootstrap_results <- bind_rows(bootstrap_results_list, .id = "mixture")
+version2_combined_bootstrap_results <- bind_rows(bootstrap_results_list, .id = "mixture")
+
+version2_combined_bootstrap_results <- version2_combined_bootstrap_results %>%
+  mutate(
+    fam_ids = sapply(fam_ids, paste, collapse = ", ")
+  )
 
 # Extract observed rows per mixture
-observed_rows <- combined_bootstrap_results %>%
+observed_rows <- version2_combined_bootstrap_results %>%
   filter(trial == "Observed") %>%
   select(mixture, observed_otus = shared_otus, observed_families = shared_families,
-         observed_otu_ids = otu_ids)
+         observed_otu_ids = otu_ids, observed_family_ids = fam_ids)
 
 # Join observed values to bootstrap results
-enrichment_pvals <- combined_bootstrap_results %>%
+version2_enrichment_pvals <- version2_combined_bootstrap_results %>%
   filter(trial != "Observed") %>%
   left_join(observed_rows, by = "mixture") %>%
   group_by(mixture) %>%
@@ -147,4 +161,26 @@ enrichment_pvals <- combined_bootstrap_results %>%
     p_value_fam = mean(shared_families >= observed_families),
     p_value_otu = mean(shared_otus >= observed_otus)
   )
+
+
+# --------------------------- PLOT ENRICHMENT --------------------------------
+
+
+manhattan_df <- version2_enrichment_pvals %>%
+  mutate(
+    neglogP_fam = -log10(p_value_fam),
+    sig = p_value_fam < 0.05
+  )
+
+manhattan_plot <- manhattan_df %>% 
+  ggplot(aes(x = reorder(mixture, neglogP_fam), y = neglogP_fam)) +
+  geom_point(aes(color = sig)) + 
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed") +
+  scale_y_continuous(limits = c(0, 3))+
+  scale_color_manual(values = c("TRUE" = "red", "FALSE" = "gray")) +
+  labs(x = "Mixture", y = expression(-log[10](p[family])), color = "Significance") +
+  DEFAULTS.THEME_PRINT+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 5), legend.title = element_text(size = 7), legend.text = element_text(size = 5))
+
+savePNGPDF(paste0(OUTDIR, "manhattan_plot_V2_colonizer_pooling"), manhattan_plot, 3, 3)
 

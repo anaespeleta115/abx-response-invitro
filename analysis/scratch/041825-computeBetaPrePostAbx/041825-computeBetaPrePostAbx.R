@@ -3,21 +3,19 @@
 ### JSD between communities of day 1&29 versus JSD of communities of day 29&36
 
 # Load data
-source("C:/abx-response-invitro/analysis/scratch/041825-computeBetaPassages/041825-computeBetaPassages.R")
+source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/041825-computeBetaPassages/041825-computeBetaPassages.R")
 
 # Set output directory
-OUTDIR <- "C:/abx-response-invitro/analysis/scratch/041825-computeBetaPrePostAbx/out/"
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/analysis/scratch/041825-computeBetaPrePostAbx/out/"
 
-# Set palette
-pal <- pnw_palette("Sunset", 6, type = "continuous")
 
 # Filter for day combinations of interest. Maybe make a new column that has the combinations and from there decide which ones to keep.
 
-e0026_beta2 <- e0026_beta2 %>%
+e0026_jsd_study_days <- e0026_beta2 %>%
   mutate(day_pair = paste(day1, day2, sep = "_")) %>% 
   filter(subject1 == subject2 & day1 != day2 & passage1 == 8 & passage2 == 8, antibiotic1 == 1)
   
-e0026_beta2 <- e0026_beta2 %>%  
+e0026_jsd_study_days <- e0026_jsd_study_days %>%  
   mutate(
     day_pair = map_chr(str_split(day_pair, "_"), ~ paste(sort(.x), collapse = "_"))
   )
@@ -28,16 +26,18 @@ e0026_beta2 <- e0026_beta2 %>%
 #   e0026_beta_clean %>% 
 #   filter(antibiotic1 == 1)
 
+e0026_jsd_study_days_filtered <- e0026_jsd_study_days %>% filter(day_pair %in% c("001_029", "001_036", "001_064"))
 
 p_betaPrePostAbx <- ggplot(
-  e0026_beta2,
-  aes(x = day_pair, y = jsd, fill = day_pair)
+  e0026_jsd_study_days_filtered,
+  aes(x = day_pair, y = jsd)
 ) +
   geom_boxplot(
     position = position_dodge(width = 0.75),
     width = 0.6,
     alpha = 0.9,
-    size = 1
+    size = 1,
+    fill = "#8FC0CEFF"
   # )  +
   # geom_jitter(
   #   color = "black",
@@ -48,17 +48,17 @@ p_betaPrePostAbx <- ggplot(
   #   alpha = 0.8
   )+
   labs(
-    title = "Divergence Across Samples Non-Abx Subjects",
-    x = "Day Pair",
+    title = "",
+    x = "Study day pair",
     y = "Jensen-Shannon Divergence"
   )  +
   theme(
     legend.position = "right",
     axis.text.x = element_text(angle = 45, hjust = 1)
   )+
-  scale_fill_manual(values=pal)
+  DEFAULTS.THEME_PRINT
 
 
 
-savePNGPDF(paste0(OUTDIR, "betaPrePostAbx"), p_betaPrePostAbx, 6, 12)
+savePNGPDF(paste0(OUTDIR, "betaPrePostAbx"), p_betaPrePostAbx, 2, 2)
 

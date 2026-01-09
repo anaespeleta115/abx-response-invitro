@@ -4,10 +4,15 @@ library(ggplot2)
 library(readr)
 library(ggrepel)
 library("phyloseq")
-library(rstatix)
+# library(rstatix)
 library(PNWColors)
+library(paletteer)
 
-source("")
+# scale_colour_paletteer_d("lisa::BridgetRiley")
+# scale_color_paletteer_d("lisa::BridgetRiley")
+# scale_fill_paletteer_d("lisa::BridgetRiley")
+# paletteer_d("lisa::BridgetRiley")
+
 household_data <- read.table("~/Documents/GitHub/abx-response-invitro/data/e0026-e0029-e0030.txt", header = TRUE)
 
 
@@ -25,30 +30,42 @@ subjectsAbx <- c("XAA","XBA","XCA","XDA","XEA","XFA","XGA","XHB","XIA","XJA",
 
 lastingResponses <- c("XBA", "XDA", "XEA", "XKA")
 
+limit_of_detection <-  1e-3
+
 # Extract subject, day, household, and antibiotic information
 e0026 <- e0026 %>%
+  filter(biosample1 != "blank") %>% 
   mutate(
-    subject = str_sub(biosample1, 1, -5),
+    subject = str_sub(biosample1, 1, 3),
     day = str_sub(biosample1, -3),
     household = str_sub(biosample1, 1, -6),
     antibiotic = if_else(str_sub(biosample1, 1, -5) %in% subjectsAbx, 1, 0)
   )
 
+# # Divide up e0026 dataset into separate day datasets: change filter into a mutate + ifelse command. 
+# e0026_day1 <- e0026 %>%  filter(str_detect(day, "001") | str_detect(day, "002") | str_detect(day, "003") | str_detect(day, "022")| str_detect(day, "008")) %>%
+#   mutate(day = "001")
+# e0026_day29 <- e0026 %>%   filter(str_detect(day, "029") | str_detect(day, "028") | str_detect(day, "027")) %>%
+#   mutate(day = "029")
+# 
+# e0026_day36 <- e0026 %>%  filter(str_detect(day, "036") | str_detect(day, "037")) %>%
+#   mutate(day = "036")
+# 
+# e0026_day64 <- e0026 %>%  filter(str_detect(day, "064")| str_detect(day, "063") | str_detect(day, "072") | str_detect(day, "059")| str_detect(day, "065")) %>%
+#   mutate(day = "064")
 
-# Divide up e0026 dataset into separate day datasets
-e0026_day1 <- e0026 %>%  filter(str_detect(day, "001") | str_detect(day, "002") | str_detect(day, "003") | str_detect(day, "022")| str_detect(day, "008")) %>% 
-  mutate(day = "001")
-e0026_day29 <- e0026 %>%   filter(str_detect(day, "029") | str_detect(day, "028") | str_detect(day, "027")) %>% 
-  mutate(day = "029")
+e0026 <- e0026 %>% 
+  mutate(day = case_when(
+    str_detect(day, "001") | str_detect(day, "002") | str_detect(day, "003") | str_detect(day, "022")| str_detect(day, "008") ~ "001",
+    str_detect(day, "029") | str_detect(day, "028") | str_detect(day, "027") ~ "029",
+    str_detect(day, "036") | str_detect(day, "037") ~ "036",
+    str_detect(day, "064")| str_detect(day, "063") | str_detect(day, "072") | str_detect(day, "059")| str_detect(day, "065") ~ "064",
+    TRUE ~ "0"
+  ))
 
-e0026_day36 <- e0026 %>%  filter(str_detect(day, "036") | str_detect(day, "037")) %>% 
-  mutate(day = "036")
 
-e0026_day64 <- e0026 %>%  filter(str_detect(day, "064")| str_detect(day, "063") | str_detect(day, "072") | str_detect(day, "059")| str_detect(day, "065")) %>% 
-  mutate(day = "064")
-
-# Combine all day datasets
-combined_day_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
+# # Combine all day datasets
+# combined_day_data <- bind_rows(e0026_day1, e0026_day29, e0026_day36, e0026_day64)
 
 # Get all samples that have every passage sequenced
 e0026_all_passages <- e0026 %>%
@@ -57,25 +74,19 @@ e0026_all_passages <- e0026 %>%
   filter(num_passages == 9) %>% 
   ungroup() 
 
-# Compute species richness
-e0026_richness <- combined_day_data %>%
-  filter(relAbundance > 0.001) %>%
-  select(biosample1, OTU, passage) %>%
-  group_by(biosample1, passage) %>%
-  dplyr::summarize(species_richness = n_distinct(OTU)) %>%
-  left_join(
-    combined_day_data %>% distinct(biosample1, day, subject, household, antibiotic),
-    by = "biosample1"
-  )
 
+e0026_species_richness <- e0026 %>% 
+  filter(relAbundance > limit_of_detection) %>% 
+  group_by(passage, subject, day, antibiotic) %>% 
+  summarize(species_richness = n())
 
-# Extract the top 25 families by relative abundance to make plots better
-top_families <- e0026_day29 %>%
-  group_by(Family) %>%
-  dplyr::summarise(total_abundance = sum(relAbundance, na.rm = TRUE)) %>%
-  arrange(desc(total_abundance)) %>%
-  # slice_head(n = 25) %>%
-  pull(Family)
+# # Extract the top 25 families by relative abundance to make plots better
+# top_families <- e0026_day29 %>%
+#   group_by(Family) %>%
+#   dplyr::summarise(total_abundance = sum(relAbundance, na.rm = TRUE)) %>%
+#   arrange(desc(total_abundance)) %>%
+#   # slice_head(n = 25) %>%
+#   pull(Family)
 
 # Define color palette
 my_colors <- readRDS("~/Documents/GitHub/abx-response-invitro/data/familyColorPalette.rds") 

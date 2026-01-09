@@ -58,8 +58,8 @@ e0041.A <- e0041 %>% filter(experiment == "XEA_exp", relAbundance>limit_of_detec
 e0041.B <- e0041 %>% filter(experiment == "XBA_exp") 
 
 # single donor, single recipients
-e0041_control_donors <- e0041.B %>% filter(recipient == "blank", replicate == 1, relAbundance>limit_of_detection) # replicate 2 donors look better
-e0041_control_recipients <- e0041.A %>% filter(donor == "blank", replicate == 1, relAbundance>limit_of_detection) # replicate 1 recipients looks better
+e0041_control_donors <- e0041.B %>% filter(recipient == "blank", donor != "blank", replicate == 1, relAbundance>limit_of_detection) # replicate 2 donors look better
+e0041_control_recipients <- e0041.A %>% filter(donor == "blank", recipient != "blank", replicate == 1, relAbundance>limit_of_detection) # replicate 1 recipients looks better
 
 # calculate richness for each group of communities
 e0041_control_donors_richness <- e0041_control_donors %>% group_by(replicate, mixture, well) %>% summarize(richness = sum(relAbundance>0.001))

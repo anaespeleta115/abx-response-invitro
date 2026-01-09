@@ -72,18 +72,20 @@ diff_colonizer_families <- mixture_colonization_full %>%
 percentage_differential <- colonizer_families %>% 
   left_join(diff_colonizer_families, by = c("Family")) %>% 
   mutate(family_diff_colonizer_otus = ifelse(is.na(family_diff_colonizer_otus), 0, family_diff_colonizer_otus), 
-         percentage = as.numeric(family_diff_colonizer_otus) / as.numeric(family_colonizer_otus) * 100)
+         percentage = as.numeric(family_diff_colonizer_otus) / as.numeric(family_colonizer_otus) * 100,
+         above_50 = ifelse(percentage > 50, 1, 0))
   
 
 # ------------------------------------------ plot -----------------------------------------------
 
 
 percent_colonizer_otus_family_plot <- percentage_differential %>% 
-  ggplot(aes(x = fct_reorder(Family, -percentage), y = percentage, fill = Family)) +
+  ggplot(aes(x = fct_reorder(Family, -percentage), y = percentage, fill = Family, alpha = factor(above_50))) +
   geom_col(color = "black")+
   labs(x = "Family",
-       y = "% of colonizers that are differential",
+       y = "% differential colonizers",
        fill = "Family")+
+  scale_alpha_manual(values = c("0" = 0, "1" = 1))+
   scale_fill_manual(values = my_colors)+
   scale_y_continuous(limits = c(0, 100))+
   theme(legend.position = "none")+
@@ -91,7 +93,7 @@ percent_colonizer_otus_family_plot <- percentage_differential %>%
   theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 6, angle = 90))
 
 
-savePNGPDF(paste0(OUTDIR, "percentage_diff_colonizer_otus_post_abx_v1"), percent_colonizer_otus_family_plot , 4, 4)
+savePNGPDF(paste0(OUTDIR, "percentage_diff_colonizer_otus_post_abx_v1_ADJUSTED"), percent_colonizer_otus_family_plot , 3, 2)
 
 
 colonizer_otus_family_plot <- colonizer_families %>% 
@@ -113,37 +115,40 @@ savePNGPDF(paste0(OUTDIR, "colonizer_otus_post_abx_v1"), colonizer_otus_family_p
 # ------------------------------------------ %  differential colonizer OTUs out of the colonizer OTUs per family (VERSION 2) -----------------------------------------------
 
 colonizer_families <- mixture_colonization_full %>% 
-  filter(colonized_post_abx_v2 == 1) %>% 
+  filter(colonized_post_abx_v1 == 1) %>% 
   group_by(Family) %>% 
   summarize(family_colonizer_otus = n())
 
 diff_colonizer_families <- mixture_colonization_full %>% 
-  filter(diff_colonizer_v2 == 1) %>% 
+  filter(diff_colonizer_v1 == 1) %>% 
   group_by(Family) %>% 
   summarize(family_diff_colonizer_otus = n())
 
 percentage_differential <- colonizer_families %>% 
   left_join(diff_colonizer_families, by = c("Family")) %>% 
   mutate(family_diff_colonizer_otus = ifelse(is.na(family_diff_colonizer_otus), 0, family_diff_colonizer_otus), 
-         percentage = as.numeric(family_diff_colonizer_otus) / as.numeric(family_colonizer_otus) * 100)
+         percentage = as.numeric(family_diff_colonizer_otus) / as.numeric(family_colonizer_otus) * 100,
+         above_50 = ifelse(percentage > 50, 1, 0))
 
 
 # ------------------------------------------ plot -----------------------------------------------
 
 
 percent_colonizer_otus_family_plot <- percentage_differential %>% 
-  ggplot(aes(x = fct_reorder(Family, -percentage), y = percentage, fill = Family)) +
+  ggplot(aes(x = fct_reorder(Family, -percentage), y = percentage, fill = Family, alpha = factor(above_50))) +
   geom_col(color = "black")+
   labs(x = "Family",
-       y = "% of colonizers that are differential",
+       y = "% of all post-abx colonizers
+       that are post-abx-only",
        fill = "Family")+
+  scale_alpha_manual(values = c("0" = 0, "1" = 1))+
   scale_fill_manual(values = my_colors)+
   theme(legend.position = "none")+
   DEFAULTS.THEME_PRINT+
   theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 6, angle = 90))
 
 
-savePNGPDF(paste0(OUTDIR, "percentage_diff_colonizer_otus_post_abx_v2"), percent_colonizer_otus_family_plot , 4, 4)
+savePNGPDF(paste0(OUTDIR, "percentage_diff_colonizer_otus_post_abx_v1_ADJUSTED"), percent_colonizer_otus_family_plot , 3, 2)
 
 
 colonizer_otus_family_plot <- colonizer_families %>% 
@@ -158,7 +163,7 @@ colonizer_otus_family_plot <- colonizer_families %>%
   theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 6, angle = 90))
 
 
-savePNGPDF(paste0(OUTDIR, "colonizer_otus_post_abx_v2"), colonizer_otus_family_plot , 4, 4)
+savePNGPDF(paste0(OUTDIR, "colonizer_otus_post_abx_v2"), colonizer_otus_family_plot , 3, 3)
 
 pre_abx_colonizer_families <- mixture_colonization_full %>% 
   filter(colonized_pre_abx == 1) %>% 

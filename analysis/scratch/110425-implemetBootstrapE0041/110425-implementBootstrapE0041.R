@@ -2,6 +2,7 @@
 source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102125-loade0041data/102125-loade0041data.R")
 source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102225-gete0041colonizationProp/102225-gete0041colonizationProp.R")
 source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102125-gete0041colonization/102125-gete0041colonization.R")
+source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102625-gete0041LostTaxa/102625gete0041LostTaxa.R")
 
 
 # Set seed to keep the same randomization
@@ -11,6 +12,8 @@ set.seed(123)
 mixture_colonization_post_abx1 <- mixture_colonization_full %>%
   filter(recipient == "pre-abx" | recipient == "post-abx-V1") 
 
+# Set output directory
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/analysis/scratch/110425-implemetBootstrapE0041/out/"
 
 
 # ------------------------------------- Define a function to get potential colonizers
@@ -65,9 +68,7 @@ for (mix in mixture_ids) {
     distinct(OTU, relAbundance, Family)
   
   # Get lost taxa between pre-abx and post-abx-V1
-  recipient_lost <- e0041_control_recipients %>%
-    filter(recipient == "pre-abx", lost_V1 == 1) %>% 
-    distinct(OTU, relAbundance, Family)
+  recipient_lost <- e0041_recipients_lost_V1
   
   # Get all potential colonizers for that mixture
   sample_potential_colonizers <- get_potential_colonizers(mix, donor_id, recipient_id)
@@ -78,7 +79,7 @@ for (mix in mixture_ids) {
   # the observed and bootstrap pools are the same size.
   
   bootstrap_results <- map_dfr(1:n_trials, function(trial) {
-    boot_sample <- sample_colonizers %>%
+    boot_sample <- sample_potential_colonizers %>% #!!!!!!!!!!!!
       slice_sample(n = n_sample, weight_by = relAbundance, replace = TRUE) # take a slice out of the post-abx-v1 colonizers and see if they
   # are enriched for lost taxa
     
@@ -129,7 +130,8 @@ combined_bootstrap_results <- bind_rows(bootstrap_results_list, .id = "mixture")
 
 combined_bootstrap_results <- combined_bootstrap_results %>%
   mutate(
-    fam_ids = sapply(fam_ids, paste, collapse = ", ")
+    fam_ids = sapply(fam_ids, paste, collapse = ", "),
+    otu_ids = sapply(otu_ids, paste, collapse = ",")
   )
 
 # Extract observed rows per mixture
@@ -147,4 +149,25 @@ enrichment_pvals <- combined_bootstrap_results %>%
     p_value_fam = mean(shared_families >= observed_families),
     p_value_otu = mean(shared_otus >= observed_otus)
   )
+
+manhattan_df <- enrichment_pvals %>%
+  mutate(
+    neglogP_fam = -log10(p_value_fam),
+    sig = p_value_fam < 0.05
+  )
+
+manhattan_plot <- manhattan_df %>% 
+  ggplot(aes(x = reorder(mixture, neglogP_fam), y = neglogP_fam)) +
+  geom_point(aes(color = sig)) + 
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed") +
+  scale_y_continuous(limits = c(0, 3))+
+  scale_color_manual(values = c("TRUE" = "red", "FALSE" = "gray")) +
+  labs(x = "Mixture", y = expression(-log[10](p[family])), color = "Significance") +
+  DEFAULTS.THEME_PRINT+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 5), legend.title = element_text(size = 7), legend.text = element_text(size = 5))
+
+savePNGPDF(paste0(OUTDIR, "manhattan_plot_V1_potential_colonizer_pooling"), manhattan_plot , 3, 3.5) #!!!!!!!!!!!!!!
+
+
+
 
