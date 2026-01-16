@@ -52,7 +52,10 @@ recipient_ASVs <- e0029 %>%
   filter(
     !(biosample2 == "blank") |
       (biosample2 == "blank" & !well %in% c("G11", "H11"))) %>%
-  filter(biosample1 != "blank" )
+  filter(biosample1 != "blank" ) %>% 
+  mutate(subject1 = str_sub(biosample1, 1, -5),
+         day = str_sub(biosample1, -3))
+  
 
 
 # Extract donor community IDs from e0029

@@ -148,7 +148,7 @@ percent_colonizer_otus_family_plot <- percentage_differential %>%
   theme(axis.text.x = element_text(hjust = 1, vjust = 0.5, size = 6, angle = 90))
 
 
-savePNGPDF(paste0(OUTDIR, "percentage_diff_colonizer_otus_post_abx_v1_ADJUSTED"), percent_colonizer_otus_family_plot , 3, 2)
+savePNGPDF(paste0(OUTDIR, "percentage_diff_colonizer_otus_post_abx_v2_ADJUSTED"), percent_colonizer_otus_family_plot , 3, 2)
 
 
 colonizer_otus_family_plot <- colonizer_families %>% 

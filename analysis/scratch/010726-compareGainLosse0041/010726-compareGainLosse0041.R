@@ -52,13 +52,13 @@ recipient_fam_loss_V2 <- recipient_fam_abundance_pre_abx %>%
 # get V1 mixture family abundance
 fam_abundance_mixture_V1 <- mixture_colonization_full %>% 
   filter(recipient == "post-abx-V1", replicate == curr_replicate) %>% 
-  group_by(Family, recipient) %>% 
+  group_by(Family, recipient, donor) %>% 
   summarise(fam_relAbundance_mixture = sum(relAbundance))
 
 # get V2 mixture family abundance
 fam_abundance_mixture_V2 <- mixture_colonization_full %>% 
   filter(recipient == "post-abx-V2", replicate == curr_replicate) %>% 
-  group_by(Family, recipient) %>% 
+  group_by(Family, recipient, donor) %>% 
   summarise(fam_relAbundance_mixture = sum(relAbundance))
 
 
@@ -83,6 +83,10 @@ gain_mixture_V1 <- fam_abundance_mixture_V1 %>%
     fam_relAbundance_mixture = if_else(fam_relAbundance_mixture == 0, 1e-4, fam_relAbundance_mixture),
     mixture_ratio = fam_relAbundance_mixture/fam_relAbundance_V1
   ) 
+# compute average mixture ratio across donors
+gain_mixture_V1_avg <- gain_mixture_V1 %>% 
+  group_by(Family, recipient) %>% 
+  summarize(avg_mix_ratio = mean(mixture_ratio))
 
 #V2 family abundance gain in mixture
 gain_mixture_V2 <- fam_abundance_mixture_V2 %>%
@@ -93,34 +97,61 @@ gain_mixture_V2 <- fam_abundance_mixture_V2 %>%
     fam_relAbundance_mixture = if_else(fam_relAbundance_mixture == 0, 1e-4, fam_relAbundance_mixture),
     mixture_ratio = fam_relAbundance_mixture/fam_relAbundance_V2
   ) 
+# compute average mixture ratio across donors
+gain_mixture_V2_avg <- gain_mixture_V2 %>% 
+  group_by(Family, recipient) %>% 
+  summarize(avg_mix_ratio = mean(mixture_ratio))
 
 # ----------------- Combine gain and loss data --------------------------------------------------------------
 # Here, we left-join the gain data into the loss data because we only care about the families that were already present in the recipient
-# V1 comparison
-compare_gain_loss_V1 <- recipient_fam_loss_V1 %>% 
-  left_join(gain_mixture_V1 %>% select(-recipient, -fam_relAbundance_V1), by = c("Family")) %>% 
-  replace_na(list(fam_relAbundance_pre_abx = 1e-4)) %>% 
+# # V1 comparison
+# compare_gain_loss_V1 <- recipient_fam_loss_V1 %>% 
+#   left_join(gain_mixture_V1 %>% select(-recipient, -fam_relAbundance_V1), by = c("Family")) %>% 
+#   replace_na(list(fam_relAbundance_pre_abx = 1e-4)) %>% 
+#   mutate(
+#     recipient_ratio = fam_relAbundance_pre_abx/fam_relAbundance_V1
+#   )
+# 
+# #V2 comparison
+# compare_gain_loss_V2 <- recipient_fam_loss_V2 %>% 
+#   left_join(gain_mixture_V2 %>% select(-recipient, -fam_relAbundance_V2), by = c("Family")) %>% 
+#   replace_na(list(fam_relAbundance_pre_abx = 1e-4)) %>% 
+#   mutate(
+#     recipient_ratio = fam_relAbundance_pre_abx/fam_relAbundance_V2
+#   )
+
+
+# V1 comparison using full_join (W/ UNEXPECTED COLONIZERS)
+compare_gain_loss_V1 <- recipient_fam_loss_V1 %>%
+  full_join(gain_mixture_V1_avg %>% select(-recipient), by = c("Family")) %>%
+  replace_na(list(fam_relAbundance_pre_abx = 1e-4, recipient = "post_abx_V1", fam_relAbundance_V1 = 1e-4)) %>%
   mutate(
     recipient_ratio = fam_relAbundance_pre_abx/fam_relAbundance_V1
   )
 
-#V2 comparison
-compare_gain_loss_V2 <- recipient_fam_loss_V2 %>% 
-  left_join(gain_mixture_V2 %>% select(-recipient, -fam_relAbundance_V2), by = c("Family")) %>% 
-  replace_na(list(fam_relAbundance_pre_abx = 1e-4)) %>% 
+#V2 comparison using full_join (W/ UNEXPECTED COLONIZERS)
+# compare_gain_loss_V2 <- recipient_fam_loss_V2 %>%
+#   full_join(gain_mixture_V2 %>% select(-recipient, -fam_relAbundance_V2), by = c("Family")) %>%
+#   replace_na(list(fam_relAbundance_pre_abx = 1e-4, recipient = "post_abx_V2", fam_relAbundance_V2 = 1e-4)) %>%
+#   mutate(
+#     recipient_ratio = fam_relAbundance_pre_abx/fam_relAbundance_V2
+#   )
+compare_gain_loss_V2 <- recipient_fam_loss_V2 %>%
+  full_join(gain_mixture_V2_avg %>% select(-recipient), by = c("Family")) %>%
+  replace_na(list(fam_relAbundance_pre_abx = 1e-4, recipient = "post_abx_V2", fam_relAbundance_V2 = 1e-4)) %>%
   mutate(
     recipient_ratio = fam_relAbundance_pre_abx/fam_relAbundance_V2
   )
 
+
+
 # ----------------- Average gain ratio across mixtures --------------------------------------------------------------
 
 # V1 PLOT -----------------
-gain_loss_avg_V1 <- compare_gain_loss_V1 %>% 
-  group_by(Family, recipient_ratio) %>% 
-  summarise(avg_mix_ratio = mean(mixture_ratio)) %>% 
+compare_gain_loss_V1 <- compare_gain_loss_V1 %>% 
   filter(Family != "Hydrogenoanaerobacterium") #filter out this family because it was not present in any donor
 
-gain_loss_avg_plot_V1 <- gain_loss_avg_V1 %>% 
+gain_loss_avg_plot_V1 <- compare_gain_loss_V1 %>% 
   ggplot(aes(x = log10(recipient_ratio), y = log10(avg_mix_ratio), color = Family))+
   geom_point(size = 2, alpha = 0.5)+
   geom_smooth(method = "lm", se = FALSE, color = "black", linewidth = 0.5) + # correlation line
@@ -133,17 +164,17 @@ gain_loss_avg_plot_V1 <- gain_loss_avg_V1 %>%
   DEFAULTS.THEME_PRINT
 
 
-savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot_e0041_V1"), gain_loss_avg_plot_V1, 2.5, 3)
+savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot_e0041_V1_UNEXPECTED"), gain_loss_avg_plot_V1, 2.5, 3)
 
 
 
 #V2 PLOT -----------------
-gain_loss_avg_V2 <- compare_gain_loss_V2 %>%
-  group_by(Family, recipient_ratio) %>%
-  summarise(avg_mix_ratio = mean(mixture_ratio)) %>% 
+compare_gain_loss_V2 <- compare_gain_loss_V2 %>%
+  # group_by(Family, recipient_ratio) %>%
+  # summarise(avg_mix_ratio = mean(mixture_ratio)) %>% 
   filter(Family != "Hydrogenoanaerobacterium") #filter out this family because it was not present in any donor
 
-gain_loss_avg_plot_V2 <- gain_loss_avg_V2 %>% 
+gain_loss_avg_plot_V2 <- compare_gain_loss_V2 %>% 
   ggplot(aes(x = log10(recipient_ratio), y = log10(avg_mix_ratio), color = Family))+
   geom_point(size = 2, alpha = 0.5)+
   geom_smooth(method = "lm", se = FALSE, color = "black", linewidth = 0.5) + # correlation line
@@ -156,4 +187,4 @@ gain_loss_avg_plot_V2 <- gain_loss_avg_V2 %>%
   DEFAULTS.THEME_PRINT
 
 
-savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot_e0041_V2"), gain_loss_avg_plot_V2, 2.5, 3)
+savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot_e0041_V2_UNEXPECTED"), gain_loss_avg_plot_V2, 2.5, 3)
