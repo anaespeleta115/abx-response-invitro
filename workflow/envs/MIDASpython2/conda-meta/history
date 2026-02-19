@@ -1,0 +1,45 @@
+==> 2026-02-18 22:15:58 <==
+# cmd: mamba env create -f midas_env.yml -p /dfs7/xuek5-lab/aespelet/envs/MIDASpython2
+# conda version: 3.8.0
++https://conda.anaconda.org/conda-forge/linux-64::ca-certificates-2020.4.5.1-hecc5488_0
++https://conda.anaconda.org/conda-forge/linux-64::_libgcc_mutex-0.1-conda_forge
++https://conda.anaconda.org/conda-forge/linux-64::ld_impl_linux-64-2.34-hc38a660_9
++https://conda.anaconda.org/conda-forge/linux-64::libgfortran-ng-7.3.0-hdf63c60_5
++https://conda.anaconda.org/conda-forge/linux-64::libstdcxx-ng-9.2.0-hdf63c60_2
++https://conda.anaconda.org/conda-forge/linux-64::libgomp-9.2.0-h24d8f2e_2
++https://conda.anaconda.org/conda-forge/linux-64::_openmp_mutex-4.5-20_gnu
++https://conda.anaconda.org/conda-forge/linux-64::libgcc-ng-9.2.0-h24d8f2e_2
++https://conda.anaconda.org/conda-forge/linux-64::libzlib-1.2.11-h36c2ea0_1013
++https://conda.anaconda.org/conda-forge/linux-64::xz-5.2.5-h516909a_1
++https://conda.anaconda.org/conda-forge/linux-64::openssl-1.1.1g-h516909a_1
++https://conda.anaconda.org/conda-forge/linux-64::ncurses-6.1-hf484d3e_1002
++https://conda.anaconda.org/conda-forge/linux-64::libopenblas-0.3.7-h5ec1e0e_6
++https://conda.anaconda.org/conda-forge/linux-64::libffi-3.2.1-he1b5a44_1007
++https://conda.anaconda.org/conda-forge/linux-64::bzip2-1.0.8-h516909a_3
++https://conda.anaconda.org/conda-forge/linux-64::libdeflate-1.5-h516909a_0
++https://conda.anaconda.org/conda-forge/linux-64::zlib-1.2.11-h36c2ea0_1013
++https://conda.anaconda.org/conda-forge/linux-64::readline-8.0-h46ee950_1
++https://conda.anaconda.org/conda-forge/linux-64::libedit-3.1.20170329-hf8c457e_1001
++https://conda.anaconda.org/conda-forge/linux-64::libblas-3.8.0-14_openblas
++https://conda.anaconda.org/conda-forge/linux-64::tk-8.6.10-h21135ba_1
++https://conda.anaconda.org/conda-forge/linux-64::libssh2-1.8.2-h22169c7_2
++https://conda.anaconda.org/conda-forge/linux-64::sqlite-3.30.1-hcee41ef_0
++https://conda.anaconda.org/conda-forge/linux-64::libcblas-3.8.0-14_openblas
++https://conda.anaconda.org/conda-forge/linux-64::liblapack-3.8.0-14_openblas
++https://conda.anaconda.org/conda-forge/linux-64::krb5-1.17.1-h2fd8d38_0
++https://conda.anaconda.org/conda-forge/linux-64::python-2.7.15-h5a48372_1011_cpython
++https://conda.anaconda.org/conda-forge/linux-64::libcurl-7.69.1-hf7181ac_0
++https://conda.anaconda.org/conda-forge/linux-64::python_abi-2.7-1_cp27mu
++https://conda.anaconda.org/conda-forge/linux-64::curl-7.69.1-h33f0ec9_0
++https://conda.anaconda.org/conda-forge/linux-64::certifi-2019.11.28-py27h8c360ce_1
++https://conda.anaconda.org/conda-forge/linux-64::setuptools-44.0.0-py27_0
++https://conda.anaconda.org/conda-forge/noarch::wheel-0.34.2-py_1
++https://conda.anaconda.org/conda-forge/noarch::pip-20.0.2-py_2
++https://conda.anaconda.org/conda-forge/noarch::six-1.14.0-py_1
++https://conda.anaconda.org/conda-forge/noarch::pytz-2019.3-py_0
++https://conda.anaconda.org/conda-forge/noarch::python-dateutil-2.8.1-py_0
++https://conda.anaconda.org/bioconda/linux-64::pysam-0.15.4-py27hbcae180_0
++https://conda.anaconda.org/conda-forge/linux-64::numpy-1.16.5-py27h95a1406_0
++https://conda.anaconda.org/conda-forge/linux-64::pandas-0.24.2-py27hb3f55d8_0
++https://conda.anaconda.org/conda-forge/linux-64::biopython-1.76-py27h516909a_0
+# update specs: ["_libgcc_mutex=0.1", "_openmp_mutex=4.5", "biopython=1.76", "bzip2=1.0.8", "ca-certificates=2020.4.5.1", "certifi=2019.11.28", "curl=7.69.1", "krb5=1.17.1", "ld_impl_linux-64=2.34", "libblas=3.8.0", "libcblas=3.8.0", "libcurl=7.69.1", "libdeflate=1.5", "libedit=3.1.20170329", "libffi=3.2.1", "libgcc-ng=9.2.0", "libgfortran-ng=7.3.0", "libgomp=9.2.0", "liblapack=3.8.0", "libopenblas=0.3.7", "libssh2=1.8.2", "libstdcxx-ng=9.2.0", "ncurses=6.1", "numpy=1.16.5", "openssl=1.1.1g", "pandas=0.24.2", "pip=20.0.2", "pysam=0.15.4", "python=2.7.15", "python-dateutil=2.8.1", "python_abi=2.7", "pytz=2019.3", "readline=8.0", "setuptools=44.0.0", "six=1.14.0", "sqlite=3.30.1", "tk=8.6.10", "wheel=0.34.2", "xz=5.2.5", "zlib=1.2.11"]
