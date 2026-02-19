@@ -1,0 +1,1 @@
+{"record_format_version": 6, "code": "echo hello > test.txt", "rule": "hello", "input": [], "log": [], "params": [], "shellcmd": "echo hello > test.txt", "incomplete": false, "starttime": 1771528929.0, "endtime": 1771528929.0, "job_hash": 8763431314641, "conda_env": null, "software_stack_hash": "d41d8cd98f00b204e9800998ecf8427e", "container_img_url": null, "input_checksums": {}}
