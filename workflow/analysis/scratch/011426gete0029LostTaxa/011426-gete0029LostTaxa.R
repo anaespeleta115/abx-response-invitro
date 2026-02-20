@@ -32,7 +32,7 @@ e0029_recipients_lost <-recipient_ASVs %>% filter(OTU %in% post_abx_lost_taxa) %
 # For coloring only the lost taxa
 ## alpha = factor(lost)
 
-p_pre_abx_lost <- ggplot(recipient_ASVs %>% filter(replicate == 1, day == "029", subject1 == "XKA") %>% mutate(lost = ifelse(OTU %in% post_abx_lost_taxa, 1, 0)), aes(x = subject1, y = relAbundance, fill = Family,  alpha = factor(lost))) +
+p_pre_abx_lost <- ggplot(recipient_ASVs %>% filter(replicate == 1, day == "029", subject1 == "XEA") %>% mutate(lost = ifelse(OTU %in% post_abx_lost_taxa, 1, 0)), aes(x = subject1, y = relAbundance, fill = Family)) +
   geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
   scale_fill_manual(values = my_colors) +
   scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
@@ -42,6 +42,6 @@ p_pre_abx_lost <- ggplot(recipient_ASVs %>% filter(replicate == 1, day == "029",
   ) +
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "compositions_pre-abx_XKA_lost"), p_pre_abx_lost, 2, 1)
+savePNGPDF(paste0(OUTDIR, "compositions_pre-abx_XEA"), p_pre_abx_lost, 2, 1)
 
 

@@ -104,44 +104,38 @@ gain_mixture_V2_avg <- gain_mixture_V2 %>%
 
 # ----------------- Combine gain and loss data --------------------------------------------------------------
 # Here, we left-join the gain data into the loss data because we only care about the families that were already present in the recipient
-# # V1 comparison
-# compare_gain_loss_V1 <- recipient_fam_loss_V1 %>% 
-#   left_join(gain_mixture_V1 %>% select(-recipient, -fam_relAbundance_V1), by = c("Family")) %>% 
-#   replace_na(list(fam_relAbundance_pre_abx = 1e-4)) %>% 
-#   mutate(
-#     recipient_ratio = fam_relAbundance_pre_abx/fam_relAbundance_V1
-#   )
-# 
-# #V2 comparison
-# compare_gain_loss_V2 <- recipient_fam_loss_V2 %>% 
-#   left_join(gain_mixture_V2 %>% select(-recipient, -fam_relAbundance_V2), by = c("Family")) %>% 
-#   replace_na(list(fam_relAbundance_pre_abx = 1e-4)) %>% 
-#   mutate(
-#     recipient_ratio = fam_relAbundance_pre_abx/fam_relAbundance_V2
-#   )
-
-
-# V1 comparison using full_join (W/ UNEXPECTED COLONIZERS)
+# V1 comparison
 compare_gain_loss_V1 <- recipient_fam_loss_V1 %>%
-  full_join(gain_mixture_V1_avg %>% select(-recipient), by = c("Family")) %>%
-  replace_na(list(fam_relAbundance_pre_abx = 1e-4, recipient = "post_abx_V1", fam_relAbundance_V1 = 1e-4)) %>%
+  left_join(gain_mixture_V1 %>% select(-recipient, -fam_relAbundance_V1), by = c("Family")) %>%
+  replace_na(list(fam_relAbundance_pre_abx = 1e-4)) %>%
   mutate(
     recipient_ratio = fam_relAbundance_pre_abx/fam_relAbundance_V1
   )
 
-#V2 comparison using full_join (W/ UNEXPECTED COLONIZERS)
+#V2 comparison
+compare_gain_loss_V2 <- recipient_fam_loss_V2 %>%
+  left_join(gain_mixture_V2 %>% select(-recipient, -fam_relAbundance_V2), by = c("Family")) %>%
+  replace_na(list(fam_relAbundance_pre_abx = 1e-4)) %>%
+  mutate(
+    recipient_ratio = fam_relAbundance_pre_abx/fam_relAbundance_V2
+  )
+
+
+# # V1 comparison using full_join (W/ UNEXPECTED COLONIZERS)
+# compare_gain_loss_V1 <- recipient_fam_loss_V1 %>%
+#   full_join(gain_mixture_V1_avg %>% select(-recipient), by = c("Family")) %>%
+#   replace_na(list(fam_relAbundance_pre_abx = 1e-4, recipient = "post_abx_V1", fam_relAbundance_V1 = 1e-4)) %>%
+#   mutate(
+#     recipient_ratio = fam_relAbundance_pre_abx/fam_relAbundance_V1
+#   )
+# 
+# #V2 comparison using full_join (W/ UNEXPECTED COLONIZERS)
 # compare_gain_loss_V2 <- recipient_fam_loss_V2 %>%
-#   full_join(gain_mixture_V2 %>% select(-recipient, -fam_relAbundance_V2), by = c("Family")) %>%
+#   full_join(gain_mixture_V2_avg %>% select(-recipient), by = c("Family")) %>%
 #   replace_na(list(fam_relAbundance_pre_abx = 1e-4, recipient = "post_abx_V2", fam_relAbundance_V2 = 1e-4)) %>%
 #   mutate(
 #     recipient_ratio = fam_relAbundance_pre_abx/fam_relAbundance_V2
 #   )
-compare_gain_loss_V2 <- recipient_fam_loss_V2 %>%
-  full_join(gain_mixture_V2_avg %>% select(-recipient), by = c("Family")) %>%
-  replace_na(list(fam_relAbundance_pre_abx = 1e-4, recipient = "post_abx_V2", fam_relAbundance_V2 = 1e-4)) %>%
-  mutate(
-    recipient_ratio = fam_relAbundance_pre_abx/fam_relAbundance_V2
-  )
 
 
 
@@ -149,6 +143,8 @@ compare_gain_loss_V2 <- recipient_fam_loss_V2 %>%
 
 # V1 PLOT -----------------
 compare_gain_loss_V1 <- compare_gain_loss_V1 %>% 
+  group_by(Family, recipient_ratio) %>%
+  summarise(avg_mix_ratio = mean(mixture_ratio)) %>%
   filter(Family != "Hydrogenoanaerobacterium") #filter out this family because it was not present in any donor
 
 gain_loss_avg_plot_V1 <- compare_gain_loss_V1 %>% 
@@ -164,14 +160,14 @@ gain_loss_avg_plot_V1 <- compare_gain_loss_V1 %>%
   DEFAULTS.THEME_PRINT
 
 
-savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot_e0041_V1_UNEXPECTED"), gain_loss_avg_plot_V1, 2.5, 3)
+savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot_e0041_V1_attempt"), gain_loss_avg_plot_V1, 1.5, 2)
 
 
 
 #V2 PLOT -----------------
 compare_gain_loss_V2 <- compare_gain_loss_V2 %>%
-  # group_by(Family, recipient_ratio) %>%
-  # summarise(avg_mix_ratio = mean(mixture_ratio)) %>% 
+  group_by(Family, recipient_ratio) %>%
+  summarise(avg_mix_ratio = mean(mixture_ratio)) %>%
   filter(Family != "Hydrogenoanaerobacterium") #filter out this family because it was not present in any donor
 
 gain_loss_avg_plot_V2 <- compare_gain_loss_V2 %>% 
@@ -180,11 +176,12 @@ gain_loss_avg_plot_V2 <- compare_gain_loss_V2 %>%
   geom_smooth(method = "lm", se = FALSE, color = "black", linewidth = 0.5) + # correlation line
   # labs(x = "log(pre-abx recipient fam relAbundance/recipient 36 fam relAbundance)", y = "log(mixture 36 fam relAbundance / recipient 36 fam relAbundance)")+
   labs(x = "Family loss in recipient 
-       (log abundance)", y = "Average family gain in V2 mixture 
+       (log abundance)", y = "Average family gain 
+       in V2 mixture 
        (log abundance)", title = "Post-abx-V2")+
   scale_color_manual(values = my_colors)+
   theme(legend.position = "none")+
   DEFAULTS.THEME_PRINT
 
 
-savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot_e0041_V2_UNEXPECTED"), gain_loss_avg_plot_V2, 2.5, 3)
+savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot_e0041_V2_attempt"), gain_loss_avg_plot_V2, 1.5, 2)

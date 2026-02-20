@@ -96,9 +96,9 @@ savePNGPDF(paste0(OUTDIR, "XKA_recipient_mixtures_36_plot"), recipient_mixtures_
 # alpha = factor(diff_colonizer_36)
 
 xea_mixture_plots <- actual_colonizers_results %>%
-  filter(day == "036", subject1 == "XEA", replicate == num_replicate) %>%
+  filter(day == "036", subject1 == "XEA", subject2 == "XFB", replicate == num_replicate) %>%
   split(.$biosample1) %>%
-  map(~ggplot(.x, aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(actual_colonizer))) +
+  map(~ggplot(.x, aes(x = mixture, y = relAbundance, fill = Family, alpha = factor(diff_colonizer_36))) +
         geom_bar(stat = "identity", color = "black") +
         scale_fill_manual(values = my_colors)  +
         scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
@@ -110,7 +110,8 @@ xea_mixture_plots <- actual_colonizers_results %>%
           axis.text.x = element_blank(),
           axis.ticks.x = element_blank(),
           strip.text = element_blank()
-        ))
+        )+
+        DEFAULTS.THEME_PRINT)
 
 # Stitch them into one row
 xea_mixture_plots <- plot_grid(plotlist = xea_mixture_plots, nrow = 1)
@@ -148,19 +149,50 @@ xea <- recipient_ASVs %>%
           axis.line=element_blank(),
           # axis.text.x = element_text(size = 10),
           axis.text.x = element_blank(),
-          axis.ticks.x = element_blank(),)
+          axis.ticks.x = element_blank(),)+
+  DEFAULTS.THEME_PRINT
   
 
 
 xea_plots <- plot_grid(
   xea,
-  xea_mixture_plots,
+  xea_mixture_plots, # adjust number of mixtures here
   nrow = 1,
-  rel_widths = c(1, 2)  # make Mixture twice as wide
+  rel_widths = c(0.5, 0.5)  # make Mixture twice as wide
 )
 
 
-savePNGPDF(paste0(OUTDIR, "xea_colonization_plots_36"), xea_plots, 4, 6)
+savePNGPDF(paste0(OUTDIR, "xea_colonization_plots_36"), xea_plots, 2, 3)
+
+
+
+# PLOT ONLY ONE MIXTURE AT A TIME
+
+p_post_abx_mix <- ggplot(actual_colonizers_results %>% filter(replicate == 1, day == "036", subject1 == "XEA", subject2 == "XFB"), aes(x = subject1, y = relAbundance, fill = Family, alpha = factor(diff_colonizer_36))) +
+  geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
+  scale_fill_manual(values = my_colors) +
+  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
+  labs(title = "" , x = "", y = "", fill = "Family") +
+  theme(
+    legend.position = "none"
+  ) +
+  DEFAULTS.THEME_PRINT
+
+savePNGPDF(paste0(OUTDIR, "compositions_post-abx-mix-diff-colonizers_XEA"), p_post_abx_mix, 2, 1)
+
+# PLOT DONOR COMMUNITY
+
+XFB_donor_community <- ggplot(single_donor_ASVs %>% filter(biosample1 == "XFB-029"), aes(x = biosample1, y = relAbundance, fill = Family)) +
+  geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
+  scale_fill_manual(values = my_colors) +
+  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
+  labs(title = "" , x = "", y = "", fill = "Family") +
+  theme(
+    legend.position = "none"
+  ) +
+  DEFAULTS.THEME_PRINT
+
+savePNGPDF(paste0(OUTDIR, "composition_XFB"), XFB_donor_community, 2, 1)
 
 
 
