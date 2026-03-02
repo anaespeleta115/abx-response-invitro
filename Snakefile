@@ -2,65 +2,40 @@ from os.path import join
 import pandas as pd
 import os
 
-configfile: "config/config.yaml"
 
-# Convert list of samples to a dataframe.
-df=pd.read_table(config['sampleFileRaw'], header=None)
-df.columns=["sample","samplelane","read1","read2","trim1","trim2"]
+# Read FASTQ metadata table
+# ----------------------------
+df = pd.read_csv(
+   "config/fastqlist/fastqlist.txt",
+    header="infer",
+    sep="\t"
+)
 
-# Parse subject and household from sample names.
-df['samplename']=df['sample']
-df[['subject','timepoint']]=df.samplename.str.split("-",expand=True)
-df['household']=df['subject'].astype(str).str[0:2]
-df['studyArm']=df['subject'].astype(str).str[0:1]
+# sanity check (VERY helpful)
+print(df.head())
 
-# Generate lists of subjects and households.
-subjects=list(set(df['subject'].tolist()))
-households=list(set(df['household'].tolist()))
-samplelanes=list(set(df['samplelane'].tolist()))
-samples=list(set(df['samplename'].tolist()))
 
-# Parse the list of species analyzed in the MIDAS snps module.
-if(os.path.isdir("workflow/out/midasOutput/snps")):
-    # Iterate through the species analyzed by the snps module.
-    dirs=[x[0] for x in os.walk("workflow/out/midasOutput/snps/HouseholdTransmission-Stool")]
-    # Remove the first element, which is the directory itself without subdirectories.
-    dirs.pop(0)
-    # Parse the species names and generate a list.
-    snpsSpecies=[]
-    for species in dirs:
-        if "lowerCoverage" not in species:
-            snpsSpecies.append(species.split("/")[5])
-            
-# Parse the list of species analyzed in the MIDAS snps module at lower coverage.
-if(os.path.isdir("workflow/out/midasOutput/snps")):
-    # Iterate through the species analyzed by the snps module.
-    dirsLowerCoverage=[x[0] for x in os.walk("workflow/out/midasOutput/snps/HouseholdTransmission-Stool/lowerCoverage")]
-    # Remove the first element, which is the directory itself without subdirectories.
-    dirsLowerCoverage.pop(0)
-    # Parse the species names and generate a list.
-    snpsSpeciesLowerCoverage=[]
-    for species in dirsLowerCoverage:
-        if "lowerCoverage" not in species.split("/")[6]:
-            snpsSpeciesLowerCoverage.append(species.split("/")[6])
-        
-# Import the list of species of special interest in household XB.
-dfXB=pd.read_table(config['XBspeciesOfInterest'], header=None)
-dfXB.columns=["species"]
-XBspeciesOfInterest=list(set(dfXB['species'].tolist()))
+df = df.rename(columns={
+    "read1": "fastq1",
+    "read2": "fastq2"
+})
 
-# Import the list of species whose genomes are of special interest in household XB.
-dfXBgenomes=pd.read_table(config['XBspeciesOfInterestGenomes'], header=None)
-dfXBgenomes.columns=["species"]
-XBspeciesOfInterestGenomes=list(set(dfXBgenomes['species'].tolist()))
 
-# Import the list of samples and species to export genomes for.
-try:
-    dfXBgenomesamples=pd.read_table("workflow/out/genomes/genomeList.txt", header=None)
-    dfXBgenomesamples.columns=["genome"]
-    XBgenomesamples=list(set(dfXBgenomesamples['genome'].tolist()))
-except FileNotFoundError:
-    print("workflow/out/genomes/genomeList.txtworkflow/out/genomes/genomeList.txt does not exist.")
+# Parse subject + timepoint
+# ----------------------------
+df["samplename"] = df["sample"]
+
+df[["subject", "timepoint"]] = (
+    df["samplename"]
+    .str.split("-", expand=True)
+)
+
+
+# Lists used by Snakemake
+# ----------------------------
+samples     = sorted(df["samplename"].unique())
+subjects    = sorted(df["subject"].unique())
+
 
 rule all:
     input:
