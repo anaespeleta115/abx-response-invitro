@@ -3,15 +3,13 @@ import pandas as pd
 import os
 
 
-# Read FASTQ metadata table
-# ----------------------------
+# Read FASTQ metadata 
+
 df = pd.read_csv(
    "config/fastqlist/fastqlist.txt",
     header="infer",
     sep="\t"
 )
-
-# sanity check (VERY helpful)
 print(df.head())
 
 
@@ -22,7 +20,7 @@ df = df.rename(columns={
 
 
 # Parse subject + timepoint
-# ----------------------------
+
 df["samplename"] = df["sample"]
 
 df[["subject", "timepoint"]] = (
@@ -32,7 +30,7 @@ df[["subject", "timepoint"]] = (
 
 
 # Lists used by Snakemake
-# ----------------------------
+
 samples     = sorted(df["samplename"].unique())
 subjects    = sorted(df["subject"].unique())
 
