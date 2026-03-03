@@ -12,7 +12,8 @@ rule profileSpeciesAbundances:
     threads: config['maxCPUs']
     # conda:
     #    "MIDASpython2"
-    # use conda activate MIDASpython2 before running snakemake (or in the SLURM job)
+    log:
+        "workflow/logs/midas_species/{sample}.log"
     shell:
         r"""
         set -euo pipefail
