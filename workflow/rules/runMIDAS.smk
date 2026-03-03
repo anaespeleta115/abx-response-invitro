@@ -21,11 +21,10 @@ rule profileSpeciesAbundances:
         mkdir -p $(dirname {log})
     
         source /dfs7/xuek5-lab/aespelet/miniforge3/etc/profile.d/conda.sh
-        conda activate midas_runtime
+        conda activate midas_runtime2
     
-        # Ensure conda samtools is used instead of MIDAS bundled binary
-        export PATH=$CONDA_PREFIX/bin:$PATH
-    
+        # Ensure this env's tools are used
+        export PATH="$CONDA_PREFIX/bin:$PATH"
         export PYTHONPATH=/dfs7/xuek5-lab/aespelet/tools/MIDAS:$PYTHONPATH
     
         python /dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py species workflow/out/midasOutput/{wildcards.sample} \
