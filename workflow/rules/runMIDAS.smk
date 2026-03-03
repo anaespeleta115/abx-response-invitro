@@ -15,7 +15,7 @@ rule profileSpeciesAbundances:
     # use conda activate MIDASpython2 before running snakemake (or in the SLURM job)
     shell:
         """
-        run_midas.py species workflow/out/midasOutput/{wildcards.sample} \
+        /dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py species workflow/out/midasOutput/{wildcards.sample} \
             -1 {input.r1} -2 {input.r2} -t {threads}
         """
 
