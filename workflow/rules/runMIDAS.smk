@@ -10,8 +10,6 @@ rule profileSpeciesAbundances:
     output:
         profile="workflow/out/midasOutput/{sample}/species/species_profile.txt"
     threads: config['maxCPUs']
-    # conda:
-    #    "MIDASpython2"
     log:
         "workflow/logs/midas_species/{sample}.log"
     shell:
@@ -23,7 +21,6 @@ rule profileSpeciesAbundances:
         source /dfs7/xuek5-lab/aespelet/miniforge3/etc/profile.d/conda.sh
         conda activate midas_runtime2
     
-        # Ensure this env's tools are used
         export PATH="$CONDA_PREFIX/bin:$PATH"
         export PYTHONPATH="/dfs7/xuek5-lab/aespelet/tools/MIDAS:${{PYTHONPATH:-}}"
     
