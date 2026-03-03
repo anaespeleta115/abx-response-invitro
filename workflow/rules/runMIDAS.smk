@@ -17,13 +17,17 @@ rule profileSpeciesAbundances:
     shell:
         r"""
         set -euo pipefail
-
+    
         mkdir -p $(dirname {log})
+    
         source /dfs7/xuek5-lab/aespelet/miniforge3/etc/profile.d/conda.sh
         conda activate midas_runtime
-
+    
+        # Ensure conda samtools is used instead of MIDAS bundled binary
+        export PATH=$CONDA_PREFIX/bin:$PATH
+    
         export PYTHONPATH=/dfs7/xuek5-lab/aespelet/tools/MIDAS:$PYTHONPATH
-
+    
         python /dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py species workflow/out/midasOutput/{wildcards.sample} \
             -1 {input.r1} -2 {input.r2} -t {threads} \
             &> {log}
