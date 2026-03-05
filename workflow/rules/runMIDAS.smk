@@ -24,9 +24,10 @@ rule profileSpeciesAbundances:
         export PATH="$CONDA_PREFIX/bin:$PATH"
         export PYTHONPATH="/dfs7/xuek5-lab/aespelet/tools/MIDAS:${{PYTHONPATH:-}}"
     
-        python /dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py species workflow/out/midasOutput/{wildcards.sample} \
-            -1 {input.r1} -2 {input.r2} -t {threads} \
-            &> {log}
+       python /dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py species workflow/out/midasOutput/{wildcards.sample} \
+       -d /dfs7/xuek5-lab/shared/public_datasets/midas_db_v1.2 \
+       -1 {input.r1} -2 {input.r2} -t {threads} \
+        &> {log}
         """
 
 # Annotate each species profile with the sample name for further processing.
