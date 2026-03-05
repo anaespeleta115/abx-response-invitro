@@ -1,12 +1,12 @@
 ### Compositional changes across passages
 
 # Load data
-source("C:/abx-response-invitro/analysis/scratch/040325-loadData/loadData.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/040325-loadData/loadData.R")
 
-source("C:/abx-response-invitro/analysis/plotDefaults.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/plotDefaults.R")
 
 # Set output directory
-OUTDIR <- "C:/abx-response-invitro/analysis/scratch/040325-plotCompositions/out/"
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/040325-plotCompositions/out/"
 
 # Plot the total relative abundances (which are calculated per community) totaled up for each
 p_compositionsByPassage <- ggplot(e0026_all_passages, aes(x = factor(passage), y = relAbundance, fill = Family)) +
@@ -57,3 +57,18 @@ legend_only <- get_legend(
 )
 
 savePNGPDF(paste0(OUTDIR, "legend"), legend_only, 2.5, 1.5)
+
+
+XAA_composition <- e0026 %>% 
+  filter(biosample1 == "XAA-029", passage == 0) %>% 
+  ggplot(aes(x = subject, y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = my_colors) +
+  labs(title = "" , x = "Passage number", y = "Relative abundance", fill = "Family") +
+  theme(
+    legend.position = "none"
+  ) +
+  DEFAULTS.THEME_PRINT
+  
+
+savePNGPDF(paste0(OUTDIR, "XAA_composition_p0"), XAA_composition, 3, 2)

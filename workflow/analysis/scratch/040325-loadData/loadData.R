@@ -29,13 +29,13 @@ e0026 <- filter(household_data, str_detect(household_data$sample, "e0026")) %>%
          antibiotic = ifelse(subject %in% subjectsAbx, 1, 0))
 
 
-write.table(
-  e0026,
-  file = "~/Documents/GitHub/abx-response-invitro/analysis/scratch/040325-loadData/e0026_subset.txt",
-  sep = "\t",
-  row.names = FALSE,
-  quote = FALSE
-)
+# write.table(
+#   e0026,
+#   file = "~/Documents/GitHub/abx-response-invitro/analysis/scratch/040325-loadData/e0026_subset.txt",
+#   sep = "\t",
+#   row.names = FALSE,
+#   quote = FALSE
+# )
 
 
 lastingResponses <- c("XBA", "XDA", "XEA", "XKA")
