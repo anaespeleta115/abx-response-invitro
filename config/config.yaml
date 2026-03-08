@@ -28,7 +28,7 @@ genomeTaxonomy: "/oak/stanford/groups/relman/public/databases/midas_db_v1.2/geno
 # MGEsdir: "workflow/out/MGEs"
 
 # Analysis parameters.
-maxCPUs: 128
+maxCPUs: 4
 # # MIDAS snps module.
 # runMIDAS_speciesMinCoverage: 3
 
