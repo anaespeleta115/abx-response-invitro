@@ -31,8 +31,6 @@ fastq_map = (
 
 rule all:
     input:
-        "workflow/out/midasOutput/species/species_profile.txt",
-        "workflow/out/midasOutput/XAA_029/species/species_profile_subject.txt",
         "workflow/out/midasOutput/species/species_profile_all.txt"
 
 
