@@ -14,10 +14,7 @@ df = pd.read_csv(
 # Parse subject + timepoint
 df["samplename"] = df["sample"]
 
-df[["subject", "timepoint"]] = (
-    df["samplename"]
-    .str.split("-", expand=True)
-)
+df[["subject", "timepoint"]] = df["samplename"].str.split("_", expand=True)
 
 # Lists used by Snakemake
 samples     = sorted(df["samplename"].unique())
