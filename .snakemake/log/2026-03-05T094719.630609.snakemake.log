@@ -1,0 +1,26 @@
+Assuming unrestricted shared filesystem usage.
+host: login-i15
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                                   count
+----------------------------------  -------
+annotateSpeciesAbundancesBySubject        1
+total                                     1
+
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Mar  5 09:47:21 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XAA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XAA_029/species/species_profile_subject.txt
+    jobid: 0
+    reason: Missing output files: workflow/out/midasOutput/XAA_029/species/species_profile_subject.txt
+    wildcards: sample=XAA_029
+    resources: tmpdir=/tmp
+[Thu Mar  5 09:47:21 2026]
+Finished jobid: 0 (Rule: annotateSpeciesAbundancesBySubject)
+1 of 1 steps (100%) done
+Complete log(s): /dfs7/xuek5-lab/aespelet/myrepos/abx-response-invitro/.snakemake/log/2026-03-05T094719.630609.snakemake.log

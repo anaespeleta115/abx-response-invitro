@@ -1,0 +1,71 @@
+Assuming unrestricted shared filesystem usage.
+host: login-i15
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                         count
+------------------------  -------
+profileSpeciesAbundances        1
+total                           1
+
+Select jobs to execute...
+Execute 1 jobs...
+[Mon Mar  2 17:03:03 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XBA_029/species/species_profile.txt
+    jobid: 0
+    reason: Missing output files: workflow/out/midasOutput/XBA_029/species/species_profile.txt
+    wildcards: sample=XBA_029
+    resources: tmpdir=/tmp
+RuleException:
+CalledProcessError in file "/dfs7/xuek5-lab/aespelet/myrepos/abx-response-invitro/workflow/rules/runMIDAS.smk", line 17:
+Command 'set -euo pipefail;  
+        source /dfs7/xuek5-lab/aespelet/miniforge3/etc/profile.d/conda.sh
+        conda activate midas_runtime
+    
+        export PYTHONPATH=/dfs7/xuek5-lab/aespelet/tools/MIDAS:$PYTHONPATH
+    
+        python /dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py species workflow/out/midasOutput/XBA_029 \
+            -1 /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R1_001.fastq.gz -2 /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R2_001.fastq.gz -t 1' returned non-zero exit status 1.
+[Mon Mar  2 17:03:04 2026]
+Error in rule profileSpeciesAbundances:
+    message: None
+    jobid: 0
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XBA_029/species/species_profile.txt
+    shell:
+        
+        source /dfs7/xuek5-lab/aespelet/miniforge3/etc/profile.d/conda.sh
+        conda activate midas_runtime
+    
+        export PYTHONPATH=/dfs7/xuek5-lab/aespelet/tools/MIDAS:$PYTHONPATH
+    
+        python /dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py species workflow/out/midasOutput/XBA_029 \
+            -1 /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R1_001.fastq.gz -2 /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R2_001.fastq.gz -t 1
+        
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Mon Mar  2 17:03:04 2026]
+Error in rule profileSpeciesAbundances:
+    message: None
+    jobid: 0
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XBA_029/species/species_profile.txt
+    shell:
+        
+        source /dfs7/xuek5-lab/aespelet/miniforge3/etc/profile.d/conda.sh
+        conda activate midas_runtime
+    
+        export PYTHONPATH=/dfs7/xuek5-lab/aespelet/tools/MIDAS:$PYTHONPATH
+    
+        python /dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py species workflow/out/midasOutput/XBA_029 \
+            -1 /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R1_001.fastq.gz -2 /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R2_001.fastq.gz -t 1
+        
+        (command exited with non-zero exit code)
+Complete log(s): /dfs7/xuek5-lab/aespelet/myrepos/abx-response-invitro/.snakemake/log/2026-03-02T170302.130343.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.
