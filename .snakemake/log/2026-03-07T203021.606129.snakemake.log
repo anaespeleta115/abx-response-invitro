@@ -1,0 +1,27 @@
+Assuming unrestricted shared filesystem usage.
+host: login-i17
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                         count
+------------------------  -------
+profileSpeciesAbundances        1
+total                           1
+
+Select jobs to execute...
+Execute 1 jobs...
+[Sat Mar  7 20:30:23 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CCGGTAACAC_CGAGGCCAAG-CCGGTAACAC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CCGGTAACAC_CGAGGCCAAG-CCGGTAACAC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XKA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XKA_029.log
+    jobid: 0
+    reason: Missing output files: workflow/out/midasOutput/XKA_029/species/species_profile.txt
+    wildcards: sample=XKA_029
+    resources: tmpdir=/tmp
+[Sat Mar  7 21:29:51 2026]
+Finished jobid: 0 (Rule: profileSpeciesAbundances)
+1 of 1 steps (100%) done
+Complete log(s): /dfs7/xuek5-lab/aespelet/myrepos/abx-response-invitro/.snakemake/log/2026-03-07T203021.606129.snakemake.log

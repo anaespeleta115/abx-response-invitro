@@ -1,0 +1,6 @@
+ValueError in file "/dfs7/xuek5-lab/aespelet/myrepos/abx-response-invitro/Snakefile", line 17:
+Columns must be same length as key
+  File "/dfs7/xuek5-lab/aespelet/myrepos/abx-response-invitro/Snakefile", line 17, in <module>
+  File "/dfs7/xuek5-lab/aespelet/miniforge3/envs/snakemake/lib/python3.13/site-packages/pandas/core/frame.py", line 4310, in __setitem__
+  File "/dfs7/xuek5-lab/aespelet/miniforge3/envs/snakemake/lib/python3.13/site-packages/pandas/core/frame.py", line 4352, in _setitem_array
+  File "/dfs7/xuek5-lab/aespelet/miniforge3/envs/snakemake/lib/python3.13/site-packages/pandas/core/indexers/utils.py", line 390, in check_key_length
