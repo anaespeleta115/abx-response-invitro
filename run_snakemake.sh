@@ -13,4 +13,4 @@ conda activate snakemake
 
 cd /dfs7/xuek5-lab/aespelet/myrepos/abx-response-invitro
 
-snakemake --cores 4
+snakemake --cores 4 --rerun-incomplete
