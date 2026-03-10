@@ -12,7 +12,7 @@ rule profileSpeciesAbundances:
     threads: 4
     resources:
         mem_mb=24000,
-        runtime="12:00:00"
+        runtime="720"
     log:
         "workflow/logs/midas_species/{sample}.log"
     shell:
@@ -42,7 +42,7 @@ rule annotateSpeciesAbundancesBySubject:
     threads: 1
     resources:
         mem_mb=2000,
-        runtime="01:00:00"
+        runtime="60"
     shell:
         "sed 's/$/\t{wildcards.sample}/g' {input} > {output}"
 
@@ -58,7 +58,7 @@ rule concatenateSpeciesAbundances:
    threads: 1
    resources:
         mem_mb=4000,
-        runtime="02:00:00"
+        runtime="120"
    shell:
        r"""
        mkdir -p $(dirname {output})
