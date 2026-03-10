@@ -9,7 +9,10 @@ rule profileSpeciesAbundances:
         r2=lambda wc: fastq_map[wc.sample]["fastq2"],
     output:
         profile="workflow/out/midasOutput/{sample}/species/species_profile.txt"
-    threads: config['maxCPUs']
+    threads: 4
+    resources:
+        mem_mb=24000,
+        runtime="12:00:00"
     log:
         "workflow/logs/midas_species/{sample}.log"
     shell:
@@ -36,6 +39,10 @@ rule annotateSpeciesAbundancesBySubject:
         "workflow/out/midasOutput/{sample}/species/species_profile.txt"
     output:
         "workflow/out/midasOutput/{sample}/species/species_profile_subject.txt"
+    threads: 1
+    resources:
+        mem_mb=2000,
+        runtime="01:00:00"
     shell:
         "sed 's/$/\t{wildcards.sample}/g' {input} > {output}"
 
@@ -48,6 +55,10 @@ rule concatenateSpeciesAbundances:
        )
    output:
        "workflow/out/midasOutput/species/species_profile_all.txt"
+   threads: 1
+   resources:
+        mem_mb=4000,
+        runtime="02:00:00"
    shell:
        r"""
        mkdir -p $(dirname {output})
