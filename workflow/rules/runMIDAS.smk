@@ -21,6 +21,7 @@ rule profileSpeciesAbundances:
         conda activate midas_runtime2
     
         export PATH="$CONDA_PREFIX/bin:$PATH"
+        export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:${{LD_LIBRARY_PATH:-}}"
         export PYTHONPATH="/dfs7/xuek5-lab/aespelet/tools/MIDAS:${{PYTHONPATH:-}}"
     
        python /dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py species workflow/out/midasOutput/{wildcards.sample} \
