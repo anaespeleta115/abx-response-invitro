@@ -1,0 +1,6 @@
+host: hpc3-l18-05
+Building DAG of jobs...
+You are running snakemake in a SLURM job context. This is not recommended, as it may lead to unexpected behavior. If possible, please run Snakemake directly on the login node.
+SLURM run ID: 4192ccb2-984a-4138-b6cb-383c94caa4db
+MinJobAge 300s (>= 120s). 'squeue' should work reliably for status queries.
+Nothing to be done (all requested files are present and up to date).

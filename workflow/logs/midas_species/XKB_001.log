@@ -1,0 +1,39 @@
+
+MIDAS: Metagenomic Intra-species Diversity Analysis System
+version 1.3.0; github.com/snayfach/MIDAS
+Copyright (C) 2015-2016 Stephen Nayfach
+Freely distributed under the GNU General Public License (GPLv3)
+
+===========Parameters===========
+Command: /dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py species workflow/out/midasOutput/XKB_001 -d /dfs7/xuek5-lab/shared/public_datasets/midas_db_v1.2 -1 /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGCCGGTCAG_TCCTGGTTGT-TGCCGGTCAG_L001_R1_001.fastq.gz -2 /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGCCGGTCAG_TCCTGGTTGT-TGCCGGTCAG_L001_R2_001.fastq.gz -t 1
+Script: run_midas.py species
+Database: /dfs7/xuek5-lab/shared/public_datasets/midas_db_v1.2
+Output directory: workflow/out/midasOutput/XKB_001
+Input reads (1st mate): /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGCCGGTCAG_TCCTGGTTGT-TGCCGGTCAG_L001_R1_001.fastq.gz
+Input reads (2nd mate): /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGCCGGTCAG_TCCTGGTTGT-TGCCGGTCAG_L001_R2_001.fastq.gz
+Remove temporary files: False
+Word size for database search: 28
+Minimum mapping alignment coverage: 0.75
+Number of reads to use from input: use all
+Number of threads for database search: 1
+================================
+
+Aligning reads to marker-genes database
+Traceback (most recent call last):
+  File "/dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py", line 757, in <module>
+    run_program(program, args)
+  File "/dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py", line 76, in run_program
+    species.run_pipeline(args)
+  File "/dfs7/xuek5-lab/aespelet/tools/MIDAS/midas/run/species.py", line 240, in run_pipeline
+    map_reads_hsblast(args)
+  File "/dfs7/xuek5-lab/aespelet/tools/MIDAS/midas/run/species.py", line 49, in map_reads_hsblast
+    utility.check_exit_code(process, command)
+  File "/dfs7/xuek5-lab/aespelet/tools/MIDAS/midas/utility.py", line 229, in check_exit_code
+    out, err = process.communicate()
+  File "/dfs7/xuek5-lab/aespelet/miniforge3/envs/midas_runtime2/lib/python2.7/subprocess.py", line 483, in communicate
+    return self._communicate(input)
+  File "/dfs7/xuek5-lab/aespelet/miniforge3/envs/midas_runtime2/lib/python2.7/subprocess.py", line 1124, in _communicate
+    stdout, stderr = self._communicate_with_poll(input)
+  File "/dfs7/xuek5-lab/aespelet/miniforge3/envs/midas_runtime2/lib/python2.7/subprocess.py", line 1178, in _communicate_with_poll
+    ready = poller.poll()
+KeyboardInterrupt

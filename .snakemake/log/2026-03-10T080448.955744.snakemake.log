@@ -1,0 +1,43 @@
+Assuming unrestricted shared filesystem usage.
+host: login-i17
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                         count
+------------------------  -------
+profileSpeciesAbundances        1
+total                           1
+
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Mar 10 08:04:49 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CATTGGTCAA_GCGTGGATGG-CATTGGTCAA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CATTGGTCAA_GCGTGGATGG-CATTGGTCAA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XKA_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XKA_064.log
+    jobid: 0
+    reason: Missing output files: workflow/out/midasOutput/XKA_064/species/species_profile.txt
+    wildcards: sample=XKA_064
+    resources: tmpdir=/tmp
+Shell command: 
+        set -euo pipefail
+    
+        mkdir -p $(dirname workflow/logs/midas_species/XKA_064.log)
+    
+        source /dfs7/xuek5-lab/aespelet/miniforge3/etc/profile.d/conda.sh
+        conda activate midas_runtime2
+    
+        export PATH="$CONDA_PREFIX/bin:$PATH"
+        export PYTHONPATH="/dfs7/xuek5-lab/aespelet/tools/MIDAS:${PYTHONPATH:-}"
+    
+       python /dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py species workflow/out/midasOutput/XKA_064 \
+       -d /dfs7/xuek5-lab/shared/public_datasets/midas_db_v1.2 \
+       -1 /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CATTGGTCAA_GCGTGGATGG-CATTGGTCAA_L001_R1_001.fastq.gz -2 /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CATTGGTCAA_GCGTGGATGG-CATTGGTCAA_L001_R2_001.fastq.gz -t 1 \
+        &> workflow/logs/midas_species/XKA_064.log
+        
+[Tue Mar 10 08:59:24 2026]
+Finished jobid: 0 (Rule: profileSpeciesAbundances)
+1 of 1 steps (100%) done
+Complete log(s): /dfs7/xuek5-lab/aespelet/myrepos/abx-response-invitro/.snakemake/log/2026-03-10T080448.955744.snakemake.log
