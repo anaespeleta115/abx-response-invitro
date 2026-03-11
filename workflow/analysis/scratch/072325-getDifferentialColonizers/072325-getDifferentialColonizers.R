@@ -1,7 +1,7 @@
 # Load data
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072225-getColonizationProportion/072225-getColonizationProportion.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/plotDefaults.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072225-getColonizationProportion/072225-getColonizationProportion.R")
 
 
 actual_colonizers_results <- actual_colonizers_results %>% 

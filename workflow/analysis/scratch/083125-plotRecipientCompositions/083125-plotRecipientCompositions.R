@@ -1,13 +1,13 @@
 # Load data
 
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
-source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/072325-getLostStrains/072325-getLostStrains.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/plotDefaults.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
+# source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072325-getLostStrains/072325-getLostStrains.R")
 
 
 # Set output directory
-OUTDIR <- "Documents/Github/abx-response-invitro/analysis/scratch/083125-plotRecipientCompositions/out/"
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/083125-plotRecipientCompositions/out/"
 
 
 num_replicate <- 1
@@ -168,17 +168,19 @@ savePNGPDF(paste0(OUTDIR, "xea_colonization_plots_36"), xea_plots, 2, 3)
 
 # PLOT ONLY ONE MIXTURE AT A TIME
 
-p_post_abx_mix <- ggplot(actual_colonizers_results %>% filter(replicate == 1, day == "036", subject1 == "XEA", subject2 == "XFB"), aes(x = subject1, y = relAbundance, fill = Family, alpha = factor(diff_colonizer_36))) +
+#alpha = factor(diff_colonizer_36)
+
+p_post_abx_mix <- ggplot(recipient_ASVs %>% filter(replicate == 1, day == "029", biosample1 == "XEA-029"), aes(x = subject1, y = relAbundance, fill = Family)) +
   geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
   scale_fill_manual(values = my_colors) +
-  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
+  # scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
   labs(title = "" , x = "", y = "", fill = "Family") +
   theme(
     legend.position = "none"
   ) +
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "compositions_post-abx-mix-diff-colonizers_XEA"), p_post_abx_mix, 2, 1)
+savePNGPDF(paste0(OUTDIR, "compositions_pre_abx_XEA"), p_post_abx_mix, 2, 1)
 
 # PLOT DONOR COMMUNITY
 
