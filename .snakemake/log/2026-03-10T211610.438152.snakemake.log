@@ -1,0 +1,2598 @@
+Assuming unrestricted shared filesystem usage.
+host: hpc3-22-13
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job                                   count
+----------------------------------  -------
+all                                       1
+annotateSpeciesAbundancesBySubject      185
+concatenateSpeciesAbundances              1
+profileSpeciesAbundances                117
+total                                   304
+
+Select jobs to execute...
+Execute 2 jobs...
+[Tue Mar 10 21:16:11 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TCCAGAGATC_AACCGAGTTC-TCCAGAGATC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TCCAGAGATC_AACCGAGTTC-TCCAGAGATC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XLA_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XLA_001.log
+    jobid: 209
+    reason: Missing output files: workflow/out/midasOutput/XLA_001/species/species_profile.txt
+    wildcards: sample=XLA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+[Tue Mar 10 21:16:11 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XFA_001_CGTCACCTTG-CAATCGGCTG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XFA_001_CGTCACCTTG-CAATCGGCTG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XFA_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XFA_001.log
+    jobid: 91
+    reason: Missing output files: workflow/out/midasOutput/XFA_001/species/species_profile.txt
+    wildcards: sample=XFA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 21:26:06 2026]
+Finished jobid: 91 (Rule: profileSpeciesAbundances)
+1 of 304 steps (0.3%) done
+Execute 1 jobs...
+[Tue Mar 10 21:26:06 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATAGCCAAGA_CCTGACCACT-ATAGCCAAGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATAGCCAAGA_CCTGACCACT-ATAGCCAAGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XVA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XVA_036.log
+    jobid: 373
+    reason: Missing output files: workflow/out/midasOutput/XVA_036/species/species_profile.txt
+    wildcards: sample=XVA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 21:33:19 2026]
+Finished jobid: 209 (Rule: profileSpeciesAbundances)
+2 of 304 steps (1%) done
+Execute 1 jobs...
+[Tue Mar 10 21:33:19 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTCCGCGAGA_CCATGGTATA-CTCCGCGAGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTCCGCGAGA_CCATGGTATA-CTCCGCGAGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XSA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XSA_029.log
+    jobid: 323
+    reason: Missing output files: workflow/out/midasOutput/XSA_029/species/species_profile.txt
+    wildcards: sample=XSA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 21:58:10 2026]
+Finished jobid: 323 (Rule: profileSpeciesAbundances)
+3 of 304 steps (1%) done
+Execute 1 jobs...
+[Tue Mar 10 21:58:10 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGTGGACGTG_GCTCTTAACT-GGTGGACGTG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGTGGACGTG_GCTCTTAACT-GGTGGACGTG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XOB_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XOB_001.log
+    jobid: 265
+    reason: Missing output files: workflow/out/midasOutput/XOB_001/species/species_profile.txt
+    wildcards: sample=XOB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 22:04:02 2026]
+Finished jobid: 373 (Rule: profileSpeciesAbundances)
+4 of 304 steps (1%) done
+Execute 1 jobs...
+[Tue Mar 10 22:04:03 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XAD_063_GGTCCGCTTC-CTTGTGTGAG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XAD_063_GGTCCGCTTC-CTTGTGTGAG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XAD_063/species/species_profile.txt
+    log: workflow/logs/midas_species/XAD_063.log
+    jobid: 25
+    reason: Missing output files: workflow/out/midasOutput/XAD_063/species/species_profile.txt
+    wildcards: sample=XAD_063
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 22:12:11 2026]
+Finished jobid: 25 (Rule: profileSpeciesAbundances)
+5 of 304 steps (2%) done
+Execute 1 jobs...
+[Tue Mar 10 22:12:11 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHB_064_CGACAAGGAT-AGGTGGCCTT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHB_064_CGACAAGGAT-AGGTGGCCTT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XHB_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XHB_064.log
+    jobid: 145
+    reason: Missing output files: workflow/out/midasOutput/XHB_064/species/species_profile.txt
+    wildcards: sample=XHB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 22:21:50 2026]
+Finished jobid: 265 (Rule: profileSpeciesAbundances)
+6 of 304 steps (2%) done
+Execute 1 jobs...
+[Tue Mar 10 22:21:50 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XEB_029_AGCTAGCTTC-CTCCGTATTA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XEB_029_AGCTAGCTTC-CTCCGTATTA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XEB_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XEB_029.log
+    jobid: 85
+    reason: Missing output files: workflow/out/midasOutput/XEB_029/species/species_profile.txt
+    wildcards: sample=XEB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 22:23:56 2026]
+Finished jobid: 145 (Rule: profileSpeciesAbundances)
+7 of 304 steps (2%) done
+Execute 1 jobs...
+[Tue Mar 10 22:23:57 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATTGATGAGA_TAATTCTGCT-ATTGATGAGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATTGATGAGA_TAATTCTGCT-ATTGATGAGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XKB_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XKB_029.log
+    jobid: 205
+    reason: Missing output files: workflow/out/midasOutput/XKB_029/species/species_profile.txt
+    wildcards: sample=XKB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 22:31:50 2026]
+Finished jobid: 85 (Rule: profileSpeciesAbundances)
+8 of 304 steps (3%) done
+Execute 1 jobs...
+[Tue Mar 10 22:31:50 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTGCGTTACC_TCATACCGTT-CTGCGTTACC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTGCGTTACC_TCATACCGTT-CTGCGTTACC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XSA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XSA_036.log
+    jobid: 325
+    reason: Missing output files: workflow/out/midasOutput/XSA_036/species/species_profile.txt
+    wildcards: sample=XSA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 22:47:43 2026]
+Finished jobid: 325 (Rule: profileSpeciesAbundances)
+9 of 304 steps (3%) done
+Execute 1 jobs...
+[Tue Mar 10 22:47:44 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_022_TAGTGGCTTG-CCAAGTAACT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_022_TAGTGGCTTG-CCAAGTAACT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XBA_022/species/species_profile.txt
+    log: workflow/logs/midas_species/XBA_022.log
+    jobid: 27
+    reason: Missing output files: workflow/out/midasOutput/XBA_022/species/species_profile.txt
+    wildcards: sample=XBA_022
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:01:10 2026]
+Finished jobid: 205 (Rule: profileSpeciesAbundances)
+10 of 304 steps (3%) done
+Execute 1 jobs...
+[Tue Mar 10 23:01:10 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHC_001_GTGTACCTTC-TAGCTCACAG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHC_001_GTGTACCTTC-TAGCTCACAG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XHC_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XHC_001.log
+    jobid: 147
+    reason: Missing output files: workflow/out/midasOutput/XHC_001/species/species_profile.txt
+    wildcards: sample=XHC_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:01:35 2026]
+Finished jobid: 27 (Rule: profileSpeciesAbundances)
+11 of 304 steps (4%) done
+Execute 1 jobs...
+[Tue Mar 10 23:01:35 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_AGATAGTAGC_GTGGTATCTG-AGATAGTAGC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_AGATAGTAGC_GTGGTATCTG-AGATAGTAGC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XOB_028/species/species_profile.txt
+    log: workflow/logs/midas_species/XOB_028.log
+    jobid: 267
+    reason: Missing output files: workflow/out/midasOutput/XOB_028/species/species_profile.txt
+    wildcards: sample=XOB_028
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:05:41 2026]
+Finished jobid: 147 (Rule: profileSpeciesAbundances)
+12 of 304 steps (4%) done
+Execute 1 jobs...
+[Tue Mar 10 23:05:41 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATTGCGCGGT_GGCGCCATTG-ATTGCGCGGT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATTGCGCGGT_GGCGCCATTG-ATTGCGCGGT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XSA_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XSA_064.log
+    jobid: 327
+    reason: Missing output files: workflow/out/midasOutput/XSA_064/species/species_profile.txt
+    wildcards: sample=XSA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:19:00 2026]
+Finished jobid: 267 (Rule: profileSpeciesAbundances)
+13 of 304 steps (4%) done
+Execute 1 jobs...
+[Tue Mar 10 23:19:00 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTGTTGGTCC_CGCACGACTG-CTGTTGGTCC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTGTTGGTCC_CGCACGACTG-CTGTTGGTCC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XKB_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XKB_036.log
+    jobid: 207
+    reason: Missing output files: workflow/out/midasOutput/XKB_036/species/species_profile.txt
+    wildcards: sample=XKB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:26:44 2026]
+Finished jobid: 327 (Rule: profileSpeciesAbundances)
+14 of 304 steps (5%) done
+Execute 1 jobs...
+[Tue Mar 10 23:26:44 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XEB_036_CAATCCTTGT-TGCGTCTTCG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XEB_036_CAATCCTTGT-TGCGTCTTCG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XEB_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XEB_036.log
+    jobid: 87
+    reason: Missing output files: workflow/out/midasOutput/XEB_036/species/species_profile.txt
+    wildcards: sample=XEB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:30:31 2026]
+Finished jobid: 207 (Rule: profileSpeciesAbundances)
+15 of 304 steps (5%) done
+Execute 1 jobs...
+[Tue Mar 10 23:30:31 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XOB_028/species/species_profile.txt
+    output: workflow/out/midasOutput/XOB_028/species/species_profile_subject.txt
+    jobid: 266
+    reason: Missing output files: workflow/out/midasOutput/XOB_028/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XOB_028/species/species_profile.txt
+    wildcards: sample=XOB_028
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:30:32 2026]
+Finished jobid: 266 (Rule: annotateSpeciesAbundancesBySubject)
+16 of 304 steps (5%) done
+Execute 1 jobs...
+[Tue Mar 10 23:30:32 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_029_ATTGAGGTCC-ATATAATCCG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XBA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XBA_029.log
+    jobid: 29
+    reason: Code has changed since last execution
+    wildcards: sample=XBA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:31:50 2026]
+Finished jobid: 87 (Rule: profileSpeciesAbundances)
+17 of 304 steps (6%) done
+Execute 1 jobs...
+[Tue Mar 10 23:31:50 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XIC_008/species/species_profile.txt
+    output: workflow/out/midasOutput/XIC_008/species/species_profile_subject.txt
+    jobid: 170
+    reason: Missing output files: workflow/out/midasOutput/XIC_008/species/species_profile_subject.txt
+    wildcards: sample=XIC_008
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:31:50 2026]
+Finished jobid: 170 (Rule: annotateSpeciesAbundancesBySubject)
+18 of 304 steps (6%) done
+Execute 1 jobs...
+[Tue Mar 10 23:31:50 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XOB_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XOB_001/species/species_profile_subject.txt
+    jobid: 264
+    reason: Missing output files: workflow/out/midasOutput/XOB_001/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XOB_001/species/species_profile.txt
+    wildcards: sample=XOB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:31:51 2026]
+Finished jobid: 264 (Rule: annotateSpeciesAbundancesBySubject)
+19 of 304 steps (6%) done
+Execute 1 jobs...
+[Tue Mar 10 23:31:51 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XHB_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XHB_064/species/species_profile_subject.txt
+    jobid: 144
+    reason: Missing output files: workflow/out/midasOutput/XHB_064/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XHB_064/species/species_profile.txt
+    wildcards: sample=XHB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:31:51 2026]
+Finished jobid: 144 (Rule: annotateSpeciesAbundancesBySubject)
+20 of 304 steps (7%) done
+Execute 1 jobs...
+[Tue Mar 10 23:31:51 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XAD_063/species/species_profile.txt
+    output: workflow/out/midasOutput/XAD_063/species/species_profile_subject.txt
+    jobid: 24
+    reason: Missing output files: workflow/out/midasOutput/XAD_063/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XAD_063/species/species_profile.txt
+    wildcards: sample=XAD_063
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:31:51 2026]
+Finished jobid: 24 (Rule: annotateSpeciesAbundancesBySubject)
+21 of 304 steps (7%) done
+Execute 1 jobs...
+[Tue Mar 10 23:31:51 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CCTGTCTGTC_CTGTGGTGAC-CCTGTCTGTC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CCTGTCTGTC_CTGTGGTGAC-CCTGTCTGTC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XPA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XPA_029.log
+    jobid: 275
+    reason: Missing output files: workflow/out/midasOutput/XPA_029/species/species_profile.txt
+    wildcards: sample=XPA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:45:03 2026]
+Finished jobid: 29 (Rule: profileSpeciesAbundances)
+22 of 304 steps (7%) done
+Execute 1 jobs...
+[Tue Mar 10 23:45:03 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XSA_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XSA_064/species/species_profile_subject.txt
+    jobid: 326
+    reason: Missing output files: workflow/out/midasOutput/XSA_064/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XSA_064/species/species_profile.txt
+    wildcards: sample=XSA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:45:03 2026]
+Finished jobid: 326 (Rule: annotateSpeciesAbundancesBySubject)
+23 of 304 steps (8%) done
+Execute 1 jobs...
+[Tue Mar 10 23:45:03 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XKB_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XKB_036/species/species_profile_subject.txt
+    jobid: 206
+    reason: Missing output files: workflow/out/midasOutput/XKB_036/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XKB_036/species/species_profile.txt
+    wildcards: sample=XKB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:45:03 2026]
+Finished jobid: 206 (Rule: annotateSpeciesAbundancesBySubject)
+24 of 304 steps (8%) done
+Execute 1 jobs...
+[Tue Mar 10 23:45:03 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XEB_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XEB_036/species/species_profile_subject.txt
+    jobid: 86
+    reason: Missing output files: workflow/out/midasOutput/XEB_036/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XEB_036/species/species_profile.txt
+    wildcards: sample=XEB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:45:03 2026]
+Finished jobid: 86 (Rule: annotateSpeciesAbundancesBySubject)
+25 of 304 steps (8%) done
+Execute 1 jobs...
+[Tue Mar 10 23:45:03 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XSA_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XSA_036/species/species_profile_subject.txt
+    jobid: 324
+    reason: Missing output files: workflow/out/midasOutput/XSA_036/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XSA_036/species/species_profile.txt
+    wildcards: sample=XSA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:45:03 2026]
+Finished jobid: 324 (Rule: annotateSpeciesAbundancesBySubject)
+26 of 304 steps (9%) done
+Execute 1 jobs...
+[Tue Mar 10 23:45:03 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TTGTCCGCTG_ATGTCCAGCA-TTGTCCGCTG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TTGTCCGCTG_ATGTCCAGCA-TTGTCCGCTG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XRA_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XRA_001.log
+    jobid: 305
+    reason: Missing output files: workflow/out/midasOutput/XRA_001/species/species_profile.txt
+    wildcards: sample=XRA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Tue Mar 10 23:45:36 2026]
+Finished jobid: 275 (Rule: profileSpeciesAbundances)
+27 of 304 steps (9%) done
+Execute 1 jobs...
+[Tue Mar 10 23:45:37 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TCAAGGTCAC_TTGCTCTATT-TCAAGGTCAC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TCAAGGTCAC_TTGCTCTATT-TCAAGGTCAC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XNA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XNA_029.log
+    jobid: 243
+    reason: Missing output files: workflow/out/midasOutput/XNA_029/species/species_profile.txt
+    wildcards: sample=XNA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:00:40 2026]
+Finished jobid: 243 (Rule: profileSpeciesAbundances)
+28 of 304 steps (9%) done
+Execute 1 jobs...
+[Wed Mar 11 00:00:41 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XJA_036_ATTGATACTG-GGAGCGTGTA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XJA_036_ATTGATACTG-GGAGCGTGTA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XJA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XJA_036.log
+    jobid: 183
+    reason: Missing output files: workflow/out/midasOutput/XJA_036/species/species_profile.txt
+    wildcards: sample=XJA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:07:47 2026]
+Finished jobid: 183 (Rule: profileSpeciesAbundances)
+29 of 304 steps (10%) done
+Execute 1 jobs...
+[Wed Mar 11 00:07:47 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XGC_001_CTTAAGTCGA-ACAACTACTG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XGC_001_CTTAAGTCGA-ACAACTACTG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XGC_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XGC_001.log
+    jobid: 123
+    reason: Missing output files: workflow/out/midasOutput/XGC_001/species/species_profile.txt
+    wildcards: sample=XGC_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:12:08 2026]
+Finished jobid: 305 (Rule: profileSpeciesAbundances)
+30 of 304 steps (10%) done
+Execute 1 jobs...
+[Wed Mar 11 00:12:08 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XAA_002_AGATAGTAGC-ATGGCGTGCC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XAA_002_AGATAGTAGC-ATGGCGTGCC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XAA_002/species/species_profile.txt
+    log: workflow/logs/midas_species/XAA_002.log
+    jobid: 3
+    reason: Missing output files: workflow/out/midasOutput/XAA_002/species/species_profile.txt
+    wildcards: sample=XAA_002
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:18:34 2026]
+Finished jobid: 123 (Rule: profileSpeciesAbundances)
+31 of 304 steps (10%) done
+Execute 1 jobs...
+[Wed Mar 11 00:18:34 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_AAGGCCACGG_GTGGACAAGT-AAGGCCACGG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_AAGGCCACGG_GTGGACAAGT-AAGGCCACGG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XUB_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XUB_029.log
+    jobid: 363
+    reason: Missing output files: workflow/out/midasOutput/XUB_029/species/species_profile.txt
+    wildcards: sample=XUB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:24:05 2026]
+Finished jobid: 3 (Rule: profileSpeciesAbundances)
+32 of 304 steps (11%) done
+Execute 1 jobs...
+[Wed Mar 11 00:24:05 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XDA_036_CAACGACCTA-ATCGAGTCGC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XDA_036_CAACGACCTA-ATCGAGTCGC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XDA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XDA_036.log
+    jobid: 63
+    reason: Missing output files: workflow/out/midasOutput/XDA_036/species/species_profile.txt
+    wildcards: sample=XDA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:35:01 2026]
+Finished jobid: 363 (Rule: profileSpeciesAbundances)
+33 of 304 steps (11%) done
+Execute 1 jobs...
+[Wed Mar 11 00:35:01 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGAAGTGCAG_TCCAGAGATC-TGAAGTGCAG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGAAGTGCAG_TCCAGAGATC-TGAAGTGCAG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XQB_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XQB_064.log
+    jobid: 303
+    reason: Missing output files: workflow/out/midasOutput/XQB_064/species/species_profile.txt
+    wildcards: sample=XQB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:35:09 2026]
+Finished jobid: 63 (Rule: profileSpeciesAbundances)
+34 of 304 steps (11%) done
+Execute 1 jobs...
+[Wed Mar 11 00:35:10 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XEB_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XEB_029/species/species_profile_subject.txt
+    jobid: 84
+    reason: Missing output files: workflow/out/midasOutput/XEB_029/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XEB_029/species/species_profile.txt
+    wildcards: sample=XEB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:35:10 2026]
+Finished jobid: 84 (Rule: annotateSpeciesAbundancesBySubject)
+35 of 304 steps (12%) done
+Execute 1 jobs...
+[Wed Mar 11 00:35:10 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XKB_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XKB_029/species/species_profile_subject.txt
+    jobid: 204
+    reason: Missing output files: workflow/out/midasOutput/XKB_029/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XKB_029/species/species_profile.txt
+    wildcards: sample=XKB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:35:10 2026]
+Finished jobid: 204 (Rule: annotateSpeciesAbundancesBySubject)
+36 of 304 steps (12%) done
+Execute 1 jobs...
+[Wed Mar 11 00:35:10 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XDA_064_CGGTCGGCAT-CCTTGCCTAG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XDA_064_CGGTCGGCAT-CCTTGCCTAG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XDA_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XDA_064.log
+    jobid: 65
+    reason: Missing output files: workflow/out/midasOutput/XDA_064/species/species_profile.txt
+    wildcards: sample=XDA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:47:18 2026]
+Finished jobid: 65 (Rule: profileSpeciesAbundances)
+37 of 304 steps (12%) done
+Execute 1 jobs...
+[Wed Mar 11 00:47:19 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XSA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XSA_029/species/species_profile_subject.txt
+    jobid: 322
+    reason: Missing output files: workflow/out/midasOutput/XSA_029/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XSA_029/species/species_profile.txt
+    wildcards: sample=XSA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:47:19 2026]
+Finished jobid: 322 (Rule: annotateSpeciesAbundancesBySubject)
+38 of 304 steps (12%) done
+Execute 1 jobs...
+[Wed Mar 11 00:47:19 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XGB_064_AACCAGCCAC-GTGCTGTGGC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XGB_064_AACCAGCCAC-GTGCTGTGGC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XGB_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XGB_064.log
+    jobid: 121
+    reason: Missing output files: workflow/out/midasOutput/XGB_064/species/species_profile.txt
+    wildcards: sample=XGB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:57:29 2026]
+Finished jobid: 121 (Rule: profileSpeciesAbundances)
+39 of 304 steps (13%) done
+Execute 1 jobs...
+[Wed Mar 11 00:57:29 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XVB_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XVB_064/species/species_profile_subject.txt
+    jobid: 382
+    reason: Missing output files: workflow/out/midasOutput/XVB_064/species/species_profile_subject.txt
+    wildcards: sample=XVB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 00:57:29 2026]
+Finished jobid: 382 (Rule: annotateSpeciesAbundancesBySubject)
+40 of 304 steps (13%) done
+Execute 1 jobs...
+[Wed Mar 11 00:57:29 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XJA_064_GGATTATGGA-CTCTATCGGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XJA_064_GGATTATGGA-CTCTATCGGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XJA_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XJA_064.log
+    jobid: 185
+    reason: Missing output files: workflow/out/midasOutput/XJA_064/species/species_profile.txt
+    wildcards: sample=XJA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:08:29 2026]
+Finished jobid: 185 (Rule: profileSpeciesAbundances)
+41 of 304 steps (13%) done
+Execute 1 jobs...
+[Wed Mar 11 01:08:29 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XOA_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XOA_064/species/species_profile_subject.txt
+    jobid: 262
+    reason: Missing output files: workflow/out/midasOutput/XOA_064/species/species_profile_subject.txt
+    wildcards: sample=XOA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:08:29 2026]
+Finished jobid: 262 (Rule: annotateSpeciesAbundancesBySubject)
+42 of 304 steps (14%) done
+Execute 1 jobs...
+[Wed Mar 11 01:08:29 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XAA_029_ATTAGAAGAC-TCCAGCCTGC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XAA_029_ATTAGAAGAC-TCCAGCCTGC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XAA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XAA_029.log
+    jobid: 5
+    reason: Code has changed since last execution
+    wildcards: sample=XAA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:15:24 2026]
+Finished jobid: 303 (Rule: profileSpeciesAbundances)
+43 of 304 steps (14%) done
+Execute 1 jobs...
+[Wed Mar 11 01:15:24 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XHB_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XHB_036/species/species_profile_subject.txt
+    jobid: 142
+    reason: Missing output files: workflow/out/midasOutput/XHB_036/species/species_profile_subject.txt
+    wildcards: sample=XHB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:15:24 2026]
+Finished jobid: 142 (Rule: annotateSpeciesAbundancesBySubject)
+44 of 304 steps (14%) done
+Execute 1 jobs...
+[Wed Mar 11 01:15:25 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XGC_029_GCCTAACGTG-CTTGAGAGCT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XGC_029_GCCTAACGTG-CTTGAGAGCT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XGC_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XGC_029.log
+    jobid: 125
+    reason: Missing output files: workflow/out/midasOutput/XGC_029/species/species_profile.txt
+    wildcards: sample=XGC_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:20:20 2026]
+Finished jobid: 5 (Rule: profileSpeciesAbundances)
+45 of 304 steps (15%) done
+Execute 1 jobs...
+[Wed Mar 11 01:20:20 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XAD_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XAD_036/species/species_profile_subject.txt
+    jobid: 22
+    reason: Missing output files: workflow/out/midasOutput/XAD_036/species/species_profile_subject.txt
+    wildcards: sample=XAD_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:20:20 2026]
+Finished jobid: 22 (Rule: annotateSpeciesAbundancesBySubject)
+46 of 304 steps (15%) done
+Execute 1 jobs...
+[Wed Mar 11 01:20:20 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XKB_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XKB_001/species/species_profile_subject.txt
+    jobid: 202
+    reason: Missing output files: workflow/out/midasOutput/XKB_001/species/species_profile_subject.txt
+    wildcards: sample=XKB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:20:20 2026]
+Finished jobid: 202 (Rule: annotateSpeciesAbundancesBySubject)
+47 of 304 steps (15%) done
+Execute 1 jobs...
+[Wed Mar 11 01:20:21 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATATGCATGT_TTACAGTTAG-ATATGCATGT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATATGCATGT_TTACAGTTAG-ATATGCATGT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XNA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XNA_036.log
+    jobid: 245
+    reason: Missing output files: workflow/out/midasOutput/XNA_036/species/species_profile.txt
+    wildcards: sample=XNA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:25:24 2026]
+Finished jobid: 125 (Rule: profileSpeciesAbundances)
+48 of 304 steps (16%) done
+Execute 1 jobs...
+[Wed Mar 11 01:25:24 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XEB_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XEB_001/species/species_profile_subject.txt
+    jobid: 82
+    reason: Missing output files: workflow/out/midasOutput/XEB_001/species/species_profile_subject.txt
+    wildcards: sample=XEB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:25:24 2026]
+Finished jobid: 82 (Rule: annotateSpeciesAbundancesBySubject)
+49 of 304 steps (16%) done
+Execute 1 jobs...
+[Wed Mar 11 01:25:24 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XVB_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XVB_036/species/species_profile_subject.txt
+    jobid: 380
+    reason: Missing output files: workflow/out/midasOutput/XVB_036/species/species_profile_subject.txt
+    wildcards: sample=XVB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:25:25 2026]
+Finished jobid: 380 (Rule: annotateSpeciesAbundancesBySubject)
+50 of 304 steps (16%) done
+Execute 1 jobs...
+[Wed Mar 11 01:25:25 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGATATATCC_AACAAGTACA-GGATATATCC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGATATATCC_AACAAGTACA-GGATATATCC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XUB_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XUB_036.log
+    jobid: 365
+    reason: Missing output files: workflow/out/midasOutput/XUB_036/species/species_profile.txt
+    wildcards: sample=XUB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:34:56 2026]
+Finished jobid: 245 (Rule: profileSpeciesAbundances)
+51 of 304 steps (17%) done
+Execute 1 jobs...
+[Wed Mar 11 01:34:56 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XOA_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XOA_036/species/species_profile_subject.txt
+    jobid: 260
+    reason: Missing output files: workflow/out/midasOutput/XOA_036/species/species_profile_subject.txt
+    wildcards: sample=XOA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:34:57 2026]
+Finished jobid: 260 (Rule: annotateSpeciesAbundancesBySubject)
+52 of 304 steps (17%) done
+Execute 1 jobs...
+[Wed Mar 11 01:34:57 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XHB_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XHB_029/species/species_profile_subject.txt
+    jobid: 140
+    reason: Missing output files: workflow/out/midasOutput/XHB_029/species/species_profile_subject.txt
+    wildcards: sample=XHB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:34:57 2026]
+Finished jobid: 140 (Rule: annotateSpeciesAbundancesBySubject)
+53 of 304 steps (17%) done
+Execute 1 jobs...
+[Wed Mar 11 01:34:57 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XBA_022/species/species_profile.txt
+    output: workflow/out/midasOutput/XBA_022/species/species_profile_subject.txt
+    jobid: 26
+    reason: Missing output files: workflow/out/midasOutput/XBA_022/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XBA_022/species/species_profile.txt
+    wildcards: sample=XBA_022
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:34:57 2026]
+Finished jobid: 26 (Rule: annotateSpeciesAbundancesBySubject)
+54 of 304 steps (18%) done
+Execute 1 jobs...
+[Wed Mar 11 01:34:57 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XHC_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XHC_001/species/species_profile_subject.txt
+    jobid: 146
+    reason: Missing output files: workflow/out/midasOutput/XHC_001/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XHC_001/species/species_profile.txt
+    wildcards: sample=XHC_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:34:57 2026]
+Finished jobid: 146 (Rule: annotateSpeciesAbundancesBySubject)
+55 of 304 steps (18%) done
+Execute 1 jobs...
+[Wed Mar 11 01:34:57 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATGCGGATCC_CAACGTTCGG-ATGCGGATCC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATGCGGATCC_CAACGTTCGG-ATGCGGATCC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XRA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XRA_029.log
+    jobid: 307
+    reason: Missing output files: workflow/out/midasOutput/XRA_029/species/species_profile.txt
+    wildcards: sample=XRA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:47:18 2026]
+Finished jobid: 365 (Rule: profileSpeciesAbundances)
+56 of 304 steps (18%) done
+Execute 1 jobs...
+[Wed Mar 11 01:47:18 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XAD_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XAD_029/species/species_profile_subject.txt
+    jobid: 20
+    reason: Missing output files: workflow/out/midasOutput/XAD_029/species/species_profile_subject.txt
+    wildcards: sample=XAD_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:47:18 2026]
+Finished jobid: 20 (Rule: annotateSpeciesAbundancesBySubject)
+57 of 304 steps (19%) done
+Execute 1 jobs...
+[Wed Mar 11 01:47:19 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XKA_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XKA_064/species/species_profile_subject.txt
+    jobid: 200
+    reason: Missing output files: workflow/out/midasOutput/XKA_064/species/species_profile_subject.txt
+    wildcards: sample=XKA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:47:19 2026]
+Finished jobid: 200 (Rule: annotateSpeciesAbundancesBySubject)
+58 of 304 steps (19%) done
+Execute 1 jobs...
+[Wed Mar 11 01:47:19 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XDB_001_TCGACGCTAG-TTCGAAGAGG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XDB_001_TCGACGCTAG-TTCGAAGAGG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XDB_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XDB_001.log
+    jobid: 67
+    reason: Missing output files: workflow/out/midasOutput/XDB_001/species/species_profile.txt
+    wildcards: sample=XDB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:54:52 2026]
+Finished jobid: 307 (Rule: profileSpeciesAbundances)
+59 of 304 steps (19%) done
+Execute 1 jobs...
+[Wed Mar 11 01:54:53 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XEA_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XEA_064/species/species_profile_subject.txt
+    jobid: 80
+    reason: Missing output files: workflow/out/midasOutput/XEA_064/species/species_profile_subject.txt
+    wildcards: sample=XEA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:54:53 2026]
+Finished jobid: 80 (Rule: annotateSpeciesAbundancesBySubject)
+60 of 304 steps (20%) done
+Execute 1 jobs...
+[Wed Mar 11 01:54:53 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XRB_059/species/species_profile.txt
+    output: workflow/out/midasOutput/XRB_059/species/species_profile_subject.txt
+    jobid: 318
+    reason: Missing output files: workflow/out/midasOutput/XRB_059/species/species_profile_subject.txt
+    wildcards: sample=XRB_059
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:54:53 2026]
+Finished jobid: 318 (Rule: annotateSpeciesAbundancesBySubject)
+61 of 304 steps (20%) done
+Execute 1 jobs...
+[Wed Mar 11 01:54:53 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XJB_001_TGGTTCTCAT-CGGCCTTGAG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XJB_001_TGGTTCTCAT-CGGCCTTGAG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XJB_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XJB_001.log
+    jobid: 187
+    reason: Missing output files: workflow/out/midasOutput/XJB_001/species/species_profile.txt
+    wildcards: sample=XJB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:56:34 2026]
+Finished jobid: 67 (Rule: profileSpeciesAbundances)
+62 of 304 steps (20%) done
+Execute 1 jobs...
+[Wed Mar 11 01:56:34 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XOA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XOA_029/species/species_profile_subject.txt
+    jobid: 258
+    reason: Missing output files: workflow/out/midasOutput/XOA_029/species/species_profile_subject.txt
+    wildcards: sample=XOA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 01:56:34 2026]
+Finished jobid: 258 (Rule: annotateSpeciesAbundancesBySubject)
+63 of 304 steps (21%) done
+Execute 1 jobs...
+[Wed Mar 11 01:56:34 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGCGCATAGC_TAGCATAACC-TGCGCATAGC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGCGCATAGC_TAGCATAACC-TGCGCATAGC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XNB_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XNB_036.log
+    jobid: 253
+    reason: Missing output files: workflow/out/midasOutput/XNB_036/species/species_profile.txt
+    wildcards: sample=XNB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:01:34 2026]
+Finished jobid: 187 (Rule: profileSpeciesAbundances)
+64 of 304 steps (21%) done
+Execute 1 jobs...
+[Wed Mar 11 02:01:35 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XPA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XPA_029/species/species_profile_subject.txt
+    jobid: 274
+    reason: Missing output files: workflow/out/midasOutput/XPA_029/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XPA_029/species/species_profile.txt
+    wildcards: sample=XPA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:01:35 2026]
+Finished jobid: 274 (Rule: annotateSpeciesAbundancesBySubject)
+65 of 304 steps (21%) done
+Execute 1 jobs...
+[Wed Mar 11 02:01:35 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XQA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XQA_029/species/species_profile_subject.txt
+    jobid: 290
+    reason: Missing output files: workflow/out/midasOutput/XQA_029/species/species_profile_subject.txt
+    wildcards: sample=XQA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:01:35 2026]
+Finished jobid: 290 (Rule: annotateSpeciesAbundancesBySubject)
+66 of 304 steps (22%) done
+Execute 1 jobs...
+[Wed Mar 11 02:01:35 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHC_029_ACCTGGCCAA-CGATCTGTGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHC_029_ACCTGGCCAA-CGATCTGTGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XHC_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XHC_029.log
+    jobid: 149
+    reason: Missing output files: workflow/out/midasOutput/XHC_029/species/species_profile.txt
+    wildcards: sample=XHC_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:08:22 2026]
+Finished jobid: 149 (Rule: profileSpeciesAbundances)
+67 of 304 steps (22%) done
+Execute 1 jobs...
+[Wed Mar 11 02:08:23 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATGGTTGACT_TGACGGCCGT-ATGGTTGACT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATGGTTGACT_TGACGGCCGT-ATGGTTGACT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XOB_037/species/species_profile.txt
+    log: workflow/logs/midas_species/XOB_037.log
+    jobid: 269
+    reason: Missing output files: workflow/out/midasOutput/XOB_037/species/species_profile.txt
+    wildcards: sample=XOB_037
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:23:52 2026]
+Finished jobid: 253 (Rule: profileSpeciesAbundances)
+68 of 304 steps (22%) done
+Execute 1 jobs...
+[Wed Mar 11 02:23:53 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XGA_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XGA_036/species/species_profile_subject.txt
+    jobid: 110
+    reason: Missing output files: workflow/out/midasOutput/XGA_036/species/species_profile_subject.txt
+    wildcards: sample=XGA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:23:53 2026]
+Finished jobid: 110 (Rule: annotateSpeciesAbundancesBySubject)
+69 of 304 steps (23%) done
+Execute 1 jobs...
+[Wed Mar 11 02:23:53 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XMA_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XMA_064/species/species_profile_subject.txt
+    jobid: 230
+    reason: Missing output files: workflow/out/midasOutput/XMA_064/species/species_profile_subject.txt
+    wildcards: sample=XMA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:23:53 2026]
+Finished jobid: 230 (Rule: annotateSpeciesAbundancesBySubject)
+70 of 304 steps (23%) done
+Execute 1 jobs...
+[Wed Mar 11 02:23:53 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TAGGTATGTT_CTAAGTACGC-TAGGTATGTT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TAGGTATGTT_CTAAGTACGC-TAGGTATGTT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XNA_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XNA_064.log
+    jobid: 247
+    reason: Missing output files: workflow/out/midasOutput/XNA_064/species/species_profile.txt
+    wildcards: sample=XNA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:33:25 2026]
+Finished jobid: 247 (Rule: profileSpeciesAbundances)
+71 of 304 steps (23%) done
+Execute 1 jobs...
+[Wed Mar 11 02:33:25 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XHC_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XHC_029/species/species_profile_subject.txt
+    jobid: 148
+    reason: Missing output files: workflow/out/midasOutput/XHC_029/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XHC_029/species/species_profile.txt
+    wildcards: sample=XHC_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:33:25 2026]
+Finished jobid: 148 (Rule: annotateSpeciesAbundancesBySubject)
+72 of 304 steps (24%) done
+Execute 1 jobs...
+[Wed Mar 11 02:33:26 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CCAAGAGGTG_AGATTAAGTG-CCAAGAGGTG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CCAAGAGGTG_AGATTAAGTG-CCAAGAGGTG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XUB_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XUB_064.log
+    jobid: 367
+    reason: Missing output files: workflow/out/midasOutput/XUB_064/species/species_profile.txt
+    wildcards: sample=XUB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:38:07 2026]
+Finished jobid: 269 (Rule: profileSpeciesAbundances)
+73 of 304 steps (24%) done
+Execute 1 jobs...
+[Wed Mar 11 02:38:07 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XOB_037/species/species_profile.txt
+    output: workflow/out/midasOutput/XOB_037/species/species_profile_subject.txt
+    jobid: 268
+    reason: Missing output files: workflow/out/midasOutput/XOB_037/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XOB_037/species/species_profile.txt
+    wildcards: sample=XOB_037
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:38:07 2026]
+Finished jobid: 268 (Rule: annotateSpeciesAbundancesBySubject)
+74 of 304 steps (24%) done
+Execute 1 jobs...
+[Wed Mar 11 02:38:07 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XGC_037_ACTTACTTCA-TAATTCCAGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XGC_037_ACTTACTTCA-TAATTCCAGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XGC_037/species/species_profile.txt
+    log: workflow/logs/midas_species/XGC_037.log
+    jobid: 127
+    reason: Missing output files: workflow/out/midasOutput/XGC_037/species/species_profile.txt
+    wildcards: sample=XGC_037
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:51:29 2026]
+Finished jobid: 127 (Rule: profileSpeciesAbundances)
+75 of 304 steps (25%) done
+Execute 1 jobs...
+[Wed Mar 11 02:51:29 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XAA_036_GCTCGCACAT-ATTAAGCCAT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XAA_036_GCTCGCACAT-ATTAAGCCAT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XAA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XAA_036.log
+    jobid: 7
+    reason: Missing output files: workflow/out/midasOutput/XAA_036/species/species_profile.txt
+    wildcards: sample=XAA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:55:56 2026]
+Finished jobid: 367 (Rule: profileSpeciesAbundances)
+76 of 304 steps (25%) done
+Execute 1 jobs...
+[Wed Mar 11 02:55:56 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XLA_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XLA_001/species/species_profile_subject.txt
+    jobid: 208
+    reason: Missing output files: workflow/out/midasOutput/XLA_001/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XLA_001/species/species_profile.txt
+    wildcards: sample=XLA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:55:56 2026]
+Finished jobid: 208 (Rule: annotateSpeciesAbundancesBySubject)
+77 of 304 steps (25%) done
+Execute 1 jobs...
+[Wed Mar 11 02:55:56 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XBA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XBA_029/species/species_profile_subject.txt
+    jobid: 28
+    reason: Input files updated by another job: workflow/out/midasOutput/XBA_029/species/species_profile.txt
+    wildcards: sample=XBA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:55:56 2026]
+Finished jobid: 28 (Rule: annotateSpeciesAbundancesBySubject)
+78 of 304 steps (26%) done
+Execute 1 jobs...
+[Wed Mar 11 02:55:56 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XKA_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XKA_036/species/species_profile_subject.txt
+    jobid: 198
+    reason: Missing output files: workflow/out/midasOutput/XKA_036/species/species_profile_subject.txt
+    wildcards: sample=XKA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:55:56 2026]
+Finished jobid: 198 (Rule: annotateSpeciesAbundancesBySubject)
+79 of 304 steps (26%) done
+Execute 1 jobs...
+[Wed Mar 11 02:55:56 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XTB_065/species/species_profile.txt
+    output: workflow/out/midasOutput/XTB_065/species/species_profile_subject.txt
+    jobid: 350
+    reason: Missing output files: workflow/out/midasOutput/XTB_065/species/species_profile_subject.txt
+    wildcards: sample=XTB_065
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 02:55:57 2026]
+Finished jobid: 350 (Rule: annotateSpeciesAbundancesBySubject)
+80 of 304 steps (26%) done
+Execute 1 jobs...
+[Wed Mar 11 02:55:57 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGTTCCGGCT_AGCGAATTAG-TGTTCCGGCT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGTTCCGGCT_AGCGAATTAG-TGTTCCGGCT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XSB_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XSB_001.log
+    jobid: 329
+    reason: Missing output files: workflow/out/midasOutput/XSB_001/species/species_profile.txt
+    wildcards: sample=XSB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:12:06 2026]
+Finished jobid: 7 (Rule: profileSpeciesAbundances)
+81 of 304 steps (27%) done
+Execute 1 jobs...
+[Wed Mar 11 03:12:07 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XEB_064_CACCTGTTGC-ATGTGTCAAT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XEB_064_CACCTGTTGC-ATGTGTCAAT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XEB_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XEB_064.log
+    jobid: 89
+    reason: Missing output files: workflow/out/midasOutput/XEB_064/species/species_profile.txt
+    wildcards: sample=XEB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:16:18 2026]
+Finished jobid: 329 (Rule: profileSpeciesAbundances)
+82 of 304 steps (27%) done
+Execute 1 jobs...
+[Wed Mar 11 03:16:18 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XCB_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XCB_029/species/species_profile_subject.txt
+    jobid: 52
+    reason: Missing output files: workflow/out/midasOutput/XCB_029/species/species_profile_subject.txt
+    wildcards: sample=XCB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:16:18 2026]
+Finished jobid: 52 (Rule: annotateSpeciesAbundancesBySubject)
+83 of 304 steps (27%) done
+Execute 1 jobs...
+[Wed Mar 11 03:16:18 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XQA_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XQA_036/species/species_profile_subject.txt
+    jobid: 292
+    reason: Missing output files: workflow/out/midasOutput/XQA_036/species/species_profile_subject.txt
+    wildcards: sample=XQA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:16:18 2026]
+Finished jobid: 292 (Rule: annotateSpeciesAbundancesBySubject)
+84 of 304 steps (28%) done
+Execute 1 jobs...
+[Wed Mar 11 03:16:18 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_036_GGAGAGACTC-TCTGCTTCAA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_036_GGAGAGACTC-TCTGCTTCAA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XBA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XBA_036.log
+    jobid: 31
+    reason: Missing output files: workflow/out/midasOutput/XBA_036/species/species_profile.txt
+    wildcards: sample=XBA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:21:20 2026]
+Finished jobid: 89 (Rule: profileSpeciesAbundances)
+85 of 304 steps (28%) done
+Execute 1 jobs...
+[Wed Mar 11 03:21:20 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHC_036_TGTCTGGCCT-ATTGGCTTCT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHC_036_TGTCTGGCCT-ATTGGCTTCT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XHC_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XHC_036.log
+    jobid: 151
+    reason: Missing output files: workflow/out/midasOutput/XHC_036/species/species_profile.txt
+    wildcards: sample=XHC_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:26:50 2026]
+Finished jobid: 151 (Rule: profileSpeciesAbundances)
+86 of 304 steps (28%) done
+Execute 1 jobs...
+[Wed Mar 11 03:26:50 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XIC_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XIC_029/species/species_profile_subject.txt
+    jobid: 172
+    reason: Missing output files: workflow/out/midasOutput/XIC_029/species/species_profile_subject.txt
+    wildcards: sample=XIC_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:26:50 2026]
+Finished jobid: 172 (Rule: annotateSpeciesAbundancesBySubject)
+87 of 304 steps (29%) done
+Execute 1 jobs...
+[Wed Mar 11 03:26:50 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XGA_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XGA_064/species/species_profile_subject.txt
+    jobid: 112
+    reason: Missing output files: workflow/out/midasOutput/XGA_064/species/species_profile_subject.txt
+    wildcards: sample=XGA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:26:50 2026]
+Finished jobid: 112 (Rule: annotateSpeciesAbundancesBySubject)
+88 of 304 steps (29%) done
+Execute 1 jobs...
+[Wed Mar 11 03:26:50 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XMB_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XMB_001/species/species_profile_subject.txt
+    jobid: 232
+    reason: Missing output files: workflow/out/midasOutput/XMB_001/species/species_profile_subject.txt
+    wildcards: sample=XMB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:26:50 2026]
+Finished jobid: 232 (Rule: annotateSpeciesAbundancesBySubject)
+89 of 304 steps (29%) done
+Execute 1 jobs...
+[Wed Mar 11 03:26:51 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATGGCGCCTG_TGTGATAACT-ATGGCGCCTG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATGGCGCCTG_TGTGATAACT-ATGGCGCCTG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XLA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XLA_029.log
+    jobid: 211
+    reason: Missing output files: workflow/out/midasOutput/XLA_029/species/species_profile.txt
+    wildcards: sample=XLA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:28:59 2026]
+Finished jobid: 31 (Rule: profileSpeciesAbundances)
+90 of 304 steps (30%) done
+Execute 1 jobs...
+[Wed Mar 11 03:28:59 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XUA_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XUA_001/species/species_profile_subject.txt
+    jobid: 352
+    reason: Missing output files: workflow/out/midasOutput/XUA_001/species/species_profile_subject.txt
+    wildcards: sample=XUA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:28:59 2026]
+Finished jobid: 352 (Rule: annotateSpeciesAbundancesBySubject)
+91 of 304 steps (30%) done
+Execute 1 jobs...
+[Wed Mar 11 03:28:59 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTTCCTAGGA_TTAGACCATG-CTTCCTAGGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTTCCTAGGA_TTAGACCATG-CTTCCTAGGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XSB_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XSB_029.log
+    jobid: 331
+    reason: Missing output files: workflow/out/midasOutput/XSB_029/species/species_profile.txt
+    wildcards: sample=XSB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:45:06 2026]
+Finished jobid: 331 (Rule: profileSpeciesAbundances)
+92 of 304 steps (30%) done
+Execute 1 jobs...
+[Wed Mar 11 03:45:07 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TACCGCCTCG_CAGTAATTAC-TACCGCCTCG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TACCGCCTCG_CAGTAATTAC-TACCGCCTCG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XOB_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XOB_064.log
+    jobid: 271
+    reason: Missing output files: workflow/out/midasOutput/XOB_064/species/species_profile.txt
+    wildcards: sample=XOB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:49:17 2026]
+Finished jobid: 211 (Rule: profileSpeciesAbundances)
+93 of 304 steps (31%) done
+Execute 1 jobs...
+[Wed Mar 11 03:49:17 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XUB_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XUB_064/species/species_profile_subject.txt
+    jobid: 366
+    reason: Missing output files: workflow/out/midasOutput/XUB_064/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XUB_064/species/species_profile.txt
+    wildcards: sample=XUB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 03:49:17 2026]
+Finished jobid: 366 (Rule: annotateSpeciesAbundancesBySubject)
+94 of 304 steps (31%) done
+Execute 1 jobs...
+[Wed Mar 11 03:49:17 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XJB_029_TCAACCACGA-TATGAACTTG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XJB_029_TCAACCACGA-TATGAACTTG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XJB_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XJB_029.log
+    jobid: 189
+    reason: Missing output files: workflow/out/midasOutput/XJB_029/species/species_profile.txt
+    wildcards: sample=XJB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 04:00:21 2026]
+Finished jobid: 189 (Rule: profileSpeciesAbundances)
+95 of 304 steps (31%) done
+Execute 1 jobs...
+[Wed Mar 11 04:00:22 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XDB_029_CTCGTAGGCA-AAGAGGATGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XDB_029_CTCGTAGGCA-AAGAGGATGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XDB_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XDB_029.log
+    jobid: 69
+    reason: Missing output files: workflow/out/midasOutput/XDB_029/species/species_profile.txt
+    wildcards: sample=XDB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 04:08:09 2026]
+Finished jobid: 271 (Rule: profileSpeciesAbundances)
+96 of 304 steps (32%) done
+Execute 1 jobs...
+[Wed Mar 11 04:08:09 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTACACATGG_TAGTTCGGTA-CTACACATGG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTACACATGG_TAGTTCGGTA-CTACACATGG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XNB_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XNB_001.log
+    jobid: 249
+    reason: Missing output files: workflow/out/midasOutput/XNB_001/species/species_profile.txt
+    wildcards: sample=XNB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 04:08:33 2026]
+Finished jobid: 69 (Rule: profileSpeciesAbundances)
+97 of 304 steps (32%) done
+Execute 1 jobs...
+[Wed Mar 11 04:08:34 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CAACACCGCA_GCGTATTAAT-CAACACCGCA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CAACACCGCA_GCGTATTAAT-CAACACCGCA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XRA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XRA_036.log
+    jobid: 309
+    reason: Missing output files: workflow/out/midasOutput/XRA_036/species/species_profile.txt
+    wildcards: sample=XRA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 04:15:55 2026]
+Finished jobid: 249 (Rule: profileSpeciesAbundances)
+98 of 304 steps (32%) done
+Execute 1 jobs...
+[Wed Mar 11 04:15:55 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XFA_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XFA_001/species/species_profile_subject.txt
+    jobid: 90
+    reason: Missing output files: workflow/out/midasOutput/XFA_001/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XFA_001/species/species_profile.txt
+    wildcards: sample=XFA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 04:15:55 2026]
+Finished jobid: 90 (Rule: annotateSpeciesAbundancesBySubject)
+99 of 304 steps (33%) done
+Execute 1 jobs...
+[Wed Mar 11 04:15:55 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XQA_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XQA_064/species/species_profile_subject.txt
+    jobid: 294
+    reason: Missing output files: workflow/out/midasOutput/XQA_064/species/species_profile_subject.txt
+    wildcards: sample=XQA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 04:15:55 2026]
+Finished jobid: 294 (Rule: annotateSpeciesAbundancesBySubject)
+100 of 304 steps (33%) done
+Execute 1 jobs...
+[Wed Mar 11 04:15:56 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_064_CCGCTCCGTT-CTTCGCCGTA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBA_064_CCGCTCCGTT-CTTCGCCGTA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XBA_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XBA_064.log
+    jobid: 33
+    reason: Missing output files: workflow/out/midasOutput/XBA_064/species/species_profile.txt
+    wildcards: sample=XBA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 04:25:41 2026]
+Finished jobid: 33 (Rule: profileSpeciesAbundances)
+101 of 304 steps (33%) done
+Execute 1 jobs...
+[Wed Mar 11 04:25:41 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XUA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XUA_029/species/species_profile_subject.txt
+    jobid: 354
+    reason: Missing output files: workflow/out/midasOutput/XUA_029/species/species_profile_subject.txt
+    wildcards: sample=XUA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 04:25:41 2026]
+Finished jobid: 354 (Rule: annotateSpeciesAbundancesBySubject)
+102 of 304 steps (34%) done
+Execute 1 jobs...
+[Wed Mar 11 04:25:41 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XFA_029_AATGACTGGT-ACGCGTGAGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XFA_029_AATGACTGGT-ACGCGTGAGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XFA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XFA_029.log
+    jobid: 93
+    reason: Missing output files: workflow/out/midasOutput/XFA_029/species/species_profile.txt
+    wildcards: sample=XFA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 04:27:37 2026]
+Finished jobid: 309 (Rule: profileSpeciesAbundances)
+103 of 304 steps (34%) done
+Execute 1 jobs...
+[Wed Mar 11 04:27:38 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGTCTATTAA_AGTATGCTAC-GGTCTATTAA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGTCTATTAA_AGTATGCTAC-GGTCTATTAA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XLA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XLA_036.log
+    jobid: 213
+    reason: Missing output files: workflow/out/midasOutput/XLA_036/species/species_profile.txt
+    wildcards: sample=XLA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 04:42:49 2026]
+Finished jobid: 213 (Rule: profileSpeciesAbundances)
+104 of 304 steps (34%) done
+Execute 1 jobs...
+[Wed Mar 11 04:42:49 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XMB_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XMB_029/species/species_profile_subject.txt
+    jobid: 234
+    reason: Missing output files: workflow/out/midasOutput/XMB_029/species/species_profile_subject.txt
+    wildcards: sample=XMB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 04:42:49 2026]
+Finished jobid: 234 (Rule: annotateSpeciesAbundancesBySubject)
+105 of 304 steps (35%) done
+Execute 1 jobs...
+[Wed Mar 11 04:42:49 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGAACACCTG_TACAAGACTT-TGAACACCTG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGAACACCTG_TACAAGACTT-TGAACACCTG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XPA_002/species/species_profile.txt
+    log: workflow/logs/midas_species/XPA_002.log
+    jobid: 273
+    reason: Missing output files: workflow/out/midasOutput/XPA_002/species/species_profile.txt
+    wildcards: sample=XPA_002
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 04:43:25 2026]
+Finished jobid: 93 (Rule: profileSpeciesAbundances)
+106 of 304 steps (35%) done
+Execute 1 jobs...
+[Wed Mar 11 04:43:25 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TTAGGCTCAA_CACACAGTAT-TTAGGCTCAA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TTAGGCTCAA_CACACAGTAT-TTAGGCTCAA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XSB_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XSB_036.log
+    jobid: 333
+    reason: Missing output files: workflow/out/midasOutput/XSB_036/species/species_profile.txt
+    wildcards: sample=XSB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:10:06 2026]
+Finished jobid: 333 (Rule: profileSpeciesAbundances)
+107 of 304 steps (35%) done
+Execute 1 jobs...
+[Wed Mar 11 05:10:06 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XGB_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XGB_001/species/species_profile_subject.txt
+    jobid: 114
+    reason: Missing output files: workflow/out/midasOutput/XGB_001/species/species_profile_subject.txt
+    wildcards: sample=XGB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:10:06 2026]
+Finished jobid: 114 (Rule: annotateSpeciesAbundancesBySubject)
+108 of 304 steps (36%) done
+Execute 1 jobs...
+[Wed Mar 11 05:10:07 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GAGCTTGCCG_AGAATTCGCC-GAGCTTGCCG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GAGCTTGCCG_AGAATTCGCC-GAGCTTGCCG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XVA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XVA_029.log
+    jobid: 371
+    reason: Missing output files: workflow/out/midasOutput/XVA_029/species/species_profile.txt
+    wildcards: sample=XVA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:11:57 2026]
+Finished jobid: 273 (Rule: profileSpeciesAbundances)
+109 of 304 steps (36%) done
+Execute 1 jobs...
+[Wed Mar 11 05:11:58 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGAGAGACTC_CTATTACTAC-GGAGAGACTC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGAGAGACTC_CTATTACTAC-GGAGAGACTC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XNB_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XNB_029.log
+    jobid: 251
+    reason: Missing output files: workflow/out/midasOutput/XNB_029/species/species_profile.txt
+    wildcards: sample=XNB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:18:43 2026]
+Finished jobid: 371 (Rule: profileSpeciesAbundances)
+110 of 304 steps (36%) done
+Execute 1 jobs...
+[Wed Mar 11 05:18:43 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XBA_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XBA_064/species/species_profile_subject.txt
+    jobid: 32
+    reason: Missing output files: workflow/out/midasOutput/XBA_064/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XBA_064/species/species_profile.txt
+    wildcards: sample=XBA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:18:43 2026]
+Finished jobid: 32 (Rule: annotateSpeciesAbundancesBySubject)
+111 of 304 steps (37%) done
+Execute 1 jobs...
+[Wed Mar 11 05:18:43 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XLA_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XLA_036/species/species_profile_subject.txt
+    jobid: 212
+    reason: Missing output files: workflow/out/midasOutput/XLA_036/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XLA_036/species/species_profile.txt
+    wildcards: sample=XLA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+[Wed Mar 11 05:18:43 2026]
+Finished jobid: 212 (Rule: annotateSpeciesAbundancesBySubject)
+112 of 304 steps (37%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Mar 11 05:18:43 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XDA_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XDA_064/species/species_profile_subject.txt
+    jobid: 64
+    reason: Missing output files: workflow/out/midasOutput/XDA_064/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XDA_064/species/species_profile.txt
+    wildcards: sample=XDA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:18:43 2026]
+Finished jobid: 64 (Rule: annotateSpeciesAbundancesBySubject)
+113 of 304 steps (37%) done
+Execute 1 jobs...
+[Wed Mar 11 05:18:43 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XEB_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XEB_064/species/species_profile_subject.txt
+    jobid: 88
+    reason: Missing output files: workflow/out/midasOutput/XEB_064/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XEB_064/species/species_profile.txt
+    wildcards: sample=XEB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:18:43 2026]
+Finished jobid: 88 (Rule: annotateSpeciesAbundancesBySubject)
+114 of 304 steps (38%) done
+Execute 1 jobs...
+[Wed Mar 11 05:18:44 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XSB_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XSB_001/species/species_profile_subject.txt
+    jobid: 328
+    reason: Missing output files: workflow/out/midasOutput/XSB_001/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XSB_001/species/species_profile.txt
+    wildcards: sample=XSB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:18:44 2026]
+Finished jobid: 328 (Rule: annotateSpeciesAbundancesBySubject)
+115 of 304 steps (38%) done
+Execute 1 jobs...
+[Wed Mar 11 05:18:44 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XFA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XFA_029/species/species_profile_subject.txt
+    jobid: 92
+    reason: Missing output files: workflow/out/midasOutput/XFA_029/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XFA_029/species/species_profile.txt
+    wildcards: sample=XFA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:18:44 2026]
+Finished jobid: 92 (Rule: annotateSpeciesAbundancesBySubject)
+116 of 304 steps (38%) done
+Execute 1 jobs...
+[Wed Mar 11 05:18:44 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XSB_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XSB_036/species/species_profile_subject.txt
+    jobid: 332
+    reason: Missing output files: workflow/out/midasOutput/XSB_036/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XSB_036/species/species_profile.txt
+    wildcards: sample=XSB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:18:44 2026]
+Finished jobid: 332 (Rule: annotateSpeciesAbundancesBySubject)
+117 of 304 steps (38%) done
+Execute 1 jobs...
+[Wed Mar 11 05:18:44 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHC_064_AGTTAATGCT-CGGCTGCAGT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHC_064_AGTTAATGCT-CGGCTGCAGT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XHC_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XHC_064.log
+    jobid: 153
+    reason: Missing output files: workflow/out/midasOutput/XHC_064/species/species_profile.txt
+    wildcards: sample=XHC_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:21:29 2026]
+Finished jobid: 153 (Rule: profileSpeciesAbundances)
+118 of 304 steps (39%) done
+Execute 1 jobs...
+[Wed Mar 11 05:21:29 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XHC_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XHC_064/species/species_profile_subject.txt
+    jobid: 152
+    reason: Missing output files: workflow/out/midasOutput/XHC_064/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XHC_064/species/species_profile.txt
+    wildcards: sample=XHC_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:21:29 2026]
+Finished jobid: 152 (Rule: annotateSpeciesAbundancesBySubject)
+119 of 304 steps (39%) done
+Execute 1 jobs...
+[Wed Mar 11 05:21:29 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XIC_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XIC_036/species/species_profile_subject.txt
+    jobid: 174
+    reason: Missing output files: workflow/out/midasOutput/XIC_036/species/species_profile_subject.txt
+    wildcards: sample=XIC_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:21:29 2026]
+Finished jobid: 174 (Rule: annotateSpeciesAbundancesBySubject)
+120 of 304 steps (39%) done
+Execute 1 jobs...
+[Wed Mar 11 05:21:29 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XIC_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XIC_064/species/species_profile_subject.txt
+    jobid: 176
+    reason: Missing output files: workflow/out/midasOutput/XIC_064/species/species_profile_subject.txt
+    wildcards: sample=XIC_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:21:29 2026]
+Finished jobid: 176 (Rule: annotateSpeciesAbundancesBySubject)
+121 of 304 steps (40%) done
+Execute 1 jobs...
+[Wed Mar 11 05:21:29 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XQB_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XQB_001/species/species_profile_subject.txt
+    jobid: 296
+    reason: Missing output files: workflow/out/midasOutput/XQB_001/species/species_profile_subject.txt
+    wildcards: sample=XQB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:21:29 2026]
+Finished jobid: 296 (Rule: annotateSpeciesAbundancesBySubject)
+122 of 304 steps (40%) done
+Execute 1 jobs...
+[Wed Mar 11 05:21:29 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XGB_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XGB_029/species/species_profile_subject.txt
+    jobid: 116
+    reason: Missing output files: workflow/out/midasOutput/XGB_029/species/species_profile_subject.txt
+    wildcards: sample=XGB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:21:29 2026]
+Finished jobid: 116 (Rule: annotateSpeciesAbundancesBySubject)
+123 of 304 steps (40%) done
+Execute 1 jobs...
+[Wed Mar 11 05:21:29 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XUA_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XUA_036/species/species_profile_subject.txt
+    jobid: 356
+    reason: Missing output files: workflow/out/midasOutput/XUA_036/species/species_profile_subject.txt
+    wildcards: sample=XUA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:21:30 2026]
+Finished jobid: 356 (Rule: annotateSpeciesAbundancesBySubject)
+124 of 304 steps (41%) done
+Execute 1 jobs...
+[Wed Mar 11 05:21:30 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XIA_002_GGTGAGTAAT-ACTAGATGTT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XIA_002_GGTGAGTAAT-ACTAGATGTT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XIA_002/species/species_profile.txt
+    log: workflow/logs/midas_species/XIA_002.log
+    jobid: 155
+    reason: Missing output files: workflow/out/midasOutput/XIA_002/species/species_profile.txt
+    wildcards: sample=XIA_002
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:27:40 2026]
+Finished jobid: 155 (Rule: profileSpeciesAbundances)
+125 of 304 steps (41%) done
+Execute 1 jobs...
+[Wed Mar 11 05:27:40 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XFA_036_ATGATTCCGG-CACGTCAGAG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XFA_036_ATGATTCCGG-CACGTCAGAG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XFA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XFA_036.log
+    jobid: 95
+    reason: Missing output files: workflow/out/midasOutput/XFA_036/species/species_profile.txt
+    wildcards: sample=XFA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:31:22 2026]
+Finished jobid: 251 (Rule: profileSpeciesAbundances)
+126 of 304 steps (41%) done
+Execute 1 jobs...
+[Wed Mar 11 05:31:22 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TCGCGACTCC_GTAACTGAAG-TCGCGACTCC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TCGCGACTCC_GTAACTGAAG-TCGCGACTCC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XLA_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XLA_064.log
+    jobid: 215
+    reason: Missing output files: workflow/out/midasOutput/XLA_064/species/species_profile.txt
+    wildcards: sample=XLA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:40:56 2026]
+Finished jobid: 95 (Rule: profileSpeciesAbundances)
+127 of 304 steps (42%) done
+Execute 1 jobs...
+[Wed Mar 11 05:40:56 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XMB_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XMB_036/species/species_profile_subject.txt
+    jobid: 236
+    reason: Missing output files: workflow/out/midasOutput/XMB_036/species/species_profile_subject.txt
+    wildcards: sample=XMB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:40:56 2026]
+Finished jobid: 236 (Rule: annotateSpeciesAbundancesBySubject)
+128 of 304 steps (42%) done
+Execute 1 jobs...
+[Wed Mar 11 05:40:56 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ACACAGGTGG_TCTTGTCGGC-ACACAGGTGG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ACACAGGTGG_TCTTGTCGGC-ACACAGGTGG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XSB_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XSB_064.log
+    jobid: 335
+    reason: Missing output files: workflow/out/midasOutput/XSB_064/species/species_profile.txt
+    wildcards: sample=XSB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:44:53 2026]
+Finished jobid: 215 (Rule: profileSpeciesAbundances)
+129 of 304 steps (42%) done
+Execute 1 jobs...
+[Wed Mar 11 05:44:53 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBB_022_ATACATCACA-TCAATGGAGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBB_022_ATACATCACA-TCAATGGAGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XBB_022/species/species_profile.txt
+    log: workflow/logs/midas_species/XBB_022.log
+    jobid: 35
+    reason: Missing output files: workflow/out/midasOutput/XBB_022/species/species_profile.txt
+    wildcards: sample=XBB_022
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:50:02 2026]
+Finished jobid: 35 (Rule: profileSpeciesAbundances)
+130 of 304 steps (43%) done
+Execute 1 jobs...
+[Wed Mar 11 05:50:03 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XCB_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XCB_064/species/species_profile_subject.txt
+    jobid: 56
+    reason: Missing output files: workflow/out/midasOutput/XCB_064/species/species_profile_subject.txt
+    wildcards: sample=XCB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 05:50:03 2026]
+Finished jobid: 56 (Rule: annotateSpeciesAbundancesBySubject)
+131 of 304 steps (43%) done
+Execute 1 jobs...
+[Wed Mar 11 05:50:03 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATGTAACGTT_TATCACTCTG-ATGTAACGTT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ATGTAACGTT_TATCACTCTG-ATGTAACGTT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XVA_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XVA_001.log
+    jobid: 369
+    reason: Missing output files: workflow/out/midasOutput/XVA_001/species/species_profile.txt
+    wildcards: sample=XVA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 06:10:16 2026]
+Finished jobid: 335 (Rule: profileSpeciesAbundances)
+132 of 304 steps (43%) done
+Execute 1 jobs...
+[Wed Mar 11 06:10:16 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XHC_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XHC_036/species/species_profile_subject.txt
+    jobid: 150
+    reason: Missing output files: workflow/out/midasOutput/XHC_036/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XHC_036/species/species_profile.txt
+    wildcards: sample=XHC_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 06:10:16 2026]
+Finished jobid: 150 (Rule: annotateSpeciesAbundancesBySubject)
+133 of 304 steps (44%) done
+Execute 1 jobs...
+[Wed Mar 11 06:10:16 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XGB_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XGB_036/species/species_profile_subject.txt
+    jobid: 118
+    reason: Missing output files: workflow/out/midasOutput/XGB_036/species/species_profile_subject.txt
+    wildcards: sample=XGB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 06:10:16 2026]
+Finished jobid: 118 (Rule: annotateSpeciesAbundancesBySubject)
+134 of 304 steps (44%) done
+Execute 1 jobs...
+[Wed Mar 11 06:10:16 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XUA_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XUA_064/species/species_profile_subject.txt
+    jobid: 358
+    reason: Missing output files: workflow/out/midasOutput/XUA_064/species/species_profile_subject.txt
+    wildcards: sample=XUA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 06:10:16 2026]
+Finished jobid: 358 (Rule: annotateSpeciesAbundancesBySubject)
+135 of 304 steps (44%) done
+Execute 1 jobs...
+[Wed Mar 11 06:10:16 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBB_029_TAGGTATGTT-CTTGGTCTCG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBB_029_TAGGTATGTT-CTTGGTCTCG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XBB_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XBB_029.log
+    jobid: 37
+    reason: Missing output files: workflow/out/midasOutput/XBB_029/species/species_profile.txt
+    wildcards: sample=XBB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 06:10:34 2026]
+Finished jobid: 369 (Rule: profileSpeciesAbundances)
+136 of 304 steps (45%) done
+Execute 1 jobs...
+[Wed Mar 11 06:10:34 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XFA_064_TTAGGCTCAA-TTCCATTCGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XFA_064_TTAGGCTCAA-TTCCATTCGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XFA_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XFA_064.log
+    jobid: 97
+    reason: Missing output files: workflow/out/midasOutput/XFA_064/species/species_profile.txt
+    wildcards: sample=XFA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 06:22:06 2026]
+Finished jobid: 37 (Rule: profileSpeciesAbundances)
+137 of 304 steps (45%) done
+Execute 1 jobs...
+[Wed Mar 11 06:22:06 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XMB_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XMB_064/species/species_profile_subject.txt
+    jobid: 238
+    reason: Missing output files: workflow/out/midasOutput/XMB_064/species/species_profile_subject.txt
+    wildcards: sample=XMB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 06:22:06 2026]
+Finished jobid: 238 (Rule: annotateSpeciesAbundancesBySubject)
+138 of 304 steps (45%) done
+Execute 1 jobs...
+[Wed Mar 11 06:22:06 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTCTGGCGTT_TCCTCGGACT-CTCTGGCGTT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTCTGGCGTT_TCCTCGGACT-CTCTGGCGTT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XLB_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XLB_001.log
+    jobid: 217
+    reason: Missing output files: workflow/out/midasOutput/XLB_001/species/species_profile.txt
+    wildcards: sample=XLB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 06:24:32 2026]
+Finished jobid: 97 (Rule: profileSpeciesAbundances)
+139 of 304 steps (46%) done
+Execute 1 jobs...
+[Wed Mar 11 06:24:32 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XJA_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XJA_001/species/species_profile_subject.txt
+    jobid: 178
+    reason: Missing output files: workflow/out/midasOutput/XJA_001/species/species_profile_subject.txt
+    wildcards: sample=XJA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 06:24:32 2026]
+Finished jobid: 178 (Rule: annotateSpeciesAbundancesBySubject)
+140 of 304 steps (46%) done
+Execute 1 jobs...
+[Wed Mar 11 06:24:32 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_AACAAGTACA_CTCCACTAAT-AACAAGTACA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_AACAAGTACA_CTCCACTAAT-AACAAGTACA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XPA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XPA_036.log
+    jobid: 277
+    reason: Missing output files: workflow/out/midasOutput/XPA_036/species/species_profile.txt
+    wildcards: sample=XPA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:02:27 2026]
+Finished jobid: 217 (Rule: profileSpeciesAbundances)
+141 of 304 steps (46%) done
+Execute 1 jobs...
+[Wed Mar 11 07:02:27 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XIA_029_TACTCTGCGC-CATAGTAAGG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XIA_029_TACTCTGCGC-CATAGTAAGG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XIA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XIA_029.log
+    jobid: 157
+    reason: Missing output files: workflow/out/midasOutput/XIA_029/species/species_profile.txt
+    wildcards: sample=XIA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:09:54 2026]
+Finished jobid: 157 (Rule: profileSpeciesAbundances)
+142 of 304 steps (47%) done
+Execute 1 jobs...
+[Wed Mar 11 07:09:54 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XDA_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XDA_001/species/species_profile_subject.txt
+    jobid: 58
+    reason: Missing output files: workflow/out/midasOutput/XDA_001/species/species_profile_subject.txt
+    wildcards: sample=XDA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:09:54 2026]
+Finished jobid: 58 (Rule: annotateSpeciesAbundancesBySubject)
+143 of 304 steps (47%) done
+Execute 1 jobs...
+[Wed Mar 11 07:09:54 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XJA_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XJA_036/species/species_profile_subject.txt
+    jobid: 182
+    reason: Missing output files: workflow/out/midasOutput/XJA_036/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XJA_036/species/species_profile.txt
+    wildcards: sample=XJA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:09:54 2026]
+Finished jobid: 182 (Rule: annotateSpeciesAbundancesBySubject)
+144 of 304 steps (47%) done
+Execute 1 jobs...
+[Wed Mar 11 07:09:54 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTACTTAGAG_ATAGTTAGCA-CTACTTAGAG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTACTTAGAG_ATAGTTAGCA-CTACTTAGAG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XPA_072/species/species_profile.txt
+    log: workflow/logs/midas_species/XPA_072.log
+    jobid: 279
+    reason: Missing output files: workflow/out/midasOutput/XPA_072/species/species_profile.txt
+    wildcards: sample=XPA_072
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:16:09 2026]
+Finished jobid: 277 (Rule: profileSpeciesAbundances)
+145 of 304 steps (48%) done
+Execute 1 jobs...
+[Wed Mar 11 07:16:09 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGTTGCGAGG_TACCGCCTCG-GGTTGCGAGG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGTTGCGAGG_TACCGCCTCG-GGTTGCGAGG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XTA_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XTA_001.log
+    jobid: 337
+    reason: Missing output files: workflow/out/midasOutput/XTA_001/species/species_profile.txt
+    wildcards: sample=XTA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:24:54 2026]
+Finished jobid: 279 (Rule: profileSpeciesAbundances)
+146 of 304 steps (48%) done
+Execute 1 jobs...
+[Wed Mar 11 07:24:54 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XRA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XRA_029/species/species_profile_subject.txt
+    jobid: 306
+    reason: Missing output files: workflow/out/midasOutput/XRA_029/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XRA_029/species/species_profile.txt
+    wildcards: sample=XRA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:24:54 2026]
+Finished jobid: 306 (Rule: annotateSpeciesAbundancesBySubject)
+147 of 304 steps (48%) done
+Execute 1 jobs...
+[Wed Mar 11 07:24:54 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XJA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XJA_029/species/species_profile_subject.txt
+    jobid: 180
+    reason: Missing output files: workflow/out/midasOutput/XJA_029/species/species_profile_subject.txt
+    wildcards: sample=XJA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:24:54 2026]
+Finished jobid: 180 (Rule: annotateSpeciesAbundancesBySubject)
+148 of 304 steps (49%) done
+Execute 1 jobs...
+[Wed Mar 11 07:24:54 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XNA_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XNA_001/species/species_profile_subject.txt
+    jobid: 240
+    reason: Missing output files: workflow/out/midasOutput/XNA_001/species/species_profile_subject.txt
+    wildcards: sample=XNA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:24:54 2026]
+Finished jobid: 240 (Rule: annotateSpeciesAbundancesBySubject)
+149 of 304 steps (49%) done
+Execute 1 jobs...
+[Wed Mar 11 07:24:54 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBB_036_CACCTAGCAC-ATGTCCAGCA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBB_036_CACCTAGCAC-ATGTCCAGCA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XBB_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XBB_036.log
+    jobid: 39
+    reason: Missing output files: workflow/out/midasOutput/XBB_036/species/species_profile.txt
+    wildcards: sample=XBB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:33:02 2026]
+Finished jobid: 39 (Rule: profileSpeciesAbundances)
+150 of 304 steps (49%) done
+Execute 1 jobs...
+[Wed Mar 11 07:33:02 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XUB_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XUB_001/species/species_profile_subject.txt
+    jobid: 360
+    reason: Missing output files: workflow/out/midasOutput/XUB_001/species/species_profile_subject.txt
+    wildcards: sample=XUB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:33:02 2026]
+Finished jobid: 360 (Rule: annotateSpeciesAbundancesBySubject)
+151 of 304 steps (50%) done
+Execute 1 jobs...
+[Wed Mar 11 07:33:03 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XQB_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XQB_036/species/species_profile_subject.txt
+    jobid: 300
+    reason: Missing output files: workflow/out/midasOutput/XQB_036/species/species_profile_subject.txt
+    wildcards: sample=XQB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:33:03 2026]
+Finished jobid: 300 (Rule: annotateSpeciesAbundancesBySubject)
+152 of 304 steps (50%) done
+Execute 1 jobs...
+[Wed Mar 11 07:33:03 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XFB_001_TGTAAGGTGG-CCAAGGCCTT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XFB_001_TGTAAGGTGG-CCAAGGCCTT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XFB_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XFB_001.log
+    jobid: 99
+    reason: Missing output files: workflow/out/midasOutput/XFB_001/species/species_profile.txt
+    wildcards: sample=XFB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:43:27 2026]
+Finished jobid: 99 (Rule: profileSpeciesAbundances)
+153 of 304 steps (50%) done
+Execute 1 jobs...
+[Wed Mar 11 07:43:27 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XIA_036_AGGTATGGCG-GTCTCGCCAC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XIA_036_AGGTATGGCG-GTCTCGCCAC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XIA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XIA_036.log
+    jobid: 159
+    reason: Missing output files: workflow/out/midasOutput/XIA_036/species/species_profile.txt
+    wildcards: sample=XIA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:47:23 2026]
+Finished jobid: 337 (Rule: profileSpeciesAbundances)
+154 of 304 steps (51%) done
+Execute 1 jobs...
+[Wed Mar 11 07:47:23 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GTTAATTACG_CTGGAACTGT-GTTAATTACG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GTTAATTACG_CTGGAACTGT-GTTAATTACG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XLB_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XLB_029.log
+    jobid: 219
+    reason: Missing output files: workflow/out/midasOutput/XLB_029/species/species_profile.txt
+    wildcards: sample=XLB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:47:26 2026]
+Finished jobid: 159 (Rule: profileSpeciesAbundances)
+155 of 304 steps (51%) done
+Execute 1 jobs...
+[Wed Mar 11 07:47:26 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XDA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XDA_029/species/species_profile_subject.txt
+    jobid: 60
+    reason: Missing output files: workflow/out/midasOutput/XDA_029/species/species_profile_subject.txt
+    wildcards: sample=XDA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:47:26 2026]
+Finished jobid: 60 (Rule: annotateSpeciesAbundancesBySubject)
+156 of 304 steps (51%) done
+Execute 1 jobs...
+[Wed Mar 11 07:47:26 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XGB_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XGB_064/species/species_profile_subject.txt
+    jobid: 120
+    reason: Missing output files: workflow/out/midasOutput/XGB_064/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XGB_064/species/species_profile.txt
+    wildcards: sample=XGB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:47:26 2026]
+Finished jobid: 120 (Rule: annotateSpeciesAbundancesBySubject)
+157 of 304 steps (52%) done
+Execute 1 jobs...
+[Wed Mar 11 07:47:26 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XSB_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XSB_029/species/species_profile_subject.txt
+    jobid: 330
+    reason: Missing output files: workflow/out/midasOutput/XSB_029/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XSB_029/species/species_profile.txt
+    wildcards: sample=XSB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:47:26 2026]
+Finished jobid: 330 (Rule: annotateSpeciesAbundancesBySubject)
+158 of 304 steps (52%) done
+Execute 1 jobs...
+[Wed Mar 11 07:47:26 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XLA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XLA_029/species/species_profile_subject.txt
+    jobid: 210
+    reason: Missing output files: workflow/out/midasOutput/XLA_029/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XLA_029/species/species_profile.txt
+    wildcards: sample=XLA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:47:26 2026]
+Finished jobid: 210 (Rule: annotateSpeciesAbundancesBySubject)
+159 of 304 steps (52%) done
+Execute 1 jobs...
+[Wed Mar 11 07:47:26 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBB_064_TTCAAGTATG-CGATACCATC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XBB_064_TTCAAGTATG-CGATACCATC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XBB_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XBB_064.log
+    jobid: 41
+    reason: Missing output files: workflow/out/midasOutput/XBB_064/species/species_profile.txt
+    wildcards: sample=XBB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:53:58 2026]
+Finished jobid: 41 (Rule: profileSpeciesAbundances)
+160 of 304 steps (53%) done
+Execute 1 jobs...
+[Wed Mar 11 07:53:58 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XAA_002/species/species_profile.txt
+    output: workflow/out/midasOutput/XAA_002/species/species_profile_subject.txt
+    jobid: 2
+    reason: Missing output files: workflow/out/midasOutput/XAA_002/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XAA_002/species/species_profile.txt
+    wildcards: sample=XAA_002
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:53:58 2026]
+Finished jobid: 2 (Rule: annotateSpeciesAbundancesBySubject)
+161 of 304 steps (53%) done
+Execute 1 jobs...
+[Wed Mar 11 07:53:58 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XIA_064_TCCAGCCTGC-TGGATCTGGC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XIA_064_TCCAGCCTGC-TGGATCTGGC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XIA_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XIA_064.log
+    jobid: 161
+    reason: Missing output files: workflow/out/midasOutput/XIA_064/species/species_profile.txt
+    wildcards: sample=XIA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 07:54:01 2026]
+Finished jobid: 219 (Rule: profileSpeciesAbundances)
+162 of 304 steps (53%) done
+Execute 1 jobs...
+[Wed Mar 11 07:54:01 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XFB_029_CAACTGCAAC-GTTGCGTTCA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XFB_029_CAACTGCAAC-GTTGCGTTCA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XFB_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XFB_029.log
+    jobid: 101
+    reason: Missing output files: workflow/out/midasOutput/XFB_029/species/species_profile.txt
+    wildcards: sample=XFB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:01:59 2026]
+Finished jobid: 161 (Rule: profileSpeciesAbundances)
+163 of 304 steps (54%) done
+Execute 1 jobs...
+[Wed Mar 11 08:01:59 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTGTGGTGAC_ATAGGTCTTA-CTGTGGTGAC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTGTGGTGAC_ATAGGTCTTA-CTGTGGTGAC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XPB_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XPB_001.log
+    jobid: 281
+    reason: Missing output files: workflow/out/midasOutput/XPB_001/species/species_profile.txt
+    wildcards: sample=XPB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:03:59 2026]
+Finished jobid: 101 (Rule: profileSpeciesAbundances)
+164 of 304 steps (54%) done
+Execute 1 jobs...
+[Wed Mar 11 08:03:59 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XQB_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XQB_064/species/species_profile_subject.txt
+    jobid: 302
+    reason: Missing output files: workflow/out/midasOutput/XQB_064/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XQB_064/species/species_profile.txt
+    wildcards: sample=XQB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:03:59 2026]
+Finished jobid: 302 (Rule: annotateSpeciesAbundancesBySubject)
+165 of 304 steps (54%) done
+Execute 1 jobs...
+[Wed Mar 11 08:03:59 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TCAGTCTCGT_GAATATGCGG-TCAGTCTCGT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TCAGTCTCGT_GAATATGCGG-TCAGTCTCGT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XLB_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XLB_036.log
+    jobid: 221
+    reason: Missing output files: workflow/out/midasOutput/XLB_036/species/species_profile.txt
+    wildcards: sample=XLB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:18:36 2026]
+Finished jobid: 221 (Rule: profileSpeciesAbundances)
+166 of 304 steps (55%) done
+Execute 1 jobs...
+[Wed Mar 11 08:18:36 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XDA_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XDA_036/species/species_profile_subject.txt
+    jobid: 62
+    reason: Missing output files: workflow/out/midasOutput/XDA_036/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XDA_036/species/species_profile.txt
+    wildcards: sample=XDA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:18:36 2026]
+Finished jobid: 62 (Rule: annotateSpeciesAbundancesBySubject)
+167 of 304 steps (55%) done
+Execute 1 jobs...
+[Wed Mar 11 08:18:36 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTAATGTAGC_TAACCGGCGA-CTAATGTAGC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTAATGTAGC_TAACCGGCGA-CTAATGTAGC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XTA_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XTA_036.log
+    jobid: 341
+    reason: Missing output files: workflow/out/midasOutput/XTA_036/species/species_profile.txt
+    wildcards: sample=XTA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:20:43 2026]
+Finished jobid: 281 (Rule: profileSpeciesAbundances)
+168 of 304 steps (55%) done
+Execute 1 jobs...
+[Wed Mar 11 08:20:43 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ACAGCTATAC_CTGTTATATC-ACAGCTATAC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_ACAGCTATAC_CTGTTATATC-ACAGCTATAC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XTA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XTA_029.log
+    jobid: 339
+    reason: Missing output files: workflow/out/midasOutput/XTA_029/species/species_profile.txt
+    wildcards: sample=XTA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:23:34 2026]
+Finished jobid: 341 (Rule: profileSpeciesAbundances)
+169 of 304 steps (56%) done
+Execute 1 jobs...
+[Wed Mar 11 08:23:35 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XCB_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XCB_036/species/species_profile_subject.txt
+    jobid: 54
+    reason: Missing output files: workflow/out/midasOutput/XCB_036/species/species_profile_subject.txt
+    wildcards: sample=XCB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:23:35 2026]
+Finished jobid: 54 (Rule: annotateSpeciesAbundancesBySubject)
+170 of 304 steps (56%) done
+Execute 1 jobs...
+[Wed Mar 11 08:23:35 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XNA_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XNA_029/species/species_profile_subject.txt
+    jobid: 242
+    reason: Missing output files: workflow/out/midasOutput/XNA_029/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XNA_029/species/species_profile.txt
+    wildcards: sample=XNA_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:23:35 2026]
+Finished jobid: 242 (Rule: annotateSpeciesAbundancesBySubject)
+171 of 304 steps (56%) done
+Execute 1 jobs...
+[Wed Mar 11 08:23:35 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XGC_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XGC_001/species/species_profile_subject.txt
+    jobid: 122
+    reason: Missing output files: workflow/out/midasOutput/XGC_001/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XGC_001/species/species_profile.txt
+    wildcards: sample=XGC_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:23:35 2026]
+Finished jobid: 122 (Rule: annotateSpeciesAbundancesBySubject)
+172 of 304 steps (57%) done
+Execute 1 jobs...
+[Wed Mar 11 08:23:35 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XUB_029/species/species_profile.txt
+    output: workflow/out/midasOutput/XUB_029/species/species_profile_subject.txt
+    jobid: 362
+    reason: Missing output files: workflow/out/midasOutput/XUB_029/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XUB_029/species/species_profile.txt
+    wildcards: sample=XUB_029
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:23:35 2026]
+Finished jobid: 362 (Rule: annotateSpeciesAbundancesBySubject)
+173 of 304 steps (57%) done
+Execute 1 jobs...
+[Wed Mar 11 08:23:35 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XTA_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XTA_036/species/species_profile_subject.txt
+    jobid: 340
+    reason: Missing output files: workflow/out/midasOutput/XTA_036/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XTA_036/species/species_profile.txt
+    wildcards: sample=XTA_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:23:35 2026]
+Finished jobid: 340 (Rule: annotateSpeciesAbundancesBySubject)
+174 of 304 steps (57%) done
+Execute 1 jobs...
+[Wed Mar 11 08:23:35 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XRA_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XRA_001/species/species_profile_subject.txt
+    jobid: 304
+    reason: Missing output files: workflow/out/midasOutput/XRA_001/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XRA_001/species/species_profile.txt
+    wildcards: sample=XRA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:23:35 2026]
+Finished jobid: 304 (Rule: annotateSpeciesAbundancesBySubject)
+175 of 304 steps (58%) done
+Execute 1 jobs...
+[Wed Mar 11 08:23:35 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XCA_001_TTAAGACAAG-CAATTAAGCC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XCA_001_TTAAGACAAG-CAATTAAGCC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XCA_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XCA_001.log
+    jobid: 43
+    reason: Missing output files: workflow/out/midasOutput/XCA_001/species/species_profile.txt
+    wildcards: sample=XCA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:30:17 2026]
+Finished jobid: 43 (Rule: profileSpeciesAbundances)
+176 of 304 steps (58%) done
+Execute 1 jobs...
+[Wed Mar 11 08:30:17 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XCA_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XCA_001/species/species_profile_subject.txt
+    jobid: 42
+    reason: Missing output files: workflow/out/midasOutput/XCA_001/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XCA_001/species/species_profile.txt
+    wildcards: sample=XCA_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:30:17 2026]
+Finished jobid: 42 (Rule: annotateSpeciesAbundancesBySubject)
+177 of 304 steps (58%) done
+Execute 1 jobs...
+[Wed Mar 11 08:30:17 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XIB_002_GCCATATAAC-GATATTGTGT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XIB_002_GCCATATAAC-GATATTGTGT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XIB_002/species/species_profile.txt
+    log: workflow/logs/midas_species/XIB_002.log
+    jobid: 163
+    reason: Missing output files: workflow/out/midasOutput/XIB_002/species/species_profile.txt
+    wildcards: sample=XIB_002
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:39:24 2026]
+Finished jobid: 339 (Rule: profileSpeciesAbundances)
+178 of 304 steps (59%) done
+Execute 1 jobs...
+[Wed Mar 11 08:39:24 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XPB_001/species/species_profile.txt
+    output: workflow/out/midasOutput/XPB_001/species/species_profile_subject.txt
+    jobid: 280
+    reason: Missing output files: workflow/out/midasOutput/XPB_001/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XPB_001/species/species_profile.txt
+    wildcards: sample=XPB_001
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:39:25 2026]
+Finished jobid: 280 (Rule: annotateSpeciesAbundancesBySubject)
+179 of 304 steps (59%) done
+Execute 1 jobs...
+[Wed Mar 11 08:39:25 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XLB_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XLB_036/species/species_profile_subject.txt
+    jobid: 220
+    reason: Missing output files: workflow/out/midasOutput/XLB_036/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XLB_036/species/species_profile.txt
+    wildcards: sample=XLB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:39:25 2026]
+Finished jobid: 220 (Rule: annotateSpeciesAbundancesBySubject)
+180 of 304 steps (59%) done
+Execute 1 jobs...
+[Wed Mar 11 08:39:25 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGTATGTAGA_TTCTTAACCA-GGTATGTAGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGTATGTAGA_TTCTTAACCA-GGTATGTAGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XPB_028/species/species_profile.txt
+    log: workflow/logs/midas_species/XPB_028.log
+    jobid: 283
+    reason: Missing output files: workflow/out/midasOutput/XPB_028/species/species_profile.txt
+    wildcards: sample=XPB_028
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:40:54 2026]
+Finished jobid: 163 (Rule: profileSpeciesAbundances)
+181 of 304 steps (60%) done
+Execute 1 jobs...
+[Wed Mar 11 08:40:54 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XIB_002/species/species_profile.txt
+    output: workflow/out/midasOutput/XIB_002/species/species_profile_subject.txt
+    jobid: 162
+    reason: Missing output files: workflow/out/midasOutput/XIB_002/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XIB_002/species/species_profile.txt
+    wildcards: sample=XIB_002
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:40:54 2026]
+Finished jobid: 162 (Rule: annotateSpeciesAbundancesBySubject)
+182 of 304 steps (60%) done
+Execute 1 jobs...
+[Wed Mar 11 08:40:54 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XJA_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XJA_064/species/species_profile_subject.txt
+    jobid: 184
+    reason: Missing output files: workflow/out/midasOutput/XJA_064/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XJA_064/species/species_profile.txt
+    wildcards: sample=XJA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:40:54 2026]
+Finished jobid: 184 (Rule: annotateSpeciesAbundancesBySubject)
+183 of 304 steps (60%) done
+Execute 1 jobs...
+[Wed Mar 11 08:40:54 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XUB_036/species/species_profile.txt
+    output: workflow/out/midasOutput/XUB_036/species/species_profile_subject.txt
+    jobid: 364
+    reason: Missing output files: workflow/out/midasOutput/XUB_036/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XUB_036/species/species_profile.txt
+    wildcards: sample=XUB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:40:55 2026]
+Finished jobid: 364 (Rule: annotateSpeciesAbundancesBySubject)
+184 of 304 steps (61%) done
+Execute 1 jobs...
+[Wed Mar 11 08:40:55 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XOB_064/species/species_profile.txt
+    output: workflow/out/midasOutput/XOB_064/species/species_profile_subject.txt
+    jobid: 270
+    reason: Missing output files: workflow/out/midasOutput/XOB_064/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XOB_064/species/species_profile.txt
+    wildcards: sample=XOB_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:40:55 2026]
+Finished jobid: 270 (Rule: annotateSpeciesAbundancesBySubject)
+185 of 304 steps (61%) done
+Execute 1 jobs...
+[Wed Mar 11 08:40:55 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XAC_002_TCGTGCATTC-ATACCAACGC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XAC_002_TCGTGCATTC-ATACCAACGC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XAC_002/species/species_profile.txt
+    log: workflow/logs/midas_species/XAC_002.log
+    jobid: 11
+    reason: Missing output files: workflow/out/midasOutput/XAC_002/species/species_profile.txt
+    wildcards: sample=XAC_002
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:49:36 2026]
+Finished jobid: 11 (Rule: profileSpeciesAbundances)
+186 of 304 steps (61%) done
+Execute 1 jobs...
+[Wed Mar 11 08:49:36 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHA_003_GATATCACAC-ACATATAGTC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHA_003_GATATCACAC-ACATATAGTC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XHA_003/species/species_profile.txt
+    log: workflow/logs/midas_species/XHA_003.log
+    jobid: 131
+    reason: Missing output files: workflow/out/midasOutput/XHA_003/species/species_profile.txt
+    wildcards: sample=XHA_003
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:59:55 2026]
+Finished jobid: 131 (Rule: profileSpeciesAbundances)
+187 of 304 steps (62%) done
+Execute 1 jobs...
+[Wed Mar 11 08:59:55 2026]
+localrule annotateSpeciesAbundancesBySubject:
+    input: workflow/out/midasOutput/XPA_002/species/species_profile.txt
+    output: workflow/out/midasOutput/XPA_002/species/species_profile_subject.txt
+    jobid: 272
+    reason: Missing output files: workflow/out/midasOutput/XPA_002/species/species_profile_subject.txt; Input files updated by another job: workflow/out/midasOutput/XPA_002/species/species_profile.txt
+    wildcards: sample=XPA_002
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 08:59:55 2026]
+Finished jobid: 272 (Rule: annotateSpeciesAbundancesBySubject)
+188 of 304 steps (62%) done
+Execute 1 jobs...
+[Wed Mar 11 08:59:55 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XDB_036_AAGTTCTAGT-TTATCTTACC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XDB_036_AAGTTCTAGT-TTATCTTACC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XDB_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XDB_036.log
+    jobid: 71
+    reason: Missing output files: workflow/out/midasOutput/XDB_036/species/species_profile.txt
+    wildcards: sample=XDB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 09:11:00 2026]
+Finished jobid: 71 (Rule: profileSpeciesAbundances)
+189 of 304 steps (62%) done
+Execute 1 jobs...
+[Wed Mar 11 09:11:01 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XJB_036_TATGAACTTG-CCTAAGGATT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XJB_036_TATGAACTTG-CCTAAGGATT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XJB_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XJB_036.log
+    jobid: 191
+    reason: Missing output files: workflow/out/midasOutput/XJB_036/species/species_profile.txt
+    wildcards: sample=XJB_036
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...
+[Wed Mar 11 09:11:30 2026]
+Finished jobid: 283 (Rule: profileSpeciesAbundances)
+190 of 304 steps (62%) done
+Execute 1 jobs...
+[Wed Mar 11 09:11:30 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTTGATTCAT_CCGAATCTGG-CTTGATTCAT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTTGATTCAT_CCGAATCTGG-CTTGATTCAT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XRA_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XRA_064.log
+    jobid: 311
+    reason: Missing output files: workflow/out/midasOutput/XRA_064/species/species_profile.txt
+    wildcards: sample=XRA_064
+    resources: tmpdir=/tmp/aespelet/49497723
+Select jobs to execute...

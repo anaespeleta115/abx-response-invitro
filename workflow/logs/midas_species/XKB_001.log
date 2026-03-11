@@ -19,21 +19,17 @@ Number of threads for database search: 1
 ================================
 
 Aligning reads to marker-genes database
-Traceback (most recent call last):
-  File "/dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py", line 757, in <module>
-    run_program(program, args)
-  File "/dfs7/xuek5-lab/aespelet/tools/MIDAS/scripts/run_midas.py", line 76, in run_program
-    species.run_pipeline(args)
-  File "/dfs7/xuek5-lab/aespelet/tools/MIDAS/midas/run/species.py", line 240, in run_pipeline
-    map_reads_hsblast(args)
-  File "/dfs7/xuek5-lab/aespelet/tools/MIDAS/midas/run/species.py", line 49, in map_reads_hsblast
-    utility.check_exit_code(process, command)
-  File "/dfs7/xuek5-lab/aespelet/tools/MIDAS/midas/utility.py", line 229, in check_exit_code
-    out, err = process.communicate()
-  File "/dfs7/xuek5-lab/aespelet/miniforge3/envs/midas_runtime2/lib/python2.7/subprocess.py", line 483, in communicate
-    return self._communicate(input)
-  File "/dfs7/xuek5-lab/aespelet/miniforge3/envs/midas_runtime2/lib/python2.7/subprocess.py", line 1124, in _communicate
-    stdout, stderr = self._communicate_with_poll(input)
-  File "/dfs7/xuek5-lab/aespelet/miniforge3/envs/midas_runtime2/lib/python2.7/subprocess.py", line 1178, in _communicate_with_poll
-    ready = poller.poll()
-KeyboardInterrupt
+  14.71 minutes
+  0.74 Gb maximum memory
+
+Classifying reads
+  total alignments: 22837
+  uniquely mapped reads: 1314
+  ambiguously mapped reads: 289
+  0.01 minutes
+  0.75 Gb maximum memory
+
+Estimating species abundance
+  total marker-gene coverage: 38.261
+  0.0 minutes
+  0.75 Gb maximum memory

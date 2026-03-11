@@ -19,15 +19,15 @@ Number of threads for database search: 1
 ================================
 
 Aligning reads to marker-genes database
-  31.45 minutes
-  0.73 Gb maximum memory
+  11.79 minutes
+  0.74 Gb maximum memory
 
 Classifying reads
   total alignments: 37879
   uniquely mapped reads: 1108
   ambiguously mapped reads: 324
-  0.06 minutes
-  0.74 Gb maximum memory
+  0.01 minutes
+  0.75 Gb maximum memory
 
 Estimating species abundance
   total marker-gene coverage: 37.094

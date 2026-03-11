@@ -20,3 +20,7 @@ Number of threads for database search: 1
 
 Aligning reads to marker-genes database
 command: python /dfs7/xuek5-lab/aespelet/tools/MIDAS/midas/run/stream_seqs.py -1 /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGCCGGTCAG_TCCTGGTTGT-TGCCGGTCAG_L001_R1_001.fastq.gz -2 /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGCCGGTCAG_TCCTGGTTGT-TGCCGGTCAG_L001_R2_001.fastq.gz 2> workflow/out/midasOutput/XKB_001/species/temp/read_count.txt | /dfs7/xuek5-lab/aespelet/tools/MIDAS/bin/Linux/hs-blastn align -word_size 28 -query /dev/stdin -db /dfs7/xuek5-lab/shared/public_datasets/midas_db_v1.2/marker_genes/phyeco.fa -outfmt 6 -num_threads 1 -out workflow/out/midasOutput/XKB_001/species/temp/alignments.m8 -evalue 1e-3
+
+Classifying reads
+
+Estimating species abundance

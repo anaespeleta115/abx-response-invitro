@@ -982,3 +982,101 @@ localrule profileSpeciesAbundances:
     wildcards: sample=XEA_064
     resources: tmpdir=/tmp/aespelet/49490196
 Select jobs to execute...
+[Tue Mar 10 20:22:39 2026]
+Finished jobid: 81 (Rule: profileSpeciesAbundances)
+69 of 379 steps (18%) done
+Execute 1 jobs...
+[Tue Mar 10 20:22:39 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHB_036_TCGTTGCTGC-TTCACGAGAC_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XHB_036_TCGTTGCTGC-TTCACGAGAC_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XHB_036/species/species_profile.txt
+    log: workflow/logs/midas_species/XHB_036.log
+    jobid: 143
+    reason: Missing output files: workflow/out/midasOutput/XHB_036/species/species_profile.txt
+    wildcards: sample=XHB_036
+    resources: tmpdir=/tmp/aespelet/49490196
+Select jobs to execute...
+[Tue Mar 10 20:30:34 2026]
+Finished jobid: 201 (Rule: profileSpeciesAbundances)
+70 of 379 steps (18%) done
+Execute 1 jobs...
+[Tue Mar 10 20:30:35 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_AACGTTAGTT_GTACCGATTA-AACGTTAGTT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_AACGTTAGTT_GTACCGATTA-AACGTTAGTT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XVB_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XVB_064.log
+    jobid: 383
+    reason: Missing output files: workflow/out/midasOutput/XVB_064/species/species_profile.txt; Code has changed since last execution
+    wildcards: sample=XVB_064
+    resources: tmpdir=/tmp/aespelet/49490196
+Select jobs to execute...
+[Tue Mar 10 20:34:47 2026]
+Finished jobid: 143 (Rule: profileSpeciesAbundances)
+71 of 379 steps (19%) done
+Execute 1 jobs...
+[Tue Mar 10 20:34:47 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GAGGAAGTAA_ACTAGCGCTA-GAGGAAGTAA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GAGGAAGTAA_ACTAGCGCTA-GAGGAAGTAA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XOA_064/species/species_profile.txt
+    log: workflow/logs/midas_species/XOA_064.log
+    jobid: 263
+    reason: Missing output files: workflow/out/midasOutput/XOA_064/species/species_profile.txt; Code has changed since last execution
+    wildcards: sample=XOA_064
+    resources: tmpdir=/tmp/aespelet/49490196
+Select jobs to execute...
+[Tue Mar 10 20:53:45 2026]
+Finished jobid: 383 (Rule: profileSpeciesAbundances)
+72 of 379 steps (19%) done
+Execute 1 jobs...
+[Tue Mar 10 20:53:45 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XEB_001_GAGCTTGCCG-CCTGCAACCT_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230314-16S-wgs-Phase5/e0026_XEB_001_GAGCTTGCCG-CCTGCAACCT_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XEB_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XEB_001.log
+    jobid: 83
+    reason: Missing output files: workflow/out/midasOutput/XEB_001/species/species_profile.txt
+    wildcards: sample=XEB_001
+    resources: tmpdir=/tmp/aespelet/49490196
+Select jobs to execute...
+[Tue Mar 10 21:00:14 2026]
+Finished jobid: 263 (Rule: profileSpeciesAbundances)
+73 of 379 steps (19%) done
+Execute 1 jobs...
+[Tue Mar 10 21:00:15 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGCCGGTCAG_TCCTGGTTGT-TGCCGGTCAG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_TGCCGGTCAG_TCCTGGTTGT-TGCCGGTCAG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XKB_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XKB_001.log
+    jobid: 203
+    reason: Missing output files: workflow/out/midasOutput/XKB_001/species/species_profile.txt
+    wildcards: sample=XKB_001
+    resources: tmpdir=/tmp/aespelet/49490196
+Select jobs to execute...
+[Tue Mar 10 21:01:02 2026]
+Finished jobid: 83 (Rule: profileSpeciesAbundances)
+74 of 379 steps (20%) done
+Execute 1 jobs...
+[Tue Mar 10 21:01:02 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTCCGCGAGA_CCATGGTATA-CTCCGCGAGA_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_CTCCGCGAGA_CCATGGTATA-CTCCGCGAGA_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XSA_029/species/species_profile.txt
+    log: workflow/logs/midas_species/XSA_029.log
+    jobid: 323
+    reason: Missing output files: workflow/out/midasOutput/XSA_029/species/species_profile.txt
+    wildcards: sample=XSA_029
+    resources: tmpdir=/tmp/aespelet/49490196
+Select jobs to execute...
+[Tue Mar 10 21:15:01 2026]
+Finished jobid: 203 (Rule: profileSpeciesAbundances)
+75 of 379 steps (20%) done
+Execute 1 jobs...
+[Tue Mar 10 21:15:01 2026]
+localrule profileSpeciesAbundances:
+    input: /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGTGGACGTG_GCTCTTAACT-GGTGGACGTG_L001_R1_001.fastq.gz, /dfs7/xuek5-lab/shared/compressed_raw_data_backup/kxue/230703-16S-wgs-Phase6/e0026_GGTGGACGTG_GCTCTTAACT-GGTGGACGTG_L001_R2_001.fastq.gz
+    output: workflow/out/midasOutput/XOB_001/species/species_profile.txt
+    log: workflow/logs/midas_species/XOB_001.log
+    jobid: 265
+    reason: Missing output files: workflow/out/midasOutput/XOB_001/species/species_profile.txt
+    wildcards: sample=XOB_001
+    resources: tmpdir=/tmp/aespelet/49490196
+Select jobs to execute...

@@ -1,6 +1,1 @@
-Traceback (most recent call last):
-  File "/dfs7/xuek5-lab/aespelet/tools/MIDAS/midas/run/stream_seqs.py", line 79, in <module>
-    main()
-  File "/dfs7/xuek5-lab/aespelet/tools/MIDAS/midas/run/stream_seqs.py", line 59, in main
-    sys.stdout.write('>%s_%s\n%s\n' % (id, seq_len, seq))
-KeyboardInterrupt
+3860568	965142000
