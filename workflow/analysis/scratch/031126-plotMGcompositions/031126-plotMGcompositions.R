@@ -2,6 +2,9 @@ source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/031126
 
 
 
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/031126-plotMGcompositions/out/"
+
+
 # Plot XBA compositions through time
 
 XBA_species_composition <- metaGdata %>% 
@@ -16,4 +19,4 @@ XBA_species_composition <- metaGdata %>%
 XBA_species_composition
 
 
-savePNGPDF(paste0(OUTDIR, "species_abundance_XAA"), species_abundance_XAA_plot, 3, 2)
+savePNGPDF(paste0(OUTDIR, "XBA_species_composition"), XBA_species_composition, 3, 2)
