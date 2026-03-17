@@ -19,7 +19,7 @@ MG_p0_species_richness <- household_filtered %>%
 
 
 MG_p0_species_richness_plot <- MG_p0_species_richness %>% mutate(day = as.numeric(day)-29) %>% 
-  ggplot(aes(x = factor(day), y = species_richness, fill = as.factor(antibiotic))
+  ggplot(aes(x = factor(day), y = species_richness, fill = factor(antibiotic))
   ) +
   geom_boxplot(
     position = position_dodge(width = 0.75),

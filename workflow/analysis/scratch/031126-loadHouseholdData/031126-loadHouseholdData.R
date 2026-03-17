@@ -6,7 +6,7 @@ library(ggrepel)
 library("phyloseq")
 library(PNWColors)
 library(paletteer)
-
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/background/background.R")
 
 # Set output directory
 OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/031126-loadHouseholdData/out/"
@@ -30,19 +30,19 @@ household_data <- household_data %>%
          antibiotic = ifelse(subject %in% subjectsAbx, 1, 0),
          day = str_sub(sample, -3))
 
+# Use background script to only keep relevant timepoints
+household_data <- household_data %>% 
+  filter(sample %in% samplesKeyTimepoints)
 
-# Adjust all the timepoints that are off
-household_data <- household_data %>%
+# Fix the ones that are off by a few days
+household_data <- household_data %>% 
   mutate(day = case_when(
-    str_detect(day, "001") | str_detect(day, "002") | str_detect(day, "003") ~ "001",
-    str_detect(day, "029") ~ "029",
-    str_detect(sample, "XTB-028") ~ "029",
-    str_detect(sample, "XTB-038") ~ "036",
-    str_detect(day, "036") ~ "036",
-    str_detect(day, "064")| str_detect(day, "063") | str_detect(day, "072") | str_detect(day, "059")| str_detect(day, "065") ~ "064",
+    str_detect(day, "001") | str_detect(day, "002") | str_detect(day, "003") | str_detect(day, "022")| str_detect(day, "008") ~ "001",
+    str_detect(day, "029") | str_detect(day, "028") | str_detect(day, "027") ~ "029",
+    str_detect(day, "036") | str_detect(day, "037") | str_detect(day, "038") ~ "036",
+    str_detect(day, "064")| str_detect(day, "063") | str_detect(day, "072") | str_detect(day, "059")| str_detect(day, "065") | str_detect(day, "066") ~ "064",
     TRUE ~ "0"
-  )) %>% 
-  filter(sample != "XRA-059")
+  ))
 
 # Set metagenomic color palette
 my_colors <- readRDS("~/Documents/GitHub/abx-response-invitro/data/commonFamiliesPalette.rds") 

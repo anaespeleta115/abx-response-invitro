@@ -35,8 +35,8 @@ metaGdata <- metaGdata %>%
   mutate(day = case_when(
     str_detect(day, "001") | str_detect(day, "002") | str_detect(day, "003") | str_detect(day, "022")| str_detect(day, "008") ~ "001",
     str_detect(day, "029") | str_detect(day, "028") | str_detect(day, "027") ~ "029",
-    str_detect(day, "036") | str_detect(day, "037") ~ "036",
-    str_detect(day, "064")| str_detect(day, "063") | str_detect(day, "072") | str_detect(day, "059")| str_detect(day, "065") ~ "064",
+    str_detect(day, "036") | str_detect(day, "037") | str_detect(day, "038") ~ "036",
+    str_detect(day, "064")| str_detect(day, "063") | str_detect(day, "072") | str_detect(day, "059")| str_detect(day, "065") | str_detect(day, "066") ~ "064",
     TRUE ~ "0"
   ))
 

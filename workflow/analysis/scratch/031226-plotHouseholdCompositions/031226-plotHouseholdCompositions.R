@@ -8,7 +8,7 @@ OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/031
 
 # Plot day 2, 29, 36 and 64 compositions through time
 
-household_species_composition <- household_data_filtered %>% 
+household_species_composition <- household_filtered %>% 
   ggplot(aes(x = as.factor(timepoint), y = relative_abundance, fill = family))+
   geom_bar(stat = "identity") +
   scale_fill_manual(values = my_colors) +

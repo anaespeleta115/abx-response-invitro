@@ -6,7 +6,7 @@ library(foreach)
 globalRunAll <- FALSE
 
 # Import list of sequenced samples and condense to sample names.
-samplesRaw <- read.table("./samples-raw.txt", 
+samplesRaw <- read.table("~/Documents/GitHub/abx-response-invitro/workflow/analysis/background/samples-raw.txt", 
                          header=FALSE, stringsAsFactors = FALSE)
 colnames(samplesRaw) <- c("sample","raw1","raw2","trimmed1","trimmed2")
 # Separate sample names into subject and timepoint.
@@ -20,15 +20,15 @@ samplesRaw <- samplesRaw %>%
 # Remove the sample with unknown ID (WWW-000).
 samplesRaw <- samplesRaw %>%
   filter(!sample=="WWW-000")
-# Export list of samples.
-write.table(samplesRaw, "workflow/analysis/background/out/samples.txt",
-            quote=FALSE, row.names=FALSE)
+# # Export list of samples.
+# write.table(samplesRaw, "workflow/analysis/background/out/samples.txt",
+#             quote=FALSE, row.names=FALSE)
 
-# Import the list of blacklisted samples and remove them from this list.
-sampleBlacklist <- read.table("workflow/analysis/background/out/sampleBlacklist.txt",
-                              header=TRUE, stringsAsFactors = FALSE)
-samplesRaw <- samplesRaw %>%
-  filter(!(sample %in% sampleBlacklist$sample))
+# # Import the list of blacklisted samples and remove them from this list.
+# sampleBlacklist <- read.table("workflow/analysis/background/out/sampleBlacklist.txt",
+#                               header=TRUE, stringsAsFactors = FALSE)
+# samplesRaw <- samplesRaw %>%
+#   filter(!(sample %in% sampleBlacklist$sample))
 
 # Extract the full list of sequenced samples as well as useful subsets.
 samplesAll <- samplesRaw$sample
@@ -103,8 +103,3 @@ hhX <- sort(unique((samplesRaw %>% filter(substr(subject,1,1)=="X"))$hh))
 hhY <- sort(unique((samplesRaw %>% filter(substr(subject,1,1)=="Y"))$hh))
 hhZ <- sort(unique((samplesRaw %>% filter(substr(subject,1,1)=="Z"))$hh))
 
-# Import list of all pairs of cohabiting subjects.
-# Note that subjects in households of size >2 will be part of multiple pairs.
-cohabitingPairs <- read.table("workflow/analysis/background/cohabitingPairs.txt",
-                              header=TRUE, stringsAsFactors = FALSE) %>%
-  mutate(pair=paste0(subject1,"-",subject2))
