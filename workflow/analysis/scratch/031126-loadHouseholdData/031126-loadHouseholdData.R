@@ -31,9 +31,24 @@ household_data <- household_data %>%
          day = str_sub(sample, -3))
 
 
+# Adjust all the timepoints that are off
+household_data <- household_data %>%
+  mutate(day = case_when(
+    str_detect(day, "001") | str_detect(day, "002") | str_detect(day, "003") ~ "001",
+    str_detect(day, "029") ~ "029",
+    str_detect(sample, "XTB-028") ~ "029",
+    str_detect(sample, "XTB-038") ~ "036",
+    str_detect(day, "036") ~ "036",
+    str_detect(day, "064")| str_detect(day, "063") | str_detect(day, "072") | str_detect(day, "059")| str_detect(day, "065") ~ "064",
+    TRUE ~ "0"
+  )) %>% 
+  filter(sample != "XRA-059")
+
 # Set metagenomic color palette
 my_colors <- readRDS("~/Documents/GitHub/abx-response-invitro/data/commonFamiliesPalette.rds") 
 
 # filter out low abundance taxa
 household_filtered <- household_data %>% 
-  filter(relative_abundance > limit_of_detection)
+  filter(relative_abundance > limit_of_detection, str_detect(sample, "X"))
+
+

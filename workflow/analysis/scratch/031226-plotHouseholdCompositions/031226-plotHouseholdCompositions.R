@@ -5,9 +5,6 @@ source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/031126
 OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/031226-plotHouseholdCompositions/out/"
 
 
-household_data_filtered <- household_data %>% 
-  filter(timepoint %in% c("2", "29", "36", "64"), str_detect(sample, "X"))
-
 
 # Plot day 2, 29, 36 and 64 compositions through time
 

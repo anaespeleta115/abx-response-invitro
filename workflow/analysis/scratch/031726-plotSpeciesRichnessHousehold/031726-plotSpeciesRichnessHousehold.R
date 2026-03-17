@@ -1,0 +1,46 @@
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/031126-loadHouseholdData/031126-loadHouseholdData.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/plotDefaults.R")
+
+
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/031726-plotSpeciesRichnessHousehold/out/"
+
+
+
+ABX <- c(0, 1)
+PALETTE.ABX <- c("gray80","#88CCEE")
+names(PALETTE.ABX) <- ABX
+
+
+MG_p0_species_richness <- household_filtered %>% 
+  filter(day %in% c("001", "029", "036", "064")) %>% 
+  group_by(subject, day, antibiotic) %>% 
+  summarize(species_richness = n())
+
+
+
+MG_p0_species_richness_plot <- MG_p0_species_richness %>% mutate(day = as.numeric(day)-29) %>% 
+  ggplot(aes(x = factor(day), y = species_richness, fill = as.factor(antibiotic))
+  ) +
+  geom_boxplot(
+    position = position_dodge(width = 0.75),
+    width = 0.6,
+    alpha = 0.9,
+    size = 1
+  )  +
+  labs(
+    title = "",
+    x = "Study day",
+    y = "Species richness",
+    fill = "Antibiotic"
+  ) +
+  scale_fill_manual(values = PALETTE.ABX)+
+  DEFAULTS.THEME_PRINT+
+  theme(
+    legend.position = "right",
+    axis.text.x = element_text(hjust = 0.5, size = 8),
+    axis.text.y = element_text(hjust = 0.5, size = 8),
+    axis.title = element_text(size = 8)
+  )
+
+savePNGPDF(paste0(OUTDIR, "MG_richness_time_p0"), MG_p0_species_richness_plot, 3, 3)
+
