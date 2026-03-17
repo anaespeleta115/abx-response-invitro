@@ -6,7 +6,7 @@ library(foreach)
 globalRunAll <- FALSE
 
 # Import list of sequenced samples and condense to sample names.
-samplesRaw <- read.table("config/samples-raw.txt", 
+samplesRaw <- read.table("./samples-raw.txt", 
                          header=FALSE, stringsAsFactors = FALSE)
 colnames(samplesRaw) <- c("sample","raw1","raw2","trimmed1","trimmed2")
 # Separate sample names into subject and timepoint.
