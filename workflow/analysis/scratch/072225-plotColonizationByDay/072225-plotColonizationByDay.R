@@ -1,16 +1,16 @@
 # Load data
-source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
-source("~/Documents/GitHub/abx-response-invitro/analysis/plotDefaults.R")
-source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/072125-getColonization/072125-getColonization.R")
-source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/072225-getColonizationProportion/072225-getColonizationProportion.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/plotDefaults.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072125-getColonization/072125-getColonization.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072225-getColonizationProportion/072225-getColonizationProportion.R")
 
 # Set output directory
-OUTDIR <- "/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072225-plotColonizationByDay/out/"
+OUTDIR <- "/Users/aespelet/Documents/Github/abx-response-invitro/workflow/analysis/scratch/072225-plotColonizationByDay/out/"
 
 
 
 DAY <- c("0", "7", "35")
-PALETTE.DAY <- c(paletteer_d("nationalparkcolors::Voyageurs"))
+PALETTE.DAY <- c(paletteer_d("nationalparkcolors::Voyageurs"),1)
 names(PALETTE.DAY) <- DAY
 
 
@@ -60,8 +60,8 @@ write.csv(
 # Plots
 
 colonization_day <- 
-  ggplot(total_colonization %>%  mutate(day = (as.numeric(as.character(day)))-29), aes(x = factor(day), y = total_colonizers, fill = recipient)) +
-  geom_boxplot() +
+  ggplot(total_colonization %>%  mutate(day = (as.numeric(as.character(day)))-29), aes(x = factor(day), y = total_colonizers)) +
+  geom_boxplot(fill = "#5495CFFF", outlier.size = 0.5, ) +
   # geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
   labs(
     title = "",
@@ -69,18 +69,18 @@ colonization_day <-
     y = "Number of colonizers",
     fill = ""
   ) + 
-  scale_fill_manual(values = PALETTE.SUBJECT)+
-  facet_wrap(~recipient)+
+  # scale_fill_manual(values = "#5495")+
+  # facet_wrap(~recipient)+
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "mixtureColonization-day"), colonization_day, 4, 5)
+savePNGPDF(paste0(OUTDIR, "mixtureColonization-day"), colonization_day, 2, 2)
 
 
 # For the poster, this plot was made on replicate 2 and with a higher limit of detection (stricter cutoff)
 
 prop_colonization_day <- 
-  ggplot(colonization_prop_results %>% mutate(day = (as.numeric(as.character(day)))-29), aes(x = factor(day), y = prop_colonizers, fill = factor(day))) +
-  geom_boxplot(outlier.size = 0.5, fill = "#8FC0CEFF") +
+  ggplot(colonization_prop_results %>% mutate(day = (as.numeric(as.character(day)))-29), aes(x = factor(day), y = prop_colonizers)) +
+  geom_boxplot(outlier.size = 0.5, fill = "#5495CFFF") +
   # geom_hline(yintercept = 0.75, linetype = "dashed", color = "black") +
   # geom_jitter(position = position_jitterdodge(jitter.width = 0.2), size = 1, alpha = 0.6) +
   labs(
@@ -90,11 +90,11 @@ prop_colonization_day <-
     fill = ""
   ) +
   scale_y_continuous(limits = c(0, 1)) +
-  # facet_wrap(~recipient)+
+  facet_wrap(~recipient)+
   DEFAULTS.THEME_PRINT+
   theme(legend.position = "none")
 
-savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day"), prop_colonization_day, 2, 2)
+savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day"), prop_colonization_day, 3, 4)
 
 
 prop_colonization_day_XEA <- 
@@ -114,4 +114,27 @@ prop_colonization_day_XEA <-
 
 savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day_XEA"), prop_colonization_day_XEA, 2, 2)
 
+colonization_difference <- actual_colonizers_results %>% 
+  group_by(subject1, subject2, day) %>% 
+  summarize(num_colonizers = sum(actual_colonizer))
 
+colonization_difference_36 <- colonization_difference %>% 
+  filter(day == "029" | day == "036") %>% 
+  pivot_wider(names_from = day, values_from = num_colonizers) %>% 
+  rename("colonizers_029" = "029", "colonizers_036" = "036") %>% 
+  mutate(difference_36 =  colonizers_036 - colonizers_029) %>% 
+  group_by(subject1) %>% 
+  summarize(avg_diff_36 = mean(difference_36))
+
+
+colonization_difference_64 <- colonization_difference %>% 
+  filter(day == "036" | day == "064") %>% 
+  pivot_wider(names_from = day, values_from = num_colonizers) %>% 
+  rename("colonizers_036" = "036", "colonizers_064" = "064") %>% 
+  mutate(difference_64 =  colonizers_036 - colonizers_064) %>% 
+  group_by(subject1) %>% 
+  summarize(avg_diff_64 = mean(difference_64))
+
+
+colonization_difference_avg <- colonization_difference_36 %>% 
+  left_join(colonization_difference_64, by = c("subject1"))

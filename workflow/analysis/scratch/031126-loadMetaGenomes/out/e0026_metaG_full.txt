@@ -462,7 +462,7 @@ Clostridium_clostridioforme_59912	1	0.0244810027419	0.000473176075833	XBA_022	Ba
 Streptococcus_anginosus_58303	1	0.0247573776986	0.000478517932898	XBA_022	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Streptococcus_intermedius_57028	1	0.02378828427	0.000459787007925	XBA_022	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus intermedius
 Clostridium_hathewayi_55515	1	0.0243280360997	0.000470219491242	XBA_022	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] hathewayi
-Alistipes_onderdonkii_55464	1	0.0256095062487	0.00049498812604	XBA_022							
+Alistipes_onderdonkii_55464	1	0.0256095062487	0.00049498812604	XBA_022					Rikenellaceae		
 Escherichia_albertii_56276	1	0.0240222926876	0.000464309991968	XBA_022	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia albertii
 Bacteroides_caccae_53434	1	0.0218992834797	0.000423275840852	XBA_022	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides caccae
 Anaeroglobus_geminatus_62348	575	13.8621911705	0.189881842064	XBA_029	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Veillonellaceae	Anaeroglobus	Anaeroglobus geminatus
@@ -530,7 +530,7 @@ Bifidobacterium_longum_57796	1	0.0220692090395	0.000302300120795	XBA_029	Bacteri
 Dorea_longicatena_59913	1	0.024560369388	0.000336423594495	XBA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea longicatena
 Bacteroides_intestinalis_61596	1	0.0255545333742	0.000350041476885	XBA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides intestinalis
 Bifidobacterium_dentium_55719	1	0.0225347034433	0.00030867638078	XBA_029	Bacteria	Actinobacteria	Actinobacteridae	Bifidobacteriales	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium dentium
-Alistipes_onderdonkii_55464	1	0.0256095062487	0.000350794485594	XBA_029							
+Alistipes_onderdonkii_55464	1	0.0256095062487	0.000350794485594	XBA_029					Rikenellaceae		
 Clostridiales_bacterium_59661	1	0.024750499002	0.00033902795631	XBA_029	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-09
 Clostridium_bolteae_57158	1	0.0239059186428	0.000327459043977	XBA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] bolteae
 Bacteroides_fragilis_54507	941	22.3506375228	0.668079818338	XBA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides fragilis
@@ -628,7 +628,7 @@ Streptococcus_intermedius_57028	2	0.0447021508574	0.000922618691076	XBA_064	Bact
 Enterococcus_mundtii_57674	1	0.024533174414	0.000506346223429	XBA_064	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus mundtii
 Bacteroides_xylanisolvens_57185	1	0.0191940508492	0.000396150738416	XBA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. D1
 Anaerococcus_sp_58645	1	0.0269164513351	0.000555535262238	XBA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Anaerococcus	Anaerococcus sp. PH9
-Alistipes_onderdonkii_55464	1	0.0247900020488	0.000511646952179	XBA_064							
+Alistipes_onderdonkii_55464	1	0.0247900020488	0.000511646952179	XBA_064					Rikenellaceae		
 Bacteroides_faecis_58503	129	3.05943309966	0.180927346143	XBB_022	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides faecis
 Clostridiales_bacterium_62591	71	1.64166921743	0.0970842783866	XBB_022	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium 9401234
 Bacteroides_uniformis_57318	53	1.41075193254	0.0834283983027	XBB_022	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
@@ -782,7 +782,7 @@ Bifidobacterium_pseudocatenulatum_57754	1	0.0223713646532	0.000807881744662	XBB_
 Bifidobacterium_catenulatum_58257	1	0.0220673635308	0.000796903560676	XBB_064	Bacteria	Actinobacteria	Actinobacteridae	Bifidobacteriales	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium catenulatum
 Burkholderiales_bacterium_56577	1	0.0237349283205	0.000857123183955	XBB_064	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales			Burkholderiales bacterium 1_1_47
 Bacteroides_faecis_58503	172	4.08767652139	0.14374896175	XCA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides faecis
-Alistipes_onderdonkii_55464	158	3.77228027044	0.132657603768	XCA_001							
+Alistipes_onderdonkii_55464	158	3.77228027044	0.132657603768	XCA_001					Rikenellaceae		
 Enterococcus_faecium_56947	114	2.68076235855	0.0942728231366	XCA_001	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus faecium
 Clostridiales_bacterium_56470	82	2.74418272662	0.096503090629	XCA_001	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
 Bacteroides_stercoris_56735	77	1.85569230769	0.065258060701	XCA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides stercoris
@@ -832,7 +832,7 @@ Enterococcus_durans_52177	1	0.0248015873016	0.000872183110799	XCA_001	Bacteria	F
 Bacteroides_salyersiae_54873	1	0.0254686226569	0.000895640358278	XCA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides salyersiae
 Anaerofustis_stercorihominis_61534	1	0.0239532432691	0.000842349885681	XCA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Eubacteriaceae	Anaerofustis	Anaerofustis stercorihominis
 Bacteroides_faecis_58503	405	9.70151376613	0.228239627853	XCA_028	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides faecis
-Alistipes_onderdonkii_55464	193	4.65970088097	0.109624994678	XCA_028							
+Alistipes_onderdonkii_55464	193	4.65970088097	0.109624994678	XCA_028					Rikenellaceae		
 Bacteroides_vulgatus_57955	126	3.0096958563	0.070806667779	XCA_028	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Bacteroides_caccae_53434	99	2.36754465637	0.0556992985138	XCA_028	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides caccae
 Bacteroides_massiliensis_44749	95	2.32432432432	0.0546824888962	XCA_028	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
@@ -896,7 +896,7 @@ Eubacterium_limosum_60946	1	0.0241896468312	0.000569090156828	XCA_028	Bacteria	F
 Bacteroides_massiliensis_44749	282	7.0249072602	0.182994496228	XCA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
 Bacteroides_vulgatus_57955	196	4.680955297	0.121935994983	XCA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Bacteroides_xylanisolvens_57185	172	4.05245703949	0.105564003475	XCA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. D1
-Alistipes_onderdonkii_55464	166	3.94335177218	0.102721878634	XCA_036							
+Alistipes_onderdonkii_55464	166	3.94335177218	0.102721878634	XCA_036					Rikenellaceae		
 Clostridiales_bacterium_56470	133	4.45824411135	0.116134506122	XCA_036	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
 Bacteroides_uniformis_57318	84	2.32208948231	0.0604889971174	XCA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
 Oscillibacter_sp_60799	80	1.91348677569	0.0498451489232	XCA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Oscillospiraceae	Oscillibacter	Oscillibacter sp. ER4
@@ -935,7 +935,7 @@ Pseudoflavonifractor_capillosus_61476	1	0.0193207847824	0.000503294512941	XCA_03
 Bacteroides_faecis_58503	450	10.7042568323	0.196713337021	XCA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides faecis
 Peptoniphilus_sp_58646	247	5.81255659523	0.10681800917	XCA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus grossensis
 Escherichia_coli_58110	177	4.16988145469	0.0766303825467	XCA_064	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
-Alistipes_onderdonkii_55464	133	3.15396435157	0.0579607591787	XCA_064							
+Alistipes_onderdonkii_55464	133	3.15396435157	0.0579607591787	XCA_064					Rikenellaceae		
 Bacteroides_massiliensis_44749	130	3.26868044515	0.0600689097895	XCA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
 Enterococcus_faecium_56947	113	2.63966646814	0.0485094488769	XCA_064	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus faecium
 Clostridiales_bacterium_52743	88	2.11172385621	0.038807387858	XCA_064	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Coprobacillus	Coprobacillus sp. 3_3_56FAA
@@ -1041,7 +1041,7 @@ Gordonibacter_pamelaeae_62044	1	0.0336630942567	0.00223198214174	XCB_001	Bacteri
 Anaerococcus_sp_62593	1	0.020287235111	0.00134511539931	XCB_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Anaerococcus	Anaerococcus sp. 9402080
 Escherichia_coli_58110	1	0.0251155314446	0.00166524851332	XCB_001	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
 Clostridium_hathewayi_55515	1	0.0245242299392	0.00162604313337	XCB_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] hathewayi
-Alistipes_onderdonkii_55464	251	5.99067813973	0.143913549158	XCB_029							
+Alistipes_onderdonkii_55464	251	5.99067813973	0.143913549158	XCB_029					Rikenellaceae		
 Bacteroides_faecis_58503	241	5.69399573301	0.136786373048	XCB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides faecis
 Alistipes_finegoldii_56071	161	3.81482593037	0.0916432374193	XCB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes sp. HGB5
 Erysipelotrichaceae_bacterium_56596	124	2.81485736167	0.0676210779221	XCB_029	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae		Erysipelotrichaceae bacterium 21_3
@@ -1084,7 +1084,7 @@ Clostridiales_bacterium_43336	1	0.0268125268125	0.000644115040985	XCB_029	Bacter
 Bacteroidales_bacterium_58650	1	0.0259201658891	0.000622677930756	XCB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales			Bacteroidales bacterium ph8
 Bacteroides_faecis_58503	356	8.52138575638	0.185417123328	XCB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides faecis
 Escherichia_coli_58110	270	6.44484629295	0.140233630315	XCB_036	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
-Alistipes_onderdonkii_55464	253	6.10694529809	0.132881231042	XCB_036							
+Alistipes_onderdonkii_55464	253	6.10694529809	0.132881231042	XCB_036					Rikenellaceae		
 Bacteroides_vulgatus_57955	201	4.83343539498	0.105170885623	XCB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Bacteroides_caccae_53434	104	2.4896558684	0.05417250696	XCB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides caccae
 Bacteroides_massiliensis_44749	97	2.41897191309	0.0526344923654	XCB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
@@ -1131,7 +1131,7 @@ Enterococcus_faecium_56947	152	3.54675402025	0.0824467628464	XCB_064	Bacteria	Fi
 Clostridiales_bacterium_52743	140	3.4074754902	0.0792091365911	XCB_064	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Coprobacillus	Coprobacillus sp. 3_3_56FAA
 Citrobacter_freundii_56148	115	2.62074585371	0.0609210592693	XCB_064	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Citrobacter	Citrobacter freundii
 Bacteroides_uniformis_57318	82	2.29152026236	0.0532679815261	XCB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
-Alistipes_onderdonkii_55464	80	1.91804958	0.0445863958841	XCB_064							
+Alistipes_onderdonkii_55464	80	1.91804958	0.0445863958841	XCB_064					Rikenellaceae		
 Bacteroides_vulgatus_57955	71	1.71147172892	0.0397843501261	XCB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Peptoniphilus_lacrimalis_56996	62	1.64414414414	0.0382192736129	XCB_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus sp. oral taxon 836
 Dorea_formicigenerans_56346	58	1.33679525223	0.0310747349563	XCB_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea formicigenerans
@@ -1190,7 +1190,7 @@ Peptoniphilus_sp_58646	73	1.70339068317	0.0351188905763	XDA_001	Bacteria	Firmicu
 Bacteroides_uniformis_57318	66	1.81658468025	0.0374526168534	XDA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
 Coprococcus_comes_61587	47	1.11021505376	0.0228893590734	XDA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Coprococcus	Coprococcus comes
 Clostridiales_bacterium_56470	41	1.37359029265	0.0283193794946	XDA_001	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
-Alistipes_onderdonkii_55464	40	0.959741856177	0.0197870456623	XDA_001							
+Alistipes_onderdonkii_55464	40	0.959741856177	0.0197870456623	XDA_001					Rikenellaceae		
 Escherichia_fergusonii_56914	35	0.774702805516	0.0159720863363	XDA_001	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia fergusonii
 Collinsella_sp_62205	35	0.765365251259	0.015779573515	XDA_001	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella sp. 4_8_47FAA
 Collinsella_aerofaciens_61484	33	0.742629405551	0.0153108274514	XDA_001	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella aerofaciens
@@ -1250,7 +1250,7 @@ Sutterella_wadsworthensis_62218	39	0.874231678487	0.0234332167056	XDA_029	Bacter
 Phascolarctobacterium_sp_59817	25	0.587231103217	0.0157403512553	XDA_029	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Acidaminococcaceae	Phascolarctobacterium	Phascolarctobacterium sp. CAG
 Bacteroides_rodentium_59708	24	0.647213640005	0.0173481444956	XDA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides rodentium
 Ruminococcus_gnavus_57638	24	0.546592353574	0.0146510557626	XDA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae		Lachnospiraceae bacterium 2_1_58FAA
-Alistipes_onderdonkii_55464	22	0.538414259373	0.0144318472182	XDA_029							
+Alistipes_onderdonkii_55464	22	0.538414259373	0.0144318472182	XDA_029					Rikenellaceae		
 Coprococcus_comes_61587	21	0.489346873755	0.0131166275703	XDA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Coprococcus	Coprococcus comes
 Clostridium_sp_60782	19	0.427767731565	0.0114660383513	XDA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium sp. ATCC 29733
 Sutterella_wadsworthensis_56828	19	0.407588517613	0.0109251475266	XDA_029	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
@@ -1298,7 +1298,7 @@ Clostridiales_bacterium_52743	350	8.46190767974	0.179634938674	XDA_036	Bacteria	
 Clostridiales_bacterium_56470	277	9.24239828694	0.19620370634	XDA_036	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
 Bacteroides_thetaiotaomicron_56941	172	4.16038025146	0.0883192868103	XDA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Bacteroides_uniformis_57318	125	3.45525884282	0.0733505060351	XDA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
-Alistipes_onderdonkii_55464	113	2.70108584306	0.0573404258395	XDA_036							
+Alistipes_onderdonkii_55464	113	2.70108584306	0.0573404258395	XDA_036					Rikenellaceae		
 Dorea_longicatena_59913	112	2.58208075449	0.0548141075912	XDA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea longicatena
 Bacteroides_fragilis_54507	81	1.92268771504	0.0408160786966	XDA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides fragilis
 Collinsella_sp_62205	80	1.77229980051	0.0376235451893	XDA_036	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella sp. 4_8_47FAA
@@ -1350,7 +1350,7 @@ Peptoniphilus_lacrimalis_56996	72	1.93612843613	0.0345835264181	XDA_064	Bacteria
 Dialister_invisus_61905	64	1.51098462153	0.0269895197038	XDA_064	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Veillonellaceae	Dialister	Dialister invisus
 Collinsella_sp_62205	63	1.42243754156	0.0254078734544	XDA_064	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella sp. 4_8_47FAA
 Collinsella_aerofaciens_61484	58	1.32805147412	0.0237219300036	XDA_064	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella aerofaciens
-Alistipes_onderdonkii_55464	51	1.24226592911	0.0221896108626	XDA_064							
+Alistipes_onderdonkii_55464	51	1.24226592911	0.0221896108626	XDA_064					Rikenellaceae		
 Bacteroides_vulgatus_57955	40	0.95417432129	0.0170436590011	XDA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Streptococcus_anginosus_58223	40	0.934125804854	0.0166855482556	XDA_064	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Bacteroides_rodentium_59708	30	0.79150932601	0.0141381032247	XDA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides rodentium
@@ -1623,7 +1623,7 @@ Streptococcus_anginosus_58032	61	1.41892025755	0.0298482428502	XEA_001	Bacteria	
 Parabacteroides_distasonis_56985	47	1.13371857259	0.0238487731064	XEA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas	Porphyromonas sp. 31_2
 Sutterella_wadsworthensis_62218	44	0.988368794326	0.0207912119385	XEA_001	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
 Clostridium_perfringens_56840	37	0.903881700555	0.0190139511804	XEA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium perfringens
-Alistipes_onderdonkii_55464	36	0.867137881582	0.0182410124433	XEA_001							
+Alistipes_onderdonkii_55464	36	0.867137881582	0.0182410124433	XEA_001					Rikenellaceae		
 Parabacteroides_merdae_56972	35	0.827429609446	0.0174057138114	XEA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Parabacteroides	Parabacteroides merdae
 Clostridium_sp_60782	29	0.709965842877	0.0149347595686	XEA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium sp. ATCC 29733
 Finegoldia_magna_61710	29	0.681937702265	0.014345162836	XEA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Finegoldia	Finegoldia magna
@@ -1676,7 +1676,7 @@ Bacteroides_thetaiotaomicron_56941	228	5.53613411019	0.119662719607	XEA_029	Bact
 Sutterella_wadsworthensis_56828	181	3.87331341121	0.0837210962468	XEA_029	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
 Clostridiales_bacterium_56470	75	2.54232690935	0.054952019956	XEA_029	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
 Coprococcus_comes_61587	68	1.58452807646	0.0342493399092	XEA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Coprococcus	Coprococcus comes
-Alistipes_onderdonkii_55464	65	1.58102847777	0.0341736966013	XEA_029							
+Alistipes_onderdonkii_55464	65	1.58102847777	0.0341736966013	XEA_029					Rikenellaceae		
 Bacteroides_uniformis_57318	49	1.36847036777	0.0295792845059	XEA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
 Coprococcus_catus_62200	41	0.962644530092	0.0208074190748	XEA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Coprococcus	Coprococcus catus
 Enterococcus_durans_52177	35	0.81378968254	0.0175899435711	XEA_029	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus durans
@@ -1763,7 +1763,7 @@ Faecalibacterium_prausnitzii_57453	1	0.0248904818797	0.000650030338803	XEA_036	B
 Clostridium_clostridioforme_59912	1	0.0244810027419	0.000639336537695	XEA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] clostridioforme
 Paraprevotella_clara_33712	1	0.0229920932168	0.000600452743974	XEA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Prevotellaceae	Paraprevotella	Paraprevotella clara
 Dorea_longicatena_61473	1	0.0246184145741	0.000642925132736	XEA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea longicatena
-Alistipes_onderdonkii_55464	271	6.5360581848	0.148223888254	XEA_064							
+Alistipes_onderdonkii_55464	271	6.5360581848	0.148223888254	XEA_064					Rikenellaceae		
 Bacteroides_xylanisolvens_57185	196	4.61451110441	0.104647290301	XEA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. D1
 Oscillibacter_ruminantium_58326	173	4.03844223627	0.091583274479	XEA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Oscillospiraceae	Oscillibacter	Oscillibacter ruminantium
 Peptostreptococcus_anaerobius_55004	159	3.58420340294	0.081282104543	XEA_064							
@@ -1817,7 +1817,7 @@ Bacteroides_vulgatus_57955	44	1.07185139824	0.0417278949209	XEB_001	Bacteria	Bac
 Dorea_formicigenerans_56346	41	0.965182987141	0.037575222025	XEB_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea formicigenerans
 Sutterella_wadsworthensis_56828	35	0.747079597935	0.0290843105782	XEB_001	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
 Enterococcus_durans_52177	31	0.721626984127	0.0280934232255	XEB_001	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus durans
-Alistipes_onderdonkii_55464	31	0.751997541487	0.0292757694242	XEB_001							
+Alistipes_onderdonkii_55464	31	0.751997541487	0.0292757694242	XEB_001					Rikenellaceae		
 Alistipes_shahii_62199	29	0.724976318282	0.028223815054	XEB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes shahii
 Parabacteroides_distasonis_56985	21	0.494322789943	0.0192443182605	XEB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas	Porphyromonas sp. 31_2
 Phascolarctobacterium_sp_59817	20	0.468324452339	0.0182321855139	XEB_001	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Acidaminococcaceae	Phascolarctobacterium	Phascolarctobacterium sp. CAG
@@ -1851,7 +1851,7 @@ Bacteroides_caccae_53434	1	0.0212937733374	0.000828980899541	XEB_001	Bacteria	Ba
 Streptococcus_anginosus_58032	409	9.56235760277	0.234143209249	XEB_029	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Bacteroides_thetaiotaomicron_56941	172	4.11090667484	0.100659368929	XEB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Bacteroides_vulgatus_57955	151	3.5695039804	0.0874026209974	XEB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
-Alistipes_onderdonkii_55464	121	2.89254251178	0.070826590547	XEB_029							
+Alistipes_onderdonkii_55464	121	2.89254251178	0.070826590547	XEB_029					Rikenellaceae		
 Clostridiales_bacterium_52743	109	2.64920343137	0.0648682071034	XEB_029	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Coprobacillus	Coprobacillus sp. 3_3_56FAA
 Bacteroides_massiliensis_44749	92	2.28002119767	0.0558284371442	XEB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
 Bacteroides_clarus_62282	89	2.13658536585	0.0523162775516	XEB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides clarus
@@ -1917,7 +1917,7 @@ Clostridium_citroniae_62210	12	0.273121387283	0.0114193554632	XEB_036	Bacteria	F
 Clostridium_scindens_58238	12	0.295869655459	0.0123704730709	XEB_036	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-26
 Clostridium_bolteae_57158	11	0.257663389242	0.0107730480607	XEB_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] bolteae
 Bacteroides_rodentium_59708	8	0.22645611626	0.00946825480833	XEB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides rodentium
-Alistipes_onderdonkii_55464	8	0.19422249539	0.00812054938604	XEB_036							
+Alistipes_onderdonkii_55464	8	0.19422249539	0.00812054938604	XEB_036					Rikenellaceae		
 Bacteroides_nordii_55557	7	0.177552314521	0.00742355995261	XEB_036							
 Oscillibacter_sp_60799	6	0.139410458308	0.00582882796015	XEB_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Oscillospiraceae	Oscillibacter	Oscillibacter sp. ER4
 Eggerthella_lenta_56463	5	0.115395601257	0.00482475357479	XEB_036	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Eggerthella	Eggerthella sp. HGA1
@@ -1949,7 +1949,7 @@ Bacteroides_vulgatus_57955	76	1.82159624413	0.0552934942001	XEB_064	Bacteria	Bac
 Alistipes_finegoldii_56071	55	1.27631052421	0.0387416634149	XEB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes sp. HGB5
 Clostridiales_bacterium_56470	54	1.83326195575	0.0556476000892	XEB_064	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
 Bacteroides_uniformis_57318	52	1.38428203326	0.0420190757552	XEB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
-Alistipes_onderdonkii_55464	38	0.879532882606	0.0266977089461	XEB_064							
+Alistipes_onderdonkii_55464	38	0.879532882606	0.0266977089461	XEB_064					Rikenellaceae		
 Phascolarctobacterium_sp_59817	29	0.667061377541	0.0202482600241	XEB_064	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Acidaminococcaceae	Phascolarctobacterium	Phascolarctobacterium sp. CAG
 Alistipes_shahii_62199	24	0.590885169982	0.0179359755624	XEB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes shahii
 Erysipelotrichaceae_bacterium_56596	23	0.522400919012	0.0158571759678	XEB_064	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae		Erysipelotrichaceae bacterium 21_3
@@ -2017,7 +2017,7 @@ Guyana_massiliensis_60772	1	0.0252908447142	0.000569623916049	XFA_001	Bacteria		
 Escherichia_coli_58110	366	8.69278681937	0.144390051115	XFA_029	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
 Bacteroides_thetaiotaomicron_56941	222	5.32934682613	0.0885222054358	XFA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Bacteroides_fragilis_54507	200	4.76290224651	0.0791133744701	XFA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides fragilis
-Alistipes_onderdonkii_55464	169	4.08092603975	0.0677855251394	XFA_029							
+Alistipes_onderdonkii_55464	169	4.08092603975	0.0677855251394	XFA_029					Rikenellaceae		
 Bacteroides_vulgatus_57955	154	3.65860379669	0.0607706136353	XFA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Enterococcus_durans_52177	121	2.81101190476	0.0466918332461	XFA_029	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus durans
 Bacteroides_uniformis_57318	85	2.32747716093	0.0386601619502	XFA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
@@ -2091,7 +2091,7 @@ Bacteroides_thetaiotaomicron_56941	6	0.140243279158	0.00434916312479	XFA_036	Bac
 Collinsella_sp_62205	5	0.104398214116	0.00323755167345	XFA_036	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella sp. 4_8_47FAA
 Blautia_wexlerae_56130	4	0.0933451118963	0.0028947777104	XFA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Blautia	Blautia wexlerae
 Adlercreutzia_equolifaciens_60310	4	0.0908831094598	0.00281842716958	XFA_036	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Adlercreutzia	Adlercreutzia equolifaciens
-Alistipes_onderdonkii_55464	3	0.0768285187462	0.00238257236047	XFA_036							
+Alistipes_onderdonkii_55464	3	0.0768285187462	0.00238257236047	XFA_036					Rikenellaceae		
 Dorea_longicatena_61473	3	0.0738552437223	0.00229036645819	XFA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea longicatena
 Enterococcus_casseliflavus_56514	2	0.0495589255625	0.001536899685	XFA_036	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus casseliflavus
 Escherichia_coli_58110	2	0.0500301386377	0.00155151273842	XFA_036	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
@@ -2345,7 +2345,7 @@ Bacteroides_rodentium_59708	7	0.186863485525	0.00569987674441	XGA_001	Bacteria	B
 Bacteroides_ovatus_58035	7	0.159036144578	0.0048510623649	XGA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides ovatus
 Eggerthella_lenta_56463	7	0.151956583833	0.00463511528708	XGA_001	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Eggerthella	Eggerthella sp. HGA1
 Clostridiales_bacterium_43336	5	0.126555126555	0.00386029737545	XGA_001	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-16
-Alistipes_onderdonkii_55464	4	0.0976234378201	0.00297779719445	XGA_001							
+Alistipes_onderdonkii_55464	4	0.0976234378201	0.00297779719445	XGA_001					Rikenellaceae		
 Pseudoflavonifractor_capillosus_61476	4	0.0883378149587	0.00269455884183	XGA_001	Bacteria	Firmicutes	Clostridia	Clostridiales		Pseudoflavonifractor	Pseudoflavonifractor capillosus
 Bacteroides_fragilis_54507	3	0.0758955676988	0.00231503431565	XGA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides fragilis
 Coprococcus_comes_61587	3	0.0652130625249	0.00198918701251	XGA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Coprococcus	Coprococcus comes
@@ -2369,7 +2369,7 @@ Bacteroides_fragilis_56548	133	3.21860417935	0.0852482951758	XGA_029	Bacteria	Ba
 Dialister_invisus_61905	78	1.83453165568	0.0485896020071	XGA_029	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Veillonellaceae	Dialister	Dialister invisus
 Sutterella_wadsworthensis_56828	68	1.45069274654	0.0384232035302	XGA_029	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
 Finegoldia_magna_57293	61	1.44326348821	0.038226431398	XGA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Finegoldia	Finegoldia magna
-Alistipes_onderdonkii_55464	57	1.39059618931	0.0368314796759	XGA_029							
+Alistipes_onderdonkii_55464	57	1.39059618931	0.0368314796759	XGA_029					Rikenellaceae		
 Clostridiales_bacterium_52743	45	1.1160130719	0.0295588418059	XGA_029	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Coprobacillus	Coprobacillus sp. 3_3_56FAA
 Bacteroides_vulgatus_57955	38	0.922433149622	0.0244316632419	XGA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Parabacteroides_merdae_56972	34	0.778585124634	0.0206216890384	XGA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Parabacteroides	Parabacteroides merdae
@@ -2425,7 +2425,7 @@ Anaerofustis_stercorihominis_61534	1	0.0216537319153	0.000573523063761	XGA_029	B
 Megasphaera_sp_50408	1	0.0226368920159	0.000599563147534	XGA_029	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Veillonellaceae	Megasphaera	Megasphaera sp. NM10
 Clostridiales_bacterium_59663	1	0.0213820886272	0.000566328290525	XGA_029	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-14
 Clostridiales_bacterium_59643	1	0.0222400142336	0.000589051400065	XGA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiales Family XIII. Incertae Sedis		Clostridiales bacterium S5-A14a
-Alistipes_onderdonkii_55464	297	7.12097930752	0.243630799581	XGA_036							
+Alistipes_onderdonkii_55464	297	7.12097930752	0.243630799581	XGA_036					Rikenellaceae		
 Bacteroides_thetaiotaomicron_56941	266	6.42400081775	0.219785002617	XGA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Bacteroides_vulgatus_57955	175	4.16411512554	0.142467300321	XGA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Clostridiales_bacterium_56470	95	3.18272662384	0.108890954281	XGA_036	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
@@ -2460,7 +2460,7 @@ Bacteroides_thetaiotaomicron_56941	409	9.84667279975	0.197620340062	XGA_064	Bact
 Escherichia_coli_58110	388	9.27617038377	0.186170494642	XGA_064	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
 Porphyromonas_somerae_59001	273	6.34643420016	0.127371398474	XGA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas	Porphyromonas somerae
 Sutterella_wadsworthensis_56828	169	3.64203567871	0.0730947746494	XGA_064	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
-Alistipes_onderdonkii_55464	94	2.26009014546	0.0453594622468	XGA_064							
+Alistipes_onderdonkii_55464	94	2.26009014546	0.0453594622468	XGA_064					Rikenellaceae		
 Parabacteroides_merdae_56972	89	2.11605611061	0.0424687340254	XGA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Parabacteroides	Parabacteroides merdae
 Finegoldia_magna_57293	67	1.59277254783	0.0319665595622	XGA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Finegoldia	Finegoldia magna
 Clostridiales_bacterium_52743	67	1.62203839869	0.0325539181063	XGA_064	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Coprobacillus	Coprobacillus sp. 3_3_56FAA
@@ -2522,7 +2522,7 @@ Escherichia_coli_58110	189	4.48332328712	0.154830727477	XGB_001	Bacteria	Proteob
 Porphyromonas_somerae_59001	115	2.66834121355	0.0921506625314	XGB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas	Porphyromonas somerae
 Bacteroides_thetaiotaomicron_56941	112	2.66636001227	0.0920822421172	XGB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Bacteroides_vulgatus_57955	92	2.21626862625	0.076538420656	XGB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
-Alistipes_onderdonkii_55464	80	1.94294202008	0.0670991376593	XGB_001							
+Alistipes_onderdonkii_55464	80	1.94294202008	0.0670991376593	XGB_001					Rikenellaceae		
 Bacteroides_caccae_53434	69	1.66676758502	0.0575615054273	XGB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides caccae
 Clostridiales_bacterium_56470	58	1.94061384725	0.0670187346482	XGB_001	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
 Bacteroides_uniformis_57318	51	1.4286718201	0.0493389129146	XGB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
@@ -2568,7 +2568,7 @@ Clostridiales_bacterium_59663	1	0.0258237785353	0.000891819340421	XGB_001	Bacter
 Clostridiales_bacterium_59664	1	0.0257201646091	0.000888241052944	XGB_001	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-21
 Escherichia_coli_53492	1	0.023761617323	0.000820602990356	XGB_001	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia sp. KTE96
 Porphyromonas_somerae_59001	150	3.49103624901	0.106214896085	XGB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas	Porphyromonas somerae
-Alistipes_onderdonkii_55464	143	3.44161032575	0.104711110696	XGB_029							
+Alistipes_onderdonkii_55464	143	3.44161032575	0.104711110696	XGB_029					Rikenellaceae		
 Escherichia_coli_58110	142	3.36367289532	0.102339861736	XGB_029	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
 Bacteroides_ovatus_58035	134	3.17429718876	0.0965780994516	XGB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides ovatus
 Oscillibacter_ruminantium_58326	91	2.14333032219	0.0652108976272	XGB_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Oscillospiraceae	Oscillibacter	Oscillibacter ruminantium
@@ -2626,7 +2626,7 @@ Holdemania_filiformis_61753	1	0.0240015360983	0.000730247548498	XGB_029	Bacteria
 Eubacterium_ventriosum_61474	1	0.0240833579082	0.000732736979834	XGB_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Eubacteriaceae	Eubacterium	Eubacterium ventriosum
 Clostridiales_bacterium_59663	1	0.0258237785353	0.000785689336345	XGB_029	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-14
 Dialister_invisus_61905	1	0.0249650489315	0.000759562459073	XGB_029	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Veillonellaceae	Dialister	Dialister invisus
-Alistipes_onderdonkii_55464	169	4.10663798402	0.167143736873	XGB_036							
+Alistipes_onderdonkii_55464	169	4.10663798402	0.167143736873	XGB_036					Rikenellaceae		
 Peptoniphilus_harei_62491	126	3.0127388535	0.122621091062	XGB_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus harei
 Bacteroides_ovatus_58035	107	2.51757028112	0.102467299593	XGB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides ovatus
 Bacteroides_caccae_53434	54	1.30235139772	0.0530068343457	XGB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides caccae
@@ -2668,7 +2668,7 @@ Ruminococcus_gnavus_57638	1	0.0216094651413	0.000879524021743	XGB_036	Bacteria	F
 Ruminococcus_obeum_61472	1	0.0276212573196	0.00112420919095	XGB_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Blautia	[Ruminococcus] obeum
 Bacteroides_faecis_58503	1	0.0224525043178	0.00091383644929	XGB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides faecis
 Escherichia_albertii_56276	1	0.0225809551264	0.000919064508893	XGB_036	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia albertii
-Alistipes_onderdonkii_55464	453	10.9797172711	0.223043751986	XGB_064							
+Alistipes_onderdonkii_55464	453	10.9797172711	0.223043751986	XGB_064					Rikenellaceae		
 Oscillibacter_ruminantium_58326	407	9.67379303423	0.196514995881	XGB_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Oscillospiraceae	Oscillibacter	Oscillibacter ruminantium
 Bacteroides_thetaiotaomicron_56941	166	4.0009199632	0.0812753350527	XGB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Escherichia_coli_58110	144	3.45187864175	0.0701220208727	XGB_064	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
@@ -2711,7 +2711,7 @@ Enterococcus_faecium_56947	1	0.0203494143339	0.000413381293134	XGB_064	Bacteria	
 Bacteroides_thetaiotaomicron_56941	452	10.8339977512	0.316718411351	XGC_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Escherichia_coli_58110	120	2.87020293349	0.0839068028468	XGC_001	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
 Bacteroides_uniformis_57318	82	2.19137971422	0.0640622527061	XGC_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
-Alistipes_onderdonkii_55464	62	1.4733661135	0.043072020645	XGC_001							
+Alistipes_onderdonkii_55464	62	1.4733661135	0.043072020645	XGC_001					Rikenellaceae		
 Bacteroides_caccae_53434	62	1.46341709557	0.0427811735148	XGC_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides caccae
 Clostridiales_bacterium_58600	58	1.40398439105	0.0410437325266	XGC_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus sp. BV3C26
 Clostridium_hathewayi_61827	48	1.24273948851	0.0363299389168	XGC_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] hathewayi
@@ -2761,7 +2761,7 @@ Clostridiales_bacterium_59643	1	0.0195712125256	0.000572139987627	XGC_001	Bacter
 Bifidobacterium_adolescentis_56815	1	0.02229952725	0.000651898865655	XGC_001	Bacteria	Actinobacteria	Actinobacteridae	Bifidobacteriales	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium stercoris
 Bacteroides_thetaiotaomicron_56941	287	6.82142492078	0.247299663558	XGC_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Enterococcus_mundtii_57674	118	2.82469209376	0.102404616712	XGC_029	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus mundtii
-Alistipes_onderdonkii_55464	89	2.16308133579	0.0784189949758	XGC_029							
+Alistipes_onderdonkii_55464	89	2.16308133579	0.0784189949758	XGC_029					Rikenellaceae		
 Bacteroides_caccae_53434	82	1.9356140882	0.0701725399532	XGC_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides caccae
 Bacteroides_vulgatus_57955	60	1.41447234129	0.051279393701	XGC_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Bacteroides_nordii_55557	45	1.10029592052	0.0398894386613	XGC_029							
@@ -2819,7 +2819,7 @@ Peptoniphilus_sp_58372	126	2.99094749547	0.0673861254656	XGC_037	Bacteria	Firmic
 Bacteroides_caccae_53434	115	2.69744676557	0.0607735463282	XGC_037	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides caccae
 Finegoldia_magna_57293	104	2.48425954044	0.0559704325584	XGC_037	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Finegoldia	Finegoldia magna
 Clostridiales_bacterium_58600	89	2.14643663997	0.0483592737565	XGC_037	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus sp. BV3C26
-Alistipes_onderdonkii_55464	84	1.98862937923	0.0448038720358	XGC_037							
+Alistipes_onderdonkii_55464	84	1.98862937923	0.0448038720358	XGC_037					Rikenellaceae		
 Bacteroides_vulgatus_57955	78	1.88497652582	0.0424685705319	XGC_037	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Clostridiales_bacterium_52743	75	1.8172998366	0.04094381295	XGC_037	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Coprobacillus	Coprobacillus sp. 3_3_56FAA
 Bacteroides_uniformis_57318	52	1.42796907941	0.0321721807861	XGC_037	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
@@ -2881,7 +2881,7 @@ Bifidobacterium_adolescentis_56815	1	0.022121131032	0.000498389661945	XGC_037	Ba
 Bacteroides_thetaiotaomicron_56941	351	8.41398344066	0.206619573264	XGC_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Escherichia_coli_58110	148	3.52390998594	0.0865355610277	XGC_064	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
 Bacteroides_vulgatus_57955	142	3.411104307	0.0837654270707	XGC_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
-Alistipes_onderdonkii_55464	119	2.88598647818	0.0708702719435	XGC_064							
+Alistipes_onderdonkii_55464	119	2.88598647818	0.0708702719435	XGC_064					Rikenellaceae		
 Burkholderiales_bacterium_56577	112	2.51238963258	0.0616959704543	XGC_064	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales			Burkholderiales bacterium 1_1_47
 Alistipes_shahii_62199	66	1.6145668877	0.0396484166739	XGC_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes shahii
 Bacteroides_uniformis_57318	62	1.71269618178	0.0420581472147	XGC_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
@@ -2959,7 +2959,7 @@ Streptococcus_anginosus_58303	21	0.480194097841	0.0115927306051	XHA_003	Bacteria
 Eubacterium_limosum_62476	19	0.437883659749	0.0105712821684	XHA_003	Bacteria	Firmicutes	Clostridia	Clostridiales	Eubacteriaceae	Eubacterium	Eubacterium limosum
 Clostridium_sp_60782	18	0.407976692787	0.00984927535328	XHA_003	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium sp. ATCC 29733
 Parabacteroides_distasonis_56985	16	0.380068937551	0.00917553302762	XHA_003	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas	Porphyromonas sp. 31_2
-Alistipes_onderdonkii_55464	16	0.393259577955	0.00949397830091	XHA_003							
+Alistipes_onderdonkii_55464	16	0.393259577955	0.00949397830091	XHA_003					Rikenellaceae		
 Guyana_massiliensis_60772	15	0.373090541224	0.00900706225916	XHA_003	Bacteria						bacterium LF-3
 Ruminococcus_torques_62045	15	0.349715518933	0.00844274808385	XHA_003	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Blautia	[Ruminococcus] torques
 Bacteroides_stercoris_56735	14	0.333128205128	0.00804230113695	XHA_003	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides stercoris
@@ -2994,7 +2994,7 @@ Clostridium_sp_60782	97	2.23648784408	0.0669853035269	XHA_029	Bacteria	Firmicute
 Enterococcus_faecium_56710	76	1.80290373906	0.053998976346	XHA_029	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus faecium
 Sutterella_wadsworthensis_62218	66	1.49730496454	0.044845952455	XHA_029	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
 Bacteroides_thetaiotaomicron_56941	58	1.36072779311	0.0407553139536	XHA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
-Alistipes_onderdonkii_55464	56	1.36969883221	0.0410240065728	XHA_029							
+Alistipes_onderdonkii_55464	56	1.36969883221	0.0410240065728	XHA_029					Rikenellaceae		
 Bacteroides_salyersiae_54873	52	1.2076202119	0.0361695712558	XHA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides salyersiae
 Clostridiaceae_bacterium_58376	42	0.961120806671	0.0287866393422	XHA_029	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Dielma	Dielma fastidiosa
 Bacteroides_uniformis_57318	40	1.1180604357	0.033487156143	XHA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
@@ -3064,7 +3064,7 @@ Bacteroides_uniformis_57318	38	1.05141719372	0.0273145064202	XHA_036	Bacteria	Ba
 Dorea_formicigenerans_56346	33	0.761721068249	0.0197885626498	XHA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea formicigenerans
 Clostridiales_bacterium_61057	30	0.696367708638	0.0180907639346	XHA_036	Bacteria	Firmicutes	Clostridia	Clostridiales			butyrate-producing bacterium SS3/4
 Clostridiales_bacterium_56470	30	1.01227694504	0.0262976916103	XHA_036	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
-Alistipes_onderdonkii_55464	30	0.745134193813	0.019357656354	XHA_036							
+Alistipes_onderdonkii_55464	30	0.745134193813	0.019357656354	XHA_036					Rikenellaceae		
 Bacteroides_salyersiae_54873	26	0.644050529747	0.016731628924	XHA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides salyersiae
 Clostridiales_bacterium_59643	25	0.528333778134	0.0137254521431	XHA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiales Family XIII. Incertae Sedis		Clostridiales bacterium S5-A14a
 Clostridium_sp_60782	23	0.551938919028	0.0143386842419	XHA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium sp. ATCC 29733
@@ -3113,7 +3113,7 @@ Streptococcus_sanguinis_62463	1	0.0246548323471	0.000640501772707	XHA_036	Bacter
 Bacteroides_thetaiotaomicron_56941	279	6.75590309721	0.171673878167	XHA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Bacteroides_massiliensis_44749	155	3.87811340753	0.0985465242857	XHA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
 Clostridium_sp_60782	146	3.45197910388	0.0877180491767	XHA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium sp. ATCC 29733
-Alistipes_onderdonkii_55464	79	1.9008399918	0.0483021393991	XHA_064							
+Alistipes_onderdonkii_55464	79	1.9008399918	0.0483021393991	XHA_064					Rikenellaceae		
 Clostridiales_bacterium_59643	73	1.52370785517	0.038718855633	XHA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiales Family XIII. Incertae Sedis		Clostridiales bacterium S5-A14a
 Clostridiaceae_bacterium_58376	69	1.5872600349	0.0403337765404	XHA_064	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Dielma	Dielma fastidiosa
 Bacteroides_salyersiae_54873	68	1.65566422168	0.0420719915292	XHA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides salyersiae
@@ -3239,7 +3239,7 @@ Bacteroides_salyersiae_54873	73	1.73777506112	0.0339594194426	XHB_029	Bacteria	B
 Streptococcus_anginosus_58303	68	1.58615567439	0.0309964891618	XHB_029	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Streptococcus_anginosus_54555	64	1.50128738364	0.0293380018539	XHB_029	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Clostridium_sp_60782	52	1.2221217601	0.0238825762836	XHB_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium sp. ATCC 29733
-Alistipes_onderdonkii_55464	47	1.11934029912	0.0218740316668	XHB_029							
+Alistipes_onderdonkii_55464	47	1.11934029912	0.0218740316668	XHB_029					Rikenellaceae		
 Bacteroides_caccae_53434	43	1.02442224241	0.020019152878	XHB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides caccae
 Bacteroides_massiliensis_44749	40	1.00476947536	0.019635100549	XHB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
 Bacteroides_vulgatus_57955	38	0.903245560318	0.0176511307641	XHB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
@@ -3299,7 +3299,7 @@ Streptococcus_anginosus_54555	88	2.02168746286	0.0447885216605	XHB_036	Bacteria	
 Streptococcus_anginosus_58303	80	1.86739948505	0.0413704214035	XHB_036	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Dorea_formicigenerans_56346	72	1.6684470821	0.0369628241994	XHB_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea formicigenerans
 Peptoniphilus_sp_58646	69	1.60267632559	0.0355057369855	XHB_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus grossensis
-Alistipes_onderdonkii_55464	64	1.53175578775	0.0339345613694	XHB_036							
+Alistipes_onderdonkii_55464	64	1.53175578775	0.0339345613694	XHB_036					Rikenellaceae		
 Streptococcus_constellatus_57767	60	1.43873204557	0.0318737107343	XHB_036	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus constellatus
 Clostridium_hathewayi_61827	58	1.4937147811	0.0330917998241	XHB_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] hathewayi
 Parabacteroides_distasonis_56985	58	1.38817923763	0.0307537623868	XHB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas	Porphyromonas sp. 31_2
@@ -3357,7 +3357,7 @@ Escherichia_coli_58110	157	3.75195901145	0.0940516089975	XHB_064	Bacteria	Proteo
 Streptococcus_anginosus_58223	77	1.76602278356	0.044269482639	XHB_064	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Bacteroides_xylanisolvens_57185	72	1.64264898	0.0411768303214	XHB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. D1
 Bacteroides_vulgatus_57955	69	1.70749132476	0.0428022550227	XHB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
-Alistipes_onderdonkii_55464	65	1.58963327187	0.0398478678682	XHB_064							
+Alistipes_onderdonkii_55464	65	1.58963327187	0.0398478678682	XHB_064					Rikenellaceae		
 Bacteroides_thetaiotaomicron_56941	58	1.41970765614	0.0355882857351	XHB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Dorea_formicigenerans_56346	57	1.34678536103	0.0337603182211	XHB_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea formicigenerans
 Clostridiaceae_bacterium_58376	52	1.21097537328	0.0303559239228	XHB_064	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Dielma	Dielma fastidiosa
@@ -3538,7 +3538,7 @@ Bacteroides_caccae_53434	2	0.0454132606721	0.00221435760688	XHC_036	Bacteria	Bac
 Bifidobacterium_adolescentis_56815	2	0.043617875301	0.00212681433879	XHC_036	Bacteria	Actinobacteria	Actinobacteridae	Bifidobacteriales	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium stercoris
 Finegoldia_magna_57293	1	0.0253062050815	0.00123393446967	XHC_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Finegoldia	Finegoldia magna
 Clostridiales_bacterium_52957	1	0.0250626566416	0.00122205901011	XHC_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Ruminococcaceae	Anaerotruncus	Anaerotruncus colihominis
-Alistipes_onderdonkii_55464	1	0.0256095062487	0.00124872348144	XHC_036							
+Alistipes_onderdonkii_55464	1	0.0256095062487	0.00124872348144	XHC_036					Rikenellaceae		
 Coprococcus_catus_62200	1	0.0247059986165	0.0012046683097	XHC_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Coprococcus	Coprococcus catus
 Bacteroides_thetaiotaomicron_56941	150	3.61381989165	0.34091050629	XHC_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Peptoniphilus_sp_58646	79	1.82332226582	0.172003513016	XHC_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus grossensis
@@ -3725,7 +3725,7 @@ Bacteroides_thetaiotaomicron_56941	354	8.52284575284	0.209230991476	XIB_002	Bact
 Bacteroides_stercoris_56735	111	2.67271794872	0.0656136978847	XIB_002	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides stercoris
 Clostridiales_bacterium_61057	107	2.44775538027	0.0600909954205	XIB_002	Bacteria	Firmicutes	Clostridia	Clostridiales			butyrate-producing bacterium SS3/4
 Burkholderiales_bacterium_56577	106	2.41213329536	0.0592164935979	XIB_002	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales			Burkholderiales bacterium 1_1_47
-Alistipes_onderdonkii_55464	105	2.52397049785	0.0619620329917	XIB_002							
+Alistipes_onderdonkii_55464	105	2.52397049785	0.0619620329917	XIB_002					Rikenellaceae		
 Bacteroides_fragilis_56548	101	2.41550010144	0.0592991467628	XIB_002	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. UW
 Oscillibacter_sp_60799	94	2.20674338785	0.0541742887717	XIB_002	Bacteria	Firmicutes	Clostridia	Clostridiales	Oscillospiraceae	Oscillibacter	Oscillibacter sp. ER4
 Bacteroides_massiliensis_44749	70	1.7368309486	0.0426382069955	XIB_002	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
@@ -3764,7 +3764,7 @@ Anaerofustis_stercorihominis_61534	1	0.0223244227268	0.000548051817047	XIB_002	B
 Eubacterium_ramulus_59802	1	0.0262549884478	0.000644544958741	XIB_002	Bacteria	Firmicutes	Clostridia	Clostridiales	Eubacteriaceae	Eubacterium	Eubacterium ramulus
 Olsenella_uli_55165	1	0.0230712440015	0.000566385852448	XIB_002	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Olsenella	Olsenella uli
 Clostridiales_bacterium_52743	1	0.0255310457516	0.000626772579364	XIB_002	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Coprobacillus	Coprobacillus sp. 3_3_56FAA
-Alistipes_onderdonkii_55464	535	12.7957385782	0.217919827018	XIB_029							
+Alistipes_onderdonkii_55464	535	12.7957385782	0.217919827018	XIB_029					Rikenellaceae		
 Enterococcus_faecalis_56297	215	5.08539032711	0.0866075352849	XIB_029	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus faecalis
 Sutterella_wadsworthensis_56828	186	3.98279453047	0.0678296051321	XIB_029	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
 Bacteroides_uniformis_57318	101	2.80920590302	0.0478426204713	XIB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
@@ -3826,7 +3826,7 @@ Gordonibacter_pamelaeae_62044	1	0.0343500961803	0.00058500468511	XIB_029	Bacteri
 Eubacterium_ventriosum_61474	1	0.0245748550084	0.000418525911553	XIB_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Eubacteriaceae	Eubacterium	Eubacterium ventriosum
 Paraprevotella_clara_33712	1	0.0210153974199	0.000357906012419	XIB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Prevotellaceae	Paraprevotella	Paraprevotella clara
 Dorea_longicatena_61473	1	0.0246184145741	0.00041926775955	XIB_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea longicatena
-Alistipes_onderdonkii_55464	174	4.17578365089	0.132377908871	XIB_036							
+Alistipes_onderdonkii_55464	174	4.17578365089	0.132377908871	XIB_036					Rikenellaceae		
 Bacteroides_massiliensis_44749	147	3.61695813461	0.114662394981	XIB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
 Bacteroides_vulgatus_57955	108	2.61992243315	0.0830550340011	XIB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Sutterella_wadsworthensis_56828	84	1.79824323101	0.0570067078337	XIB_036	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
@@ -3890,7 +3890,7 @@ Anaerococcus_obesiensis_58051	1	0.0212957408518	0.0006751033764	XIB_036	Bacteria
 Clostridiales_bacterium_59663	1	0.0242743518232	0.000769529315264	XIB_036	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-14
 Bacteroides_vulgatus_57955	128	3.05980812411	0.148057027467	XIB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Bacteroides_thetaiotaomicron_56941	110	2.6045180415	0.126026594992	XIB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
-Alistipes_onderdonkii_55464	76	1.83876254866	0.0889734604687	XIB_064							
+Alistipes_onderdonkii_55464	76	1.83876254866	0.0889734604687	XIB_064					Rikenellaceae		
 Peptoniphilus_harei_62491	68	1.59033464766	0.0769526097912	XIB_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus harei
 Sutterella_wadsworthensis_56828	53	1.10214615594	0.0533302995036	XIB_064	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
 Clostridiaceae_bacterium_58376	50	1.10732984293	0.0535811261099	XIB_064	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Dielma	Dielma fastidiosa
@@ -3960,7 +3960,7 @@ Bacteroides_vulgatus_57955	330	7.98377219841	0.199050426047	XIC_008	Bacteria	Bac
 Collinsella_sp_62205	115	2.5916215446	0.0646139894506	XIC_008	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella sp. 4_8_47FAA
 Peptoniphilus_sp_58646	114	2.66163597947	0.0663595807257	XIC_008	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus grossensis
 Bacteroides_faecis_58503	100	2.37925429239	0.0593192752504	XIC_008	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides faecis
-Alistipes_onderdonkii_55464	98	2.34828928498	0.0585472594959	XIC_008							
+Alistipes_onderdonkii_55464	98	2.34828928498	0.0585472594959	XIC_008					Rikenellaceae		
 Collinsella_aerofaciens_61484	78	1.75837894939	0.0438396875975	XIC_008	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella aerofaciens
 Clostridiales_bacterium_61057	75	1.72519232642	0.0430122827972	XIC_008	Bacteria	Firmicutes	Clostridia	Clostridiales			butyrate-producing bacterium SS3/4
 Peptoniphilus_sp_58372	68	1.60048280024	0.039903040236	XIC_008	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus senegalensis
@@ -4016,7 +4016,7 @@ Bacteroides_vulgatus_57955	267	6.3339457032	0.158800347905	XIC_029	Bacteria	Bact
 Bacteroides_thetaiotaomicron_56941	214	5.13605233568	0.128767585954	XIC_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Bacteroides_faecis_58503	169	4.05079752108	0.101558820644	XIC_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides faecis
 Escherichia_coli_58110	111	2.6219610207	0.0657360106623	XIC_029	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
-Alistipes_onderdonkii_55464	57	1.36416717886	0.034201465051	XIC_029							
+Alistipes_onderdonkii_55464	57	1.36416717886	0.034201465051	XIC_029					Rikenellaceae		
 Parabacteroides_merdae_56972	54	1.27197497225	0.0318900851988	XIC_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Parabacteroides	Parabacteroides merdae
 Alistipes_shahii_62199	39	0.975371013578	0.0244538339213	XIC_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes shahii
 Bacteroides_massiliensis_44749	38	0.979226285109	0.0245504906483	XIC_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
@@ -4080,7 +4080,7 @@ Finegoldia_magna_61710	28	0.675465210356	0.0153316318368	XIC_036	Bacteria	Firmic
 Collinsella_sp_62205	27	0.598176118552	0.0135773328998	XIC_036	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella sp. 4_8_47FAA
 Parabacteroides_distasonis_56985	26	0.618613138686	0.0140412100377	XIC_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas	Porphyromonas sp. 31_2
 Clostridiales_bacterium_52743	26	0.628982843137	0.0142765803994	XIC_036	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Coprobacillus	Coprobacillus sp. 3_3_56FAA
-Alistipes_onderdonkii_55464	25	0.582155296046	0.0132136941089	XIC_036							
+Alistipes_onderdonkii_55464	25	0.582155296046	0.0132136941089	XIC_036					Rikenellaceae		
 Parabacteroides_merdae_56972	22	0.512463417096	0.0116318358374	XIC_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Parabacteroides	Parabacteroides merdae
 Clostridiales_bacterium_56470	22	0.714346895075	0.016214163855	XIC_036	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
 Ruminococcus_lactaris_55568	21	0.489555751692	0.0111118802767	XIC_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Ruminococcaceae	Ruminococcus	Ruminococcus lactaris
@@ -4129,7 +4129,7 @@ Ruminococcus_gnavus_57638	1	0.0229783905349	0.000521560871651	XIC_036	Bacteria	F
 Streptococcus_anginosus_58303	1	0.0247573776986	0.000561940118159	XIC_036	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Dorea_longicatena_61473	1	0.0199901526342	0.000453734190674	XIC_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea longicatena
 Dialister_invisus_61905	1	0.0219692430597	0.000498655358057	XIC_036	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Veillonellaceae	Dialister	Dialister invisus
-Alistipes_onderdonkii_55464	112	2.71819299324	0.093863937749	XIC_064							
+Alistipes_onderdonkii_55464	112	2.71819299324	0.093863937749	XIC_064					Rikenellaceae		
 Erysipelotrichaceae_bacterium_56596	93	2.10664369137	0.0727460753513	XIC_064	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae		Erysipelotrichaceae bacterium 21_3
 Peptoniphilus_sp_58646	89	2.08743334339	0.0720827085814	XIC_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus grossensis
 Bacteroides_thetaiotaomicron_56941	73	1.76765818256	0.0610403153941	XIC_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
@@ -4744,7 +4744,7 @@ Collinsella_aerofaciens_61484	1	0.0240084509747	0.000481220046312	XLA_001	Bacter
 Clostridiales_bacterium_59945	1	0.0249053596334	0.000499197483786	XLA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiales Family XI. Incertae Sedis		Clostridiales bacterium S7-1-4
 Sutterella_wadsworthensis_62218	1	0.0233569739953	0.000468161986774	XLA_001	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
 Bacteroides_vulgatus_57955	346	8.48530312309	0.112530176909	XLA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
-Alistipes_onderdonkii_55464	316	7.71255890186	0.102282217271	XLA_029							
+Alistipes_onderdonkii_55464	316	7.71255890186	0.102282217271	XLA_029					Rikenellaceae		
 Escherichia_coli_58110	312	7.44745830822	0.0987665129679	XLA_029	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
 Peptoniphilus_harei_62491	300	7.19836214741	0.0954630558448	XLA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus harei
 Collinsella_sp_62205	234	5.20984136031	0.0690917415014	XLA_029	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella sp. 4_8_47FAA
@@ -4787,7 +4787,7 @@ Clostridium_clostridioforme_51842	3	0.0589097303634	0.000781247562199	XLA_029	Ba
 Bacteroides_acidifaciens_59693	2	0.0473478856902	0.000627916984894	XLA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides acidifaciens
 Odoribacter_splanchnicus_62174	2	0.0503981453483	0.000668368840763	XLA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Odoribacter	Odoribacter splanchnicus
 Escherichia_coli_57907	1	0.0239532432691	0.000317662511699	XLA_029	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia sp. KTE31
-Alistipes_onderdonkii_55464	497	12.1900225364	0.243034423982	XLA_036							
+Alistipes_onderdonkii_55464	497	12.1900225364	0.243034423982	XLA_036					Rikenellaceae		
 Clostridiales_bacterium_56470	201	6.72648108494	0.134106926466	XLA_036	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
 Intestinimonas_butyriciproducens_60001	120	2.87618185476	0.0573428964757	XLA_036	Bacteria	Firmicutes	Clostridia	Clostridiales		Intestinimonas	Intestinimonas butyriciproducens
 Burkholderiales_bacterium_56577	108	2.44659641128	0.0487781829573	XLA_036	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales			Burkholderiales bacterium 1_1_47
@@ -4823,7 +4823,7 @@ Coprococcus_comes_61587	3	0.0746714456392	0.00148873652405	XLA_036	Bacteria	Firm
 Finegoldia_magna_61710	2	0.0482402912621	0.000961774382669	XLA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Finegoldia	Finegoldia magna
 Enterococcus_gallinarum_52312	1	0.0251914550584	0.000502246058294	XLA_036	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus sp. HSIEG1
 Clostridiales_bacterium_55505	1	0.0242318503441	0.000483114266019	XLA_036	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-27
-Alistipes_onderdonkii_55464	319	7.76142183979	0.158565576936	XLA_064							
+Alistipes_onderdonkii_55464	319	7.76142183979	0.158565576936	XLA_064					Rikenellaceae		
 Bacteroides_vulgatus_57955	198	4.77546438049	0.0975625703976	XLA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Peptoniphilus_harei_62491	198	4.74502072591	0.0969406075986	XLA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus harei
 Enterococcus_faecium_56947	187	4.41155449672	0.0901279041905	XLA_064	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus faecium
@@ -4905,7 +4905,7 @@ Clostridium_symbiosum_54029	47	1.10709426628	0.0691666921028	XLB_029	Bacteria	Fi
 Parabacteroides_distasonis_56985	36	0.885239253852	0.0553061042528	XLB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas	Porphyromonas sp. 31_2
 Peptoniphilus_harei_62491	33	0.809220503488	0.0505567656819	XLB_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus harei
 Bacteroides_vulgatus_57955	29	0.699020208206	0.0436719049021	XLB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
-Alistipes_onderdonkii_55464	22	0.522229051424	0.0326267212352	XLB_029							
+Alistipes_onderdonkii_55464	22	0.522229051424	0.0326267212352	XLB_029					Rikenellaceae		
 Bacteroides_xylanisolvens_57185	21	0.512812782635	0.0320384315259	XLB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. D1
 Clostridiales_bacterium_43336	20	0.5074002574	0.0317002792314	XLB_029	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-16
 Bacteroides_ovatus_58035	18	0.435040160643	0.027179518276	XLB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides ovatus
@@ -4949,7 +4949,7 @@ Enterococcus_faecium_56947	41	0.967639467937	0.021967807084	XLB_036	Bacteria	Fir
 Bacteroides_fragilis_54507	40	0.96964177292	0.022013264355	XLB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides fragilis
 Burkholderiales_bacterium_56577	36	0.838317668281	0.0190318826609	XLB_036	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales			Burkholderiales bacterium 1_1_47
 Bifidobacterium_bifidum_55065	35	0.82463726338	0.0187213036636	XLB_036	Bacteria	Actinobacteria	Actinobacteridae	Bifidobacteriales	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium bifidum
-Alistipes_onderdonkii_55464	29	0.722905142389	0.016411733124	XLB_036							
+Alistipes_onderdonkii_55464	29	0.722905142389	0.016411733124	XLB_036					Rikenellaceae		
 Eggerthella_lenta_56463	27	0.62248881272	0.0141320342988	XLB_036	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Eggerthella	Eggerthella sp. HGA1
 Clostridium_symbiosum_54029	26	0.59407191448	0.0134869004869	XLB_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] symbiosum
 Collinsella_sp_62205	25	0.535385199962	0.0121545670449	XLB_036	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella sp. 4_8_47FAA
@@ -4982,7 +4982,7 @@ Peptoniphilus_harei_62491	1	0.0244666868871	0.000555454252672	XLB_036	Bacteria	F
 Bacteroides_fragilis_54507	203	4.82169601295	0.0947739091322	XLB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides fragilis
 Collinsella_sp_62205	181	4.05699629524	0.0797431852199	XLB_064	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella sp. 4_8_47FAA
 Clostridiales_bacterium_56470	170	5.74004282655	0.112824677416	XLB_064	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
-Alistipes_onderdonkii_55464	166	4.06054087277	0.0798128564451	XLB_064							
+Alistipes_onderdonkii_55464	166	4.06054087277	0.0798128564451	XLB_064					Rikenellaceae		
 Bacteroides_xylanisolvens_57185	143	3.38347904733	0.0665047184479	XLB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. D1
 Escherichia_coli_58110	127	3.01717902351	0.0593048275631	XLB_064	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
 Bifidobacterium_bifidum_55065	105	2.35351205919	0.0462599752121	XLB_064	Bacteria	Actinobacteria	Actinobacteridae	Bifidobacteriales	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium bifidum
@@ -5404,7 +5404,7 @@ Bacteroides_fragilis_56548	91	2.19496855346	0.0197637952775	XNA_001	Bacteria	Bac
 Dorea_formicigenerans_56346	86	2.03412462908	0.0183155347145	XNA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea formicigenerans
 Alistipes_shahii_62199	77	1.93211240922	0.0173970028176	XNA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes shahii
 Bacteroides_uniformis_57318	69	1.91133754978	0.0172099431586	XNA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
-Alistipes_onderdonkii_55464	69	1.67588608892	0.0150899061937	XNA_001							
+Alistipes_onderdonkii_55464	69	1.67588608892	0.0150899061937	XNA_001					Rikenellaceae		
 Burkholderiales_bacterium_56577	61	1.38640463306	0.012483375808	XNA_001	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales			Burkholderiales bacterium 1_1_47
 Clostridium_sp_60782	60	1.42103676914	0.0127952082698	XNA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium sp. ATCC 29733
 Collinsella_sp_62205	56	1.27586206897	0.0114880355318	XNA_001	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella sp. 4_8_47FAA
@@ -5501,7 +5501,7 @@ Streptococcus_parasanguinis_58126	2	0.0446971964482	0.000939931226145	XNA_036	Ba
 Subdoligranulum_sp_62068	1	0.0220877458396	0.000464480183984	XNA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Ruminococcaceae	Subdoligranulum	Subdoligranulum sp. 4_3_54A2FAA
 Clostridium_clostridioforme_59912	1	0.0242851547199	0.000510689194556	XNA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] clostridioforme
 Peptoniphilus_sp_58646	199	4.75943253848	0.114214652407	XNA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus grossensis
-Alistipes_onderdonkii_55464	190	4.69248104897	0.112607981645	XNA_064							
+Alistipes_onderdonkii_55464	190	4.69248104897	0.112607981645	XNA_064					Rikenellaceae		
 Bacteroides_thetaiotaomicron_56941	178	4.27905550445	0.102686787368	XNA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Bacteroides_stercoris_56735	152	3.62153846154	0.086907998636	XNA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides stercoris
 Clostridiales_bacterium_52743	142	3.43831699346	0.082511134909	XNA_064	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Coprobacillus	Coprobacillus sp. 3_3_56FAA
@@ -5646,7 +5646,7 @@ Enterococcus_faecium_56947	117	2.79471907882	0.0795474837136	XOA_001	Bacteria	Fi
 Alistipes_finegoldii_56071	70	1.63045218087	0.0464083740247	XOA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes sp. HGB5
 Clostridiales_bacterium_61057	66	1.56539098257	0.0445565046717	XOA_001	Bacteria	Firmicutes	Clostridia	Clostridiales			butyrate-producing bacterium SS3/4
 Clostridiaceae_bacterium_58376	63	1.45830909443	0.0415085794555	XOA_001	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Dielma	Dielma fastidiosa
-Alistipes_onderdonkii_55464	50	1.25025609506	0.0355866631153	XOA_001							
+Alistipes_onderdonkii_55464	50	1.25025609506	0.0355866631153	XOA_001					Rikenellaceae		
 Dorea_longicatena_59913	45	1.02839178701	0.0292716286043	XOA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea longicatena
 Phascolarctobacterium_sp_59817	33	0.796526544306	0.0226719324997	XOA_001	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Acidaminococcaceae	Phascolarctobacterium	Phascolarctobacterium sp. CAG
 Streptococcus_anginosus_58223	25	0.5715700842	0.0162688845218	XOA_001	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
@@ -5731,7 +5731,7 @@ Bifidobacterium_bifidum_55065	5	0.120111463438	0.00298061734846	XOA_029	Bacteria
 Collinsella_tanakaei_62212	4	0.0903811932191	0.00224284797447	XOA_029	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella tanakaei
 Parabacteroides_merdae_56972	3	0.0756887677869	0.00187824915201	XOA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Parabacteroides	Parabacteroides merdae
 Clostridium_perfringens_56840	3	0.0770178681454	0.00191123134599	XOA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium perfringens
-Alistipes_onderdonkii_55464	3	0.0768285187462	0.00190653255964	XOA_029							
+Alistipes_onderdonkii_55464	3	0.0768285187462	0.00190653255964	XOA_029					Rikenellaceae		
 Clostridium_bolteae_57158	2	0.0481974166185	0.00119603951206	XOA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] bolteae
 Prevotella_buccalis_58135	2	0.0497181964573	0.00123377831435	XOA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Prevotellaceae	Prevotella	Prevotella buccalis
 Subdoligranulum_sp_62068	1	0.0209783156833	0.000520585878127	XOA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Ruminococcaceae	Subdoligranulum	Subdoligranulum sp. 4_3_54A2FAA
@@ -5845,7 +5845,7 @@ Anaerostipes_hadrus_55206	1	0.0247426761679	0.000392294035867	XOA_064	Bacteria	F
 Alistipes_finegoldii_56071	1	0.0242096838735	0.000383843466624	XOA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes sp. HGB5
 Clostridium_hathewayi_55515	1	0.021385128507	0.000339060266263	XOA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] hathewayi
 Clostridium_bolteae_57158	1	0.0206284943127	0.000327063864591	XOA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] bolteae
-Alistipes_onderdonkii_55464	857	20.7333538209	0.254494785753	XOB_001							
+Alistipes_onderdonkii_55464	857	20.7333538209	0.254494785753	XOB_001					Rikenellaceae		
 Bacteroides_thetaiotaomicron_56941	377	9.17397526321	0.112607390453	XOB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Bacteroides_vulgatus_57955	274	6.59655031639	0.0809703858804	XOB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Clostridiales_bacterium_56470	246	8.27608850821	0.101586139414	XOB_001	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
@@ -5890,7 +5890,7 @@ Bacteroides_intestinalis_61596	1	0.0255545333742	0.000313673106254	XOB_001	Bacte
 Enterococcus_faecium_56710	1	0.0223747016706	0.000274641765974	XOB_001	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus faecium
 Streptococcus_anginosus_54555	1	0.0186175480293	0.00022852399751	XOB_001	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Catenibacterium_mitsuokai_61547	1	0.0260254007912	0.000319452841816	XOB_001	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Catenibacterium	Catenibacterium mitsuokai
-Alistipes_onderdonkii_55464	276	6.72546609301	0.122399813674	XOB_028							
+Alistipes_onderdonkii_55464	276	6.72546609301	0.122399813674	XOB_028					Rikenellaceae		
 Bacteroides_thetaiotaomicron_56941	230	5.58356332413	0.101617806269	XOB_028	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
 Peptoniphilus_harei_62491	159	3.7669598625	0.0685566143535	XOB_028	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus harei
 Peptoniphilus_lacrimalis_56996	127	3.4881034881	0.0634815804754	XOB_028	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus sp. oral taxon 836
@@ -5955,7 +5955,7 @@ Bacteroides_thetaiotaomicron_56941	373	8.97076561382	0.114593216924	XOB_037	Bact
 Enterococcus_faecium_56947	246	5.78836609093	0.0739410123562	XOB_037	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus faecium
 Sutterella_wadsworthensis_62218	222	5.0336643026	0.0643003964416	XOB_037	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
 Peptoniphilus_sp_58646	211	4.94617164705	0.063182758852	XOB_037	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus grossensis
-Alistipes_onderdonkii_55464	208	5.11411595984	0.0653280918031	XOB_037							
+Alistipes_onderdonkii_55464	208	5.11411595984	0.0653280918031	XOB_037					Rikenellaceae		
 Peptostreptococcus_anaerobius_55004	139	3.22679814385	0.041219355804	XOB_037							
 Bacteroides_uniformis_57318	118	3.24185992036	0.0414117560401	XOB_037	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
 Clostridiales_bacterium_62591	101	2.44005713703	0.0311694685658	XOB_037	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium 9401234
@@ -6022,7 +6022,7 @@ Bacteroides_uniformis_57318	85	2.40325603186	0.0366554058137	XOB_064	Bacteria	Ba
 Collinsella_sp_62205	83	1.87451315664	0.028590811611	XOB_064	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella sp. 4_8_47FAA
 Clostridiales_bacterium_52743	79	1.90798611111	0.0291013542721	XOB_064	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Coprobacillus	Coprobacillus sp. 3_3_56FAA
 Sutterella_wadsworthensis_62218	73	1.65947990544	0.0253110399255	XOB_064	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
-Alistipes_onderdonkii_55464	71	1.76633886499	0.026940894787	XOB_064							
+Alistipes_onderdonkii_55464	71	1.76633886499	0.026940894787	XOB_064					Rikenellaceae		
 Collinsella_aerofaciens_61484	70	1.59185633343	0.0242796186197	XOB_064	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella aerofaciens
 Bifidobacterium_bifidum_55065	57	1.2989334102	0.019811843035	XOB_064	Bacteria	Actinobacteria	Actinobacteridae	Bifidobacteriales	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium bifidum
 Clostridium_sp_60782	50	1.19921639542	0.0182909199227	XOB_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium sp. ATCC 29733
@@ -6083,7 +6083,7 @@ Bacteroides_thetaiotaomicron_56941	526	12.7693958908	0.152236160157	XPA_002	Bact
 Enterococcus_faecium_56947	433	10.2747667262	0.122495304107	XPA_002	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus faecium
 Peptoniphilus_lacrimalis_56996	268	7.45610995611	0.0888914056019	XPA_002	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus sp. oral taxon 836
 Bacteroides_massiliensis_44749	216	5.45659777424	0.0650533118224	XPA_002	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
-Alistipes_onderdonkii_55464	195	4.77975824626	0.0569840615882	XPA_002							
+Alistipes_onderdonkii_55464	195	4.77975824626	0.0569840615882	XPA_002					Rikenellaceae		
 Bacteroides_vulgatus_57955	187	4.48295570525	0.0534455951208	XPA_002	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Bacteroides_uniformis_57318	169	4.68587491216	0.0558647887261	XPA_002	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
 Dorea_longicatena_59913	163	3.80764318695	0.0453945498271	XPA_002	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea longicatena
@@ -6143,7 +6143,7 @@ Negativicoccus_succinicivorans_57482	30	0.773005464481	0.019265253257	XPA_029	Ba
 Bacteroides_massiliensis_44749	29	0.741176470588	0.0184719941451	XPA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
 Coprococcus_comes_61587	27	0.644165671047	0.0160542394102	XPA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Coprococcus	Coprococcus comes
 Parabacteroides_distasonis_56985	22	0.531934306569	0.0132571496619	XPA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas	Porphyromonas sp. 31_2
-Alistipes_onderdonkii_55464	21	0.518541282524	0.0129233615945	XPA_029							
+Alistipes_onderdonkii_55464	21	0.518541282524	0.0129233615945	XPA_029					Rikenellaceae		
 Bacteroides_xylanisolvens_57185	19	0.450507486685	0.0112277871554	XPA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. D1
 Escherichia_coli_57907	16	0.367251125802	0.00915282785516	XPA_029	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia sp. KTE31
 Bacteroides_rodentium_59708	16	0.400274630965	0.00997585721215	XPA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides rodentium
@@ -6179,7 +6179,7 @@ Bacteroides_thetaiotaomicron_56941	796	19.4373913932	0.121358948908	XPA_036	Bact
 Escherichia_coli_58110	576	13.8110307414	0.0862303042728	XPA_036	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
 Clostridiales_bacterium_59945	393	9.33821478382	0.0583039106385	XPA_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiales Family XI. Incertae Sedis		Clostridiales bacterium S7-1-4
 Clostridiales_bacterium_56470	324	10.9064953605	0.0680955991693	XPA_036	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
-Alistipes_onderdonkii_55464	284	6.9586150379	0.0434466842678	XPA_036							
+Alistipes_onderdonkii_55464	284	6.9586150379	0.0434466842678	XPA_036					Rikenellaceae		
 Bacteroides_massiliensis_44749	208	5.20805511394	0.0325169196675	XPA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
 Bacteroides_vulgatus_57955	187	4.56705450092	0.0285147797162	XPA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Bacteroides_uniformis_57318	179	5.02869524479	0.0313970715997	XPA_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
@@ -6275,7 +6275,7 @@ Bacteroides_vulgatus_57955	93	2.24739742805	0.0492152605194	XPB_001	Bacteria	Bac
 Clostridium_sp_60782	81	1.91169379144	0.0418637606349	XPB_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium sp. ATCC 29733
 Alistipes_shahii_62199	69	1.74160614672	0.0381390488231	XPB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes shahii
 Sutterella_wadsworthensis_56828	43	0.930906456579	0.0203857151423	XPB_001	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Sutterellaceae	Sutterella	Sutterella wadsworthensis
-Alistipes_onderdonkii_55464	37	0.886498668306	0.0194132387829	XPB_001							
+Alistipes_onderdonkii_55464	37	0.886498668306	0.0194132387829	XPB_001					Rikenellaceae		
 Bacteroides_eggerthii_54457	35	0.829405840886	0.0181629755495	XPB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides eggerthii
 Enterococcus_gallinarum_52312	34	0.840286174929	0.0184012415846	XPB_001	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus sp. HSIEG1
 Parabacteroides_merdae_56972	33	0.811686345746	0.0177749402342	XPB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Parabacteroides	Parabacteroides merdae
@@ -6332,7 +6332,7 @@ Sutterella_wadsworthensis_56828	67	1.46101602825	0.0275235677264	XPB_028	Bacteri
 Alistipes_finegoldii_56071	56	1.30552220888	0.0245942742856	XPB_028	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes sp. HGB5
 Clostridium_sp_60782	54	1.29566003617	0.0244084842782	XPB_028	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium sp. ATCC 29733
 Alistipes_shahii_62199	41	1.02010314704	0.0192173648423	XPB_028	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes shahii
-Alistipes_onderdonkii_55464	40	0.963736939152	0.0181555016525	XPB_028							
+Alistipes_onderdonkii_55464	40	0.963736939152	0.0181555016525	XPB_028					Rikenellaceae		
 Burkholderiales_bacterium_56577	37	0.826165384981	0.0155638394699	XPB_028	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales			Burkholderiales bacterium 1_1_47
 Peptoniphilus_timonensis_58570	36	0.838899008298	0.0158037237265	XPB_028	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus timonensis
 Eubacterium_limosum_60946	35	0.79854862119	0.0150435769582	XPB_028	Bacteria	Firmicutes	Clostridia	Clostridiales	Eubacteriaceae	Eubacterium	Eubacterium limosum
@@ -6406,7 +6406,7 @@ Parabacteroides_distasonis_56985	29	0.710462287105	0.0154998738606	XPB_036	Bacte
 Bacteroides_eggerthii_54457	28	0.689023162135	0.0150321449766	XPB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides eggerthii
 Escherichia_albertii_56276	28	0.648697991736	0.0141523867319	XPB_036	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia albertii
 Bacteroides_vulgatus_57955	26	0.643192488263	0.0140322753468	XPB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
-Alistipes_onderdonkii_55464	26	0.605716041795	0.013214666582	XPB_036							
+Alistipes_onderdonkii_55464	26	0.605716041795	0.013214666582	XPB_036					Rikenellaceae		
 Phascolarctobacterium_sp_59818	24	0.580765357503	0.0126703274013	XPB_036	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Acidaminococcaceae	Phascolarctobacterium	Phascolarctobacterium sp. CAG
 Bacteroides_uniformis_57318	21	0.585968610916	0.0127838447168	XPB_036	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
 Burkholderiales_bacterium_56577	16	0.361435488465	0.00788529466186	XPB_036	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales			Burkholderiales bacterium 1_1_47
@@ -6476,7 +6476,7 @@ Bacteroides_nordii_55557	13	0.335552737265	0.00596255773956	XPB_063
 Eggerthella_lenta_56463	12	0.277349328763	0.00492832035959	XPB_063	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Eggerthella	Eggerthella sp. HGA1
 Bacteroides_uniformis_57318	12	0.31119700164	0.00552977187962	XPB_063	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
 Streptococcus_intermedius_57028	11	0.256814352265	0.00456342694805	XPB_063	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus intermedius
-Alistipes_onderdonkii_55464	11	0.269514443762	0.00478909945922	XPB_063							
+Alistipes_onderdonkii_55464	11	0.269514443762	0.00478909945922	XPB_063					Rikenellaceae		
 Alistipes_shahii_62199	10	0.248710662036	0.00441942955054	XPB_063	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Rikenellaceae	Alistipes	Alistipes shahii
 Streptococcus_sanguinis_58161	9	0.197162281998	0.00350344777414	XPB_063	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus sanguinis
 Streptococcus_anginosus_58223	9	0.209608717187	0.00372461297478	XPB_063	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
@@ -6505,7 +6505,7 @@ Streptococcus_sanguinis_62464	1	0.0242819070181	0.000431473972771	XPB_063	Bacter
 Streptococcus_anginosus_58032	1085	25.5655274889	0.260829026781	XQA_001	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Bacteroides_faecis_58503	501	12.0718276948	0.123161279206	XQA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides faecis
 Peptoniphilus_sp_58646	408	9.73397726129	0.099309658949	XQA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus grossensis
-Alistipes_onderdonkii_55464	305	7.42901044868	0.0757935296316	XQA_001							
+Alistipes_onderdonkii_55464	305	7.42901044868	0.0757935296316	XQA_001					Rikenellaceae		
 Anaerococcus_obesiensis_58051	281	6.69776044791	0.0683330449568	XQA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Anaerococcus	Anaerococcus obesiensis
 Burkholderiales_bacterium_56577	159	3.64530523118	0.0371907607297	XQA_001	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales			Burkholderiales bacterium 1_1_47
 Clostridiales_bacterium_56470	146	4.89022127052	0.0498918575136	XQA_001	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
@@ -6557,7 +6557,7 @@ Bacteroides_intestinalis_61596	1	0.0215680261678	0.000220045030457	XQA_001	Bacte
 Acidaminococcus_intestini_54097	863	20.1084242603	0.330933982152	XQA_029	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Acidaminococcaceae	Acidaminococcus	Acidaminococcus intestini
 Streptococcus_anginosus_58032	613	14.4244675582	0.237390380652	XQA_029	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Bacteroides_faecis_58503	276	6.63080361678	0.109126315288	XQA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides faecis
-Alistipes_onderdonkii_55464	116	2.83937717681	0.0467289919782	XQA_029							
+Alistipes_onderdonkii_55464	116	2.83937717681	0.0467289919782	XQA_029					Rikenellaceae		
 Bacteroides_massiliensis_44749	78	1.99077901431	0.032763205026	XQA_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
 Clostridiales_bacterium_56470	68	2.27665952891	0.0374680777645	XQA_029	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
 Anaerococcus_obesiensis_58051	52	1.23885222955	0.0203883853015	XQA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Anaerococcus	Anaerococcus obesiensis
@@ -6652,7 +6652,7 @@ Coprococcus_comes_61587	1	0.0248904818797	0.000665749492803	XQA_036	Bacteria	Fir
 Acidaminococcus_intestini_54097	1678	39.0843409024	0.273928406086	XQA_064	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Acidaminococcaceae	Acidaminococcus	Acidaminococcus intestini
 Streptococcus_anginosus_58032	1636	38.5988112927	0.27052549973	XQA_064	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Escherichia_coli_58110	404	9.61271850512	0.0673721648484	XQA_064	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
-Alistipes_onderdonkii_55464	264	6.49979512395	0.0455547791541	XQA_064							
+Alistipes_onderdonkii_55464	264	6.49979512395	0.0455547791541	XQA_064					Rikenellaceae		
 Bacteroides_massiliensis_44749	180	4.50302066773	0.0315600889155	XQA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides massiliensis
 Bacteroides_faecis_58503	135	3.26038809306	0.0228509140217	XQA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides faecis
 Clostridiaceae_bacterium_58376	110	2.54876866395	0.0178634235983	XQA_064	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Dielma	Dielma fastidiosa
@@ -7494,7 +7494,7 @@ Collinsella_sp_62205	104	2.35109717868	0.031926060235	XTA_001	Bacteria	Actinobac
 Dorea_formicigenerans_56346	88	2.07111770524	0.028124158036	XTA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea formicigenerans
 Bacteroides_uniformis_57318	79	2.14019676739	0.029062197654	XTA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
 Parabacteroides_distasonis_56985	75	1.7949107867	0.024373484181	XTA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas	Porphyromonas sp. 31_2
-Alistipes_onderdonkii_55464	65	1.57150174145	0.0213397641373	XTA_001							
+Alistipes_onderdonkii_55464	65	1.57150174145	0.0213397641373	XTA_001					Rikenellaceae		
 Peptoniphilus_sp_58646	62	1.52872522387	0.020758892496	XTA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus grossensis
 Collinsella_aerofaciens_61484	57	1.27974647076	0.0173779558248	XTA_001	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella aerofaciens
 Escherichia_fergusonii_56914	53	1.18782691393	0.0161297601591	XTA_001	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia fergusonii
@@ -7560,7 +7560,7 @@ Clostridium_bolteae_57158	16	0.385386543281	0.0099147555764	XTA_029	Bacteria	Fir
 Phascolarctobacterium_succinatutens_61948	15	0.355087511124	0.00913525898194	XTA_029	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Acidaminococcaceae	Phascolarctobacterium	Phascolarctobacterium succinatutens
 Collinsella_sp_62205	15	0.350907191033	0.00902771279834	XTA_029	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella sp. 4_8_47FAA
 Oscillibacter_sp_60799	14	0.334948516051	0.00861714744642	XTA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Oscillospiraceae	Oscillibacter	Oscillibacter sp. ER4
-Alistipes_onderdonkii_55464	14	0.333538209383	0.00858086479426	XTA_029							
+Alistipes_onderdonkii_55464	14	0.333538209383	0.00858086479426	XTA_029					Rikenellaceae		
 Ruminococcus_sp_55468	13	0.298809875086	0.00768741650933	XTA_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Blautia	Blautia sp. KLE 1732
 Phascolarctobacterium_succinatutens_59819	13	0.28557302482	0.00734687494844	XTA_029	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Acidaminococcaceae	Phascolarctobacterium	Phascolarctobacterium succinatutens
 Anaerostipes_hadrus_55206	12	0.293448139351	0.00754947630304	XTA_029	Bacteria	Firmicutes	Clostridia	Clostridiales			butyrate-producing bacterium SSC/2
@@ -7710,7 +7710,7 @@ Peptoniphilus_timonensis_58570	5	0.114855292451	0.00253767878528	XTB_001	Bacteri
 Bacteroides_clarus_62282	4	0.0963414634146	0.00212862361527	XTB_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides clarus
 Dorea_formicigenerans_56346	4	0.0989119683482	0.00218541782735	XTB_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea formicigenerans
 Clostridium_hylemonae_61789	4	0.0914700905743	0.00202099270643	XTB_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] hylemonae
-Alistipes_onderdonkii_55464	4	0.080721163696	0.00178349974357	XTB_001							
+Alistipes_onderdonkii_55464	4	0.080721163696	0.00178349974357	XTB_001					Rikenellaceae		
 Enterococcus_faecium_56710	3	0.063245823389	0.00139738953989	XTB_001	Bacteria	Firmicutes	Bacilli	Lactobacillales	Enterococcaceae	Enterococcus	Enterococcus faecium
 Anaerococcus_obesiensis_58051	3	0.0747850429914	0.001652343684	XTB_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Anaerococcus	Anaerococcus obesiensis
 Clostridium_hathewayi_55515	3	0.0692564253482	0.00153019123107	XTB_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] hathewayi
@@ -7796,7 +7796,7 @@ Ruminococcus_obeum_62046	2	0.0466351829988	0.00132577822683	XTB_028	Bacteria	Fir
 Streptococcus_constellatus_57767	2	0.0441802872709	0.00125598870107	XTB_028	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus constellatus
 Bifidobacterium_longum_57796	2	0.0441384180791	0.00125479841384	XTB_028	Bacteria	Actinobacteria	Actinobacteridae	Bifidobacteriales	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium longum subsp. infantis
 Streptococcus_anginosus_58303	2	0.0491186373539	0.0013963796376	XTB_028	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
-Alistipes_onderdonkii_55464	2	0.0448678549478	0.00127553536513	XTB_028							
+Alistipes_onderdonkii_55464	2	0.0448678549478	0.00127553536513	XTB_028					Rikenellaceae		
 Erysipelotrichaceae_bacterium_56596	2	0.0472908290255	0.00134441739946	XTB_028	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae		Erysipelotrichaceae bacterium 21_3
 Bilophila_wadsworthia_57364	1	0.0237394545811	0.000674882137832	XTB_028	Bacteria	delta/epsilon subdivisions	Deltaproteobacteria	Desulfovibrionales	Desulfovibrionaceae	Bilophila	Bilophila wadsworthia
 Finegoldia_magna_57293	1	0.0249013058002	0.000707912072529	XTB_028	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Finegoldia	Finegoldia magna
@@ -7853,7 +7853,7 @@ Bilophila_wadsworthia_57364	7	0.171473415735	0.00302627608453	XTB_037	Bacteria	d
 Bacteroides_cellulosilyticus_58046	7	0.180057161003	0.00317776768986	XTB_037	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides cellulosilyticus
 Coprococcus_catus_62200	7	0.167111374642	0.00294929190256	XTB_037	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Coprococcus	Coprococcus catus
 Eubacterium_cylindroides_56237	6	0.141735374951	0.00250143950132	XTB_037	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Faecalitalea	Faecalitalea cylindroides
-Alistipes_onderdonkii_55464	6	0.148125384143	0.00261421460359	XTB_037							
+Alistipes_onderdonkii_55464	6	0.148125384143	0.00261421460359	XTB_037					Rikenellaceae		
 Escherichia_albertii_56276	6	0.120784087633	0.00213167734619	XTB_037	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia albertii
 Collinsella_aerofaciens_61484	5	0.114472294248	0.00202028264812	XTB_037	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Collinsella	Collinsella aerofaciens
 Gordonibacter_pamelaeae_62044	5	0.155262434735	0.00274017398586	XTB_037	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Gordonibacter	Gordonibacter pamelaeae
@@ -7944,7 +7944,7 @@ Bifidobacterium_adolescentis_56815	1	0.02229952725	0.000398021015005	XTB_065	Bac
 Bacteroides_vulgatus_57955	172	4.19167176975	0.139799213506	XUA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides vulgatus
 Escherichia_coli_58110	135	3.21076953988	0.107084495419	XUA_001	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia coli
 Bacteroides_thetaiotaomicron_56941	134	3.25544311561	0.108574433347	XUA_001	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. 1_1_6
-Alistipes_onderdonkii_55464	97	2.44744929318	0.0816264977502	XUA_001							
+Alistipes_onderdonkii_55464	97	2.44744929318	0.0816264977502	XUA_001					Rikenellaceae		
 Peptoniphilus_sp_58372	96	2.3034600684	0.0768242180195	XUA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus senegalensis
 Clostridiales_bacterium_56470	67	2.30506780871	0.0768778388284	XUA_001	Bacteria	Firmicutes	Clostridia	Clostridiales			Clostridiales bacterium VE202-03
 Dorea_formicigenerans_56346	64	1.51909000989	0.0506641741753	XUA_001	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea formicigenerans
@@ -8062,7 +8062,7 @@ Clostridiales_bacterium_56470	108	3.65496074233	0.0679858413469	XUA_064	Bacteria
 Peptoniphilus_lacrimalis_56996	104	2.886001386	0.0536824459107	XUA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus sp. oral taxon 836
 Clostridium_sp_60782	88	2.11985131605	0.0394313059463	XUA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium sp. ATCC 29733
 Peptoniphilus_harei_62491	53	1.30684460621	0.0243085866925	XUA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus harei
-Alistipes_onderdonkii_55464	52	1.29563614014	0.0241000982709	XUA_064							
+Alistipes_onderdonkii_55464	52	1.29563614014	0.0241000982709	XUA_064					Rikenellaceae		
 Bacteroides_stercoris_56735	47	1.11364102564	0.0207148113001	XUA_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides stercoris
 Clostridium_hathewayi_55515	40	0.937610359035	0.0174404688883	XUA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] hathewayi
 Anaerococcus_obesiensis_58051	38	0.923515296941	0.01717828696	XUA_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Anaerococcus	Anaerococcus obesiensis
@@ -8160,7 +8160,7 @@ Dorea_longicatena_61473	26	0.615164943378	0.011044768461	XUB_029	Bacteria	Firmic
 Clostridium_sp_60782	23	0.522403054049	0.00937930686302	XUB_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae	Clostridium	Clostridium sp. ATCC 29733
 Phascolarctobacterium_sp_59817	22	0.50759818433	0.00911349789601	XUB_029	Bacteria	Firmicutes	Negativicutes	Selenomonadales	Acidaminococcaceae	Phascolarctobacterium	Phascolarctobacterium sp. CAG
 Bacteroides_nordii_55557	21	0.510040160643	0.00915734152405	XUB_029							
-Alistipes_onderdonkii_55464	19	0.456771153452	0.00820094136357	XUB_029							
+Alistipes_onderdonkii_55464	19	0.456771153452	0.00820094136357	XUB_029					Rikenellaceae		
 Bacteroides_uniformis_57318	18	0.50866713516	0.00913269000789	XUB_029	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides uniformis
 Peptoniphilus_sp_58646	16	0.368346916189	0.00661335865517	XUB_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptoniphilaceae	Peptoniphilus	Peptoniphilus grossensis
 Oscillibacter_sp_60799	15	0.369069250959	0.00662632756762	XUB_029	Bacteria	Firmicutes	Clostridia	Clostridiales	Oscillospiraceae	Oscillibacter	Oscillibacter sp. ER4
@@ -8460,7 +8460,7 @@ Anaerococcus_obesiensis_58051	31	0.762147570486	0.0125849014986	XVB_027	Bacteria
 Ruminococcaceae_bacterium_61777	28	0.613306605575	0.0101271768336	XVB_027	Bacteria	Firmicutes	Clostridia	Clostridiales	Ruminococcaceae		Ruminococcaceae bacterium D16
 Escherichia_fergusonii_56914	26	0.579172610556	0.00956354193967	XVB_027	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Escherichia	Escherichia fergusonii
 Dorea_longicatena_59913	26	0.618331859711	0.0102101559452	XVB_027	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Dorea	Dorea longicatena
-Alistipes_onderdonkii_55464	22	0.4938537185	0.00815472048031	XVB_027							
+Alistipes_onderdonkii_55464	22	0.4938537185	0.00815472048031	XVB_027					Rikenellaceae		
 Streptococcus_anginosus_54555	18	0.422261834027	0.00697256514833	XVB_027	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Bacteroides_rodentium_59708	17	0.476141434947	0.00786224779855	XVB_027	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides rodentium
 Bacteroides_xylanisolvens_57185	16	0.383981509396	0.0063404643145	XVB_027	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. D1
@@ -8523,7 +8523,7 @@ Dorea_formicigenerans_56346	8	0.192284866469	0.00257184003257	XVB_036	Bacteria	F
 Streptococcus_intermedius_57028	7	0.15769650114	0.00210921526002	XVB_036	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus intermedius
 Eggerthella_lenta_56463	6	0.137294106446	0.00183633005383	XVB_036	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Eggerthella	Eggerthella sp. HGA1
 Oscillospiraceae_bacterium_54867	6	0.146066184528	0.0019536579642	XVB_036	Bacteria	Firmicutes	Clostridia	Clostridiales	Oscillospiraceae	Oscillibacter	Oscillibacter sp. KLE 1728
-Alistipes_onderdonkii_55464	6	0.153042409342	0.00204696605747	XVB_036							
+Alistipes_onderdonkii_55464	6	0.153042409342	0.00204696605747	XVB_036					Rikenellaceae		
 Clostridium_spiroforme_61500	5	0.130493788496	0.00174537474227	XVB_036	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Erysipelatoclostridium	[Clostridium] spiroforme
 Holdemania_sp_59514	4	0.0963843774169	0.0012891560574	XVB_036	Bacteria	Firmicutes	Erysipelotrichia	Erysipelotrichales	Erysipelotrichaceae	Holdemania	Holdemania massiliensis
 Gordonibacter_pamelaeae_62044	4	0.137400384721	0.00183775154231	XVB_036	Bacteria	Actinobacteria	Coriobacteridae	Coriobacterineae	Coriobacteriaceae	Gordonibacter	Gordonibacter pamelaeae
@@ -8554,7 +8554,7 @@ Escherichia_fergusonii_56914	34	0.750166428911	0.0140356233814	XVB_064	Bacteria	
 Bacteroides_nordii_55557	33	0.822024941873	0.0153800970686	XVB_064							
 Streptococcus_anginosus_54555	32	0.777480689245	0.014546673538	XVB_064	Bacteria	Firmicutes	Bacilli	Lactobacillales	Streptococcaceae	Streptococcus	Streptococcus anginosus
 Parabacteroides_distasonis_56985	26	0.622060016221	0.0116387507782	XVB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Porphyromonadaceae	Porphyromonas	Porphyromonas sp. 31_2
-Alistipes_onderdonkii_55464	26	0.658369186642	0.0123180958165	XVB_064							
+Alistipes_onderdonkii_55464	26	0.658369186642	0.0123180958165	XVB_064					Rikenellaceae		
 Bacteroides_xylanisolvens_57185	24	0.569992965531	0.0106645756007	XVB_064	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidales	Bacteroidaceae	Bacteroides	Bacteroides sp. D1
 Clostridium_hathewayi_55515	22	0.520894643908	0.00974594538161	XVB_064	Bacteria	Firmicutes	Clostridia	Clostridiales	Lachnospiraceae	Lachnoclostridium	[Clostridium] hathewayi
 Anaerostipes_hadrus_55206	21	0.508511480602	0.00951425623939	XVB_064	Bacteria	Firmicutes	Clostridia	Clostridiales			butyrate-producing bacterium SSC/2

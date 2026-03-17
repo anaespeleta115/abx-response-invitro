@@ -1,10 +1,10 @@
 # Load data
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/workflow/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/workflow/analysis/plotDefaults.R")
 
 
 # Set output directory
-OUTDIR <- "~/Documents/GitHub/abx-response-invitro/analysis/scratch/101625-percentageLostFamilies/out/"
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/101625-percentageLostFamilies/out/"
 
 curr_replicate <- 1
 
@@ -146,7 +146,7 @@ hist_OTU_loss <- family_OTU_counts %>% filter(lost == 1) %>%
 
 savePNGPDF(paste0(OUTDIR, "OTU-loss-percentages-histogram"), hist_OTU_loss , 2, 2)
 
-OTU_loss_per_fam <- family_OTU_counts %>% filter(lost == 1) %>% 
+OTU_loss_per_fam <- family_OTU_counts %>% 
   ggplot(aes(x = percentage_OTU_lost, fill = subject1)) +
   geom_bar(color = "black", alpha = 0.7) +
   # geom_density(color = "darkblue", size = 1) +
@@ -163,11 +163,12 @@ OTU_loss_per_fam <- family_OTU_counts %>% filter(lost == 1) %>%
     legend.position = "none"
   )
 
-density_OTU_loss <- family_OTU_counts %>% filter(lost == 1) %>% 
+density_OTU_loss <- family_OTU_counts %>% 
   mutate(percentage_OTU_lost = percentage_OTU_lost * 100) %>%  # convert to %
   ggplot(aes(x = percentage_OTU_lost)) +
   # geom_histogram(bins = 10, fill = "skyblue", color = "black", alpha = 0.7) +
   geom_density(color = "darkblue", size = 1) +
+  xlim(0, NA)+
   facet_wrap(~subject1) +
   labs(
     title = "",

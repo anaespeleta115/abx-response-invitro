@@ -18,6 +18,9 @@ metaGdata <- read.table("~/Documents/GitHub/abx-response-invitro/workflow/out/mi
 # Get midas taxonomy table
 midas_taxonomy <- read.table("~/Downloads/species_taxonomy.txt", sep = "\t", header = TRUE, quote = "", comment.char = "")
 
+midas_taxonomy <- midas_taxonomy %>% 
+  mutate(family = ifelse(species_id == "Alistipes_onderdonkii_55464", "Rikenellaceae", family))
+
 # select only relevant columns
 midas_filtered <- midas_taxonomy %>% 
   select(kingdom, phylum, class, order, family, genus, species, species_id)
