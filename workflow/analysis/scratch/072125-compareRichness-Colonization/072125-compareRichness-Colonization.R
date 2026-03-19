@@ -1,8 +1,8 @@
-source("C:/abx-response-invitro/analysis/plotDefaults.R")
-source("C:/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
-source("C:/abx-response-invitro/analysis/scratch/072125-getRecipient-MixtureRichness/072125-getRecipient-MixtureRichness.R")
-source("C:/abx-response-invitro/analysis/scratch/072125-getColonization/072125-getColonization.R")
-source("C:/abx-response-invitro/analysis/scratch/072225-getColonizationProportion/072225-getColonizationProportion.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/plotDefaults.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072125-getRecipient-MixtureRichness/072125-getRecipient-MixtureRichness.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072125-getColonization/072125-getColonization.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072225-getColonizationProportion/072225-getColonizationProportion.R")
 
 
 
