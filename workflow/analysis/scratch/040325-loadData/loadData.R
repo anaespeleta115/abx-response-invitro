@@ -7,6 +7,7 @@ library("phyloseq")
 # library(rstatix)
 library(PNWColors)
 library(paletteer)
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/background/background.R")
 
 # scale_colour_paletteer_d("lisa::BridgetRiley")
 # scale_color_paletteer_d("lisa::BridgetRiley")
@@ -51,6 +52,32 @@ e0026 <- e0026 %>%
     household = str_sub(biosample1, 1, -6),
     antibiotic = if_else(str_sub(biosample1, 1, -5) %in% subjectsAbx, 1, 0)
   )
+
+# Use background script to only keep relevant timepoints
+e0026_p0 <- e0026 %>% 
+  filter(passage == 0, biosample1 %in% samplesKeyTimepoints)
+
+e0026_p0 <- e0026_p0 %>% 
+  mutate(day = case_when(
+    str_detect(day, "001") | str_detect(day, "002") | str_detect(day, "003") | str_detect(day, "022")| str_detect(day, "008") ~ "001",
+    str_detect(day, "029") | str_detect(day, "028") | str_detect(day, "027") ~ "029",
+    str_detect(day, "036") | str_detect(day, "037") ~ "036",
+    str_detect(day, "064")| str_detect(day, "063") | str_detect(day, "072") | str_detect(day, "059")| str_detect(day, "065") ~ "064",
+    TRUE ~ "0"
+  ))
+
+# Use background script to only keep relevant timepoints
+e0026_p8 <- e0026 %>% 
+  filter(passage == 8, biosample1 %in% samplesKeyTimepoints)
+
+e0026_p8 <- e0026_p8 %>% 
+  mutate(day = case_when(
+    str_detect(day, "001") | str_detect(day, "002") | str_detect(day, "003") | str_detect(day, "022")| str_detect(day, "008") ~ "001",
+    str_detect(day, "029") | str_detect(day, "028") | str_detect(day, "027") ~ "029",
+    str_detect(day, "036") | str_detect(day, "037") ~ "036",
+    str_detect(day, "064")| str_detect(day, "063") | str_detect(day, "072") | str_detect(day, "059")| str_detect(day, "065") ~ "064",
+    TRUE ~ "0"
+  ))
 
 
 e0026 <- e0026 %>% 
