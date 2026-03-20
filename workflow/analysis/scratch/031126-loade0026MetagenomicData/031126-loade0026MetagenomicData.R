@@ -30,6 +30,8 @@ metaGdata <- metaGdata %>%
          antibiotic = ifelse(subject %in% subjectsAbx, 1, 0),
          day = str_sub(sample, -3))
 
+
+
 # Adjust days to be the correct timepoint
 metaGdata <- metaGdata %>% 
   mutate(day = case_when(

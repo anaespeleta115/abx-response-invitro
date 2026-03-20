@@ -31,7 +31,7 @@ household_data <- household_data %>%
          day = str_sub(sample, -3))
 
 # Use background script to only keep relevant timepoints
-household_data <- household_data %>% 
+household_data <- household_data %>%
   filter(sample %in% samplesKeyTimepoints)
 
 # Fix the ones that are off by a few days

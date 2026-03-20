@@ -9,7 +9,7 @@ OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/031
 # Plot XBA compositions through time
 
 MG_species_composition <- metaGdata %>% 
-  ggplot(aes(x = day, y = relative_abundance, fill = family))+
+  ggplot(aes(x = as.factor(day), y = relative_abundance, fill = family))+
   geom_bar(stat = "identity") +
   scale_fill_manual(values = my_colors) +
   facet_wrap(~subject)+
