@@ -64,7 +64,7 @@ savePNGPDF(paste0(OUTDIR, "legend"), legend_only, 2.5, 1.5)
 
 # make sure all e0026 p0 subjects are included: 
 
-all_compositions <- e0026_p0 %>% mutate(day = as.numeric(day) - 29) %>% 
+p0_compositions <- e0026 %>% mutate(day = as.numeric(day) - 29) %>% 
   filter(passage == 0) %>% 
   ggplot(aes(x = factor(day), y = relAbundance, fill = Family))+
   geom_bar(stat = "identity") +
@@ -78,11 +78,11 @@ all_compositions <- e0026_p0 %>% mutate(day = as.numeric(day) - 29) %>%
   DEFAULTS.THEME_PRINT
   
 
-savePNGPDF(paste0(OUTDIR, "p0_16S_compositions"), all_compositions, 5, 5)
+savePNGPDF(paste0(OUTDIR, "p0_16S_compositions"), p0_compositions, 5, 5)
 
 
 
-all_compositions <- e0026_p8 %>% mutate(day = as.numeric(day) - 29) %>% 
+p8_compositions <- e0026 %>% mutate(day = as.numeric(day) - 29) %>% 
   filter(passage == 8) %>% 
   ggplot(aes(x = factor(day), y = relAbundance, fill = Family))+
   geom_bar(stat = "identity") +
@@ -96,4 +96,43 @@ all_compositions <- e0026_p8 %>% mutate(day = as.numeric(day) - 29) %>%
   DEFAULTS.THEME_PRINT
 
 
-savePNGPDF(paste0(OUTDIR, "p8_16S_compositions"), all_compositions, 5, 5)
+savePNGPDF(paste0(OUTDIR, "p8_16S_compositions"), p8_compositions, 5, 5)
+
+
+# Plot only lasting responders:
+
+
+p0_abx_compositions <- e0026 %>% mutate(day = as.numeric(day) - 29) %>% filter(subject %in% lastingResponses) %>% 
+  filter(passage == 0) %>% 
+  ggplot(aes(x = factor(day), y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = my_colors) +
+  facet_wrap(~subject)+
+  labs(x = "Study day", y = "Relative abundance")+
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 90, vjust = 0.5)
+  )+
+  DEFAULTS.THEME_PRINT
+
+
+savePNGPDF(paste0(OUTDIR, "p0_abx_16S_compositions"), p0_abx_compositions, 3, 3)
+
+
+
+p8_abx_compositions <- e0026 %>% mutate(day = as.numeric(day) - 29) %>% filter(subject %in% lastingResponses) %>% 
+  filter(passage == 8) %>% 
+  ggplot(aes(x = factor(day), y = relAbundance, fill = Family))+
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = my_colors) +
+  facet_wrap(~subject)+
+  labs(x = "Study day", y = "Relative abundance")+
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 90, vjust = 0.5)
+  )+
+  DEFAULTS.THEME_PRINT
+
+
+savePNGPDF(paste0(OUTDIR, "p8_abx_16S_compositions"), p8_abx_compositions, 3, 3)
+
