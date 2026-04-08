@@ -102,5 +102,6 @@ curr_replicate <- 1
 limit_of_detection <-  1e-3
 my_colors <- readRDS("~/Documents/GitHub/abx-response-invitro/data/familyColorPalette.rds") 
 
-
-
+# Filter the data to include only the selected replicate
+eAME004_data <- eAME004_data %>% 
+  filter(replicate == curr_replicate)

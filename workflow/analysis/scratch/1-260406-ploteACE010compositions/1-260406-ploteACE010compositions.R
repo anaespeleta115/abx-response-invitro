@@ -110,7 +110,7 @@ richness <- data_eACE010_diversity %>%
 #   left_join(data_eACE010_diversity, by = c("biosample"))
 
 # Plot compositions faceted by their subject
-eACE010_richness_compositions <- eACE010_data_richness %>% filter(round2plate == "A") %>% 
+eACE010_richness_compositions <- eACE010_data %>% filter(round2plate == "A") %>% 
   ggplot(aes(x = factor(day), y = relAbundance, fill = Family))+
   geom_bar(stat = "identity") +
   geom_text(
