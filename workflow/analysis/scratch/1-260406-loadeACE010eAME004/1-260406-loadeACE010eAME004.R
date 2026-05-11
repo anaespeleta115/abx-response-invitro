@@ -15,11 +15,17 @@ OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-2
 # Read in full data file for eACE010 and eAME004
 SR2601_data <- read.table("~/Documents/GitHub/abx-response-invitro/data/eACE010-eAME004ps_all.txt.gz", header = TRUE)
 
+# Define global variables
+curr_replicate <- 1
+limit_of_detection <-  1e-3
+my_colors <- readRDS("~/Documents/GitHub/abx-response-invitro/data/familyColorPalette.rds") 
 
+
+eAME004_obj <- readRDS("~/Documents/GitHub/abx-response-invitro/data/ps_ACE010-eAME004.rds")
 
 # Divide the data into corresponding experiments, eAME004, and add more metadata columns
 eAME004_data <- SR2601_data %>% 
-  filter(round2plate == "A", round1index %in% 2:7) %>% 
+  filter(round2plate == "A", round1index %in% c(2, 3, 4, 5, 6, 7)) %>% 
   mutate(replicate = case_when(
     str_detect(sample, "AME0060") ~ 1,
     str_detect(sample, "AME0061") ~ 2, 
@@ -28,11 +34,22 @@ eAME004_data <- SR2601_data %>%
     str_detect(sample, "AME0064") ~ 1,
     str_detect(sample, "AME0065") ~ 2
   )) %>% 
-  rename(mixture = metadata) 
+  rename(mixture = metadata) %>% 
+  mutate(mixture = ifelse(mixture == "XBB-029+XVA-029", "XBB-029+XJA-029", mixture)) %>% 
+  mutate(mixture = ifelse(mixture == "XBB-029+XVA-036", "XBB-029+XJA-036", mixture)) %>% 
+  mutate(mixture = ifelse(mixture == "XBB-029+XVA-064", "XBB-029+XJA-064", mixture)) %>% 
+  mutate(mixture = ifelse(mixture == "XBB-029+XTA-029", "XBB-029+XCA-029", mixture)) %>% 
+  mutate(mixture = ifelse(mixture == "XBB-029+XTA-036", "XBB-029+XCA-036", mixture)) %>% 
+  mutate(mixture = ifelse(mixture == "XBB-029+XTA-064", "XBB-029+XCA-064", mixture)) %>% 
+  mutate(mixture = ifelse(mixture == "XCB-029+XTA-029", "XCB-029+XCA-029", mixture)) %>% 
+  mutate(mixture = ifelse(mixture == "XCB-029+XTA-036", "XCB-029+XCA-036", mixture)) %>% 
+  mutate(mixture = ifelse(mixture == "XCB-029+XTA-064", "XCB-029+XCA-064", mixture))
 
 
-# Add recipient, donor, and day columns to eAME004 data
-eAME004_data <- eAME004_data %>% 
+
+
+# Add recipient, donor, and day columns to eAME004 data and filter for current replicate
+eAME004_data <- eAME004_data %>%
   mutate(biosample2 = ifelse(str_detect(mixture, "blank") | str_detect(mixture, "B-mix"), 
                            str_sub(mixture, 1, 5),
                            str_sub(mixture, 1, 7)
@@ -95,13 +112,14 @@ write.table(eACE010_data_pooled,
             row.names = FALSE,
             quote = FALSE)
 
-
-
-# Define global variables
-curr_replicate <- 1
-limit_of_detection <-  1e-3
-my_colors <- readRDS("~/Documents/GitHub/abx-response-invitro/data/familyColorPalette.rds") 
-
-# Filter the data to include only the selected replicate
+# filter for current replicate
 eAME004_data <- eAME004_data %>% 
   filter(replicate == curr_replicate)
+
+
+# Count to see if there are any missing wells
+eAME004_n <- eAME004_data %>% 
+  select(biosample1, biosample2, replicate) %>% 
+  group_by(replicate, biosample1, biosample2) %>% 
+  filter(biosample2 =="XEB-029") %>% 
+  summarize(count = n())

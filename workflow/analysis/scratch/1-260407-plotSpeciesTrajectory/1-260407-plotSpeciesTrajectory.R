@@ -1,5 +1,5 @@
 source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-260406-ploteACE010compositions/1-260406-ploteACE010compositions.R")
-source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-260408-geteAME004Richness/1-260408-geteAME004Richness.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-260408-geteAME004Richness/1-260408-geteAME004SpeciesRichness.R")
 OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-260407-plotSpeciesTrajectory/out/"
 
 

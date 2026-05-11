@@ -7,13 +7,13 @@ library(foreach)
 
 get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {
   mix_asvs_subset <- mixture_ASVs %>% 
-    filter(mixture == mix_id, replicate == curr_replicate)
+    filter(mixture == mix_id, replicate == curr_replicate, relAbundance > limit_of_detection)
   
   recipient_asvs_subset <- recipient_ASVs %>% 
-    filter(biosample1 == recipient_id, replicate == curr_replicate)
+    filter(biosample1 == recipient_id, replicate == curr_replicate, relAbundance > limit_of_detection)
   
   donor_asvs_subset <- single_donor_ASVs %>%  
-    filter(biosample == donor_id)
+    filter(biosample == donor_id, relAbundance > limit_of_detection)
   
   # potential colonizers are those present in the donor but not in the recipient
   potential_colonizers <- donor_asvs_subset$OTU[!(donor_asvs_subset$OTU %in% recipient_asvs_subset$OTU)]

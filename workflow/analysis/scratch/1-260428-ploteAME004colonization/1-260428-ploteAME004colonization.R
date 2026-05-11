@@ -1,5 +1,5 @@
 source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-260428-geteAME004colonization/1-260428-geteAME004colonization.R")
-
+library(paletteer)
 OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-260428-ploteAME004colonization/out/"
 
 
@@ -29,10 +29,10 @@ colonization_day <-
     fill = ""
   ) + 
   # scale_fill_manual(values = "#5495")+
-  # facet_wrap(~recipient)+
+  facet_wrap(~subject1)+
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "mixtureColonization-day"), colonization_day, 2, 2)
+savePNGPDF(paste0(OUTDIR, "mixtureColonization-day-faceted"), colonization_day, 3, 4)
 
 
 # ------------ PLOT COLONIZATION PROPORTION BY DAY -----------------
@@ -49,8 +49,8 @@ prop_colonization_day <-
     fill = ""
   ) +
   scale_y_continuous(limits = c(0, 1)) +
-  # facet_wrap(~recipient)+
+  facet_wrap(~recipient)+
   DEFAULTS.THEME_PRINT+
   theme(legend.position = "none")
 
-savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day"), prop_colonization_day, 3, 4)
+savePNGPDF(paste0(OUTDIR, "mixtureColonizationProp-day-faceted"), prop_colonization_day, 3, 4)
