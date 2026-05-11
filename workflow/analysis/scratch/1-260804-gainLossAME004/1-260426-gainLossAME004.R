@@ -22,8 +22,7 @@ recipient_fam_loss <- recipient_fam_loss %>%
     values_from = fam_relAbundance,
     names_prefix = "recipient_fam_relAbundance_day_"
   )%>%
-  replace_na(list(recipient_fam_relAbundance_day_029 = 0, recipient_fam_relAbundance_day_036 = 0)) %>%
-  filter(recipient_fam_relAbundance_day_029 != 0 & recipient_fam_relAbundance_day_036 != 0) %>%  # filter to make sure that we only have taxa present in that community
+  replace_na(list(recipient_fam_relAbundance_day_029 = 0, recipient_fam_relAbundance_day_036 = 0)) %>% 
   mutate(
     recipient_fam_relAbundance_day_029 = if_else(recipient_fam_relAbundance_day_029 == 0, 1e-4, recipient_fam_relAbundance_day_029),
     recipient_fam_relAbundance_day_036 = if_else(recipient_fam_relAbundance_day_036 == 0, 1e-4, recipient_fam_relAbundance_day_036),
@@ -44,13 +43,12 @@ recipient_fam_36 <- recipient_ASVs %>%
   group_by(day, Family, subject) %>%
   summarise(fam_relAbundance = sum(relAbundance)) 
 
-gain_mixture <- fam_abundance_mixture %>%
-  left_join(recipient_fam_36, by = c("subject", "Family"), relationship = "many-to-many") %>% 
-  replace_na(list(fam_relAbundance.y = 0, fam_relAbundance.x = 0)) %>%
+gain_mixture <- recipient_fam_36 %>%
+  full_join(fam_abundance_mixture, by = c("subject", "Family"), relationship = "many-to-many") %>% 
+  replace_na(list(fam_relAbundance.y = 1e-4, fam_relAbundance.x = 1e-4)) %>%
+  rename(recipient_abundance36 = fam_relAbundance.x, mixture_abundance36 = fam_relAbundance.y) %>% 
   mutate(
-    fam_relAbundance.y = if_else(fam_relAbundance.y == 0, 1e-4, fam_relAbundance.y),
-    fam_relAbundance.x = if_else(fam_relAbundance.x == 0, 1e-4, fam_relAbundance.x),
-    mix_ratio = fam_relAbundance.x / fam_relAbundance.y, # x = mix 36, y = recipient 36
+    mix_ratio = mixture_abundance36/recipient_abundance36, # y = mix 36, x = recipient 36
     mix_log10_ratio = log10(mix_ratio)
   ) 
 
@@ -58,14 +56,12 @@ gain_mixture <- fam_abundance_mixture %>%
 # ----------------- Combine gain and loss data --------------------------------------------------------------
 
 compare_gain_loss <- gain_mixture %>% 
-  left_join(recipient_fam_loss, by = c("Family", "subject")) %>% 
-  filter(!is.na(recipient_fam_relAbundance_day_029), !is.na(recipient_fam_relAbundance_day_036)) %>% 
+  full_join(recipient_fam_loss, by = c("Family", "subject")) %>% 
   mutate(
-    # recipient_fam_relAbundance_day_029 = if_else(is.na(recipient_fam_relAbundance_day_029), 1e-4, recipient_fam_relAbundance_day_029),
-    # recipient_fam_relAbundance_day_036 = if_else(is.na(recipient_fam_relAbundance_day_036), 1e-4, recipient_fam_relAbundance_day_036),
     recipient_ratio = if_else(is.na(recipient_ratio), 1e-4, recipient_ratio),
     recipient_log10_ratio = if_else(is.na(recipient_log10_ratio), 1e-4, recipient_log10_ratio),
-  )
+  ) %>% 
+  filter()
 
 
 # ----------------- Average across a recipient's mixes fold change for each recipient ------------------------
@@ -81,7 +77,7 @@ gain_loss_avg <- gain_mixture %>%
     recipient_log10_ratio = if_else(is.na(recipient_log10_ratio), 1e-4, recipient_log10_ratio),
   ) 
 
-gain_loss_avg_plot <- gain_loss_avg %>% filter(subject == "XJA") %>% 
+gain_loss_avg_plot <- gain_loss_avg %>%
   ggplot(aes(x = recipient_log10_ratio, y = avg_mix_ratio, color = Family))+
   geom_point(size = 2, alpha = 0.5)+
   geom_smooth(method = "lm", se = FALSE, color = "black", linewidth = 0.5) + # correlation line
@@ -89,7 +85,7 @@ gain_loss_avg_plot <- gain_loss_avg %>% filter(subject == "XJA") %>%
        recipient day 36 relAbundance)", y = "Average mixture gain (log(mixture day 36 relAbundance / 
        recipient 36 relAbundance")+
   scale_color_manual(values = my_colors)+
-  # facet_wrap(~subject)+
+  facet_wrap(~subject)+
   theme(legend.position = "none")+
   DEFAULTS.THEME_PRINT
 
