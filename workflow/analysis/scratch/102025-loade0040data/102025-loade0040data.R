@@ -14,7 +14,7 @@ library(paletteer)
 # paletteer_d("lisa::BridgetRiley")
 
 # Load data
-source("~/Documents/GitHub/abx-response-invitro/analysis/plotDefaults.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/plotDefaults.R")
 
 e0040 <- fread("~/Documents/GitHub/bottom-up-community-mixtures/data/ps_all.txt.gz")
 

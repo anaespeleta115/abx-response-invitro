@@ -1,6 +1,6 @@
 # Load data
-source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102025-loade0040data/102025-loade0040data.R")
-source("~/Documents/GitHub/abx-response-invitro/analysis/plotDefaults.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/102025-loade0040data/102025-loade0040data.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/plotDefaults.R")
 
 e0041 <- fread("~/Documents/GitHub/bottom-up-community-mixtures/data/ps_all_e0041.txt.gz")
 
