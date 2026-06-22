@@ -27,6 +27,10 @@ lost_strains_36 <- recipients_day29 %>%
   select(subject, OTU, day) %>%
   mutate(lost_strain_36 = 1)
 
+lost_strains_totals <- lost_strains_36 %>% 
+  group_by(subject) %>% 
+  summarize(total_species_lost = sum(lost_strain_36))
+
 # Join lost strains back into recipient ASVs
 recipient_ASVs <- recipient_ASVs %>% 
   left_join(lost_strains_36, by = c("subject", "day", "OTU")) %>%
@@ -48,7 +52,7 @@ AME004_lost_compositions <- eAME004_data %>%
   ggplot(aes(x = biosample1, y = relAbundance, fill = Family, alpha = factor(lost_36))) +
   geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
   scale_fill_manual(values = my_colors) +
-  scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
+  scale_alpha_manual(values = c("0" = 1, "1" = 0)) +
   labs(x = "recipient", y = "relative abundance") +
   theme(
     legend.position = "none",
@@ -58,6 +62,9 @@ AME004_lost_compositions <- eAME004_data %>%
 
 
 AME004_lost_compositions 
+
+savePNGPDF(paste0(OUTDIR, "eAME004_maintained_compositions"), AME004_lost_compositions, 3, 4)
+
 
 # Plot compositions of differential colonizers
 AME004_diff_compositions <- colonization_results %>% 

@@ -4,8 +4,8 @@ OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-2
 
 
 # Plot mixture communities
-eAME004_all_compositions <- eAME004_data %>% filter(replicate == curr_replicate) %>% 
-  ggplot(aes(x = biosample1, y = relAbundance, fill = Family)) +
+eAME004_all_compositions <- eAME004_data %>% filter(replicate == curr_replicate, subject == "XJA") %>% 
+  ggplot(aes(x = mixture, y = relAbundance, fill = Family)) +
   geom_bar(stat = "identity") +
   scale_fill_manual(values = my_colors) +
   labs(x = "recipient", y = "relative abundance") +
@@ -13,12 +13,12 @@ eAME004_all_compositions <- eAME004_data %>% filter(replicate == curr_replicate)
     legend.position = "none",
     axis.text.x = element_text(angle = 90, vjust = 0.5)
   ) +
-  facet_wrap(~biosample2)+
+  # facet_wrap(~biosample2)+
   DEFAULTS.THEME_PRINT
 
 eAME004_all_compositions
 
-savePNGPDF(paste0(OUTDIR, "eAME004_all_compositions"), eAME004_all_compositions, 5, 6)
+savePNGPDF(paste0(OUTDIR, "eAME004_XJA_compositions"), eAME004_all_compositions, 5, 6)
 
 
 

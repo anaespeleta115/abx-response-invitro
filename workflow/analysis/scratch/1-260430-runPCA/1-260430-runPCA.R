@@ -1,5 +1,5 @@
 source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-260406-loadeACE010eAME004/1-260406-loadeACE010eAME004.R")
-
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-260428-geteAME004_ASV_lists/1-260428-geteAME004_ASV_lists.R")
 OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-260430-runPCA/out/"
 
 
@@ -51,9 +51,14 @@ savePNGPDF(paste0(OUTDIR, "eAME004-eACE010"), pca, 10, 10)
 
 ### --------------- Subset by round1index (only plot ACE data) --------------------
 
-subset_obj <- subset_samples(eAME004_obj_filtered, round1index %in% c("0", "1") & 
-                               day %in% c("029", "036", "064") &
-                               metadata %in% c(donor_communities, recipient_ASVs$biosample1))
+# subset_obj <- subset_samples(eAME004_obj_filtered, round1index %in% c("0", "1") & 
+#                                day %in% c("028", "029", "036", "064") &
+#                                metadata %in% c(donor_communities, recipient_ASVs$biosample1))
+
+
+subset_obj <- subset_samples(eAME004_obj_filtered, round1index %in% c("0", "1", "2", "4", "6") &
+                             metadata %in% c(donor_communities, recipient_ASVs$mixture))
+
 
 subset_obj <- prune_taxa(taxa_sums(subset_obj) > 0, subset_obj)
 
@@ -61,9 +66,9 @@ ordu <- ordinate(subset_obj, method = "PCoA", distance = "jsd")
 
 ACE_pca <- plot_ordination(subset_obj, ordu, color = "subject") +
   geom_point(size = 2) +
-  geom_text(aes(label = metadata), vjust = -0.5, size = 3)
+  geom_text_repel(aes(label = metadata), vjust = -0.5, size = 2)
 
-savePNGPDF(paste0(OUTDIR, "eACE010_pca"), ACE_pca, 6, 6)
+savePNGPDF(paste0(OUTDIR, "eAME004_pca"), ACE_pca, 6, 6)
 
 
 

@@ -129,3 +129,16 @@ gain_loss_avg_plot
 savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot"), gain_loss_avg_plot, 3, 4)
 
 
+
+# ---------------- Get the unexpected colonizers -----------------
+
+unexpected_colonizers <- gain_loss_avg %>% 
+  filter(is.na(recipient_fam_relAbundance_day_029)) %>% 
+  group_by(subject, Family) %>% 
+  summarize(total_relAbundance = sum(avg_mix_log10_ratio))
+
+unexpected_colonizers_prev <- unexpected_colonizers %>% 
+  group_by(Family, total_relAbundance) %>% 
+  summarize(num_subjects = n(), avg_abundance = mean(total_relAbundance))
+
+

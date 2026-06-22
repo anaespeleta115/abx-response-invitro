@@ -18,6 +18,15 @@ total_colonization <- colonization_results %>%
     subject2 = str_sub(mixture, 1, 3),
     day = str_sub(biosample1, -3))
 
+avg_colonization <- total_colonization %>% 
+  mutate(
+    subject1 = str_sub(biosample1, 1, -5),
+    subject2 = str_sub(mixture, 1, 3),
+    day = str_sub(biosample1, -3)) %>% 
+  group_by(day, subject2) %>% 
+  summarize(avg_colonization = mean(total_colonizers))
+
+
 colonization_day <- 
   ggplot(total_colonization %>%  mutate(day = (as.numeric(as.character(day)))-29), aes(x = factor(day), y = total_colonizers)) +
   geom_boxplot(fill = "#5495CFFF", outlier.size = 0.5, ) +

@@ -60,8 +60,7 @@ compare_gain_loss <- gain_mixture %>%
   mutate(
     recipient_ratio = if_else(is.na(recipient_ratio), 1e-4, recipient_ratio),
     recipient_log10_ratio = if_else(is.na(recipient_log10_ratio), 1e-4, recipient_log10_ratio),
-  ) %>% 
-  filter()
+  )
 
 
 # ----------------- Average across a recipient's mixes fold change for each recipient ------------------------
@@ -75,7 +74,7 @@ gain_loss_avg <- gain_mixture %>%
     recipient_fam_relAbundance_day_036 = if_else(is.na(recipient_fam_relAbundance_day_036), 1e-4, recipient_fam_relAbundance_day_036),
     recipient_ratio = if_else(is.na(recipient_ratio), 1e-4, recipient_ratio),
     recipient_log10_ratio = if_else(is.na(recipient_log10_ratio), 1e-4, recipient_log10_ratio),
-  ) 
+  ) # Comment out last two lines to include NAs
 
 gain_loss_avg_plot <- gain_loss_avg %>%
   ggplot(aes(x = recipient_log10_ratio, y = avg_mix_ratio, color = Family))+
@@ -91,7 +90,7 @@ gain_loss_avg_plot <- gain_loss_avg %>%
 
 gain_loss_avg_plot
 
-savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot"), gain_loss_avg_plot, 3, 4)
+savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot_NAs"), gain_loss_avg_plot, 5, 5)
 
 
 
