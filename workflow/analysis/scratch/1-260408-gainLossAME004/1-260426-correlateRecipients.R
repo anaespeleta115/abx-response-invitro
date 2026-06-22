@@ -3,7 +3,7 @@ source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-2604
 
 
 # Set output directory
-OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-260804-gainLossAME004/out/"
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-260408-gainLossAME004/out/"
 
 
 # ----------------- Compute day 29 recipient family abundances (recipient 29) ------------------------
