@@ -3,6 +3,8 @@ source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072125
 source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/plotDefaults.R")
 source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072225-getColonizationProportion/072225-getColonizationProportion.R")
 
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/072325-getDifferentialColonizers/out/"
+
 
 actual_colonizers_results <- actual_colonizers_results %>% 
   mutate(day = str_sub(biosample1, -3), 
@@ -23,3 +25,8 @@ diff_colonizers <- actual_colonizers_results %>%
 actual_colonizers_results <- actual_colonizers_results %>%
   left_join(diff_colonizers,
             by = c("mixture_pair", "OTU"))
+
+
+# Write out base dataset with differential colonizer flags into a text file
+
+write_delim(actual_colonizers_results, paste0(OUTDIR, "differential_colonization.txt"))

@@ -67,17 +67,17 @@ compare_gain_loss <- gain_mixture %>%
 
 gain_loss_avg <- gain_mixture %>% 
   group_by(Family, subject) %>% 
-  summarise(avg_mix_ratio = mean(mix_log10_ratio)) %>% 
+  summarise(avg_mix_log10_ratio = mean(mix_log10_ratio)) %>% 
   left_join(recipient_fam_loss, by = c("Family", "subject")) %>% 
   mutate(
     recipient_fam_relAbundance_day_029 = if_else(is.na(recipient_fam_relAbundance_day_029), 1e-4, recipient_fam_relAbundance_day_029),
     recipient_fam_relAbundance_day_036 = if_else(is.na(recipient_fam_relAbundance_day_036), 1e-4, recipient_fam_relAbundance_day_036),
     recipient_ratio = if_else(is.na(recipient_ratio), 1e-4, recipient_ratio),
     recipient_log10_ratio = if_else(is.na(recipient_log10_ratio), 1e-4, recipient_log10_ratio),
-  ) # Comment out last two lines to include NAs
+  ) # Comment out last two lines to filter out NA values
 
 gain_loss_avg_plot <- gain_loss_avg %>%
-  ggplot(aes(x = recipient_log10_ratio, y = avg_mix_ratio, color = Family))+
+  ggplot(aes(x = recipient_log10_ratio, y = avg_mix_log10_ratio, color = Family))+
   geom_point(size = 2, alpha = 0.5)+
   geom_smooth(method = "lm", se = FALSE, color = "black", linewidth = 0.5) + # correlation line
   labs(x = "Recipient loss (log(recipient day 29 relAbundance / 
@@ -92,7 +92,8 @@ gain_loss_avg_plot
 
 savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot_NAs"), gain_loss_avg_plot, 5, 5)
 
-
+# Save base dataset as a text file
+write_delim(gain_loss_avg, paste0(OUTDIR, "gain_loss_avg_NAs.txt"))
 
 # ----------------- Plot x vs y -------------------------------------------------------------------------------
 
