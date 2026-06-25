@@ -1,11 +1,10 @@
 # Load data
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072325-getLostStrains/072325-getLostStrains.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/workflow/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/plotDefaults.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/workflow/analysis/scratch/072325-getDifferentialColonizers/072325-getDifferentialColonizers.R")
 
 # Set output directory
-OUTDIR <- "~/Documents/GitHub/abx-response-invitro/analysis/scratch/092525-compareLossGainDifference/out/"
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/092525-compareLossGainDifference/out/"
 
 curr_replicate <- 1
 
@@ -88,8 +87,8 @@ compare_gain_loss <- gain_mixture %>%
   mutate(
     log_recipient_abundance_29 = log10(fam_relAbundance_29),
     recipient_ratio = fam_relAbundance_29/fam_relAbundance_recipient_36
-  )
-  # filter(!(log_recipient_abundance_29 == -4.0 & log_recipient_abundance_36 == -4.0)) # filter out the families that weren't in the recipient neither before 
+  ) %>% 
+  filter(!(log_recipient_abundance_29 == -4.0 & log_recipient_abundance_36 == -4.0)) # filter out the families that weren't in the recipient neither before
 # after the antibiotic and that were gained in the mixture., optionally also filter out families not present on day 29 in the recipient
 
 # ----------------- (SIDE QUEST: get unexpected colonizers) --------------------------------------------------------------
@@ -121,8 +120,11 @@ savePNGPDF(paste0(OUTDIR, "unexpected_colonizers"), unexpected_colonizers_plot, 
 gain_loss_avg <- compare_gain_loss %>% 
   group_by(Family, subject1, recipient_ratio) %>% 
   summarise(avg_mix_ratio = mean(mixture_ratio))
+
+gain_loss_avg_log <- gain_loss_avg %>% 
+  mutate(log_recipient_ratio = log10(recipient_ratio), log_avg_mix_ratio = log10(avg_mix_ratio))
   
-gain_loss_avg_plot <- gain_loss_avg %>% 
+gain_loss_avg_plot <- gain_loss_avg_log %>% 
   ggplot(aes(x = log(recipient_ratio), y = log(avg_mix_ratio), color = Family))+
   geom_point(size = 2, alpha = 0.5)+
   geom_smooth(method = "lm", se = FALSE, color = "black", linewidth = 0.5) + # correlation line
@@ -139,3 +141,6 @@ gain_loss_avg_plot <- gain_loss_avg %>%
 savePNGPDF(paste0(OUTDIR, "gain_loss_avg_plot"), gain_loss_avg_plot, 3, 4)
 
 
+# Write out base dataset with differential colonizer flags into a text file
+
+write_delim(gain_loss_avg_log, paste0(OUTDIR, "gain_loss_avg_e0029_NAs.txt"))

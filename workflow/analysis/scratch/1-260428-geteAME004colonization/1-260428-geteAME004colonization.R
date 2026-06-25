@@ -3,6 +3,9 @@ source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-2604
 library(foreach)
 
 
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-260428-geteAME004colonization/out/"
+
+
 # ------------------------ COMPUTE COLONIZATION EFFICACY ---------------------------
 
 get_colonization <- function(mix_id, donor_id, recipient_id, replicate) {
@@ -105,3 +108,7 @@ colonization_results <- colonization_results %>%
   left_join(diff_colonizers,
             by = c("mixture_pair", "OTU"))
 
+
+# Write out base dataset with differential colonizer flags into a text file
+
+write_delim(colonization_results, paste0(OUTDIR, "differential_colonization_AME004.txt"))

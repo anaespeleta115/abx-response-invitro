@@ -1,6 +1,5 @@
 # Load data
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
+source("/Users/aespelet/Documents/Github/abx-response-invitro/workflow/analysis/scratch/072125-loade0029Data/072125-loade0029Data.R")
 
 
 
