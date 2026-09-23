@@ -2,12 +2,12 @@
 # Plot the distribution of species richness at each timepoint, for abx- and non-abx subjects.
 
 # Load data
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/040325-loadData/loadData.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/040325-loadData/loadData.R")
 
-source("/Users/aespelet/Documents/Github/abx-response-invitro/analysis/plotDefaults.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/plotDefaults.R")
 
 # Set output directory
-OUTDIR <- "/Users/aespelet/Documents/Github/abx-response-invitro/analysis/scratch/040325-comparerichnessPrePostAbx/out/"
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/040325-compareRichnessPrePostAbx/out/"
 
 
 
@@ -125,6 +125,8 @@ p_richness_time_filtered <- ggplot(
     axis.text.y = element_text(hjust = 0.5, size = 8),
     axis.title = element_text(size = 8)
   )
+
+
 
 savePNGPDF(paste0(OUTDIR, "richnessByTime_filtered"), p_richness_time_filtered, 2, 3)
 

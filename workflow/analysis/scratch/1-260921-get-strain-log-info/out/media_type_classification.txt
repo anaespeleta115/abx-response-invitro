@@ -1,0 +1,63 @@
+strainID	TAX_family	TAX_genus	TAX_species	TAX_purity	ISO_plate	LOC_culture	LOC_glycerol
+KSX00259	Lachnospiraceae	Anaerostipes	Anaerostipes hadrus	1	RCM	ACE0012-F07	ACE0023-F07
+KSX00539	Lachnospiraceae	Anaerostipes	Anaerostipes rhamnosivorans	1	RCM	JKA0001-E11	JKA0002-E11
+KSX00018	Bacteroidaceae	Bacteroides	Bacteroides caccae	1	BHI-blood-gentamicin	ACE0108-B06	ACE0109-B06
+KSX00159	Bacteroidaceae	Bacteroides	Bacteroides faecis	1	BHI-blood-gentamicin	AHC0005-F03	gAHC0006-F03
+KSX00465	Bacteroidaceae	Bacteroides	Bacteroides fragilis	1	BHI-blood-gentamicin	AHC0011-G09	AHC0012-G09
+KSX00102	Bacteroidaceae	Bacteroides	Bacteroides ovatus	1	BHI-blood-gentamicin	AHC0005-A06	gAHC0006-A06
+KSX00207	Bacteroidaceae	Bacteroides	Bacteroides sp. A1C1	1	mBHI-gentamicin	ACE0012-B03	ACE0023-B03
+KSX00002	Bacteroidaceae	Bacteroides	Bacteroides stercoris	1	BHI-blood-gentamicin	ACE0108-A02	ACE0109-A02
+KSX00004	Bacteroidaceae	Bacteroides	Bacteroides thetaiotaomicron	1	BHI-blood-gentamicin	ACE0108-A04	ACE0109-A04
+KSX00053	Bacteroidaceae	Bacteroides	Bacteroides uniformis	1	BHI-blood-gentamicin	ACE0108-E05	ACE0109-E05
+KSX00078	Bacteroidaceae	Bacteroides	Bacteroides xylanisolvens	1	BHI-blood-gentamicin	ACE0108-G06	ACE0109-G06
+KSX00211	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium adolescentis	1	RCM	ACE0012-B07	ACE0023-B07
+KSX00082	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium longum	1	RCM	ACE0110-G10	ACE0111-G10
+KSX00226	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium_sp.	1	RCM	ACE0012-C10	ACE0023-C10
+KSX00519	Lachnospiraceae	Blautia	Blautia hominis	1	mBHI	JKA0001-D03	JKA0002-D03
+KSX00690	Lachnospiraceae	Blautia	Blautia parvula	1	mBHI	JKA0005-B06	JKA0006-B06
+KSX00235	Lachnospiraceae	Blautia	Blautia sp. SC05B48	1	RCM	ACE0012-D07	ACE0023-D07
+KSX00481	Unknown	Unknown	Burkholderiales bacterium YL45	1	mBHI	JKA0001-A01	JKA0002-A01
+KSX00100	Clostridiaceae	Butyricicoccus	Butyricicoccus pullicaecorum	1	BHI-blood-gentamicin	AHC0005-A04	gAHC0006-A04
+KSX00057	Enterobacteriaceae	Citrobacter	Citrobacter freundii	1	RCM	ACE0110-E09	ACE0111-E09
+KSX00367	Enterobacteriaceae	Citrobacter	Citrobacter koseri	1	RCM	ACE0005-G07	ACE0007-G07
+KSX00368	Unknown	Unknown	Clostridiales bacterium CCNA10	1	RCM	ACE0005-G08	ACE0007-G08
+KSX00684	Clostridiaceae	Clostridium	Clostridium pacaense	1	mBHI	JKA0005-A12	JKA0006-A12
+KSX00050	Clostridiaceae	Clostridium	Clostridium perfringens	0.931034483	BHI-blood-gentamicin	ACE0108-E02	ACE0109-E02
+KSX00059	Clostridiaceae	Clostridium	Clostridium sporogenes	0.677419355	RCM	ACE0110-E11	ACE0111-E11
+KSX00036	Coriobacteriaceae	Collinsella	Collinsella aerofaciens	1	RCM	ACE0110-C12	ACE0111-C12
+KSX00901	Coprobacillaceae	Coprobacillus	Coprobacillus cateniformis	1	mBHI	JKA0011-D01	JKA0012-D01
+KSX00200	Lachnospiraceae	Dorea	Dorea longicatena	1	RCM	ACE0012-A08	ACE0023-A08
+KSX00043	Lachnospiraceae	Dorea	Dorea_sp.	1	RCM	ACE0110-D07	ACE0111-D07
+KSX00906	Lachnospiraceae	Enterocloster	Enterocloster bolteae	1	mBHI	JKA0011-D06	JKA0012-D06
+KSX00154	Enterococcaceae	Enterococcus	Enterococcus asini	1	BHI-blood-gentamicin	AHC0005-E10	gAHC0006-E10
+KSX00298	Enterococcaceae	Enterococcus	Enterococcus avium	1	RCM	ACE0005-A10	ACE0007-A10
+KSX00008	Enterococcaceae	Enterococcus	Enterococcus faecium	1	RCM	ACE0110-A08	ACE0111-A08
+KSX00009	Enterococcaceae	Enterococcus	Enterococcus sp. FDAARGOS_553	1	RCM	ACE0110-A09	ACE0111-A09
+KSX00145	Erysipelotrichaceae	Erysipelatoclostridium	Erysipelatoclostridium ramosum	1	BHI-blood-gentamicin	AHC0005-E01	gAHC0006-E01
+KSX00323	Erysipelotrichaceae	Unknown	Erysipelotrichaceae bacterium I46	1	RCM	ACE0005-C11	ACE0007-C11
+KSX00225	Enterobacteriaceae	Escherichia	Escherichia coli	1	RCM	ACE0012-C09	ACE0023-C09
+KSX00907	Lachnospiraceae	Faecalicatena	Faecalicatena contorta	1	mBHI	JKA0011-D07	JKA0012-D07
+KSX00513	Lachnospiraceae	Faecalimonas	Faecalimonas umbilicata	0.75	mBHI	JKA0001-C09	JKA0002-C09
+KSX00423	Peptoniphilaceae	Finegoldia	Finegoldia magna	1	BHI-blood-gentamicin	AHC0011-D03	AHC0012-D03
+KSX00400	Family_XI	Finegoldia	Finegoldia_sp.	1	BHI-blood-gentamicin	AHC0011-B04	AHC0012-B04
+KSX00150	Oscillospiraceae	Flavonifractor	Flavonifractor plautii	1	BHI-blood-gentamicin	AHC0005-E06	gAHC0006-E06
+KSX00711	Oscillospiraceae	Flintibacter	Flintibacter sp. KGMB00164	1	mBHI	JKA0005-D03	JKA0006-D03
+KSX00536	Lachnospiraceae	Lachnoclostridium	Lachnoclostridium pacaense	1	RCM	JKA0001-E08	JKA0002-E08
+KSX00113	Lachnospiraceae	Lachnoclostridium	Lachnoclostridium sp. YL32	1	BHI-blood-gentamicin	AHC0005-B05	gAHC0006-B05
+KSX00887	Veillonellaceae	Megasphaera	Megasphaera geminata	1	mBHI	JKA0011-B11	JKA0012-B11
+KSX00253	Tannerellaceae	Parabacteroides	Parabacteroides distasonis	1	mBHI-gentamicin	ACE0012-F01	ACE0023-F01
+KSX00291	Tannerellaceae	Parabacteroides	Parabacteroides goldsteinii	1	BHI-blood-gentamicin	ACE0005-A03	ACE0007-A03
+KSX00361	Tannerellaceae	Parabacteroides	Parabacteroides johnsonii	0.8	mBHI-gentamicin	ACE0005-G01	ACE0007-G01
+KSX00318	Tannerellaceae	Parabacteroides	Parabacteroides merdae	1	mBHI-gentamicin	ACE0005-C06	ACE0007-C06
+KSX00929	Acidaminococcaceae	Phascolarctobacterium	Phascolarctobacterium faecium	1	RCM	JKA0011-F05	JKA0012-F05
+KSX00014	Bacteroidaceae	Phocaeicola	Phocaeicola vulgatus	1	BHI-blood-gentamicin	ACE0108-B02	ACE0109-B02
+KSX00947	Lachnospiraceae	Sellimonas	Sellimonas intestinalis	1	RCM	JKA0011-G11	JKA0012-G11
+KSX00019	Streptococcaceae	Streptococcus	Streptococcus anginosus	1	RCM	ACE0110-B07	ACE0111-B07
+KSX00724	Streptococcaceae	Streptococcus	Streptococcus pasteurianus	1	RCM	JKA0005-E04	JKA0006-E04
+KSX00307	Streptococcaceae	Streptococcus	Streptococcus periodonticum	1	RCM	ACE0005-B07	ACE0007-B07
+KSX00147	Streptococcaceae	Streptococcus	Streptococcus salivarius	1	BHI-blood-gentamicin	AHC0005-E03	gAHC0006-E03
+KSX00048	Sutterellaceae	Sutterella	Sutterella wadsworthensis	0.80952381	RCM	ACE0110-D12	ACE0111-D12
+KSX00871	Coprobacillaceae	Thomasclavelia	Thomasclavelia ramosa	1	mBHI	JKA0011-A07	JKA0012-A07
+KSX00964	Turicibacteraceae	Turicibacter	Turicibacter bilis	0.9090909091	mBHI-taurocholate	AME0094-A04	AME0095-A04
+KSX00976	Turicibacteraceae	Turicibacter	Turicibacter sanguinis	0.95	mBHI-taurocholate	AME0094-B04	AME0095-B04
+KSX00069	Lachnospiraceae	Lachnoclostridium	[Clostridium] symbiosum	1	RCM	ACE0110-F09	ACE0111-F09
