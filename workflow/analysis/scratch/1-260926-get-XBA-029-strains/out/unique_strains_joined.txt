@@ -1,0 +1,52 @@
+strainID	TAX_family	TAX_genus	TAX_species	TAX_purity	ISO_plate	ISO_liquid	LOC_culture	LOC_glycerol	Taxonomy ID	Kingdom	Phylum	Class	Order	Genus	Relative Abundance	subject
+KSX00977	Lachnospiraceae	Anaerostipes	Anaerostipes hadrus	0.6538461538	mBHI-taurocholate	mBHI	AME0094-B05	AME0095-B05	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00539	Lachnospiraceae	Anaerostipes	Anaerostipes rhamnosivorans	1	RCM	RCM	JKA0001-E11	JKA0002-E11	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00289	Bacteroidaceae	Bacteroides	Bacteroides faecis	1	BHI-blood-gentamicin	mBHI	ACE0005-A01	ACE0007-A01	674529	Bacteria	Bacteroidota	Bacteroidia	Bacteroidales	Bacteroides	0.0872609977315348	XBA-029
+KSX00515	Bacteroidaceae	Bacteroides	Bacteroides thetaiotaomicron	1	mBHI	mBHI	JKA0001-C11	JKA0002-C11	818	Bacteria	Bacteroidota	Bacteroidia	Bacteroidales	Bacteroides	0.0050160677868419	XBA-029
+KSX00290	Bacteroidaceae	Bacteroides	Bacteroides uniformis	1	BHI-blood-gentamicin	mBHI	ACE0005-A02	ACE0007-A02	820	Bacteria	Bacteroidota	Bacteroidia	Bacteroidales	Bacteroides	0.0114302747273323	XBA-029
+KSX00326	Bacteroidaceae	Bacteroides	Bacteroides xylanisolvens	1	mBHI-gentamicin	mBHI	ACE0005-D02	ACE0007-D02	371601	Bacteria	Bacteroidota	Bacteroidia	Bacteroidales	Bacteroides	0.0066668784939218	XBA-029
+KSX00538	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium longum	1	RCM	RCM	JKA0001-E10	JKA0002-E10	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00519	Lachnospiraceae	Blautia	Blautia hominis	1	mBHI	mBHI	JKA0001-D03	JKA0002-D03	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00690	Lachnospiraceae	Blautia	Blautia parvula	1	mBHI	mBHI	JKA0005-B06	JKA0006-B06	2877527	Bacteria	Bacillota	Clostridia	Lachnospirales	Blautia	0.0359775929656785	XBA-029
+KSX00481	Unknown	Unknown	Burkholderiales bacterium YL45	1	mBHI	mBHI	JKA0001-A01	JKA0002-A01	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00367	Enterobacteriaceae	Citrobacter	Citrobacter koseri	1	RCM	RCM	ACE0005-G07	ACE0007-G07	545	Bacteria	Pseudomonadota	Gammaproteobacteria	Enterobacterales	Citrobacter	0.0223562776535622	XBA-029
+KSX00368	Unknown	Unknown	Clostridiales bacterium CCNA10	1	RCM	RCM	ACE0005-G08	ACE0007-G08	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00684	Clostridiaceae	Clostridium	Clostridium pacaense	1	mBHI	mBHI	JKA0005-A12	JKA0006-A12	1917870	Bacteria	Bacillota	Clostridia	Eubacteriales	Clostridium	0.0114258753399798	XBA-029
+KSX00802	Coriobacteriaceae	Collinsella	Collinsella aerofaciens	1	Chromagar	mBHI	ACE0168-C10	ACE0169-C10	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00901	Coprobacillaceae	Coprobacillus	Coprobacillus cateniformis	1	mBHI	mBHI	JKA0011-D01	JKA0012-D01	100884	Bacteria	Bacillota	Erysipelotrichia	Erysipelotrichales	Coprobacillus	0.0053050397877984	XBA-029
+KSX00380	Lachnospiraceae	Dorea	Dorea_sp.	1	RCM	RCM	ACE0005-H08	ACE0007-H08	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00906	Lachnospiraceae	Enterocloster	Enterocloster bolteae	1	mBHI	mBHI	JKA0011-D06	JKA0012-D06	208479	Bacteria	Bacillota	Clostridia	Lachnospirales	Enterocloster	0.003615054725422	XBA-029
+KSX00298	Enterococcaceae	Enterococcus	Enterococcus avium	1	RCM	RCM	ACE0005-A10	ACE0007-A10	33945	Bacteria	Bacillota	Bacilli	Lactobacillales	Enterococcus	0.0401960793312446	XBA-029
+KSX00323	Erysipelotrichaceae	Unknown	Erysipelotrichaceae bacterium I46	1	RCM	RCM	ACE0005-C11	ACE0007-C11	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00309	Enterobacteriaceae	Escherichia	Escherichia coli	1	RCM	RCM	ACE0005-B09	ACE0007-B09	562	Bacteria	Pseudomonadota	Gammaproteobacteria	Enterobacterales	Escherichia	0.0735425175630963	XBA-029
+KSX00907	Lachnospiraceae	Faecalicatena	Faecalicatena contorta	1	mBHI	mBHI	JKA0011-D07	JKA0012-D07	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00513	Lachnospiraceae	Faecalimonas	Faecalimonas umbilicata	0.75	mBHI	mBHI	JKA0001-C09	JKA0002-C09	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00295	Oscillospiraceae	Flavonifractor	Flavonifractor plautii	1	RCM	RCM	ACE0005-A07	ACE0007-A07	292800	Bacteria	Bacillota	Clostridia	Eubacteriales	Flavonifractor	0.0086021121755192	XBA-029
+KSX00711	Oscillospiraceae	Flintibacter	Flintibacter sp. KGMB00164	1	mBHI	mBHI	JKA0005-D03	JKA0006-D03	2610895	Bacteria	Bacillota	Clostridia	Eubacteriales	Flintibacter	0.0467977780901584	XBA-029
+KSX00536	Lachnospiraceae	Lachnoclostridium	Lachnoclostridium pacaense	1	RCM	RCM	JKA0001-E08	JKA0002-E08	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00887	Veillonellaceae	Megasphaera	Megasphaera geminata	1	mBHI	mBHI	JKA0011-B11	JKA0012-B11	156456	Bacteria	Bacillota	Negativicutes	Veillonellales	Megasphaera	0.0365231663998674	XBA-029
+KSX00350	Tannerellaceae	Parabacteroides	Parabacteroides distasonis	1	mBHI-gentamicin	mBHI	ACE0005-F02	ACE0007-F02	823	Bacteria	Bacteroidota	Bacteroidia	Bacteroidales	Parabacteroides	0.0155037943004822	XBA-029
+KSX00291	Tannerellaceae	Parabacteroides	Parabacteroides goldsteinii	1	BHI-blood-gentamicin	mBHI	ACE0005-A03	ACE0007-A03	328812	Bacteria	Bacteroidota	Bacteroidia	Bacteroidales	Parabacteroides	0.0067333197306672	XBA-029
+KSX00361	Tannerellaceae	Parabacteroides	Parabacteroides johnsonii	0.8	mBHI-gentamicin	mBHI	ACE0005-G01	ACE0007-G01	387661	Bacteria	Bacteroidota	Bacteroidia	Bacteroidales	Parabacteroides	0.003060599877576	XBA-029
+KSX00318	Tannerellaceae	Parabacteroides	Parabacteroides merdae	1	mBHI-gentamicin	mBHI	ACE0005-C06	ACE0007-C06	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00929	Acidaminococcaceae	Phascolarctobacterium	Phascolarctobacterium faecium	1	RCM	RCM	JKA0011-F05	JKA0012-F05	33025	Bacteria	Bacillota	Negativicutes	Acidaminococcales	Phascolarctobacterium	0.032646398694144	XBA-029
+KSX00313	Bacteroidaceae	Phocaeicola	Phocaeicola vulgatus	1	mBHI-gentamicin	mBHI	ACE0005-C01	ACE0007-C01	821	Bacteria	Bacteroidota	Bacteroidia	Bacteroidales	Phocaeicola	0.179978386560838	XBA-029
+KSX00947	Lachnospiraceae	Sellimonas	Sellimonas intestinalis	1	RCM	RCM	JKA0011-G11	JKA0012-G11	1653434	Bacteria	Bacillota	Clostridia	Lachnospirales	Sellimonas	0.0062586878828088	XBA-029
+KSX00675	Streptococcaceae	Streptococcus	Streptococcus anginosus	1	mBHI	mBHI	JKA0005-A03	JKA0006-A03	1328	Bacteria	Bacillota	Bacilli	Lactobacillales	Streptococcus	0.142114794781138	XBA-029
+KSX00724	Streptococcaceae	Streptococcus	Streptococcus pasteurianus	1	RCM	RCM	JKA0005-E04	JKA0006-E04	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00307	Streptococcaceae	Streptococcus	Streptococcus periodonticum	1	RCM	RCM	ACE0005-B07	ACE0007-B07	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00871	Coprobacillaceae	Thomasclavelia	Thomasclavelia ramosa	1	mBHI	mBHI	JKA0011-A07	JKA0012-A07	1547	Bacteria	Bacillota	Erysipelotrichia	Erysipelotrichales	Thomasclavelia	0.0022444399102224	XBA-029
+KSX00964	Turicibacteraceae	Turicibacter	Turicibacter bilis	0.9090909091	mBHI-taurocholate	mBHI	AME0094-A04	AME0095-A04	NA	NA	NA	NA	NA	NA	NA	NA
+KSX00976	Turicibacteraceae	Turicibacter	Turicibacter sanguinis	0.95	mBHI-taurocholate	mBHI	AME0094-B04	AME0095-B04	NA	NA	NA	NA	NA	NA	NA	NA
+NA	Sutterellaceae	NA	Turicimonas muris	NA	NA	NA	NA	NA	1796652	Bacteria	Pseudomonadota	Betaproteobacteria	Burkholderiales	Turicimonas	0.0576649538448327	XBA-029
+NA	Streptococcaceae	NA	Streptococcus vaginalis	NA	NA	NA	NA	NA	2748301	Bacteria	Bacillota	Bacilli	Lactobacillales	Streptococcus	0.0050001300369679	XBA-029
+NA	Oscillospiraceae	NA	Flintibacter porci	NA	NA	NA	NA	NA	3342383	Bacteria	Bacillota	Clostridia	Eubacteriales	Flintibacter	0.0031676729325745	XBA-029
+NA	Lachnospiraceae	NA	Dorea formicigenerans	NA	NA	NA	NA	NA	39486	Bacteria	Bacillota	Clostridia	Lachnospirales	Dorea	0.043384625807069	XBA-029
+NA	Unknown	NA	Fenollaria massiliensis	NA	NA	NA	NA	NA	938288	Bacteria	Bacillota	Clostridia	Eubacteriales	Fenollaria	0.0449401920747238	XBA-029
+NA	Unknown	NA	Fenollaria sporofastidiosus	NA	NA	NA	NA	NA	2811778	Bacteria	Bacillota	Clostridia	Eubacteriales	Fenollaria	0.0040289808644544	XBA-029
+NA	Lachnospiraceae	NA	Enterocloster clostridioformis	NA	NA	NA	NA	NA	1531	Bacteria	Bacillota	Clostridia	Lachnospirales	Enterocloster	0.0122488488750864	XBA-029
+NA	Peptoniphilaceae	NA	Peptoniphilus duerdenii	NA	NA	NA	NA	NA	507750	Bacteria	Bacillota	Tissierellia	Tissierellales	Peptoniphilus	0.0203955365050018	XBA-029
+NA	Bacteroidaceae	NA	Bacteroides fragilis	NA	NA	NA	NA	NA	817	Bacteria	Bacteroidota	Bacteroidia	Bacteroidales	Bacteroides	0.0132624449895442	XBA-029
+NA	Lachnospiraceae	NA	Hungatella hathewayi	NA	NA	NA	NA	NA	154046	Bacteria	Bacillota	Clostridia	Lachnospirales	Hungatella	0.0081615996735365	XBA-029
+NA	Bacteroidaceae	NA	Bacteroides cellulosilyticus	NA	NA	NA	NA	NA	246787	Bacteria	Bacteroidota	Bacteroidia	Bacteroidales	Bacteroides	0.0024484799679877	XBA-029
+NA	Oscillospiraceae	NA	Bittarella massiliensis (ex Durand et al. 2017)	NA	NA	NA	NA	NA	1720313	Bacteria	Bacillota	Clostridia	Eubacteriales	Bittarella (ex Durand et al. 2017)	0.002040399918384	XBA-029

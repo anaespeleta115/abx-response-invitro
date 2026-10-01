@@ -1,0 +1,40 @@
+TAX_species	in_mBHI	in_RCM	media_category
+Anaerostipes hadrus	TRUE	FALSE	mBHI only
+Anaerostipes rhamnosivorans	FALSE	TRUE	RCM only
+Bacteroides faecis	TRUE	TRUE	Both
+Bacteroides thetaiotaomicron	TRUE	FALSE	mBHI only
+Bacteroides uniformis	TRUE	FALSE	mBHI only
+Bacteroides xylanisolvens	TRUE	TRUE	Both
+Bifidobacterium longum	TRUE	TRUE	Both
+Blautia hominis	TRUE	FALSE	mBHI only
+Blautia parvula	TRUE	TRUE	Both
+Burkholderiales bacterium YL45	TRUE	FALSE	mBHI only
+Citrobacter koseri	TRUE	TRUE	Both
+Clostridiales bacterium CCNA10	FALSE	TRUE	RCM only
+Clostridium pacaense	TRUE	FALSE	mBHI only
+Collinsella aerofaciens	TRUE	FALSE	mBHI only
+Coprobacillus cateniformis	TRUE	FALSE	mBHI only
+Dorea_sp.	TRUE	TRUE	Both
+Enterocloster bolteae	TRUE	TRUE	Both
+Enterococcus avium	TRUE	TRUE	Both
+Erysipelotrichaceae bacterium I46	TRUE	TRUE	Both
+Escherichia coli	TRUE	TRUE	Both
+Faecalicatena contorta	TRUE	FALSE	mBHI only
+Faecalimonas umbilicata	TRUE	FALSE	mBHI only
+Flavonifractor plautii	TRUE	TRUE	Both
+Flintibacter sp. KGMB00164	TRUE	TRUE	Both
+Lachnoclostridium pacaense	FALSE	TRUE	RCM only
+Megasphaera geminata	TRUE	FALSE	mBHI only
+Parabacteroides distasonis	TRUE	FALSE	mBHI only
+Parabacteroides goldsteinii	TRUE	FALSE	mBHI only
+Parabacteroides johnsonii	TRUE	FALSE	mBHI only
+Parabacteroides merdae	TRUE	FALSE	mBHI only
+Phascolarctobacterium faecium	FALSE	TRUE	RCM only
+Phocaeicola vulgatus	TRUE	TRUE	Both
+Sellimonas intestinalis	FALSE	TRUE	RCM only
+Streptococcus anginosus	TRUE	TRUE	Both
+Streptococcus pasteurianus	FALSE	TRUE	RCM only
+Streptococcus periodonticum	TRUE	TRUE	Both
+Thomasclavelia ramosa	TRUE	FALSE	mBHI only
+Turicibacter bilis	TRUE	FALSE	mBHI only
+Turicibacter sanguinis	TRUE	FALSE	mBHI only

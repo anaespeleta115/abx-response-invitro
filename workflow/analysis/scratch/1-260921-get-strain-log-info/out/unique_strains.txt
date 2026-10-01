@@ -1,40 +1,40 @@
-strainID	TAX_family	TAX_genus	TAX_species	TAX_purity	ISO_plate	LOC_culture	LOC_glycerol
-KSX00977	Lachnospiraceae	Anaerostipes	Anaerostipes hadrus	0.6538461538	mBHI-taurocholate	AME0094-B05	AME0095-B05
-KSX00539	Lachnospiraceae	Anaerostipes	Anaerostipes rhamnosivorans	1	RCM	JKA0001-E11	JKA0002-E11
-KSX00289	Bacteroidaceae	Bacteroides	Bacteroides faecis	1	BHI-blood-gentamicin	ACE0005-A01	ACE0007-A01
-KSX00515	Bacteroidaceae	Bacteroides	Bacteroides thetaiotaomicron	1	mBHI	JKA0001-C11	JKA0002-C11
-KSX00290	Bacteroidaceae	Bacteroides	Bacteroides uniformis	1	BHI-blood-gentamicin	ACE0005-A02	ACE0007-A02
-KSX00326	Bacteroidaceae	Bacteroides	Bacteroides xylanisolvens	1	mBHI-gentamicin	ACE0005-D02	ACE0007-D02
-KSX00538	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium longum	1	RCM	JKA0001-E10	JKA0002-E10
-KSX00519	Lachnospiraceae	Blautia	Blautia hominis	1	mBHI	JKA0001-D03	JKA0002-D03
-KSX00690	Lachnospiraceae	Blautia	Blautia parvula	1	mBHI	JKA0005-B06	JKA0006-B06
-KSX00481	Unknown	Unknown	Burkholderiales bacterium YL45	1	mBHI	JKA0001-A01	JKA0002-A01
-KSX00367	Enterobacteriaceae	Citrobacter	Citrobacter koseri	1	RCM	ACE0005-G07	ACE0007-G07
-KSX00368	Unknown	Unknown	Clostridiales bacterium CCNA10	1	RCM	ACE0005-G08	ACE0007-G08
-KSX00684	Clostridiaceae	Clostridium	Clostridium pacaense	1	mBHI	JKA0005-A12	JKA0006-A12
-KSX00802	Coriobacteriaceae	Collinsella	Collinsella aerofaciens	1	Chromagar	ACE0168-C10	ACE0169-C10
-KSX00901	Coprobacillaceae	Coprobacillus	Coprobacillus cateniformis	1	mBHI	JKA0011-D01	JKA0012-D01
-KSX00380	Lachnospiraceae	Dorea	Dorea_sp.	1	RCM	ACE0005-H08	ACE0007-H08
-KSX00906	Lachnospiraceae	Enterocloster	Enterocloster bolteae	1	mBHI	JKA0011-D06	JKA0012-D06
-KSX00298	Enterococcaceae	Enterococcus	Enterococcus avium	1	RCM	ACE0005-A10	ACE0007-A10
-KSX00323	Erysipelotrichaceae	Unknown	Erysipelotrichaceae bacterium I46	1	RCM	ACE0005-C11	ACE0007-C11
-KSX00309	Enterobacteriaceae	Escherichia	Escherichia coli	1	RCM	ACE0005-B09	ACE0007-B09
-KSX00907	Lachnospiraceae	Faecalicatena	Faecalicatena contorta	1	mBHI	JKA0011-D07	JKA0012-D07
-KSX00513	Lachnospiraceae	Faecalimonas	Faecalimonas umbilicata	0.75	mBHI	JKA0001-C09	JKA0002-C09
-KSX00295	Oscillospiraceae	Flavonifractor	Flavonifractor plautii	1	RCM	ACE0005-A07	ACE0007-A07
-KSX00711	Oscillospiraceae	Flintibacter	Flintibacter sp. KGMB00164	1	mBHI	JKA0005-D03	JKA0006-D03
-KSX00536	Lachnospiraceae	Lachnoclostridium	Lachnoclostridium pacaense	1	RCM	JKA0001-E08	JKA0002-E08
-KSX00887	Veillonellaceae	Megasphaera	Megasphaera geminata	1	mBHI	JKA0011-B11	JKA0012-B11
-KSX00350	Tannerellaceae	Parabacteroides	Parabacteroides distasonis	1	mBHI-gentamicin	ACE0005-F02	ACE0007-F02
-KSX00291	Tannerellaceae	Parabacteroides	Parabacteroides goldsteinii	1	BHI-blood-gentamicin	ACE0005-A03	ACE0007-A03
-KSX00361	Tannerellaceae	Parabacteroides	Parabacteroides johnsonii	0.8	mBHI-gentamicin	ACE0005-G01	ACE0007-G01
-KSX00318	Tannerellaceae	Parabacteroides	Parabacteroides merdae	1	mBHI-gentamicin	ACE0005-C06	ACE0007-C06
-KSX00929	Acidaminococcaceae	Phascolarctobacterium	Phascolarctobacterium faecium	1	RCM	JKA0011-F05	JKA0012-F05
-KSX00313	Bacteroidaceae	Phocaeicola	Phocaeicola vulgatus	1	mBHI-gentamicin	ACE0005-C01	ACE0007-C01
-KSX00947	Lachnospiraceae	Sellimonas	Sellimonas intestinalis	1	RCM	JKA0011-G11	JKA0012-G11
-KSX00675	Streptococcaceae	Streptococcus	Streptococcus anginosus	1	mBHI	JKA0005-A03	JKA0006-A03
-KSX00724	Streptococcaceae	Streptococcus	Streptococcus pasteurianus	1	RCM	JKA0005-E04	JKA0006-E04
-KSX00307	Streptococcaceae	Streptococcus	Streptococcus periodonticum	1	RCM	ACE0005-B07	ACE0007-B07
-KSX00871	Coprobacillaceae	Thomasclavelia	Thomasclavelia ramosa	1	mBHI	JKA0011-A07	JKA0012-A07
-KSX00964	Turicibacteraceae	Turicibacter	Turicibacter bilis	0.9090909091	mBHI-taurocholate	AME0094-A04	AME0095-A04
-KSX00976	Turicibacteraceae	Turicibacter	Turicibacter sanguinis	0.95	mBHI-taurocholate	AME0094-B04	AME0095-B04
+strainID	TAX_family	TAX_genus	TAX_species	TAX_purity	ISO_plate	ISO_liquid	LOC_culture	LOC_glycerol	LOC_glycerol_plateID
+KSX00977	Lachnospiraceae	Anaerostipes	Anaerostipes hadrus	0.6538461538	mBHI-taurocholate	mBHI	AME0094-B05	AME0095-B05	AME0095
+KSX00539	Lachnospiraceae	Anaerostipes	Anaerostipes rhamnosivorans	1	RCM	RCM	JKA0001-E11	JKA0002-E11	JKA0002
+KSX00289	Bacteroidaceae	Bacteroides	Bacteroides faecis	1	BHI-blood-gentamicin	mBHI	ACE0005-A01	ACE0007-A01	ACE0007
+KSX00515	Bacteroidaceae	Bacteroides	Bacteroides thetaiotaomicron	1	mBHI	mBHI	JKA0001-C11	JKA0002-C11	JKA0002
+KSX00290	Bacteroidaceae	Bacteroides	Bacteroides uniformis	1	BHI-blood-gentamicin	mBHI	ACE0005-A02	ACE0007-A02	ACE0007
+KSX00326	Bacteroidaceae	Bacteroides	Bacteroides xylanisolvens	1	mBHI-gentamicin	mBHI	ACE0005-D02	ACE0007-D02	ACE0007
+KSX00538	Bifidobacteriaceae	Bifidobacterium	Bifidobacterium longum	1	RCM	RCM	JKA0001-E10	JKA0002-E10	JKA0002
+KSX00519	Lachnospiraceae	Blautia	Blautia hominis	1	mBHI	mBHI	JKA0001-D03	JKA0002-D03	JKA0002
+KSX00690	Lachnospiraceae	Blautia	Blautia parvula	1	mBHI	mBHI	JKA0005-B06	JKA0006-B06	JKA0006
+KSX00481	Unknown	Unknown	Burkholderiales bacterium YL45	1	mBHI	mBHI	JKA0001-A01	JKA0002-A01	JKA0002
+KSX00367	Enterobacteriaceae	Citrobacter	Citrobacter koseri	1	RCM	RCM	ACE0005-G07	ACE0007-G07	ACE0007
+KSX00368	Unknown	Unknown	Clostridiales bacterium CCNA10	1	RCM	RCM	ACE0005-G08	ACE0007-G08	ACE0007
+KSX00684	Clostridiaceae	Clostridium	Clostridium pacaense	1	mBHI	mBHI	JKA0005-A12	JKA0006-A12	JKA0006
+KSX00802	Coriobacteriaceae	Collinsella	Collinsella aerofaciens	1	Chromagar	mBHI	ACE0168-C10	ACE0169-C10	ACE0169
+KSX00901	Coprobacillaceae	Coprobacillus	Coprobacillus cateniformis	1	mBHI	mBHI	JKA0011-D01	JKA0012-D01	JKA0012
+KSX00380	Lachnospiraceae	Dorea	Dorea_sp.	1	RCM	RCM	ACE0005-H08	ACE0007-H08	ACE0007
+KSX00906	Lachnospiraceae	Enterocloster	Enterocloster bolteae	1	mBHI	mBHI	JKA0011-D06	JKA0012-D06	JKA0012
+KSX00298	Enterococcaceae	Enterococcus	Enterococcus avium	1	RCM	RCM	ACE0005-A10	ACE0007-A10	ACE0007
+KSX00323	Erysipelotrichaceae	Unknown	Erysipelotrichaceae bacterium I46	1	RCM	RCM	ACE0005-C11	ACE0007-C11	ACE0007
+KSX00309	Enterobacteriaceae	Escherichia	Escherichia coli	1	RCM	RCM	ACE0005-B09	ACE0007-B09	ACE0007
+KSX00907	Lachnospiraceae	Faecalicatena	Faecalicatena contorta	1	mBHI	mBHI	JKA0011-D07	JKA0012-D07	JKA0012
+KSX00513	Lachnospiraceae	Faecalimonas	Faecalimonas umbilicata	0.75	mBHI	mBHI	JKA0001-C09	JKA0002-C09	JKA0002
+KSX00295	Oscillospiraceae	Flavonifractor	Flavonifractor plautii	1	RCM	RCM	ACE0005-A07	ACE0007-A07	ACE0007
+KSX00711	Oscillospiraceae	Flintibacter	Flintibacter sp. KGMB00164	1	mBHI	mBHI	JKA0005-D03	JKA0006-D03	JKA0006
+KSX00536	Lachnospiraceae	Lachnoclostridium	Lachnoclostridium pacaense	1	RCM	RCM	JKA0001-E08	JKA0002-E08	JKA0002
+KSX00887	Veillonellaceae	Megasphaera	Megasphaera geminata	1	mBHI	mBHI	JKA0011-B11	JKA0012-B11	JKA0012
+KSX00350	Tannerellaceae	Parabacteroides	Parabacteroides distasonis	1	mBHI-gentamicin	mBHI	ACE0005-F02	ACE0007-F02	ACE0007
+KSX00291	Tannerellaceae	Parabacteroides	Parabacteroides goldsteinii	1	BHI-blood-gentamicin	mBHI	ACE0005-A03	ACE0007-A03	ACE0007
+KSX00361	Tannerellaceae	Parabacteroides	Parabacteroides johnsonii	0.8	mBHI-gentamicin	mBHI	ACE0005-G01	ACE0007-G01	ACE0007
+KSX00318	Tannerellaceae	Parabacteroides	Parabacteroides merdae	1	mBHI-gentamicin	mBHI	ACE0005-C06	ACE0007-C06	ACE0007
+KSX00929	Acidaminococcaceae	Phascolarctobacterium	Phascolarctobacterium faecium	1	RCM	RCM	JKA0011-F05	JKA0012-F05	JKA0012
+KSX00313	Bacteroidaceae	Phocaeicola	Phocaeicola vulgatus	1	mBHI-gentamicin	mBHI	ACE0005-C01	ACE0007-C01	ACE0007
+KSX00947	Lachnospiraceae	Sellimonas	Sellimonas intestinalis	1	RCM	RCM	JKA0011-G11	JKA0012-G11	JKA0012
+KSX00675	Streptococcaceae	Streptococcus	Streptococcus anginosus	1	mBHI	mBHI	JKA0005-A03	JKA0006-A03	JKA0006
+KSX00724	Streptococcaceae	Streptococcus	Streptococcus pasteurianus	1	RCM	RCM	JKA0005-E04	JKA0006-E04	JKA0006
+KSX00307	Streptococcaceae	Streptococcus	Streptococcus periodonticum	1	RCM	RCM	ACE0005-B07	ACE0007-B07	ACE0007
+KSX00871	Coprobacillaceae	Thomasclavelia	Thomasclavelia ramosa	1	mBHI	mBHI	JKA0011-A07	JKA0012-A07	JKA0012
+KSX00964	Turicibacteraceae	Turicibacter	Turicibacter bilis	0.9090909091	mBHI-taurocholate	mBHI	AME0094-A04	AME0095-A04	AME0095
+KSX00976	Turicibacteraceae	Turicibacter	Turicibacter sanguinis	0.95	mBHI-taurocholate	mBHI	AME0094-B04	AME0095-B04	AME0095
