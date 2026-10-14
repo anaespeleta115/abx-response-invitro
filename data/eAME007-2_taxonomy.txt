@@ -1,0 +1,97 @@
+"well_padded" "Phylum" "Class" "Order" "Family" "Genus" "Species" "most_likely_taxon" "purity"
+"A01" "Pseudomonadota" "Gammaproteobacteria" "Enterobacterales" "Enterobacteriaceae" "Escherichia" "Escherichia coli" 562 1
+"A02" "Bacillota" "Erysipelotrichia" "Erysipelotrichales" "Turicibacteraceae" "Turicibacter" "Turicibacter sanguinis" 154288 0.916666666666667
+"A03" "Pseudomonadota" "Gammaproteobacteria" "Enterobacterales" "Enterobacteriaceae" "Escherichia" "Escherichia coli" 562 1
+"A04" "Pseudomonadota" "Gammaproteobacteria" "Enterobacterales" "Enterobacteriaceae" "Escherichia" "Escherichia coli" 562 1
+"A05" "Pseudomonadota" "Gammaproteobacteria" "Enterobacterales" "Enterobacteriaceae" "Escherichia" "Escherichia coli" 562 1
+"A06" "Bacillota" "Bacilli" "Lactobacillales" "Enterococcaceae" "Enterococcus" "Enterococcus avium" 33945 1
+"A07" "Bacillota" "Bacilli" "Lactobacillales" "Enterococcaceae" "Enterococcus" "Enterococcus avium" 33945 1
+"A08" "Bacillota" "Bacilli" "Lactobacillales" "Enterococcaceae" "Enterococcus" "Enterococcus avium" 33945 1
+"A09" NA NA NA NA NA NA NA NA
+"A10" NA NA NA NA NA NA NA NA
+"A11" NA NA NA NA NA NA NA NA
+"A12" "Actinomycetota" "Actinomycetes" "Bifidobacteriales" "Bifidobacteriaceae" "Bifidobacterium" "Bifidobacterium longum" 216816 1
+"B01" "Bacillota" "Bacilli" "Lactobacillales" "Streptococcaceae" "Streptococcus" "Streptococcus anginosus" 1328 0.571428571428571
+"B02" "Bacillota" "Clostridia" "Eubacteriales" "Clostridiaceae" "Clostridium" "Clostridium pacaense" 1917870 0.555555555555556
+"B03" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Blautia" "Blautia parvula" 2877527 1
+"B04" "Bacillota" "Bacilli" "Lactobacillales" "Enterococcaceae" "Enterococcus" "Enterococcus avium" 33945 1
+"B05" "Bacillota" "Bacilli" "Lactobacillales" "Streptococcaceae" "Streptococcus" "Streptococcus anginosus" 1328 1
+"B06" "Bacillota" "Bacilli" "Lactobacillales" "Streptococcaceae" "Streptococcus" "Streptococcus anginosus" 1328 0.9
+"B07" NA NA NA NA NA NA NA NA
+"B08" "Bacillota" "Bacilli" "Lactobacillales" "Streptococcaceae" "Streptococcus" "Streptococcus pasteurianus" 197614 1
+"B09" "Bacillota" "Bacilli" "Lactobacillales" "Streptococcaceae" "Streptococcus" "Streptococcus pasteurianus" 197614 1
+"B10" "Bacillota" "Bacilli" "Lactobacillales" "Streptococcaceae" "Streptococcus" "Streptococcus pasteurianus" 197614 1
+"B11" "Bacillota" "Bacilli" "Lactobacillales" "Enterococcaceae" "Enterococcus" "Enterococcus avium" 33945 1
+"B12" "Actinomycetota" "Actinomycetes" "Bifidobacteriales" "Bifidobacteriaceae" "Bifidobacterium" "Bifidobacterium longum" 216816 1
+"C01" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Dorea" "Dorea formicigenerans" 39486 1
+"C02" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Dorea" "Dorea formicigenerans" 39486 1
+"C03" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Dorea" "Dorea formicigenerans" 39486 1
+"C04" "Pseudomonadota" "Gammaproteobacteria" "Enterobacterales" "Enterobacteriaceae" "Citrobacter" "Citrobacter koseri" 545 0.971428571428571
+"C05" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides thetaiotaomicron" 818 1
+"C06" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Blautia" "Blautia parvula" 2877527 1
+"C07" "Pseudomonadota" "Gammaproteobacteria" "Enterobacterales" "Enterobacteriaceae" "Citrobacter" "Citrobacter koseri" 545 1
+"C08" "Bacillota" "Clostridia" "Eubacteriales" "Clostridiaceae" "Clostridium" "Clostridium pacaense" 1917870 0.9375
+"C09" "Actinomycetota" "Actinomycetes" "Bifidobacteriales" "Bifidobacteriaceae" "Bifidobacterium" "Bifidobacterium longum" 216816 1
+"C10" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Anaerostipes" "Anaerostipes rhamnosivorans" 1229621 1
+"C11" "Pseudomonadota" "Gammaproteobacteria" "Enterobacterales" "Enterobacteriaceae" "Citrobacter" "Citrobacter koseri" 545 1
+"C12" "Pseudomonadota" "Gammaproteobacteria" "Enterobacterales" "Enterobacteriaceae" "Citrobacter" "Citrobacter koseri" 545 1
+"D01" "Bacillota" "Clostridia" "Eubacteriales" "Oscillospiraceae" "Flavonifractor" "Flavonifractor plautii" 292800 1
+"D02" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Anaerostipes" "Anaerostipes rhamnosivorans" 1229621 1
+"D03" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Anaerostipes" "Anaerostipes rhamnosivorans" 1229621 1
+"D04" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Anaerostipes" "Anaerostipes rhamnosivorans" 1229621 1
+"D05" NA NA NA NA NA NA NA NA
+"D06" "Bacillota" "Clostridia" "Eubacteriales" "Oscillospiraceae" "Flavonifractor" "Flavonifractor plautii" 292800 1
+"D07" "Bacillota" "Clostridia" "Eubacteriales" "Unknown" "Flintibacter" "Flintibacter sp. KGMB00164" 2610895 1
+"D08" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Blautia" "Blautia parvula" 2877527 1
+"D09" "Bacillota" "Clostridia" "Eubacteriales" "Oscillospiraceae" "Flavonifractor" "Flavonifractor plautii" 292800 1
+"D10" "Bacillota" "Negativicutes" "Veillonellales" "Veillonellaceae" "Megasphaera" "Megasphaera geminata" 156456 1
+"D11" "Bacillota" "Erysipelotrichia" "Erysipelotrichales" "Coprobacillaceae" "Coprobacillus" "Coprobacillus cateniformis" 100884 1
+"D12" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Blautia" "Blautia parvula" 2877527 1
+"E01" "Bacillota" "Bacilli" "Lactobacillales" "Streptococcaceae" "Streptococcus" "Streptococcus anginosus" 1328 0.933333333333333
+"E02" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Faecalicatena" "Faecalicatena contorta" 39482 0.884615384615385
+"E03" "Bacillota" "Bacilli" "Lactobacillales" "Streptococcaceae" "Streptococcus" "Streptococcus pasteurianus" 197614 1
+"E04" "Bacillota" "Clostridia" "Eubacteriales" "Unknown" "Flintibacter" "Flintibacter sp. KGMB00164" 2610895 1
+"E05" NA NA NA NA NA NA NA 1
+"E06" NA NA NA NA NA NA NA NA
+"E07" NA NA NA NA NA NA NA NA
+"E08" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Enterocloster" "Enterocloster bolteae" 208479 1
+"E09" "Pseudomonadota" "Gammaproteobacteria" "Enterobacterales" "Enterobacteriaceae" "Escherichia" "Escherichia coli" 562 1
+"E10" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Blautia" "Blautia parvula" 2877527 1
+"E11" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Sellimonas" "Sellimonas intestinalis" 1653434 1
+"E12" NA NA NA NA NA NA NA NA
+"F01" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides uniformis" 820 1
+"F02" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Tannerellaceae" "Parabacteroides" "Parabacteroides goldsteinii" 328812 1
+"F03" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides faecis" 674529 1
+"F04" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides faecis" 674529 1
+"F05" "Bacillota" "Clostridia" "Eubacteriales" "Oscillospiraceae" "Flavonifractor" "Flavonifractor plautii" 292800 1
+"F06" "Bacillota" "Clostridia" "Eubacteriales" "Oscillospiraceae" "Flavonifractor" "Flavonifractor plautii" 292800 1
+"F07" "Bacillota" "Bacilli" "Lactobacillales" "Enterococcaceae" "Enterococcus" "Enterococcus avium" 33945 1
+"F08" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides faecis" 674529 1
+"F09" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides uniformis" 820 1
+"F10" "Bacillota" "Bacilli" "Lactobacillales" "Streptococcaceae" "Streptococcus" "Streptococcus anginosus" 1328 1
+"F11" "Pseudomonadota" "Gammaproteobacteria" "Enterobacterales" "Enterobacteriaceae" "Escherichia" "Escherichia coli" 562 0.888888888888889
+"F12" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides faecis" 674529 1
+"G01" "Bacillota" "Bacilli" "Lactobacillales" "Enterococcaceae" "Enterococcus" "Enterococcus avium" 33945 1
+"G02" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Phocaeicola" "Phocaeicola vulgatus" 821 1
+"G03" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides uniformis" 820 1
+"G04" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Phocaeicola" "Phocaeicola vulgatus" 821 1
+"G05" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Tannerellaceae" "Parabacteroides" "Parabacteroides johnsonii" 387661 0.909090909090909
+"G06" "Pseudomonadota" "Gammaproteobacteria" "Enterobacterales" "Enterobacteriaceae" "Escherichia" "Escherichia coli" 562 1
+"G07" NA NA NA NA NA NA NA NA
+"G08" "Bacillota" "Bacilli" "Lactobacillales" "Streptococcaceae" "Streptococcus" "Streptococcus anginosus" 1328 1
+"G09" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides xylanisolvens" 371601 1
+"G10" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Phocaeicola" "Phocaeicola vulgatus" 821 1
+"G11" "Bacillota" "Clostridia" "Eubacteriales" "Clostridiaceae" "Clostridium" "[Clostridium] innocuum" 1522 0.813953488372093
+"G12" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides xylanisolvens" 371601 1
+"H01" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides xylanisolvens" 371601 1
+"H02" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Phocaeicola" "Phocaeicola vulgatus" 821 1
+"H03" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Tannerellaceae" "Parabacteroides" "Parabacteroides distasonis" 823 0.933333333333333
+"H04" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides xylanisolvens" 371601 1
+"H05" "Bacillota" "Clostridia" "Eubacteriales" "Clostridiaceae" "Clostridium" "[Clostridium] innocuum" 1522 0.709677419354839
+"H06" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Tannerellaceae" "Parabacteroides" "Parabacteroides distasonis" 823 1
+"H07" "Pseudomonadota" "Gammaproteobacteria" "Enterobacterales" "Enterobacteriaceae" "Citrobacter" "Citrobacter koseri" 545 1
+"H08" "Bacillota" "Clostridia" "Eubacteriales" "Clostridiaceae" "Clostridium" "[Clostridium] innocuum" 1522 0.861111111111111
+"H09" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides xylanisolvens" 371601 1
+"H10" "Bacteroidota" "Bacteroidia" "Bacteroidales" "Bacteroidaceae" "Bacteroides" "Bacteroides uniformis" 820 1
+"H11" "Bacillota" "Clostridia" "Eubacteriales" "Clostridiaceae" "Clostridium" "[Clostridium] innocuum" 1522 0.921052631578947
+"H12" "Bacillota" "Clostridia" "Lachnospirales" "Lachnospiraceae" "Dorea" "Dorea formicigenerans" 39486 1
