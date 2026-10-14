@@ -17,19 +17,21 @@ eAME007_results <- read_csv("~/Documents/GitHub/abx-response-invitro/data/eAME00
 
 taxonomy_table <- read.table("~/Documents/GitHub/abx-response-invitro/data/eAME007-2_taxonomy.txt", header = TRUE)
 
+# join in taxonomy information and eAME007 results
 eAME007_full_results <- eAME007_results |> 
-  left_join(taxonomy_table, by = "well_padded")
+  left_join(taxonomy_table, by = "well_padded") |> 
+  mutate(Family = ifelse(Family == "Unknown", "Oscillospiraceae", Family))
 
 
 # try plotting number of isolates per family
 family_distribution <- eAME007_full_results |> 
-  filter(purity == 1, !is.na(Species)) |> 
+  filter(purity == 1, !is.na(Species)) |> # filter for strains with purity of 1
   group_by(Family) |> 
   summarize(unique_species_per_fam = n_distinct(Species), total_species_per_fam = n())
 
-
+# plot families by the number of species
 p_family_distribution <- family_distribution |> 
-  ggplot(aes(x = fct_reorder(Family, -total_species_per_fam), y = total_species_per_fam, fill = Family)) +
+  ggplot(aes(x = fct_reorder(Family, -unique_species_per_fam), y = unique_species_per_fam, fill = Family)) +
   geom_col(color = "black") +
   labs(
     x = "Family",
@@ -37,7 +39,7 @@ p_family_distribution <- family_distribution |>
     fill = "Family"
   ) +
   scale_fill_manual(values = my_colors) +
-  scale_y_continuous(limits = c(0, 20)) +
+  scale_y_continuous(limits = c(0, 5)) +
   DEFAULTS.THEME_PRINT +
   theme(
     axis.text.x = element_text(
@@ -48,6 +50,10 @@ p_family_distribution <- family_distribution |>
 
 p_family_distribution
 
-savePNGPDF(paste0(OUTDIR, "p_family_distribution_total"), p_family_distribution, 3, 3)
+savePNGPDF(paste0(OUTDIR, "p_family_distribution_unique"), p_family_distribution, 3, 3)
+
+
+unique_isolates <- family_distribution |> 
+  summarize(total_isolates = sum(unique_species_per_fam))
 
 
