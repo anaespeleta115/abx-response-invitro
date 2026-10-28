@@ -5,6 +5,9 @@ OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/1-2
 # this script takes most of the code from 1-260408-gainLossAME004.R and plots the loss in abundance of each family in the
 # recipient community against the gain in abundance of each family in the mixture community.
 
+# filtering steps are labeled throughout the script. These filters make the plots include or exclude taxa that colonized, but
+# weren't originally present in the recipient community.
+
 # ----------------- Compute Recipient Family Loss ------------------------
 
 recipient_OTUs <- rbind(preabx_recipient_OTUs, postabx_recipient_OTUs)
@@ -22,7 +25,7 @@ recipient_fam_loss <- recipient_OTUs %>%
     values_fill = 0
   ) %>%
   # only keep families that were present pre-antibiotic
-  filter(`recipient_fam_relAbundance_A-pre` > 0) %>%  # KEY FILTERING STEP !!
+  filter(`recipient_fam_relAbundance_A-pre` > 0) %>%  # KEY FILTERING STEP # 1!!
   mutate(
     `recipient_fam_relAbundance_A-post_pseudo` = if_else(
     `recipient_fam_relAbundance_A-post` == 0,
@@ -79,7 +82,8 @@ compare_gain_loss <- mixture_gain %>%
   mutate(
     recipient_ratio = replace_na(recipient_ratio, 1e-4),
     recipient_log10_ratio = log(recipient_ratio)
-  )
+  ) |> # only keep families that were present pre-antibiotic
+  filter(recipient_ratio != 1e-4)  # KEY FILTERING STEP # 2!!
 
 
 # ----------------- Average Across Recipient's Mixes ------------------------

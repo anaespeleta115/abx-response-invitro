@@ -67,7 +67,7 @@ family_distribution_read_filtered <- eAME007_full_results |>
 
 # plot families by the number of species (FILTERED BY READS)
 p_family_distribution_filtered <- family_distribution_read_filtered |> 
-  ggplot(aes(x = fct_reorder(Family, -total_species_per_fam), y = total_species_per_fam, fill = Family)) +
+  ggplot(aes(x = fct_reorder(Family, -unique_species_per_fam), y = unique_species_per_fam, fill = Family)) +
   geom_col(color = "black") +
   labs(
     x = "Family",
@@ -75,7 +75,7 @@ p_family_distribution_filtered <- family_distribution_read_filtered |>
     fill = "Family"
   ) +
   scale_fill_manual(values = my_colors) +
-  scale_y_continuous(limits = c(0, 20)) +
+  scale_y_continuous(limits = c(0, 5)) +
   DEFAULTS.THEME_PRINT +
   theme(
     axis.text.x = element_text(
@@ -86,7 +86,7 @@ p_family_distribution_filtered <- family_distribution_read_filtered |>
 
 p_family_distribution_filtered
 
-savePNGPDF(paste0(OUTDIR, "p_family_distribution_total_filtered"), p_family_distribution_filtered, 3, 3)
+savePNGPDF(paste0(OUTDIR, "p_family_distribution_unique_filtered"), p_family_distribution_filtered, 3, 3)
 
 
 unique_isolates_filtered <- family_distribution_read_filtered |> 

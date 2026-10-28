@@ -1,10 +1,10 @@
 # load scripts
-source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102125-loade0041data/102125-loade0041data.R")
-source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102225-gete0041colonizationProp/102225-gete0041colonizationProp.R")
-source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102625-gete0041LostTaxa/102625gete0041LostTaxa.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/102125-loade0041data/102125-loade0041data.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/102225-gete0041colonizationProp/102225-gete0041colonizationProp.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/102625-gete0041LostTaxa/102625gete0041LostTaxa.R")
 
 # Set output directory
-OUTDIR <- "~/Documents/GitHub/abx-response-invitro/analysis/scratch/102125-plote0041compositions/out/"
+OUTDIR <- "~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/102125-plote0041compositions/out/"
 
 
 # --------------------------- PLOT DONOR/RECIPIENTS -------------------------
@@ -69,19 +69,20 @@ p_post_abx_v1 <- ggplot(mixture_colonization_full %>% filter(recipient == "post-
 
 savePNGPDF(paste0(OUTDIR, "compositions_post-abx-V1_DIFFcolonization"), p_post_abx_v1, 4, 4)
 
-p_post_abx_v2 <- ggplot(mixture_colonization_full %>% filter(recipient == "post-abx-V2", donor == "XIB-029"), aes(x = recipient, y = relAbundance, fill = Family)) +
+p_post_abx_v2 <- ggplot(mixture_colonization_full %>% filter(recipient == "post-abx-V2", donor != "XBB-029" & donor != "XEB-029" & donor != "XDB-029"), aes(x = recipient, y = relAbundance, fill = Family, alpha = factor(diff_colonizer_v2))) +
   geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
   scale_fill_manual(values = my_colors) +
   scale_alpha_manual(values = c("0" = 0, "1" = 1)) +
   labs(title = "" , x = "", y = "", fill = "Family") +
-  # facet_wrap(~donor)+
-  # theme_minimal()+
+  facet_wrap(~donor)+
+  theme_minimal()+
   theme(
     legend.position = "none"
   ) +
   DEFAULTS.THEME_PRINT
 
-savePNGPDF(paste0(OUTDIR, "compositions_post-abx-V2_DIFFcolonization"), p_post_abx_v2, 2, 1)
+
+savePNGPDF(paste0(OUTDIR, "compositions_post-abx-V2_DIFFcolonization"), p_post_abx_v2, 4, 4)
 
 
 # --------------------------------- PLOT ALL COMPOSITIONS BY WELL ---------------------------------------

@@ -1,0 +1,98 @@
+"well" "Species" "n" "total_reads" "purity" "max_purity" "well_padded" "allSpeciesDetected"
+"A1" "Enterococcus avium" 1 1 1 1 "A01" NA
+"A2" "Escherichia coli" 8 8 1 1 "A02" NA
+"A3" "Escherichia coli" 1 2 0.5 0.5 "A03" NA
+"A3" "Streptococcus pasteurianus" 1 2 0.5 0.5 "A03" NA
+"A4" "Enterococcus avium" 9 13 0.692307692307692 0.692307692307692 "A04" "Enterococcus hulanensis, Parabacteroides distasonis"
+"A5" "Enterococcus avium" 10 11 0.909090909090909 0.909090909090909 "A05" "Enterococcus hulanensis"
+"A6" "Enterococcus avium" 7 8 0.875 0.875 "A06" "Enterococcus hulanensis"
+"A7" "Bifidobacterium longum" 3 3 1 1 "A07" NA
+"A8" "Blautia parvula" 23 24 0.958333333333333 0.958333333333333 "A08" "Flavonifractor plautii"
+"A9" "Streptococcus anginosus" 6 6 1 1 "A09" NA
+"A10" "Streptococcus pasteurianus" 3 3 1 1 "A10" NA
+"A11" "Streptococcus pasteurianus" 17 17 1 1 "A11" NA
+"A12" "Streptococcus pasteurianus" 12 12 1 1 "A12" NA
+"B1" "Bifidobacterium longum" 12 18 0.666666666666667 0.666666666666667 "B01" "Citrobacter koseri, Dorea formicigenerans, Anaerostipes rhamnosivorans"
+"B2" "Dorea formicigenerans" 19 19 1 1 "B02" NA
+"B3" "Dorea formicigenerans" 11 11 1 1 "B03" NA
+"B4" "Dorea formicigenerans" 16 16 1 1 "B04" NA
+"B5" "Bacteroides thetaiotaomicron" 18 18 1 1 "B05" NA
+"B6" "Blautia parvula" 22 22 1 1 "B06" NA
+"B7" "Citrobacter koseri" 22 22 1 1 "B07" NA
+"B8" "Bifidobacterium longum" 9 9 1 1 "B08" NA
+"B9" "Anaerostipes rhamnosivorans" 22 22 1 1 "B09" NA
+"B10" "Citrobacter koseri" 12 12 1 1 "B10" NA
+"B11" "Citrobacter koseri" 16 18 0.888888888888889 0.888888888888889 "B11" "Dorea formicigenerans, Streptococcus pasteurianus"
+"B12" "Flavonifractor plautii" 9 9 1 1 "B12" NA
+"C1" "Anaerostipes rhamnosivorans" 31 31 1 1 "C01" NA
+"C2" "Anaerostipes rhamnosivorans" 14 14 1 1 "C02" NA
+"C3" "Anaerostipes rhamnosivorans" 12 12 1 1 "C03" NA
+"C4" "Flavonifractor plautii" 6 6 1 1 "C04" NA
+NA NA NA NA NA NA "C05" NA
+"C6" "Blautia parvula" 12 12 1 1 "C06" NA
+"C7" "Flavonifractor plautii" 13 13 1 1 "C07" NA
+"C8" NA 1 1 1 1 "C08" NA
+"C9" "Coprobacillus cateniformis" 9 9 1 1 "C09" NA
+"C10" "Blautia parvula" 22 22 1 1 "C10" NA
+"C11" "Streptococcus pasteurianus" 15 15 1 1 "C11" NA
+"C12" "Flintibacter sp. KGMB00164" 28 28 1 1 "C12" NA
+"D1" "Enterocloster bolteae" 17 17 1 1 "D01" NA
+"D2" "Escherichia coli" 8 8 1 1 "D02" NA
+"D3" "Blautia parvula" 12 12 1 1 "D03" NA
+"D4" "Sellimonas intestinalis" 10 10 1 1 "D04" NA
+"D5" "Bacteroides uniformis" 13 13 1 1 "D05" NA
+"D6" "Parabacteroides goldsteinii" 12 12 1 1 "D06" NA
+"D7" "Bacteroides faecis" 18 18 1 1 "D07" NA
+"D8" "Flavonifractor plautii" 9 9 1 1 "D08" NA
+"D9" "Flavonifractor plautii" 5 5 1 1 "D09" NA
+"D10" "Enterococcus avium" 20 21 0.952380952380952 0.952380952380952 "D10" "Enterococcus hulanensis"
+"D11" "Bacteroides faecis" 17 17 1 1 "D11" NA
+"D12" "Bacteroides uniformis" 16 16 1 1 "D12" NA
+"E1" "Streptococcus anginosus" 17 17 1 1 "E01" NA
+"E2" "Enterococcus avium" 18 19 0.947368421052632 0.947368421052632 "E02" "Parabacteroides distasonis"
+"E3" "Phocaeicola vulgatus" 13 13 1 1 "E03" NA
+"E4" "Bacteroides uniformis" 10 10 1 1 "E04" NA
+"E5" "Phocaeicola vulgatus" 23 23 1 1 "E05" NA
+"E6" "Escherichia coli" 4 4 1 1 "E06" NA
+"E7" "Streptococcus anginosus" 18 18 1 1 "E07" NA
+NA NA NA NA NA NA "E08" NA
+"E9" "Phocaeicola vulgatus" 22 22 1 1 "E09" NA
+"E10" "Bacteroides xylanisolvens" 8 8 1 1 "E10" NA
+"E11" "Bacteroides xylanisolvens" 14 14 1 1 "E11" NA
+"E12" "Phocaeicola vulgatus" 21 21 1 1 "E12" NA
+"F1" "Bacteroides xylanisolvens" 4 4 1 1 "F01" NA
+"F2" "Parabacteroides distasonis" 18 18 1 1 "F02" NA
+"F3" "Citrobacter koseri" 16 16 1 1 "F03" NA
+"F4" "Bacteroides uniformis" 13 13 1 1 "F04" NA
+"F5" "Dorea formicigenerans" 21 21 1 1 "F05" NA
+NA NA NA NA NA NA "F06" NA
+NA NA NA NA NA NA "F07" NA
+NA NA NA NA NA NA "F08" NA
+NA NA NA NA NA NA "F09" NA
+NA NA NA NA NA NA "F10" NA
+NA NA NA NA NA NA "F11" NA
+NA NA NA NA NA NA "F12" NA
+NA NA NA NA NA NA "G01" NA
+NA NA NA NA NA NA "G02" NA
+NA NA NA NA NA NA "G03" NA
+NA NA NA NA NA NA "G04" NA
+NA NA NA NA NA NA "G05" NA
+NA NA NA NA NA NA "G06" NA
+NA NA NA NA NA NA "G07" NA
+NA NA NA NA NA NA "G08" NA
+NA NA NA NA NA NA "G09" NA
+NA NA NA NA NA NA "G10" NA
+NA NA NA NA NA NA "G11" NA
+NA NA NA NA NA NA "G12" NA
+NA NA NA NA NA NA "H01" NA
+NA NA NA NA NA NA "H02" NA
+NA NA NA NA NA NA "H03" NA
+NA NA NA NA NA NA "H04" NA
+NA NA NA NA NA NA "H05" NA
+NA NA NA NA NA NA "H06" NA
+NA NA NA NA NA NA "H07" NA
+NA NA NA NA NA NA "H08" NA
+NA NA NA NA NA NA "H09" NA
+NA NA NA NA NA NA "H10" NA
+NA NA NA NA NA NA "H11" NA
+NA NA NA NA NA NA "H12" NA

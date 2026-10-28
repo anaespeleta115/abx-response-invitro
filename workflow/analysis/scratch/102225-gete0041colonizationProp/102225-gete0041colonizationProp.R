@@ -1,6 +1,6 @@
 # Load data
-source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102125-loade0041data/102125-loade0041data.R")
-source("~/Documents/GitHub/abx-response-invitro/analysis/scratch/102625-gete0041LostTaxa/102625gete0041LostTaxa.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/102125-loade0041data/102125-loade0041data.R")
+source("~/Documents/GitHub/abx-response-invitro/workflow/analysis/scratch/102625-gete0041LostTaxa/102625gete0041LostTaxa.R")
 
 
 get_colonization <- function(mix_id, recipient_id, donor_id) {
