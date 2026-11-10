@@ -1,0 +1,9 @@
+total_num_reads	5000.0
+total_num_bases	5782685.0
+read_n50	1049.0
+longest_read	3228.0
+shortest_read	406.0
+mean_read_length	1156.0
+median_length	1047.0
+mean_quality	23.761854
+median_quality	23.756317

@@ -1,0 +1,23 @@
+tax_id	abundance	estimated counts	species	genus	family	order	class	phylum	superkingdom	source	mean_confidence	confident_reads_percentage
+197614	0.2866305877789964	1430.0000024294131	Streptococcus pasteurianus	Streptococcus	Streptococcaceae	Lactobacillales	Bacilli	Bacillota	Bacteria	EMU	0.9999999999984754	0.9993006993006993
+1328	0.0344758463761448	171.9999975705868	Streptococcus anginosus	Streptococcus	Streptococcaceae	Lactobacillales	Bacilli	Bacillota	Bacteria	EMU	0.9999999858628292	0.9709302325581395
+818	0.0293278835333754	146.3168109480103	Bacteroides thetaiotaomicron	Bacteroides	Bacteroidaceae	Bacteroidales	Bacteroidia	Bacteroidota	Bacteria	EMU	0.9882417855886083	0.1506849315068493
+674529	0.0385301472288287	192.2269045246265	Bacteroides faecis	Bacteroides	Bacteroidaceae	Bacteroidales	Bacteroidia	Bacteroidota	Bacteria	EMU	0.9896400142671555	0.041666666666666664
+371601	0.066856783571151	333.54849323647267	Bacteroides xylanisolvens	Bacteroides	Bacteroidaceae	Bacteroidales	Bacteroidia	Bacteroidota	Bacteria	EMU	0.9959102586890153	0.8562874251497006
+562	0.1872426333304664	934.1534976856972	Escherichia coli	Escherichia	Enterobacteriaceae	Enterobacterales	Gammaproteobacteria	Pseudomonadota	Bacteria	EMU	1.0	1.0
+2877527	0.0461014132405673	229.99995065719077	Blautia parvula	Blautia	Lachnospiraceae	Lachnospirales	Clostridia	Bacillota	Bacteria	EMU	0.9999997854648455	0.9826086956521739
+292800	0.0528145803491557	263.4919413619381	Flavonifractor plautii	Flavonifractor	Oscillospiraceae	Eubacteriales	Clostridia	Bacillota	Bacteria	EMU	0.9980755354618867	0.9848484848484849
+39486	0.027129434251637	135.34874748141735	Dorea formicigenerans	Dorea	Lachnospiraceae	Lachnospirales	Clostridia	Bacillota	Bacteria	EMU	0.8903974975070533	0.013157894736842105
+2040291	0.0033388868938539	16.65770671343734	Dorea phocaeensis	Dorea	Lachnospiraceae	Lachnospirales	Clostridia	Bacillota	Bacteria	EMU	0.0	0.0
+820	0.0197683731205907	98.62441349862704	Bacteroides uniformis	Bacteroides	Bacteroidaceae	Bacteroidales	Bacteroidia	Bacteroidota	Bacteria	EMU	0.9990826345490816	0.8673469387755102
+1229621	0.0138792714472384	69.24368525027278	Anaerostipes rhamnosivorans	Anaerostipes	Lachnospiraceae	Lachnospirales	Clostridia	Bacillota	Bacteria	EMU	1.0	1.0
+821	0.0913294023658058	455.6423884030052	Phocaeicola vulgatus	Phocaeicola	Bacteroidaceae	Bacteroidales	Bacteroidia	Bacteroidota	Bacteria	EMU	0.999171821586594	0.9912280701754386
+823	0.0120264582080577	60.0	Parabacteroides distasonis	Parabacteroides	Tannerellaceae	Bacteroidales	Bacteroidia	Bacteroidota	Bacteria	EMU	1.0	1.0
+208479	0.0232011380623993	115.7504777933102	Enterocloster bolteae	Enterocloster	Lachnospiraceae	Lachnospirales	Clostridia	Bacillota	Bacteria	EMU	0.9978440321796469	0.9482758620689655
+545	0.0246541959389707	122.99978353952513	Citrobacter koseri	Citrobacter	Enterobacteriaceae	Enterobacterales	Gammaproteobacteria	Pseudomonadota	Bacteria	EMU	0.9999982401587405	0.9024390243902439
+1653434	0.0294647087801907	146.99943210437152	Sellimonas intestinalis	Sellimonas	Lachnospiraceae	Lachnospirales	Clostridia	Bacillota	Bacteria	EMU	0.9999961366136801	0.9863945578231292
+100884	0.0058127881338945	29.0	Coprobacillus cateniformis	Coprobacillus	Coprobacillaceae	Erysipelotrichales	Erysipelotrichia	Bacillota	Bacteria	EMU	1.0	1.0
+328812	0.0074154673886747	36.99576680209812	Parabacteroides goldsteinii	Parabacteroides	Tannerellaceae	Bacteroidales	Bacteroidia	Bacteroidota	Bacteria	EMU	0.9998855892458951	0.9459459459459459
+unmapped	0.0	6.0									0.0	0.0
+mapped_filtered	0.0	0.0									0.0	0.0
+mapped_unclassified	0.0	5.0									0.0	0.0

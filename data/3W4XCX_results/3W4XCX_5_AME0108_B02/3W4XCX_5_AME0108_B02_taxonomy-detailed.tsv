@@ -1,0 +1,20 @@
+tax_id	abundance	estimated counts	species	genus	family	order	class	phylum	superkingdom	source	mean_confidence	confident_reads_percentage
+328812	0.0855092656091892	426.17817979619895	Parabacteroides goldsteinii	Parabacteroides	Tannerellaceae	Bacteroidales	Bacteroidia	Bacteroidota	Bacteria	EMU	0.9980710680851715	0.9718969555035128
+562	0.2253221329024878	1123.0055103859993	Escherichia coli	Escherichia	Enterobacteriaceae	Enterobacterales	Gammaproteobacteria	Pseudomonadota	Bacteria	EMU	0.9997504858323518	0.9946571682991986
+197614	0.2328044560298574	1160.2974088528094	Streptococcus pasteurianus	Streptococcus	Streptococcaceae	Lactobacillales	Bacilli	Bacillota	Bacteria	EMU	0.9979232675094797	0.0353448275862069
+315405	0.0032530810530112	16.21335596820795	Streptococcus gallolyticus	Streptococcus	Streptococcaceae	Lactobacillales	Bacilli	Bacillota	Bacteria	EMU	0.8411655011922777	0.11764705882352941
+39486	0.0328892314785612	163.91992968914917	Dorea formicigenerans	Dorea	Lachnospiraceae	Lachnospirales	Clostridia	Bacillota	Bacteria	EMU	0.9994036642757844	0.9634146341463414
+1653434	0.025512620841238	127.15490227273042	Sellimonas intestinalis	Sellimonas	Lachnospiraceae	Lachnospirales	Clostridia	Bacillota	Bacteria	EMU	0.9933849863384296	0.953125
+292800	0.0606318276186871	302.1890288515366	Flavonifractor plautii	Flavonifractor	Oscillospiraceae	Eubacteriales	Clostridia	Bacillota	Bacteria	EMU	0.9996442278645882	0.9568106312292359
+1328	0.0413428613594032	206.05282101526572	Streptococcus anginosus	Streptococcus	Streptococcaceae	Lactobacillales	Bacilli	Bacillota	Bacteria	EMU	0.9999695671174347	0.9660194174757282
+545	0.0247226028185828	123.21745244781712	Citrobacter koseri	Citrobacter	Enterobacteriaceae	Enterobacterales	Gammaproteobacteria	Pseudomonadota	Bacteria	EMU	0.9994898915098508	0.991869918699187
+2877527	0.0535967851686782	267.12637728069234	Blautia parvula	Blautia	Lachnospiraceae	Lachnospirales	Clostridia	Bacillota	Bacteria	EMU	0.9948487446735701	0.835820895522388
+33035	0.0024055752669339	11.989387130398727	Blautia producta	Blautia	Lachnospiraceae	Lachnospirales	Clostridia	Bacillota	Bacteria	EMU	0.9721982913966918	0.0
+2610895	0.0979629581184121	488.247383262166	Flintibacter sp. KGMB00164	Flintibacter	Unknown	Eubacteriales	Clostridia	Bacillota	Bacteria	EMU	0.9982419177277364	0.9652351738241309
+208479	0.0246400079771597	122.80579975816396	Enterocloster bolteae	Enterocloster	Lachnospiraceae	Lachnospirales	Clostridia	Bacillota	Bacteria	EMU	0.9999999500325556	0.9918032786885246
+1229621	0.0168447704750472	83.95433604763559	Anaerostipes rhamnosivorans	Anaerostipes	Lachnospiraceae	Lachnospirales	Clostridia	Bacillota	Bacteria	EMU	0.9994350903171078	0.9642857142857143
+100884	0.0128410914927768	64.0	Coprobacillus cateniformis	Coprobacillus	Coprobacillaceae	Erysipelotrichales	Erysipelotrichia	Bacillota	Bacteria	EMU	1.0	1.0
+823	0.0597207317899759	297.64812724124016	Parabacteroides distasonis	Parabacteroides	Tannerellaceae	Bacteroidales	Bacteroidia	Bacteroidota	Bacteria	EMU	0.999999969622694	0.98989898989899
+unmapped	0.0	10.0									0.0	0.0
+mapped_filtered	0.0	0.0									0.0	0.0
+mapped_unclassified	0.0	6.0									0.0	0.0

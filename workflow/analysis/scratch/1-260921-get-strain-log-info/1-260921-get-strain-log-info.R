@@ -29,7 +29,7 @@ strain_log <- read_csv("~/Documents/GitHub/abx-response-invitro/data/Xue_lab_str
 colnames(strain_log)
 
 
-# try plotting number of isolates per family
+# plot number of isolates per family
 family_distribution <- strain_log |> 
   group_by(TAX_family) |> 
   summarize(unique_species_per_fam = n_distinct(TAX_species), total_species_per_fam = n())
